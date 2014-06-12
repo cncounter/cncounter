@@ -7,7 +7,7 @@
 <title>hello</title>
 </head>
 <body>
-    <h1>Message : ${message}</h1>
-    <h2>当前时间:${date}</h2>
+	<h1>Message : ${message}</h1>
+    <h2>当前时间: ${date}</h2>
 </body>
 </html>

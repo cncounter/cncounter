@@ -11,27 +11,93 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>TestLinkService</servlet-name>
-		<url-pattern>/test/link</url-pattern>
+		<url-pattern>/test/link.asp</url-pattern>
 	</servlet-mapping>
-	<!-- Spring web mvc 配置器 -->
-	<!-- 
-		servlet-name为: mvc-dispatcher,一般需要和对应的配置文件匹配; 
-		则框架会在web应用的 WEB-INF文件夹下寻找名为mvc-dispatcher-servlet.xml 的配置文件 -->
+	<!-- Druid,监控数据库,以及WEB访问连接信息 -->
+	<filter>
+		<filter-name>DruidWebStatFilter</filter-name>
+		<filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
+		<init-param>
+			<param-name>exclusions</param-name>
+			<param-value>*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*</param-value>
+		</init-param>
+		<init-param>
+			<param-name>sessionStatMaxCount</param-name>
+			<param-value>1000</param-value>
+		</init-param>
+		<init-param>
+	        <param-name>sessionStatEnable</param-name>
+	        <param-value>false</param-value>
+	    </init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>DruidWebStatFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<servlet>
+		<servlet-name>DruidStatView</servlet-name>
+		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+		<init-param>
+			<param-name>resetEnable</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DruidStatView</servlet-name>
+		<url-pattern>/druid/*</url-pattern>
+	</servlet-mapping>	
+	<!-- Spring启动监听 -->
+	<context-param> 
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring/applicationContext.xml</param-value>  
+	</context-param> 
+	<listener> 
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> 
+	</listener> 
+	<!-- Spring,字符编码过滤器 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+    <filter-mapping>  
+        <filter-name>encodingFilter</filter-name>  
+        <servlet-name>mvc-dispatcher</servlet-name>  
+    </filter-mapping>  
+	<!-- Spring web mvc 配置器 -->
+	<!-- 对应的配置文件名需要和servlet-name 匹配; 
+	如果不指定contextConfigLocation参数,
+	默认查找寻找  WEB-INF/{servlet-name}-servlet.xml 的配置文件 -->
+	<servlet>
+		<!-- 对应的配置文件名需要和servlet-name 匹配;  -->
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
+		<init-param>
+			<!-- 如果不指定contextConfigLocation参数,
+				默认查找  WEB-INF/{servlet-name}-servlet.xml 配置文件
+			 -->
+            <param-name>contextConfigLocation</param-name> 
+			<param-value>classpath:spring/Spring-mvc.xml</param-value>
+        </init-param>  
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
-		<url-pattern>*.do</url-pattern>
+		<url-pattern>*.php</url-pattern>
 	</servlet-mapping>
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/mvc-dispatcher-servlet.xml</param-value>
-	</context-param>
-
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
+	
+	<session-config>  
+        <session-timeout>30</session-timeout>  
+    </session-config>  
+    <!-- 默认欢迎页面 -->  
+    <welcome-file-list>  
+        <welcome-file>index.jsp</welcome-file>  
+    </welcome-file-list>  
 </web-app>

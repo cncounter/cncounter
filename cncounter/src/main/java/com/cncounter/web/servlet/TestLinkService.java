@@ -1,7 +1,6 @@
 package com.cncounter.web.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,10 +25,10 @@ public class TestLinkService extends ServletBase{
             String password = request.getParameter("password");  
             //
             respage =  "loginresult.jsp";
-            System.out.println("name->" + name + ",password->" + password);
+            System.out.println(this.getClass().getName()+":name->" + name + ",password->" + password);
         }
         //
-        System.out.println("respage="+respage);
+        System.out.println(this.getClass().getName()+":respage="+respage);
     	toPage(request, response, respage);
 	}
 }

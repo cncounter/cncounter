@@ -19,5 +19,7 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
-
+	<!-- 用于持有ApplicationContext,可以使用SpringContextHolder.getBean('xxxx')的静态方法得到spring 
+		bean对象 -->
+	<bean class="com.cncounter.util.spring.SpringContextHolder" lazy-init="false" />
 </beans>

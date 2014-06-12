@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.cncounter.model.message.Message;
 import com.cncounter.model.message.PostPaper;
 
 public class TestSpring1 {
@@ -22,7 +23,10 @@ public class TestSpring1 {
 		Assert.assertNotNull(context);
 		//
 		PostPaper paper = (PostPaper) context.getBean("postPaperBean");
+		Message message = (Message) context.getBean("messageBean");
 		Assert.assertNotNull(paper);
+		Assert.assertNotNull(message);
+		Assert.assertEquals(message, paper.getMessage());
 		System.out.println(paper);
 	}
 }
