@@ -6,7 +6,7 @@ foo.txt
 
 # 忽略所有生成的 html文件,
 
-*.html
+*.html2
 
 # foo.html是手工维护的，所以例外.
 
