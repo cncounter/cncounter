@@ -16,6 +16,7 @@ CREATE TABLE `vote` (
 	`votetimedesc` VARCHAR(256) NULL DEFAULT NULL COMMENT '投票时间段说明',
 	`createuserid` VARCHAR(256) NULL DEFAULT NULL COMMENT '创建者ID',
 	`createtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	`gen` INT(10) UNSIGNED NOT NULL DEFAULT 1 COMMENT '分代,后期使用',
 	PRIMARY KEY (`id`)
 )
 COMMENT='投票主表'
@@ -33,6 +34,7 @@ CREATE TABLE `voteoption` (
 	`content` LONGTEXT NULL COMMENT '内容及说明',
 	`createuserid` VARCHAR(256) NULL DEFAULT NULL COMMENT '创建者ID',
 	`createtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	`gen` INT(10) UNSIGNED NOT NULL DEFAULT 1 COMMENT '分代,后期使用',
 	PRIMARY KEY (`id`)
 )
 COMMENT='投票细节选项表'
@@ -49,6 +51,7 @@ CREATE TABLE `voterecord` (
 	`anonymous` int(10) NULL DEFAULT 0 COMMENT '是否匿名投票,0为否,1为是',
 	`remark` VARCHAR(512) NULL DEFAULT NULL COMMENT '说明信息,如果有',
 	`createtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	`gen` INT(10) UNSIGNED NOT NULL DEFAULT 1 COMMENT '分代,后期使用',
 	PRIMARY KEY (`id`)
 )
 COMMENT='投票记录表'
