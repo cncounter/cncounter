@@ -1,0 +1,68 @@
+/* 页面标签样式*/
+
+*{
+	margin:0px;
+	padding:0px;
+}
+body{
+    margin:0 auto;
+    position: relative;
+}
+
+/* 部分特殊class样式*/
+/* 隐藏 */
+.hide{
+	display: none !important;
+	visibility: hidden;
+}
+
+.text-left{
+	text-align: left;
+}
+.text-right{
+	text-align: right;
+}
+.left{
+	float: left;
+}
+.right{
+	float: right;
+}
+
+/* 单个使用的CSS*/
+
+/* 顶部元素 */
+.header{
+	height: 50px;
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+}
+
+.container{
+	min-height: 400px;
+}
+.content_left{
+	float: left;
+}
+.sidebar{
+	width : 220px;
+}
+
+/* 底部元素 */
+.footer{
+	height: 85px;
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+	position: relative;
+	bottom: 5px;
+}
+/*CNZZ*/
+.cnzz{
+	text-align: center;
+	font-family: 'Open Sans', Myriad, Calibri, sans-serif;
+	font-weight: bold;
+	font-size: .8em;
+	color: #8b786f;
+}
