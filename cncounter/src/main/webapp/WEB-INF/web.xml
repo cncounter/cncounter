@@ -2,17 +2,15 @@
 <web-app xmlns:javaee="http://java.sun.com/xml/ns/javaee"
 	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<javaee:display-name>CNCounterWebApplication</javaee:display-name>
-	<!-- 测试使用的 Servlet -->
-	<servlet>
-		<javaee:description></javaee:description>
-		<javaee:display-name>TestLinkService</javaee:display-name>
-		<servlet-name>TestLinkService</servlet-name>
-		<servlet-class>com.cncounter.web.servlet.TestLinkService</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>TestLinkService</servlet-name>
-		<url-pattern>/test/link.asp</url-pattern>
-	</servlet-mapping>
+	
+	<!-- Spring启动监听 -->
+	<context-param> 
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring/applicationContext.xml</param-value>  
+	</context-param> 
+	<listener> 
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> 
+	</listener> 
 	<!-- Druid,监控数据库,以及WEB访问连接信息 -->
 	<filter>
 		<filter-name>DruidWebStatFilter</filter-name>
@@ -46,14 +44,6 @@
 		<servlet-name>DruidStatView</servlet-name>
 		<url-pattern>/druid/*</url-pattern>
 	</servlet-mapping>	
-	<!-- Spring启动监听 -->
-	<context-param> 
-		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:spring/applicationContext.xml</param-value>  
-	</context-param> 
-	<listener> 
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> 
-	</listener> 
 	<!-- Spring,字符编码过滤器 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -91,6 +81,8 @@
 	<servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<url-pattern>*.php</url-pattern>
+		<url-pattern>*.json</url-pattern>
+		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 	
 	<session-config>  

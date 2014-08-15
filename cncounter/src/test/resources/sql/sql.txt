@@ -1,9 +1,0 @@
-create database mybatis;
-
-use mybatis;
-create table user
-(
- name varchar(255),
- age int(11)
-);
-insert into user value ("andy",22);

@@ -19,3 +19,5 @@ foo.txt
 # 忽略所有.class文件.
 
 *.class
+
+BAE_CONF/

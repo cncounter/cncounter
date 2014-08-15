@@ -18,64 +18,90 @@
 		http://www.springframework.org/schema/context 
 		http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-
 	<!-- Activates annotation-based bean configuration -->
 	<context:annotation-config />
-
 	<!-- Scans for application @Components to deploy -->
 	<context:component-scan base-package="com.cncounter.components" />
-
+	<!-- 引入属性文件 -->
+	<context:property-placeholder location="classpath:duapp/druid.properties" />
 	<!-- 配置Druid数据源 -->
-	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">
-		<property name="url">
-			<value>jdbc:mysql://192.168.7.138:3306/mybatis</value>
-		</property>
-		<property name="username"><value>root</value></property>
-		<property name="password"><value>adminjxl</value></property>
-
-		<property name="initialSize"><value>1</value></property>
-		<property name="maxActive"><value>30</value></property>
-		<property name="maxWait"><value>1200</value></property>
-		<property name="validationQuery"><value>select 1</value></property>
+		<property name="url" value="${url}" />
+		<!-- 渣渣,这里value直接是 ${username} 会搞成操作系统用户,Spring在搞毛线 -->
+		<property name="username" value="${dbusername}" />
+		<property name="password" value="${password}" />
+		<property name="initialSize" value="${initialSize}" />
+		<property name="maxActive" value="${maxActive}" />
+		<property name="minIdle" value="${minIdle}" />
+		<property name="maxWait" value="60000" />
+		<property name="validationQuery" value="${validationQuery}" />
 		<property name="testOnBorrow" value="false" />
 		<property name="testOnReturn" value="false" />
 		<property name="testWhileIdle" value="true" />
 		<property name="timeBetweenEvictionRunsMillis" value="60000" />
-		<property name="minEvictableIdleTimeMillis" value="300000" />
-		<property name="poolPreparedStatements" value="false" />
-		<property name="maxPoolPreparedStatementPerConnectionSize"
-			value="20" />
-		<property name="useGloalDataSourceStat" value="true" />
-		<property name="proxyFilters">
-			<list>
-				<ref bean="stat-filter" />
-			</list>
-		</property>
+		<property name="minEvictableIdleTimeMillis" value="25200000" />
+		<property name="removeAbandoned" value="true" />
+		<property name="removeAbandonedTimeout" value="1800" />
+		<property name="logAbandoned" value="true" />
+		<property name="filters" value="mergeStat" />
+		
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <!-- 如果用Oracle，则把poolPreparedStatements配置为true，mysql可以配置为false-->
+        <property name="poolPreparedStatements" value="false" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
 	</bean>
+	
 	<bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
 		<property name="slowSqlMillis" value="10000" />
 		<property name="logSlowSql" value="true" />
 		<property name="mergeSql" value="true" />
 	</bean>
-	<!-- 使用JDBC事物 -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
 
-	<!-- 使用annotation注解方式配置事务 -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
-
+	<!-- myBatis sqlSessionFactory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:mappers/sqlMapConfig.xml"></property>
-		<property name="mapperLocations" value="classpath:mappers/*Mapper.xml"></property>
+		<property name="configLocation" value="classpath:spring/MybatisMapConfig.xml"></property>
+		<!-- 表示在包或所有子目录中，以 *Mapper.xml结尾所有文件 -->
+		<property name="mapperLocations">
+			<value>classpath:com/cncounter/cncounter/dao/mysql/**/*Mapper.xml</value>
+		</property>
 	</bean>
-
+	
 	<!-- 配置SQLSession模板 -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
+	
+	<!-- 使用annotation注解方式配置事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- 自动扫描下面的组件, 接口上需要注解 @Component("bean的id") -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.cncounter.cncounter.dao.api" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+
+	<!-- 配置事务管理器,使用JDBC事务 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- 配置druid监控spring jdbc -->
+	<bean id="druid-stat-interceptor"
+		class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
+	</bean>
+	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"
+		scope="prototype">
+		<property name="patterns">
+			<list>
+				<value>com.cncounter.cncounter.service.impl</value>
+			</list>
+		</property>
+	</bean>
+	<aop:config>
+		<aop:advisor advice-ref="druid-stat-interceptor"
+			pointcut-ref="druid-stat-pointcut" />
+	</aop:config>
 
 </beans>
