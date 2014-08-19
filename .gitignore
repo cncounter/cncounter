@@ -21,3 +21,4 @@ foo.txt
 *.class
 
 BAE_CONF/
+cncounter/target/*

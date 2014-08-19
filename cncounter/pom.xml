@@ -111,7 +111,7 @@
 					<showWarnings>true</showWarnings>
 					<showDeprecation>true</showDeprecation>
 					<!-- windows 默认是 GBK,需要指定为 UTF-8 -->
-					<encoding>utf8</encoding>
+					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
 		</plugins>

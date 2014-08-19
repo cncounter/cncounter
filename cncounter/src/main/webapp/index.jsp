@@ -1,12 +1,5 @@
-<%@page import="org.springframework.context.ApplicationContext"%>
-<%@page import="com.cncounter.util.spring.SpringContextHolder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-//ApplicationContext context = SpringContextHolder.getApplicationContext();
-//System.out.println(context.getClass().getName());
-//
-%>
 <!DOCTYPE html>
 <html>
 <head>

@@ -19,14 +19,14 @@ public class JedisTest {
 	}
 	
 	public JedisPool getNewPool() {
-		JedisPool pool = new JedisPool("localhost", 6379);
+		JedisPool pool = new JedisPool("localhost", 80);
 		return pool;
 	}
 	
 	public JedisPool getPool() {
 		// 不处理同步
 		if(null == _pool){
-			_pool = new JedisPool("localhost", 6379);
+			_pool = getNewPool();
 		}
 		return _pool;
 	}
