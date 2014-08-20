@@ -27,6 +27,16 @@
 		   		测试spring
 		   		</a>
 		   	</h1>
+		   	<h1>
+		   		<a target="_blank" href="../ueditor/index.html">
+		   		UEditor_完全测试
+		   		</a>
+		   	</h1>
+		   	<h1>
+		   		<a target="_blank" href="../ueditor/demo.html">
+		   		UEditor_测试
+		   		</a>
+		   	</h1>
 		</div>
 		<jsp:include page="/common/sidebar.jsp"></jsp:include>
 	</div>

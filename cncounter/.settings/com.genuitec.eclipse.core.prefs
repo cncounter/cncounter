@@ -1,4 +1,4 @@
-#Sat Aug 16 16:00:05 CST 2014
+#Wed Aug 20 14:02:06 CST 2014
 eclipse.preferences.version=1
-validator.Checked=target
+validator.Checked=src/main/webapp/static/book,src/main/webapp/ueditor,target
 validator.Unchecked=
