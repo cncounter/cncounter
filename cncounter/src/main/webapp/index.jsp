@@ -16,6 +16,9 @@
 				<a target="_blank" href="http://cncounter.duapp.com">在线访问地址</a>
 			</h2>
 			<h2>
+				<a target="_blank" href="http://blog.cncounter.com/cncounter/">GitHub项目首页</a>
+			</h2>
+			<h2>
 				<a target="_blank" href="./druid/weburi.html">Druid监控页面</a>
 			</h2>
 		</div>
