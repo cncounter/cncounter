@@ -26,7 +26,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<textarea tabindex="3" id="content" name="content" rows="8" cols="40"></textarea>
 					<br/>
 				</form>
-					<button tabindex="4" id="btn_generate_qrcode">生成</button>
+					<button tabindex="4" id="btn_generate_qrcode"
+						 type="button" class="btn btn-primary">生成</button>
 			</div>
 			<div class="qrcode-jpeg-area">
 				<img id="qrcode_img" alt="" src="" class="qrcode-img hide">
