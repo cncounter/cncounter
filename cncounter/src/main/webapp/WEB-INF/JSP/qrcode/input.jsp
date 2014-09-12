@@ -7,7 +7,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>二维码生成 - 中国计数cncounter</title>
 	<jsp:include page="/common/cssjs.jsp"></jsp:include>
 </head>
@@ -24,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<br/>
 					<span>请输入需要转换的内容:</span>
 					<br/>
-					<textarea tabindex="3" id="content" name="content" rows="8" cols="50"></textarea>
+					<textarea tabindex="3" id="content" name="content" rows="8" cols="40"></textarea>
 					<br/>
 				</form>
 					<button tabindex="4" id="btn_generate_qrcode">生成</button>

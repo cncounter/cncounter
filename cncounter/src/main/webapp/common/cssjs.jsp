@@ -3,6 +3,9 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()	+ path + "/";
 %>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	
 	<!-- 百度CDN公共库参考地址 : http://developer.baidu.com/wiki/index.php?title=docs/cplat/libs -->
 	<!-- 引入 jQuery -->
 	<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
