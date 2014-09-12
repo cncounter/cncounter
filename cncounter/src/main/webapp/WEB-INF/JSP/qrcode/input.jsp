@@ -44,10 +44,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var $btn_generate_qrcode = $("#btn_generate_qrcode");
 			var $qrcode_img = $("#qrcode_img");
 			var $input_form = $("#input_form");
+			var $content = $("#content");
+			//
+			var href = window.location.href;
+			$content.val(href);
 			//
 			$btn_generate_qrcode.bind("click", function(e){
 				//
-				var content = $("#content").val();
+				var content = $content.val();
 				if(!content){
 					alert("content="+content);
 					return;
@@ -74,7 +78,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				requestAjax(url, data, successCallback,errotCallback);
 				//
 			});
-			//
 		});
 	</script>
 </body>
