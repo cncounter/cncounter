@@ -24,11 +24,11 @@ public class ZXingUtil {
 	/**
 	 * 生成二维码, 默认width = 400;height = 400;
 	 * @param content 需要生成的字符串内容
-	 * @param ostream 输出流, 本方法不负责关闭输出流
+	 * @param output 输出流, 本方法不负责关闭输出流
 	 */
-	public static boolean generateQrCode(String content, OutputStream ostream){
+	public static boolean generateQrCode(String content, OutputStream output){
 		// 防御编程
-		if(null == content || null == ostream){
+		if(null == content || null == output){
 			return false;
 		}
 		//
@@ -38,7 +38,7 @@ public class ZXingUtil {
 	    BufferedImage image =  generateQrCode(content, width, height);
 	    
 	    try {
-			ImageIO.write(image, "jpeg", ostream);
+			ImageIO.write(image, "jpeg", output);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
@@ -50,14 +50,14 @@ public class ZXingUtil {
 	 * 
 	 * 生成二维码
 	 * @param content 需要生成的字符串内容
-	 * @param ostream 输出流, 本方法不负责关闭输出流
+	 * @param output 输出流, 本方法不负责关闭输出流
 	 * @param width 宽
 	 * @param height 高
 	 * @return
 	 */
-	public static boolean generateQrCode(String content, OutputStream ostream, int width, int height){
+	public static boolean generateQrCode(String content, OutputStream output, int width, int height){
 		// 防御编程
-		if(null == content || null == ostream){
+		if(null == content || null == output){
 			return false;
 		}
 		if(width < 10){
@@ -70,7 +70,7 @@ public class ZXingUtil {
 	    BufferedImage image =  generateQrCode(content, width, height);
 	    
 	    try {
-			ImageIO.write(image, "jpeg", ostream);
+			ImageIO.write(image, "jpeg", output);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;

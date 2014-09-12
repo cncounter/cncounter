@@ -82,7 +82,7 @@
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<url-pattern>*.php</url-pattern>
 		<url-pattern>*.json</url-pattern>
-		<url-pattern>/rest/*</url-pattern>
+		<url-pattern>*.jpeg</url-pattern>
 	</servlet-mapping>
 	
 	<session-config>  

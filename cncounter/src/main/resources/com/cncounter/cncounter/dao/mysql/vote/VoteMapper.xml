@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cncounter.cncounter.dao.api.vote.VoteMapper" >
+  <resultMap id="BaseResultMap" type="com.cncounter.cncounter.model.vote.Vote" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="VARCHAR" />
+    <result column="features" property="features" jdbcType="VARCHAR" />
+    <result column="multiselect" property="multiselect" jdbcType="INTEGER" />
+    <result column="reelect" property="reelect" jdbcType="INTEGER" />
+    <result column="onceperuser" property="onceperuser" jdbcType="INTEGER" />
+    <result column="votetimeout" property="votetimeout" jdbcType="INTEGER" />
+    <result column="anonymous" property="anonymous" jdbcType="INTEGER" />
+    <result column="starttime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endtime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="votetimedesc" property="votetimedesc" jdbcType="VARCHAR" />
+    <result column="createuserid" property="createuserid" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="gen" property="gen" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.cncounter.cncounter.model.vote.Vote" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, keyword, category, features, multiselect, reelect, onceperuser, votetimeout, 
+    anonymous, starttime, endtime, votetimedesc, createuserid, createtime, gen
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from vote
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from vote
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cncounter.cncounter.model.vote.Vote" >
+    insert into vote (id, title, keyword, 
+      category, features, multiselect, 
+      reelect, onceperuser, votetimeout, 
+      anonymous, starttime, endtime, 
+      votetimedesc, createuserid, createtime, 
+      gen, content)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, 
+      #{category,jdbcType=VARCHAR}, #{features,jdbcType=VARCHAR}, #{multiselect,jdbcType=INTEGER}, 
+      #{reelect,jdbcType=INTEGER}, #{onceperuser,jdbcType=INTEGER}, #{votetimeout,jdbcType=INTEGER}, 
+      #{anonymous,jdbcType=INTEGER}, #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
+      #{votetimedesc,jdbcType=VARCHAR}, #{createuserid,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{gen,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cncounter.cncounter.model.vote.Vote" >
+    insert into vote
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="keyword != null" >
+        keyword,
+      </if>
+      <if test="category != null" >
+        category,
+      </if>
+      <if test="features != null" >
+        features,
+      </if>
+      <if test="multiselect != null" >
+        multiselect,
+      </if>
+      <if test="reelect != null" >
+        reelect,
+      </if>
+      <if test="onceperuser != null" >
+        onceperuser,
+      </if>
+      <if test="votetimeout != null" >
+        votetimeout,
+      </if>
+      <if test="anonymous != null" >
+        anonymous,
+      </if>
+      <if test="starttime != null" >
+        starttime,
+      </if>
+      <if test="endtime != null" >
+        endtime,
+      </if>
+      <if test="votetimedesc != null" >
+        votetimedesc,
+      </if>
+      <if test="createuserid != null" >
+        createuserid,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="gen != null" >
+        gen,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="features != null" >
+        #{features,jdbcType=VARCHAR},
+      </if>
+      <if test="multiselect != null" >
+        #{multiselect,jdbcType=INTEGER},
+      </if>
+      <if test="reelect != null" >
+        #{reelect,jdbcType=INTEGER},
+      </if>
+      <if test="onceperuser != null" >
+        #{onceperuser,jdbcType=INTEGER},
+      </if>
+      <if test="votetimeout != null" >
+        #{votetimeout,jdbcType=INTEGER},
+      </if>
+      <if test="anonymous != null" >
+        #{anonymous,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="votetimedesc != null" >
+        #{votetimedesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gen != null" >
+        #{gen,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cncounter.cncounter.model.vote.Vote" >
+    update vote
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="features != null" >
+        features = #{features,jdbcType=VARCHAR},
+      </if>
+      <if test="multiselect != null" >
+        multiselect = #{multiselect,jdbcType=INTEGER},
+      </if>
+      <if test="reelect != null" >
+        reelect = #{reelect,jdbcType=INTEGER},
+      </if>
+      <if test="onceperuser != null" >
+        onceperuser = #{onceperuser,jdbcType=INTEGER},
+      </if>
+      <if test="votetimeout != null" >
+        votetimeout = #{votetimeout,jdbcType=INTEGER},
+      </if>
+      <if test="anonymous != null" >
+        anonymous = #{anonymous,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="votetimedesc != null" >
+        votetimedesc = #{votetimedesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        createuserid = #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gen != null" >
+        gen = #{gen,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cncounter.cncounter.model.vote.Vote" >
+    update vote
+    set title = #{title,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      features = #{features,jdbcType=VARCHAR},
+      multiselect = #{multiselect,jdbcType=INTEGER},
+      reelect = #{reelect,jdbcType=INTEGER},
+      onceperuser = #{onceperuser,jdbcType=INTEGER},
+      votetimeout = #{votetimeout,jdbcType=INTEGER},
+      anonymous = #{anonymous,jdbcType=INTEGER},
+      starttime = #{starttime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
+      votetimedesc = #{votetimedesc,jdbcType=VARCHAR},
+      createuserid = #{createuserid,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      gen = #{gen,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cncounter.cncounter.model.vote.Vote" >
+    update vote
+    set title = #{title,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      features = #{features,jdbcType=VARCHAR},
+      multiselect = #{multiselect,jdbcType=INTEGER},
+      reelect = #{reelect,jdbcType=INTEGER},
+      onceperuser = #{onceperuser,jdbcType=INTEGER},
+      votetimeout = #{votetimeout,jdbcType=INTEGER},
+      anonymous = #{anonymous,jdbcType=INTEGER},
+      starttime = #{starttime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
+      votetimedesc = #{votetimedesc,jdbcType=VARCHAR},
+      createuserid = #{createuserid,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      gen = #{gen,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

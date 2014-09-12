@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">  
+<generatorConfiguration>  
+<!-- 说明: 本文件需要 ANSI编码,不能使用 UTF-8,所以 MyEclipse 并不能读取,请使用编辑工具进行编辑  -->
+	<!-- 数据库驱动-->
+    <classPathEntry  location="mysql-connector-java-5.1.30.jar"/>  
+    <context id="mysql_context_vote"  targetRuntime="MyBatis3">  
+        <commentGenerator>  
+            <property name="suppressDate" value="true"/>  
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->  
+            <property name="suppressAllComments" value="true"/>  
+        </commentGenerator>  
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://sqld.duapp.com:4050/eReqDlGXyFUaXwyfjjVg" userId="6EhSiGpsmSMRyZieglUImkTr" password="eoNRNBgRk397mVyu66MHYuZDsepCeZ8A">  
+        </jdbcConnection>
+        <javaTypeResolver>  
+            <property name="forceBigDecimals" value="false"/>  
+        </javaTypeResolver>  
+        <!-- 生成模型(Java Model)的包名和位置; 建议总的包为 com.cncounter.cncounter.model.xxx -->  
+        <javaModelGenerator targetPackage="com.cncounter.cncounter.model.vote" targetProject="../../../cncounter/src/main/java">  
+            <property name="enableSubPackages" value="true"/>  
+            <property name="trimStrings" value="true"/>  
+        </javaModelGenerator>  
+        <!-- 生成映射(XML实现)文件的包名和位置; 注意多次生成后文件内会有重复,请自己解决 -->
+		<!-- 建议总的包为 com.cncounter.cncounter.dao.mysql.xxx, 其他类型数据库类似 -->  
+        <sqlMapGenerator targetPackage="com.cncounter.cncounter.dao.mysql.vote" targetProject="../../../cncounter/src/main/resources">  
+            <property name="enableSubPackages" value="true"/>  
+        </sqlMapGenerator>  
+        <!-- 生成DAO(Java接口文件)的包名和位置; 建议总的包为 com.cncounter.cncounter.dao.api.xxx -->  
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.cncounter.cncounter.dao.api.vote" targetProject="../../../cncounter/src/main/java">  
+            <property name="enableSubPackages" value="true"/>  
+        </javaClientGenerator>  
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名 -->  
+		<!-- 这里可以有多个表, context也可以有多个,id唯一即可,比如要生成在多个子包下, -->
+		<!-- enable *** ByExample 如果设为true,则会生成一个类似的 Example对象,以及Mapper中的示例XML -->
+        <table tableName="vote" domainObjectName="Vote" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="voteoption" domainObjectName="VoteOption" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="voterecord" domainObjectName="VoteRecord" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    </context>
+	  
+    <context id="mysql_context_user"  targetRuntime="MyBatis3">  
+        <commentGenerator>  
+            <property name="suppressDate" value="true"/>  
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->  
+            <property name="suppressAllComments" value="true"/>  
+        </commentGenerator>  
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://sqld.duapp.com:4050/eReqDlGXyFUaXwyfjjVg" userId="6EhSiGpsmSMRyZieglUImkTr" password="eoNRNBgRk397mVyu66MHYuZDsepCeZ8A">  
+        </jdbcConnection>
+        <javaTypeResolver>  
+            <property name="forceBigDecimals" value="false"/>  
+        </javaTypeResolver>  
+        <!-- 生成模型(Java Model)的包名和位置; 建议总的包为 com.cncounter.cncounter.model.xxx -->  
+        <javaModelGenerator targetPackage="com.cncounter.cncounter.model.user" targetProject="../../../cncounter/src/main/java">  
+            <property name="enableSubPackages" value="true"/>  
+            <property name="trimStrings" value="true"/>  
+        </javaModelGenerator>  
+        <!-- 生成映射(XML实现)文件的包名和位置; 注意多次生成后文件内会有重复,请自己解决 -->
+		<!-- 建议总的包为 com.cncounter.cncounter.dao.mysql.xxx, 其他类型数据库类似 -->  
+        <sqlMapGenerator targetPackage="com.cncounter.cncounter.dao.mysql.user" targetProject="../../../cncounter/src/main/resources">  
+            <property name="enableSubPackages" value="true"/>  
+        </sqlMapGenerator>  
+        <!-- 生成DAO(Java接口文件)的包名和位置; 建议总的包为 com.cncounter.cncounter.dao.api.xxx -->  
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.cncounter.cncounter.dao.api.user" targetProject="../../../cncounter/src/main/java">  
+            <property name="enableSubPackages" value="true"/>  
+        </javaClientGenerator>  
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名 -->  
+		<!-- 这里可以有多个表, context也可以有多个,id唯一即可,比如要生成在多个子包下, -->
+		<!-- enable *** ByExample 如果设为true,则会生成一个类似的 Example对象,以及Mapper中的示例XML -->
+        <table tableName="user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    </context>
+	  
+    <context id="mysql_context_hotword"  targetRuntime="MyBatis3">  
+        <commentGenerator>  
+            <property name="suppressDate" value="true"/>  
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->  
+            <property name="suppressAllComments" value="true"/>  
+        </commentGenerator>  
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://sqld.duapp.com:4050/eReqDlGXyFUaXwyfjjVg" userId="6EhSiGpsmSMRyZieglUImkTr" password="eoNRNBgRk397mVyu66MHYuZDsepCeZ8A">  
+        </jdbcConnection>
+        <javaTypeResolver>  
+            <property name="forceBigDecimals" value="false"/>  
+        </javaTypeResolver>  
+        <!-- 生成模型(Java Model)的包名和位置; 建议总的包为 com.cncounter.cncounter.model.xxx -->  
+        <javaModelGenerator targetPackage="com.cncounter.cncounter.model.hotword" targetProject="../../../cncounter/src/main/java">  
+            <property name="enableSubPackages" value="true"/>  
+            <property name="trimStrings" value="true"/>  
+        </javaModelGenerator>  
+        <!-- 生成映射(XML实现)文件的包名和位置; 注意多次生成后文件内会有重复,请自己解决 -->
+		<!-- 建议总的包为 com.cncounter.cncounter.dao.mysql.xxx, 其他类型数据库类似 -->  
+        <sqlMapGenerator targetPackage="com.cncounter.cncounter.dao.mysql.hotword" targetProject="../../../cncounter/src/main/resources">  
+            <property name="enableSubPackages" value="true"/>  
+        </sqlMapGenerator>  
+        <!-- 生成DAO(Java接口文件)的包名和位置; 建议总的包为 com.cncounter.cncounter.dao.api.xxx -->  
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.cncounter.cncounter.dao.api.hotword" targetProject="../../../cncounter/src/main/java">  
+            <property name="enableSubPackages" value="true"/>  
+        </javaClientGenerator>  
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名 -->  
+		<!-- 这里可以有多个表, context也可以有多个,id唯一即可,比如要生成在多个子包下, -->
+		<!-- enable *** ByExample 如果设为true,则会生成一个类似的 Example对象,以及Mapper中的示例XML -->
+        <table tableName="hotword" domainObjectName="HotWord" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    </context>
+</generatorConfiguration>  

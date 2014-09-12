@@ -23,3 +23,4 @@ foo.txt
 BAE_CONF/
 cncounter/target/*
 cncounter/src/main/webapp/WEB-INF/classes/*
+generator_log*
