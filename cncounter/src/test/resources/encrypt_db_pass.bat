@@ -3,4 +3,4 @@
 @rem cd 的目的是跳到有druid-xxx.jar的 lib 目录执行
 @echo 正在生成Druid使用的加密密码......
 cd ..\lib
-java -cp druid-1.0.7.jar com.alibaba.druid.filter.config.ConfigTools eoNRNBgRk397mVyu66MHYuZDsepCeZ8A > ..\classes\pass.txt
+java -cp druid-1.0.7.jar com.alibaba.druid.filter.config.ConfigTools eoNRNBgRk397mVyu66MHYuZDsepCeZ8A	> ..\classes\pass.txt

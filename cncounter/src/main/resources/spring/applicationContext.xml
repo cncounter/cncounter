@@ -49,7 +49,9 @@
 		<property name="removeAbandoned" value="true" />
 		<property name="removeAbandonedTimeout" value="1800" />
 		<property name="logAbandoned" value="true" />
-		<property name="filters" value="mergeStat,config" />
+		<property name="filters" value="config,mergeStat" />
+		<!-- 提示Druid数据源需要对数据库密码进行解密 -->
+		<property name="connectionProperties" value="config.decrypt=true" />
 		<!-- 参考: https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatFilter -->
         <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
         <!-- 如果用Oracle，则把poolPreparedStatements配置为true，mysql可以配置为false-->
