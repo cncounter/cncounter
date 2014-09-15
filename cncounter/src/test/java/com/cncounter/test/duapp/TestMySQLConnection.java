@@ -34,8 +34,7 @@ public class TestMySQLConnection {
 			String host = "sqld.duapp.com";
 			String port = "4050";
 			String username = "6EhSiGpsmSMRyZieglUImkTr";// 用户名(api key);
-			String password = "eoNRNBgRk397mVyu66MHYuZDsepCeZ8A";// 密码(secret
-																	// key)
+			String password = "eoNRNBgRk397mVyu66MHYuZDsepCeZ8A";// 密码(secret key)
 			String driverName = "com.mysql.jdbc.Driver";
 			String dbUrl = "jdbc:mysql://";
 			String serverName = host + ":" + port + "/";

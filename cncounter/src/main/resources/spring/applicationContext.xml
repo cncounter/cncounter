@@ -9,7 +9,7 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/aop 
-		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 		http://www.springframework.org/schema/security 
 		http://www.springframework.org/schema/security/spring-security-3.2.xsd
 		http://www.springframework.org/schema/beans 
@@ -49,18 +49,12 @@
 		<property name="removeAbandoned" value="true" />
 		<property name="removeAbandonedTimeout" value="1800" />
 		<property name="logAbandoned" value="true" />
-		<property name="filters" value="mergeStat" />
-		
+		<property name="filters" value="mergeStat,config" />
+		<!-- 参考: https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatFilter -->
         <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
         <!-- 如果用Oracle，则把poolPreparedStatements配置为true，mysql可以配置为false-->
         <property name="poolPreparedStatements" value="false" />
         <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
-	</bean>
-	
-	<bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
-		<property name="slowSqlMillis" value="10000" />
-		<property name="logSlowSql" value="true" />
-		<property name="mergeSql" value="true" />
 	</bean>
 
 	<!-- myBatis sqlSessionFactory -->
