@@ -3,14 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>欢迎您 - cncounter</title>
+	<title>天朝计数器 - CNCounter</title>
 	<jsp:include page="/common/cssjs.jsp"></jsp:include>
 </head>
 <body>
 	<jsp:include page="/common/header.jsp"></jsp:include>
 	<div class="container">
 		<div class="content_left">
-			<p class="h1">天朝计数</p>
+			<p class="h1">天朝计数器</p>
 			<h2>
 				<a target="_self" href="http://cncounter.duapp.com">在线访问地址</a>
 			</h2>
