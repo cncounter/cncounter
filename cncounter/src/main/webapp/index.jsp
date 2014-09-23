@@ -24,6 +24,9 @@
 				<a target="_blank" href="http://nec.netease.com/">Nice Easy CSS</a>
 			</h2>
 			<h2>
+				<a target="_blank" href="https://mybatis.github.io/spring/zh/index.html">MyBatis-Spring中文站点</a>
+			</h2>
+			<h2>
 				<a target="_self" href="./qrcode/input.php">二维码生成</a>
 			</h2>
 			<h2>
