@@ -98,7 +98,7 @@ public class ZXingUtil {
 		hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
 		BitMatrix matrix = null;
 		try {
-			matrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 400, 400,hints);
+			matrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, width, height,hints);
 			image =  MatrixToImageWriter.toBufferedImage(matrix);
 		} catch (WriterException e) {
 			e.printStackTrace();

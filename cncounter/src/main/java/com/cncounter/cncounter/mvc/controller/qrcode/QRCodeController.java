@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cncounter.cncounter.mvc.controller.base.ControllerBase;
 import com.cncounter.cncounter.mvc.msg.JSONMessage;
-import com.cncounter.util.string.StringNumberUtil;
 import com.cncounter.util.zxing.ZXingUtil;
 
 @Controller
@@ -34,14 +33,21 @@ public class QRCodeController extends ControllerBase {
 
 		// 需要转换的内容
 		String content = getParameterString(request, "content", "");
-		//int width = getParameterInt(request, "width", 400);
-		//int height = getParameterInt(request, "height", 400);
+		int width = getParameterInt(request, "width", 400);
+		int height = getParameterInt(request, "height", 400);
 		
+		// 使用Length+Hash
+		int len = content.length();
+		int hash = content.hashCode();
+		// 
+		String key = Integer.toHexString(len) + Integer.toHexString(hash);
 		//
-		String uuid = StringNumberUtil.getUUID();
+		String uuid;// = StringNumberUtil.getUUID(); //
 		//
-		String src = basePath(request)+"rest/qrcode/"+uuid+".jpeg";
+		uuid = key;
 		//
+		String src = basePath(request)+"rest/qrcode/"+uuid+".jpeg" + "?w="+width + "&h="+height;
+		// 缓存起来
 		String uuidKey = getUUIDKey(uuid);
 		setSessionAttribute(request, uuidKey, content);
 		//
@@ -56,18 +62,27 @@ public class QRCodeController extends ControllerBase {
 		return message;
 	}
 
+	/**
+	 * 获取二维码, 动态生成
+	 * @param uuid
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/rest/qrcode/{uuid}.jpeg")
 	@ResponseBody
-	public void listOrgByLevel(@PathVariable("uuid")String uuid, 
+	public void getQrCode(@PathVariable("uuid")String uuid, 
 			HttpServletRequest request, HttpServletResponse response) {
 		String uuidKey = getUUIDKey(uuid);
 		String content = (String)getSessionAttribute(request, uuidKey);
+		//
+		int w = getParameterInt(request, "w", 400);
+		int h = getParameterInt(request, "h", 400);
 		//
 		String type="image/jpeg;charset=UTF-8";
 		response.setContentType(type);
 		try {
 			OutputStream output = response.getOutputStream();
-			ZXingUtil.generateQrCode(content, output);
+			ZXingUtil.generateQrCode(content, output, w, h);
 			output.close();
 		} catch (IOException e) {
 			e.printStackTrace();

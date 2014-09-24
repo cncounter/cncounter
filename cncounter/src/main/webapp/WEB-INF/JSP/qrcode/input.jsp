@@ -30,7 +30,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						 type="button" class="btn btn-primary">生成</button>
 			</div>
 			<div class="qrcode-jpeg-area">
-				<img id="qrcode_img" alt="" src="" class="qrcode-img hide">
+				<a id="qrcode_img_anchor" target="_blank">
+					<img id="qrcode_img" alt="" src="" class="qrcode-img hide">
+				</a>
 			</div>
 		</div>
 		<jsp:include page="/common/sidebar.jsp"></jsp:include>
@@ -43,8 +45,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			//
 			var $btn_generate_qrcode = $("#btn_generate_qrcode");
 			var $qrcode_img = $("#qrcode_img");
+			var $qrcode_img_anchor = $("#qrcode_img_anchor");
 			var $input_form = $("#input_form");
 			var $content = $("#content");
+			var $width = $("input[name=width]");
+			var $height = $("input[name=height]");
 			//
 			var href = window.location.href;
 			$content.val(href);
@@ -52,14 +57,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$btn_generate_qrcode.bind("click", function(e){
 				//
 				var content = $content.val();
+				var width = $width.val();
+				var height = $height.val();
 				if(!content){
-					alert("content="+content);
+					alert("内容不能为空!");
 					return;
 				}
 				//
 				var url = $input_form.attr("action");
 				var data = {
 					content : content
+					,
+					width : width
+					,
+					height : height
 				};
 				
 				var successCallback = function (message) {
@@ -68,6 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        	   var uuid = meta["uuid"];
 		        	   var src = meta["src"];
 		        	   $qrcode_img.attr("src", src).removeClass("hide");
+		        	   $qrcode_img_anchor.attr("href", src).removeClass("hide");
 				    };
 				//
 				var errotCallback = function (jqXHR, textStatus, errorThrown) {
