@@ -36,8 +36,19 @@
 		<servlet-name>DruidStatView</servlet-name>
 		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
 		<init-param>
+			<!-- 允许清空统计数据 -->
 			<param-name>resetEnable</param-name>
 			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<!-- 用户名 -->
+			<param-name>loginUsername</param-name>
+			<param-value>druid</param-value>
+		</init-param>
+		<init-param>
+			<!-- 密码 -->
+			<param-name>loginPassword</param-name>
+			<param-value>druid</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>
