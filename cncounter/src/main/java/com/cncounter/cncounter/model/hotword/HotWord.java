@@ -1,9 +1,13 @@
 package com.cncounter.cncounter.model.hotword;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class HotWord {
-    private Integer id;
+public class HotWord implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private String word;
 

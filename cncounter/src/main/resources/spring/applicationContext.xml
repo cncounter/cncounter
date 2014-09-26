@@ -22,7 +22,7 @@
 	<!-- Activates annotation-based bean configuration -->
 	<context:annotation-config />
 	<!-- Scans for application @Components to deploy -->
-	<context:component-scan base-package="com.cncounter.com.cncounter.cncounter" />
+	<context:component-scan base-package="com.cncounter.cncounter" />
 
 	<!-- 引入属性文件 -->
 	<context:property-placeholder
@@ -139,11 +139,14 @@
 		<property name="maxWaitMillis" value="${redis.maxWaitMillis}" />
 		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
 	</bean>
-	<bean id="connectionFactory"
-		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-		p:host-name="${redis.host}" p:port="${redis.port}" p:password="${redis.pass}"
-		p:pool-config-ref="poolConfig" />
-	<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
-		<property name="connectionFactory" ref="connectionFactory" />
+	<bean id="jedisConnFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<property name="hostName" value="${redis.host}"></property>	
+		<property name="port" value="${redis.port}"></property>	
+		<property name="password" value="${redis.pass}"></property>	
+		<property name="poolConfig" ref="poolConfig"></property>
 	</bean>
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="jedisConnFactory" />
+    </bean>
 </beans>

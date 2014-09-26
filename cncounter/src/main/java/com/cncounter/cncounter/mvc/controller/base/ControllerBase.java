@@ -10,6 +10,9 @@ import java.util.WeakHashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.cncounter.cncounter.dao.redis.api.RedisBaseDAO;
 import com.cncounter.cncounter.model.user.User;
 import com.cncounter.util.string.StringNumberUtil;
 
@@ -24,6 +27,8 @@ public abstract class ControllerBase {
 	 */
 	public static final String SESSION_USER_KEY = "session_user_key";
 
+	@Autowired
+	private RedisBaseDAO redisBaseDAO;
 
 	/**
 	 * 获取基于sessionid的key
@@ -58,12 +63,13 @@ public abstract class ControllerBase {
 	 * @param name 属性名
 	 * @param value 属性值, 可序列化对象
 	 */
-	public static void setSessionAttribute(HttpServletRequest request, String name, Serializable value) {
+	public  void setSessionAttribute(HttpServletRequest request, String name, Serializable value) {
 		// 当前是基于单容器的实现
 		HttpSession session = request.getSession(true);
 		session.setAttribute(name, value);
 		//
 	}
+
 
 	/**
 	 * 设置Session存活时间
@@ -81,17 +87,59 @@ public abstract class ControllerBase {
 	 * @param name 属性名
 	 * @return
 	 */
-	public static Object getSessionAttribute(HttpServletRequest request, String name) {
+	public  Object getSessionAttribute(HttpServletRequest request, String name) {
 		// 当前是基于单容器的实现
 		HttpSession session = request.getSession(true);
 		return session.getAttribute(name);
+	}
+	
+
+	/**
+	 * 保存到缓存. 使用Redis实现
+	 * @param request 使用是为了使用app缓存的方式
+	 * @param name
+	 * @param value
+	 */
+	public void saveToCache(HttpServletRequest request, String name, Serializable value) {
+		// 基于单容器的实现
+		// ServletContext application = request.getSession().getServletContext();
+		// application.setAttribute(name, value);
+		// 基于Redis的实现
+		saveToCache(name, value);
+	}
+	public void saveToCache(String name, Serializable value) {
+		// 基于单容器的实现
+		// ServletContext application = request.getSession().getServletContext();
+		// application.setAttribute(name, value);
+		// 基于Redis的实现
+		redisBaseDAO.saveObject(name, value);
+	}
+	/**
+	 * 从Cache获取对象
+	 * @param request 使用是为了使用app缓存的方式
+	 * @param name
+	 * @return
+	 */
+	public  Object getFromCache(HttpServletRequest request, String name) {
+		// 基于单容器的实现
+		// ServletContext application = request.getSession().getServletContext();
+		// return application.getAttribute(name);
+		// 基于Redis的实现
+		return getFromCache(name);
+	}
+	public  Object getFromCache(String name) {
+		// 基于单容器的实现
+		// ServletContext application = request.getSession().getServletContext();
+		// return application.getAttribute(name);
+		// 基于Redis的实现
+		return redisBaseDAO.getObject(name);
 	}
 	/**
 	 * 获取当前登录的用户
 	 * @param request
 	 * @return
 	 */
-	public static User getLoginUser(HttpServletRequest request) {
+	public  User getLoginUser(HttpServletRequest request) {
 		User user = null;
 		Object obj = getSessionAttribute(request, SESSION_USER_KEY);
 		if(obj instanceof User){

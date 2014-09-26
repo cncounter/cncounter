@@ -7,85 +7,101 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cncounter</name>
 	<url>http://maven.apache.org</url>
+	
+	<properties>
+		<junit.version>4.11</junit.version>
+		<log4j.version>1.2.16</log4j.version>
+		<servlet.api.version>2.5</servlet.api.version>
+		<spring.version>4.0.7.RELEASE</spring.version>
+		<spring.data.redis.version>1.4.0.RELEASE</spring.data.redis.version>
+		<jedis.version>2.5.2</jedis.version>
+		<mybatis.version>3.2.7</mybatis.version>
+		<mybatis-spring.version>1.2.2</mybatis-spring.version>
+		<mysql.jdbc.version>5.1.30</mysql.jdbc.version>
+		<druid.version>1.0.7</druid.version>
+		<fastjson.version>1.1.34</fastjson.version>
+		<jackson.databind.version>2.2.2</jackson.databind.version>
+	</properties>
+	
 	<dependencies>
 		<!-- junit,测试使用 -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- javaweb工程的API -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
+			<version>${servlet.api.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<!-- spring-webmvc,Spring相关的一般jar依赖都在此依赖中解决了 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.0.3.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			<version>4.0.3.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-redis</artifactId>
-			<version>1.3.2.RELEASE</version>
-		</dependency>
-
 
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.1.34</version>
+			<version>${fastjson.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.2.2</version>
+			<version>${jackson.databind.version}</version>
 		</dependency>
 		<!-- log4j2 -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.16</version>
+			<version>${log4j.version}</version>
 		</dependency>
 		<!-- MySQL 的客户端驱动  -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.30</version>
+			<version>${mysql.jdbc.version}</version>
 		</dependency>
 		<!-- mybatis 文件 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
-			<version>3.2.7</version>
+			<version>${mybatis.version}</version>
 		</dependency>
 		<!-- mybatis 与 spring的桥接,好像Spring3.0需要,4.0推荐使用注解方式来集成, -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
-			<version>1.2.2</version>
+			<version>${mybatis-spring.version}</version>
 		</dependency>
 		<!-- druid 数据库连接池,和 DBCP,c3p0是一类东西 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
-			<version>1.0.7</version>
+			<version>${druid.version}</version>
 		</dependency>
 		<!-- redis客户端,使用缓存 -->
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
-			<version>2.4.2</version>
+			<version>${jedis.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>${spring.data.redis.version}</version>
+		</dependency>
+
 		<!-- 百度,Ueditor -->
 		<dependency>
 			<groupId>com.baidu.ueditor</groupId>

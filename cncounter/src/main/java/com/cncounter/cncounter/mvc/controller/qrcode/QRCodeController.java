@@ -29,7 +29,7 @@ public class QRCodeController extends ControllerBase {
 	
 	@RequestMapping(value = "/qrcode/ajax/genqrcode.json")
 	@ResponseBody
-	public Object listOrganizationByPage(HttpServletRequest request, HttpServletResponse response) {
+	public Object generateQRcode(HttpServletRequest request, HttpServletResponse response) {
 
 		// 需要转换的内容
 		String content = getParameterString(request, "content", "");
@@ -49,7 +49,7 @@ public class QRCodeController extends ControllerBase {
 		String src = basePath(request)+"rest/qrcode/"+uuid+".jpeg" + "?w="+width + "&h="+height;
 		// 缓存起来
 		String uuidKey = getUUIDKey(uuid);
-		setSessionAttribute(request, uuidKey, content);
+		saveToCache(request, uuidKey, content);
 		//
 		JSONMessage message = JSONMessage.newMessage();
 		//
@@ -73,7 +73,7 @@ public class QRCodeController extends ControllerBase {
 	public void getQrCode(@PathVariable("uuid")String uuid, 
 			HttpServletRequest request, HttpServletResponse response) {
 		String uuidKey = getUUIDKey(uuid);
-		String content = (String)getSessionAttribute(request, uuidKey);
+		String content = (String)getFromCache(request, uuidKey);
 		//
 		int w = getParameterInt(request, "w", 400);
 		int h = getParameterInt(request, "h", 400);

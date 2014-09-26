@@ -1,8 +1,12 @@
 package com.cncounter.cncounter.model.vote;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class VoteRecord {
+public class VoteRecord implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
     private Integer id;
 
     private Integer voteid;
