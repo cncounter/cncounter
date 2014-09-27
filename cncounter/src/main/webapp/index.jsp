@@ -18,19 +18,7 @@
 				<a target="_blank" href="http://blog.cncounter.com/cncounter/">GitHub项目首页</a>
 			</h2>
 			<h2>
-				<a target="_blank" href="http://developer.baidu.com/apm/index">应用性能监测中心</a>
-			</h2>
-			<h2>
-				<a target="_blank" href="http://nec.netease.com/">Nice Easy CSS</a>
-			</h2>
-			<h2>
-				<a target="_blank" href="https://mybatis.github.io/spring/zh/index.html">MyBatis-Spring中文站点</a>
-			</h2>
-			<h2>
-				<a target="_self" href="./qrcode/input.php">二维码生成</a>
-			</h2>
-			<h2>
-				<a target="_blank" href="./druid/weburi.html">Druid监控页面</a>
+				<a target="_self" href="./qrcode/input.php">实用小程序二维码生成</a>
 			</h2>
 		</div>
 		<jsp:include page="/common/sidebar.jsp"></jsp:include>
