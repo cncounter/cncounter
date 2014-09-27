@@ -6,11 +6,11 @@ import java.nio.charset.Charset;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import com.cncounter.cncounter.dao.redis.api.RedisBaseDAO;
 
-@Service("redisBaseImpl")
+@Repository
 public class RedisBaseImpl implements RedisBaseDAO {
 	/**
 	 * 前缀字符串

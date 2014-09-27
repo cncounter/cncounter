@@ -7,7 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cncounter</name>
 	<url>http://maven.apache.org</url>
-	
+
 	<properties>
 		<junit.version>4.11</junit.version>
 		<log4j.version>1.2.16</log4j.version>
@@ -22,7 +22,7 @@
 		<fastjson.version>1.1.34</fastjson.version>
 		<jackson.databind.version>2.2.2</jackson.databind.version>
 	</properties>
-	
+
 	<dependencies>
 		<!-- junit,测试使用 -->
 		<dependency>
@@ -31,6 +31,13 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+
 		<!-- javaweb工程的API -->
 		<dependency>
 			<groupId>javax.servlet</groupId>

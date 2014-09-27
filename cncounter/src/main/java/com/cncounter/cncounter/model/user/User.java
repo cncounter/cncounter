@@ -116,4 +116,35 @@ public class User implements Serializable{
     public void setGen(Integer gen) {
         this.gen = gen;
     }
+    
+    //
+    @Override
+    public int hashCode() {
+    	return null!=this.id? this.id : 0;
+    }
+    //
+    @Override
+    public boolean equals(Object obj) {
+    	if(this ==  obj){
+    		return true;
+    	}
+    	//
+    	if(obj instanceof User){
+    		//
+    		User other = (User)obj;
+    		Integer id2 = other.id;
+    		String username2 = other.username;
+    		// 承认ID
+    		if(this.id !=null && this.id.equals(id2)){
+    			return true;
+    		} else {
+    			// 承认USERNAME
+    			if(null != this.username && this.username.equals(username2)){
+        			return true;
+    			}
+    		}
+    	}
+    	// 其他情况,返回false
+    	return false;
+    }
 }
