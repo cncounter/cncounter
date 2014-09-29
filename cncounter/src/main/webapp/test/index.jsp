@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>测试页面- cncounter</title>
+	<title>测试页面目录- cncounter</title>
 	<jsp:include page="/common/cssjs.jsp"></jsp:include>
 </head>
 <body>
@@ -17,6 +17,9 @@
 			</h2>
 			<h2>
 				<a target="_blank" href="http://nec.netease.com/">Nice Easy CSS</a>
+			</h2>
+			<h2>
+				<a target="_blank" href="http://www.bootcss.com/p/chart.js/docs/">Chart.js 中文文档</a>
 			</h2>
 			<h2>
 				<a target="_blank" href="https://mybatis.github.io/spring/zh/index.html">MyBatis-Spring中文站点</a>
@@ -49,6 +52,12 @@
 		   		UEditor_测试
 		   		</a>
 		   	</h1>
+		   	<h1>
+		   		<a target="_blank" href="./chart.js/testChartjs.jsp">
+		   		测试 Chartjs
+		   		</a>
+		   	</h1>
+		   	
 		</div>
 		<jsp:include page="/common/sidebar.jsp"></jsp:include>
 	</div>
