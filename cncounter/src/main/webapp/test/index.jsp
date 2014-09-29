@@ -28,20 +28,20 @@
 				<a target="_blank" href="https://mybatis.github.io/spring/zh/index.html">MyBatis-Spring中文站点</a>
 			</h2>
 			<h2>
-				<a target="_blank" href="./druid/weburi.html">Druid监控页面</a>
+				<a target="_blank" href="../druid/weburi.html">Druid监控页面</a>
 			</h2>
 		   	<h1>
-		   		<a target="_blank" href="./testmysql.jsp">
+		   		<a target="_blank" href="../testmysql.jsp">
 		   		测试MySQL
 		   		</a>
 		   	</h1>
 		   	<h1>
-		   		<a target="_blank" href="./testredis.jsp">
+		   		<a target="_blank" href="../testredis.jsp">
 		   		测试redis
 		   		</a>
 		   	</h1>
 		   	<h1>
-		   		<a target="_blank" href="./testspring.jsp">
+		   		<a target="_blank" href="../testspring.jsp">
 		   		测试spring
 		   		</a>
 		   	</h1>
