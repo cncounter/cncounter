@@ -13,6 +13,9 @@
 			<p class="h1">测试  - 天朝计数</p>
 			
 			<h2>
+				<a target="_blank" href="http://developer.baidu.com/console#bae!appid=2825717">管理控制台</a>
+			</h2>
+			<h2>
 				<a target="_blank" href="http://developer.baidu.com/apm/index">应用性能监测中心</a>
 			</h2>
 			<h2>
