@@ -27,24 +27,11 @@ public class ZXingUtil {
 	 * @param output 输出流, 本方法不负责关闭输出流
 	 */
 	public static boolean generateQrCode(String content, OutputStream output){
-		// 防御编程
-		if(null == content || null == output){
-			return false;
-		}
 		//
 		int width = 400;
 		int height = 400;
-		// 调用另一个方法
-	    BufferedImage image =  generateQrCode(content, width, height);
-	    
-	    try {
-			ImageIO.write(image, "jpeg", output);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return false;
-		}
 		//
-		return true;
+		return generateQrCode(content, output, width, height);
 	}
 	/**
 	 * 
