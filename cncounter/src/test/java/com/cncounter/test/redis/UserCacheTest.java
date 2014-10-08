@@ -11,8 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.cncounter.cncounter.dao.redis.api.RedisBaseDAO;
 import com.cncounter.cncounter.model.user.User;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:spring/applicationContext.xml"})
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations={"classpath:spring/applicationContext.xml"})
 public class UserCacheTest {
 
 	@Autowired
@@ -23,7 +23,7 @@ public class UserCacheTest {
     	Assert.assertNotNull("redisBaseDAO 对象不能为空",redisBaseDAO);
     }
     
-    @Test
+    //@Test
     public void testUser() throws Exception {
 		//
     	User user = generateNewUser();

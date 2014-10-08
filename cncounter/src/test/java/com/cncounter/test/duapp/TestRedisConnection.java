@@ -14,7 +14,7 @@ public class TestRedisConnection {
 		new TestRedisConnection().testRedisConn();
 	}
 
-	@Test
+	//@Test
 	public void testRedisConn(){
 		String name = testRedisConnStr();
         System.out.println("name | " + name);	

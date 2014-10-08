@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> 浏览器拍照</title>
+  <meta charset='utf-8'>
+  <meta name="Author" content="renfufei@qq.com">
+  <meta name="Description" content="inveted by: http://davidwalsh.name/browser-camera">
+  <script>
+	// 设置事件监听，DOM内容加载完成，和jQuery的$.ready() 效果差不多。
+	window.addEventListener("DOMContentLoaded", function() {
+		// canvas 元素将用于抓拍
+		var canvas = document.getElementById("canvas"),
+			context = canvas.getContext("2d"),
+			// video 元素，将用于接收并播放摄像头 的数据流
+			video = document.getElementById("video"),
+			videoObj = { "video": true },
+			// 一个出错的回调函数，在控制台打印出错信息
+			errBack = function(error) {
+				if("object" === typeof window.console){
+					console.log("Video capture error: ", error.code); 
+				}
+			};
+
+		// Put video listeners into place
+		// 针对标准的浏览器
+		if(navigator.getUserMedia) { // Standard
+			navigator.getUserMedia(videoObj, function(stream) {
+				video.src = stream;
+				video.play();
+			}, errBack);
+		} else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
+			navigator.webkitGetUserMedia(videoObj, function(stream){
+				video.src = window.webkitURL.createObjectURL(stream);
+				video.play();
+			}, errBack);
+		}
+		// 对拍照按钮的事件监听
+		document.getElementById("snap").addEventListener("click", function() {
+			// 画到画布上
+			context.drawImage(video, 0, 0, 640, 480);
+		});
+
+	}, false);
+  </script>
+ </head>
+
+ <body>
+  
+	<div>
+		<!-- 
+		声明： 此div应该在允许使用webcam，网络摄像头之后动态生成
+		宽高： 640 *480,当然，可以动态控制啦!
+		-->
+		<!--
+	Ideally these elements aren't created until it's confirmed that the 
+	client supports video/camera, but for the sake of illustrating the 
+	elements involved, they are created with markup (not JavaScript)
+		-->
+		<video id="video" width="640" height="480" autoplay></video>
+		<button id="snap">Snap Photo</button>
+		<canvas id="canvas" width="640" height="480"></canvas>
+	</div>
+ </body>
+</html>

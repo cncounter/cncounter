@@ -19,7 +19,8 @@ public class JedisTest {
 	}
 	
 	public JedisPool getNewPool() {
-		JedisPool pool = new JedisPool("localhost", 80);
+		//JedisPool pool = new JedisPool("localhost", 80);
+		JedisPool pool = new JedisPool("redis.duapp.com", 80);
 		return pool;
 	}
 	

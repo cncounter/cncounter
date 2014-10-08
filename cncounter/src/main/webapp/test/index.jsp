@@ -64,6 +64,11 @@
 		   		测试 Chartjs
 		   		</a>
 		   	</h1>
+		   	<h1>
+		   		<a target="_blank" href="./html5/takephoto.html">
+		   		HTML5浏览器拍照
+		   		</a>
+		   	</h1>
 		   	
 		</div>
 		<jsp:include page="/common/sidebar.jsp"></jsp:include>
