@@ -14,21 +14,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="container">
      <form class="form-signin" role="form">
        <h2 class="form-signin-heading">账号登录</h2>
-       <input type="email" class="form-control" placeholder="输入用户名/邮箱" required autofocus>
-       <input type="password" class="form-control" placeholder="请输入密码" required>
+       <input type="email" class="form-control" placeholder="输入用户名/邮箱" required-message="请输入用户名/邮箱！" required autofocus>
+       <input type="password" class="form-control" placeholder="请输入密码" required-message="请输入密码！" required>
        <div class="checkbox">
-         <label>
-           <input name="rememberme" type="checkbox" value="0"> 下次自动登录
+         <label class="text-left">
+           <input name="rememberme" type="checkbox" value="0"> 记住我
          </label>
-         
+         <span class="text-right"><a href="<%=path %>/password_reset.php">忘记密码</a></span>
        </div>
-       <ul class="nav nav-pills">
-		  <li><a href="<%=path %>/forgotpass.php">忘记密码</a></li>
-	   </ul>
        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
-       <ul class="nav nav-pills">
-		  <li><a href="<%=path %>/signup.php">马上注册</a></li>
-	   </ul>
+       <a class="btn btn-lg btn-warning btn-block"  href="<%=path %>/signup.php">注册</a>
      </form>
   </div> <!-- /container -->
 </body>
