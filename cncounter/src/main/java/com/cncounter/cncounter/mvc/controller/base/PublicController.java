@@ -26,6 +26,10 @@ public class PublicController extends ControllerBase {
 	}
 	@RequestMapping({"/login.php","/signin.php"})
 	public ModelAndView signinPage(HttpServletRequest request, HttpServletResponse response) {
+		// 判断是否登录
+		getLoginUser(request);
+		
+		
 		// 输入页面
 		ModelAndView mav = new ModelAndView("login");
 

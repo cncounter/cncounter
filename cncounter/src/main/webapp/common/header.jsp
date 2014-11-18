@@ -16,7 +16,7 @@
           <ul class="nav navbar-nav">
             <li><a href="<%=h_path %>/">首页</a></li>
             <li><a href="<%=h_path %>/login.php">登录</a></li>
-            <li><a href="http://blog.cncounter.com/cncounter/">GitHub</a></li>
+            <li><a href="http://blog.cncounter.com/cncounter/" target="_blank">GitHub</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
