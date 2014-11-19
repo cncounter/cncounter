@@ -92,8 +92,11 @@
 	<servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<url-pattern>*.php</url-pattern>
+		<url-pattern>*.page</url-pattern>
 		<url-pattern>*.json</url-pattern>
 		<url-pattern>*.jpeg</url-pattern>
+		<url-pattern>*.photo</url-pattern>
+		<url-pattern>*.action</url-pattern>
 	</servlet-mapping>
 	
 	<session-config>  
