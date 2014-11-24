@@ -17,9 +17,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<p class="h1">二维码在线生成</p>
 			<div>
 				<form id="input_form" action="<%=basePath %>qrcode/ajax/genqrcode.json" method="post">
-					宽: <input tabindex="1" name="width" name="width" value="400" > px
+					宽: <input tabindex="1" name="width" name="width" value="300" > px
 					<br/>
-					高: <input tabindex="2" name="height" name="height" value="400" > px
+					高: <input tabindex="2" name="height" name="height" value="300" > px
 					<br/>
 					<span>请输入需要转换的内容:</span>
 					<br/>
@@ -28,6 +28,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</form>
 					<button tabindex="4" id="btn_generate_qrcode"
 						 type="button" class="btn btn-primary">生成</button>
+			</div>
+			<div>
+			<br/>
 			</div>
 			<div class="qrcode-jpeg-area">
 				<a id="qrcode_img_anchor" target="_blank">
