@@ -20,6 +20,5 @@ foo.txt
 
 *.class
 
-BAE_CONF/
-cncounter/src/main/webapp/WEB-INF/classes/*
-generator_log*
+*-*
+classes/*
