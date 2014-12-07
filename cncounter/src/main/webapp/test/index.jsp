@@ -19,6 +19,9 @@
 				<a target="_blank" href="http://developer.baidu.com/apm/index">应用性能监测中心</a>
 			</h2>
 			<h2>
+				<a target="_blank" href="https://docs.oracle.com/javase/jp/8/technotes/tools/unix/toc.html">JavaSE Tools Reference</a>
+			</h2>
+			<h2>
 				<a target="_blank" href="http://duoshuo.com/">多说 - 社会化评论系统</a>
 			</h2>
 			<h2>
