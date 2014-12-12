@@ -20,5 +20,6 @@ foo.txt
 
 *.class
 
-*-*
+*-*/*
 classes/*
+*.*
