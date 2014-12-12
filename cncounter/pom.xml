@@ -10,14 +10,14 @@
 
 	<properties>
 		<junit.version>4.11</junit.version>
-		
+
 		<log4j.version>1.2.16</log4j.version>
 		<servlet.api.version>2.5</servlet.api.version>
-		
+
 		<spring.version>4.0.7.RELEASE</spring.version>
 		<spring.data.redis.version>1.4.0.RELEASE</spring.data.redis.version>
 		<jedis.version>2.5.2</jedis.version>
-		
+
 		<mybatis.version>3.2.7</mybatis.version>
 		<mybatis-spring.version>1.2.2</mybatis-spring.version>
 		<mysql.jdbc.version>5.1.30</mysql.jdbc.version>
@@ -25,15 +25,15 @@
 		<fastjson.version>1.1.34</fastjson.version>
 		<jackson.databind.version>2.2.2</jackson.databind.version>
 		<org.aspectj.version>1.8.4</org.aspectj.version>
-		
-		
+
+
 		<gpg.skip>true</gpg.skip>
 		<javadoc.skip>true</javadoc.skip>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.6</jdk.version>
 	</properties>
-	
+
 	<repositories>
 		<repository>
 			<id>local-file</id>
@@ -41,7 +41,7 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
-	
+
 	<developers>
 		<developer>
 			<id>renfufei</id>
@@ -54,7 +54,7 @@
 			<email>tiemaocsdn@qq.com</email>
 		</developer>
 	</developers>
-	
+
 	<organization>
 		<name>CNCounter</name>
 		<url>http://blog.cncounter.com/</url>
@@ -97,27 +97,6 @@
 	</build>
 
 	<dependencies>
-		<!-- junit,测试使用 -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<!-- javaweb工程的API -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>${servlet.api.version}</version>
-			<scope>provided</scope>
-		</dependency>
 		<!-- spring-webmvc,Spring相关的一般jar依赖都在此依赖中解决了 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -215,6 +194,34 @@
 			<groupId>com.google.zxing</groupId>
 			<artifactId>javase</artifactId>
 			<version>3.1.0</version>
+		</dependency>
+		
+		<!-- junit,测试使用 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.jsqlparser</groupId>
+			<artifactId>jsqlparser</artifactId>
+			<version>0.9.1</version>
+			<optional>true</optional>
+		</dependency>
+		<!-- javaweb工程的API -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${servlet.api.version}</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>

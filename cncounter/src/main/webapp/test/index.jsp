@@ -28,6 +28,12 @@
 				<a target="_blank" href="http://nec.netease.com/">Nice Easy CSS</a>
 			</h2>
 			<h2>
+				<a target="_blank" href="http://www.jiaojiaochisu.com/">娇娇吃素 敬请期待</a>
+			</h2>
+			<h2>
+				<a target="_blank" href="http://b3log.org/">B3log Solo 开源博客程序</a>
+			</h2>
+			<h2>
 				<a target="_blank" href="http://www.bootcss.com/p/chart.js/docs/">Chart.js 中文文档</a>
 			</h2>
 			<h2>
