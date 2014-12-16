@@ -45,6 +45,9 @@
 			<h2>
 				<a target="_blank" href="http://dbanotes.net/">闲思录-dbanotes</a>
 			</h2>
+			<h2>
+				<a target="_blank" href="http://www.lepus.cc/">天兔数据库监控系统</a>
+			</h2>
 			<hr/>
 			<h2>
 				<a target="_blank" href="../druid/weburi.html">Druid监控页面</a>
