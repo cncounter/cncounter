@@ -14,7 +14,7 @@ public class RandomUtil {
 	 * @param max 一个最大值,建议为 int 正整数.
 	 * @return 返回 [1～max]
 	 */
-	public static int nextRandom(int max){
+	public static int nextInt(int max){
 		// 伪随机数
 		Random random = new Random(System.nanoTime());
 		//

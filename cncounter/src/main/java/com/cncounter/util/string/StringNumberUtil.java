@@ -71,22 +71,6 @@ public class StringNumberUtil {
 		}
 		return result;
 	}
-	/**
-	 * 不为empty(空)
-	 * @param str
-	 * @return
-	 */
-	public static boolean notEmpty(Object str){
-		boolean result = false;
-		try{
-			if(null != str && str.toString().trim().length() > 0){
-				result = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
 	
 	/**
 	 * 为empty(空)
@@ -95,16 +79,52 @@ public class StringNumberUtil {
 	 */
 	public static boolean isEmpty(Object str){
 		boolean result = false;
-		try{
-			if(null == str || str.toString().trim().length() <= 0){
-				result = true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		if(null == str || str.toString().isEmpty()){
+			result = true;
 		}
 		return result;
 	}
 	
+	/**
+	 * 不为empty(空)
+	 * @param str
+	 * @return
+	 */
+	public static boolean notEmpty(Object str){
+		boolean result = false;
+		if(null != str && !str.toString().isEmpty()){
+			result = true;
+		}
+		return result;
+	}
+	
+
+	/**
+	 * 去除首尾空格
+	 * @param str
+	 * @return 如果没有字符,则返回empty字符串("")
+	 */
+	public static String trim(Object str){
+		String result = "";
+		if(null != str){
+			result = str.toString();
+			result = result.trim();
+		}
+		return result;
+	}
+
+	/**
+	 * 转换为String,如果需要 "null",请使用 String.valueOf();
+	 * @param str
+	 * @return 如果为null,则返回empty字符串("")
+	 */
+	public static String toString(Object str){
+		String result = "";
+		if(null != str){
+			result = String.valueOf(str);
+		}
+		return result;
+	}
 	
 	
 	public static String num2CNnum(Integer num){
