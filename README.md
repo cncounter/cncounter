@@ -18,7 +18,7 @@ ZXing 类库可以在这里搜索: [http://www.mvnrepository.com/search?q=zxing]
 
 参考: [https://github.com/alibaba/druid/wiki/如何参与](https://github.com/alibaba/druid/wiki/%E5%A6%82%E4%BD%95%E5%8F%82%E4%B8%8E)
 
-	@rem 这是Windows的CMD命令
+	@rem 这是Windows下的CMD命令
 	F:
 	cd F:\STUDY\GIT_ALL\cncounter
 	D:\DevlopPrograms\Git\bin\git config --global credential.helper cache
