@@ -18,6 +18,9 @@
 				<a target="_self" href="./qrcode/input.php">实用小程序二维码生成</a>
 			</h2>
 			<h2>
+				<a target="_self" href="favorite/list/0.php">收藏夹</a>
+			</h2>
+			<h2>
 				<a target="_blank" href="http://blog.cncounter.com/cncounter/">GitHub项目首页</a>
 			</h2>
 			<h2>

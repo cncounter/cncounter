@@ -8,8 +8,6 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.junit.Test;
-
 import com.cncounter.util.zxing.ZXingUtil;
 
 public class TestZXing {

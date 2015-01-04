@@ -1,8 +1,6 @@
 package com.cncounter.test.redis;
 
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -12,7 +10,7 @@ public class JedisTest {
 // Maven 有点扯,和MyEclipse不太兼容,需要run之后才会执行编译,而不是MyEclipse的自动编译
 	//
 	public static JedisPool _pool = null;
-	@Before
+	//@Before
 	public void setUp() {
 		_pool = getNewPool();
 		Assert.assertNotNull(_pool);
@@ -47,7 +45,7 @@ public class JedisTest {
 		return ;
 	}
 
-	@Test
+	//@Test
 	public void testIncr() {
 		//
 		final String key = "testClient:count";
@@ -77,7 +75,7 @@ public class JedisTest {
 	}
 	
 
-	@Test
+	//@Test
 	public void testPipeLine() {
 		//
 		final String key = "testPipeLine:count";
@@ -114,7 +112,7 @@ public class JedisTest {
 
 	// 多线程,增加
 	// 按道理,每个线程都需要有自己的连接
-	@Test
+	//@Test
 	public void testMultiIncr() {
 		//
 		final String key = "testMultiIncr:count";

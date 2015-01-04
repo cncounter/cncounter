@@ -15,7 +15,7 @@ public class TestMySQLConnection {
 		new TestMySQLConnection().testMySQLConn();
 	}
 
-	@Test
+	//@Test
 	public void testMySQLConn() {
 		String realname = testMySQLConnStr();
 		System.out.println("realname=" + realname);

@@ -1,7 +1,5 @@
 package com.cncounter.test.duapp;
 
-import org.junit.Test;
-
 import redis.clients.jedis.Jedis;
 
 public class TestRedisConnection {

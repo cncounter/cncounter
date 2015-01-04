@@ -17,13 +17,13 @@ public class TestAtomic {
 	// 一个int类型的变量
 	public static int count_int = 0;
 
-	@Before
+	//@Before
 	public void setUp() {
 		// 所有测试开始之前执行初始设置工作
 		counter_integer = new AtomicInteger(0);
 	}
 
-	@Test
+	//@Test
 	public void testAtomic() throws InterruptedException {
 		// 创建的线程数量
 		int threadCount = 100;
@@ -57,7 +57,7 @@ public class TestAtomic {
 		System.out.println("sum = " + (sum) + ";");
 	}
 
-	@Test
+	//@Test
 	public void testIntAdd() throws InterruptedException {
 		// 创建的线程数量
 		int threadCount = 100;
