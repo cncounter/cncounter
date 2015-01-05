@@ -11,9 +11,14 @@
 	</div>
 	<div class="cnzz">
 		<span id='cnzz_stat_icon_1000461034'></span>
+		<script defer src='http://s19.cnzz.com/z_stat.php?id=1000461034&online=2' type='text/javascript'></script>
+		<%--
 		<script src='http://s19.cnzz.com/z_stat.php?id=1000461034&online=1&show=line' type='text/javascript'></script>
+		 --%>
 	</div>
 	<div class="baidutongji">
+		<script defer src='http://hm.baidu.com/hm.js?31b7f6b4cced37f3566af21dcfd4df13' type='text/javascript'></script>
+		<%--
 		<script>
 		var _hmt = _hmt || [];
 		(function() {
@@ -23,5 +28,6 @@
 		  s.parentNode.insertBefore(hm, s);
 		})();
 		</script>
+		--%>
 	</div>
   </div>
