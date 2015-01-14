@@ -54,6 +54,7 @@ public class FavoriteController extends ControllerBase{
 		//
 		favorite.setUrl(url);
 		favorite.setTitle(title);
+		favorite.setType(type);
 		
 		//
 		int rows = favoriteService.add(favorite);
