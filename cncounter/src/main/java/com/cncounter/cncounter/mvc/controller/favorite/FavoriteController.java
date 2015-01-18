@@ -38,6 +38,7 @@ public class FavoriteController extends ControllerBase{
 		ModelAndView mav = new ModelAndView("favorite/listbytype");
 
 		mav.addObject("favorites", favorites);
+		mav.addObject("type", type);
 		return mav;
 	}
 	

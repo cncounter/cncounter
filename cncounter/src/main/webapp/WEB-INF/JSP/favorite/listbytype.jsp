@@ -9,10 +9,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 <%
 	Object _favorites = request.getAttribute("favorites");
+	Object _type = request.getAttribute("type");
 	//
 	List<Favorite> favorites = new ArrayList<Favorite>();
 	if(_favorites instanceof List<?>){
 		favorites = (List<Favorite>)_favorites;
+	}
+	//
+	Integer type = 0;
+	if(_type instanceof Integer){
+		type = (Integer)_type;
 	}
 %>
 <!DOCTYPE html>
@@ -62,7 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<hr class="hr" style="border-top-color :black; width: 100%;"/>
 			<p class="h2">添加收藏</p>
 			<div>
-				<form id="input_form" action="<%=basePath %>favorite/0/add.json" method="post">
+				<form id="input_form" action="<%=basePath %>favorite/<%=type.intValue() %>/add.json" method="post">
 					标题: <input tabindex="1" id="title" name="title" value="" >
 					<br/>
 					网址: <input tabindex="2" id="url" name="url" value="" >
