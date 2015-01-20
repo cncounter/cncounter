@@ -6,7 +6,8 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-String requestURL = request.getRequestURL().toString();
+String requestURL = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort() + request.getRequestURI();
+requestURL = "";
 %>
 <%
 	Object _favorites = request.getAttribute("favorites");
