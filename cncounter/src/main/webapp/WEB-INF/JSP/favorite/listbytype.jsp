@@ -6,6 +6,7 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String requestURL = request.getRequestURL().toString();
 %>
 <%
 	Object _favorites = request.getAttribute("favorites");
@@ -81,6 +82,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<jsp:include page="/common/sidebar.jsp"></jsp:include>
 	</div>
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="<%=type.intValue() %>" data-title="收藏夹天朝计数器" data-url="<%=requestURL %>"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cncounter"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
 	<jsp:include page="/common/footer.jsp"></jsp:include>
 	
 	<script type="text/javascript">
