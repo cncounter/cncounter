@@ -49,7 +49,7 @@
 		<property name="minEvictableIdleTimeMillis" value="60000" />
 		<!-- 连接有效性测试 -->
 		<property name="validationQuery" value="${validationQuery}" />
-		<property name="testOnBorrow" value="false" />
+		<property name="testOnBorrow" value="true" />
 		<property name="testOnReturn" value="false" />
 		<property name="testWhileIdle" value="true" />
 		<!-- 强行关闭长时间不归还的连接,防止泄露,单位秒 -->
