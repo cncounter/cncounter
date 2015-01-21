@@ -3,15 +3,15 @@
 <%@page import="java.util.List"%>
 <%@page import="com.cncounter.cncounter.model.other.Favorite"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="com.cncounter.util.string.StringNumberUtil"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-String requestURL = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort() + request.getRequestURI();
-requestURL = "";
 %>
 <%
 	Object _favorites = request.getAttribute("favorites");
 	Object _type = request.getAttribute("type");
+	Object _requestURL = request.getAttribute("requestURL");
 	//
 	List<Favorite> favorites = new ArrayList<Favorite>();
 	if(_favorites instanceof List<?>){
@@ -21,6 +21,11 @@ requestURL = "";
 	Integer type = 0;
 	if(_type instanceof Integer){
 		type = (Integer)_type;
+	}
+	
+	String requestURL = StringNumberUtil.toString(_requestURL);
+	if(StringNumberUtil.isEmpty(requestURL)){
+		requestURL = basePath;
 	}
 %>
 <!DOCTYPE html>
@@ -84,7 +89,7 @@ requestURL = "";
 		<jsp:include page="/common/sidebar.jsp"></jsp:include>
 	</div>
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="<%=type.intValue() %>" data-title="收藏夹天朝计数器" data-url="<%=requestURL %>"></div>
+	<div class="ds-thread" data-thread-key="<%=type.intValue() %>" data-title="收藏夹_<%=type.intValue() %>" data-url="<%=requestURL %>"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

@@ -16,6 +16,7 @@ import com.cncounter.cncounter.model.other.Favorite;
 import com.cncounter.cncounter.mvc.controller.base.ControllerBase;
 import com.cncounter.cncounter.mvc.msg.JSONMessage;
 import com.cncounter.cncounter.service.api.other.FavoriteService;
+import com.cncounter.util.string.StringNumberUtil;
 
 @RequestMapping({"/favorite"})
 @Controller
@@ -32,11 +33,18 @@ public class FavoriteController extends ControllerBase{
 		//type = getParameterInt(request, "", 0);
 		// 获取数据
 		List<Favorite> favorites = favoriteService.listByType(type);
-		
+		//
+		String requestURL = request.getRequestURL().toString();
+		String queryString = request.getQueryString();
+		//
+		if(StringNumberUtil.notEmpty(queryString)){
+			requestURL = requestURL + "?" + queryString;
+		}
 		//
 		// 输入页面
 		ModelAndView mav = new ModelAndView("favorite/listbytype");
 
+		mav.addObject("requestURL", requestURL);
 		mav.addObject("favorites", favorites);
 		mav.addObject("type", type);
 		return mav;
