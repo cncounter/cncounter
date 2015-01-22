@@ -47,6 +47,7 @@ public class QRCodeController extends ControllerBase {
 		uuid = key;
 		//
 		String src = basePath(request)+"rest/qrcode/"+uuid+".jpeg" + "?w="+width + "&h="+height;
+		String href = basePath(request)+"rest/qrcode/"+uuid+".php" + "?w="+width + "&h="+height;
 		// 缓存起来
 		String uuidKey = getUUIDKey(uuid);
 		saveToCache(request, uuidKey, content);
@@ -56,6 +57,7 @@ public class QRCodeController extends ControllerBase {
 		//message.setTotal(total); 
 		message.addMeta("uuid", uuid);
 		message.addMeta("src", src);
+		message.addMeta("href", href);
 		message.setSuccess();
 		
 		//
@@ -88,5 +90,33 @@ public class QRCodeController extends ControllerBase {
 			e.printStackTrace();
 		}
 		// 未实现日志
+	}
+
+	/**
+	 * 获取二维码, 动态生成
+	 * @param uuid
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/rest/qrcode/{uuid}.php")
+	public ModelAndView getQrCodePage(@PathVariable("uuid")String uuid, 
+			HttpServletRequest request, HttpServletResponse response) {
+		String uuidKey = getUUIDKey(uuid);
+		String content = (String)getFromCache(request, uuidKey);
+		//
+		int w = getParameterInt(request, "w", 400);
+		int h = getParameterInt(request, "h", 400);
+		// 未实现日志
+		
+
+		// 输入页面
+		ModelAndView mav = new ModelAndView("qrcode/show");
+		//
+		mav.addObject("uuid", uuid);
+		mav.addObject("content", content);
+		mav.addObject("w", w);
+		mav.addObject("h", h);
+
+		return mav;
 	}
 }

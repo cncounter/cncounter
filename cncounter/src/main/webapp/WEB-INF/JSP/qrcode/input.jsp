@@ -81,8 +81,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        	   //
 		        	   var uuid = meta["uuid"];
 		        	   var src = meta["src"];
+		        	   var href = meta["href"] || src;
 		        	   $qrcode_img.attr("src", src).removeClass("hide");
-		        	   $qrcode_img_anchor.attr("href", src).removeClass("hide");
+		        	   $qrcode_img_anchor.attr("href", href).removeClass("hide");
 				    };
 				//
 				var errotCallback = function (jqXHR, textStatus, errorThrown) {
