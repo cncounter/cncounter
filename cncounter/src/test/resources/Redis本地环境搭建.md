@@ -87,3 +87,5 @@ Windows下Redis项目: [https://github.com/MSOpenTech/redis](https://github.com/
 管理工具: RedisStudio: [https://github.com/cinience/RedisStudio](https://github.com/cinience/RedisStudio)
 
 当然,目录里面也有一些word文档, 有兴趣可以读一读.
+
+更多信息,请参考: [renfufei的专栏-Redis: http://blog.csdn.net/renfufei/article/category/2470713](http://blog.csdn.net/renfufei/article/category/2470713)
