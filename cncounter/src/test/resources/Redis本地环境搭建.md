@@ -29,7 +29,7 @@ Windows下Redis项目: [https://github.com/MSOpenTech/redis](https://github.com/
 
 简单测试,则使用 `redis-cli.exe` 即可, 打开后会自动连接上本机服务器. 可以输入 `info` 查看服务器信息.
 
-如果要进行基准测试,可以启动服务器后,在cmd中运行 `redis-benchmark.exe` 程序.
+如果要进行基准测试,可以启动服务器后,在`cmd中`运行 `redis-benchmark.exe` 程序.
 
 ### 4. 启动与注册服务
 
@@ -40,28 +40,28 @@ Windows下Redis项目: [https://github.com/MSOpenTech/redis](https://github.com/
 	D:
 	cd D:\DevlopPrograms\redis-2.8.17
 
-注册服务,可以保存为 service-install.bat 文件:
+注册服务,可以保存为 `service-install.bat` 文件:
 
 	redis-server.exe --service-install redis.windows.conf --loglevel verbose
 	redis-server --service-start
 
-卸载服务, 可以保存为 uninstall-service 文件.: 
+卸载服务, 可以保存为 `uninstall-service.bat` 文件.: 
 
 	redis-server --service-stop
 	redis-server --service-uninstall
 
 可以在注册服务时,通过 `–service-name redisService1 ` 参数直接指定服务名,适合安装多个实例的情况,卸载也是同样的道理.
 
-启动redis服务器时也可以直接指定配置文件,可以保存为 startup.bat 文件:
+启动redis服务器时也可以直接指定配置文件,可以保存为 `startup.bat` 文件:
 
 	redis-server.exe redis.windows.conf
 
 
-当然,指定了配置文件以后,可能会碰到启动失败的问题.此时,请修改配置文件,指定 maxheap 参数.
+当然,指定了配置文件以后,可能会碰到启动失败的问题.此时,请修改配置文件,指定 `maxheap` 参数.
 
 ### 5. 修改配置文件
 
-修改配置文件`redis.windows.conf`,如果有中文,请另存为UTF-8编码.
+修改配置文件`redis.windows.conf`,如果有中文,请另存为`UTF-8`编码.
 
 	# 修改端口号
 	# port 6379
@@ -75,9 +75,7 @@ Windows下Redis项目: [https://github.com/MSOpenTech/redis](https://github.com/
 	# maxheap <bytes>
 	maxheap 512000000
 
-此时,如果用客户端来访问,可以使用如下cmd命令:
-
-可以保存为 client.bat 文件.
+此时,如果用客户端来访问,使用如下cmd命令,可以保存为 `client.bat` 文件:
 
 	redis-cli.exe -h redis.duapp.com -p 80 -a 6EhSiGpsmSMRyZieglUImkTr-eoNRNBgRk397mVyu66MHYuZDsepCeZ8A-MHdLBQwQQVQiHBufZbPa
 
