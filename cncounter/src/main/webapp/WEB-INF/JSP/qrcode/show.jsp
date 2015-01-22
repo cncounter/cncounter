@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div class="qrcode-jpeg-area">
 				<a id="qrcode_img_anchor" target="_blank" href="<%=basePath %>rest/qrcode/${uuid}.jpeg">
-					<img id="qrcode_img" alt="" src="<%=basePath %>rest/qrcode/${uuid}.jpeg" class="qrcode-img hide">
+					<img id="qrcode_img" alt="" src="<%=basePath %>rest/qrcode/${uuid}.jpeg" class="qrcode-img">
 				</a>
 			</div>
 			<a href="<%=basePath %>qrcode/input.php" class="btn btn-lg btn-warning btn-block">  &lt;&lt;返回 </a> 

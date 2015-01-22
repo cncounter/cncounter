@@ -33,8 +33,8 @@ public class QRCodeController extends ControllerBase {
 
 		// 需要转换的内容
 		String content = getParameterString(request, "content", "");
-		int width = getParameterInt(request, "width", 400);
-		int height = getParameterInt(request, "height", 400);
+		int width = getParameterInt(request, "width", 300);
+		int height = getParameterInt(request, "height", 300);
 		
 		// 使用Length+Hash
 		int len = content.length();
@@ -77,8 +77,8 @@ public class QRCodeController extends ControllerBase {
 		String uuidKey = getUUIDKey(uuid);
 		String content = (String)getFromCache(request, uuidKey);
 		//
-		int w = getParameterInt(request, "w", 400);
-		int h = getParameterInt(request, "h", 400);
+		int w = getParameterInt(request, "w", 300);
+		int h = getParameterInt(request, "h", 300);
 		//
 		String type="image/jpeg;charset=UTF-8";
 		response.setContentType(type);
@@ -104,8 +104,8 @@ public class QRCodeController extends ControllerBase {
 		String uuidKey = getUUIDKey(uuid);
 		String content = (String)getFromCache(request, uuidKey);
 		//
-		int w = getParameterInt(request, "w", 400);
-		int h = getParameterInt(request, "h", 400);
+		int w = getParameterInt(request, "w", 300);
+		int h = getParameterInt(request, "h", 300);
 		// 未实现日志
 		
 
