@@ -21,14 +21,15 @@
 	<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
 	<!-- BootStrap JS -->
 	<script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	<!-- 本站的JS工具类 -->
-	<script src="<%=basePath %>static/js/cncounter-util.js?v=1"></script>
 	<!-- BootStrap -->
 	<link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 	<!-- BootStrap theme -->
 	<link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" rel="stylesheet">
-	<!-- 本站CSS样式 -->
-	<link href="<%=path%>/static/css/main.css" rel="stylesheet" type="text/css" />
 <%
 	}
 %>
+
+	<!-- 本站的JS工具类 -->
+	<script src="<%=basePath %>static/js/cncounter-util.js?v=1"></script>
+	<!-- 本站CSS样式 -->
+	<link href="<%=path%>/static/css/main.css" rel="stylesheet" type="text/css" />

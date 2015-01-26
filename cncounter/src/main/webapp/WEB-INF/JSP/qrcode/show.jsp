@@ -9,6 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 	<title>二维码显示 - 中国计数cncounter</title>
 	<jsp:include page="/common/cssjs.jsp"></jsp:include>
+	<jsp:include page="/common/clipboard.jsp"></jsp:include>
 </head>
 <body>
 	<jsp:include page="/common/header.jsp"></jsp:include>
@@ -23,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<textarea readonly="readonly" tabindex="3" id="content" name="content" rows="8" cols="40">${content}</textarea>
 					<br/>
 					
-					<a id="btn_copy" class="btn btn-sm btn-success btn-block"> 点击复制 </a> 
+					<a id="btn_copy"  tabindex="4" class="btn btn-sm btn-success btn-block"> 点击复制 </a> 
 				</form>
 			</div>
 			<div>
@@ -50,21 +51,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var $btn_copy = $("#btn_copy");
 			var $content = $("#content");
 			
-			// 
-			function initCopy(){
-				
-			};
 			//
-			$btn_copy.bind("click", function(e){
-				//
-				var content = $content.val();
-				//
-				if(!content){
-					alert("复制的内容为空!");
-					return;
-				}
-				// 引入复制机制
-			});
+			setTimeout(function() {
+				//set path
+				ZeroClipboard.setMoviePath('http://davidwalsh.name/dw-content/ZeroClipboard.swf');
+				//create client
+				var clip = new ZeroClipboard.Client();
+				//event
+				clip.addEventListener('mousedown',function() {
+					// 由JS自己控制
+					var content = $content.val() || "";
+					//
+					if(!content){
+						alert("复制的内容为空!");
+						return;
+					} else {
+						// 由JS自己控制
+						clip.setText(content);
+					}
+				});
+				clip.addEventListener('complete',function(client,text) {
+					alert("复制成功!"); // 这里应该修改为使用 msg
+				});
+				//glue it to the button
+				clip.glue('btn_copy');
+			}, 2000);
+			
 		});
 	</script>
 </body>
