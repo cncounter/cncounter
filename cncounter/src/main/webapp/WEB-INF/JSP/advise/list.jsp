@@ -15,41 +15,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="container">
 		<div class="content_left">
 			<div>
-			     <form id="input_form" class="form-advise" role="form" method="post" action="<%=path %>/advise/ajax/addadvise.json">
 			       <h2 class="form-advise-heading">意见与建议</h2>
-					<br/>
-					<%-- 这里需要替换为 ueditor... --%>
-					<textarea tabindex="3" id="content" name="content" rows="8" cols="40"></textarea>
-					<br/>
-			       <input type="text" class="form-control" placeholder="输入用户名/邮箱" required>
-			       <br/>
-			       <button class="btn btn-lg btn-primary btn-block ajaxsubmit" type="button">确定</button>
-			     </form>
 			</div>
 			<div><br/><br/></div>
 			
-			<div class="list-group">
-			   <a href="#" class="list-group-item active">
-			      <h4 class="list-group-item-heading">
-			         建议标题
-			      </h4>
-			   </a>
-			   <a href="#" class="list-group-item">
-			      <h4 class="list-group-item-heading">
-			         建议标题
-			      </h4>
-			      <p class="list-group-item-text">
-			         建议的内容
-			      </p>
-			      <p class="list-group-item-text">
-			        联系信息: renfufei. 邮箱: renfufei@qq.com
-			      </p>
-			   </a>
-			</div>
 			
 		</div>
 		<jsp:include page="/common/sidebar.jsp"></jsp:include>
 	</div>
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="advise" data-title="意见与建议" data-url="<%=path %>/advise/list.php"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"cncounter"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
 	<jsp:include page="/common/footer.jsp"></jsp:include>
 	
 	<script type="text/javascript">
