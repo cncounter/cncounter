@@ -8,6 +8,11 @@ Java+SpringMVC+Druid+Jedis+MyBatis+REST
 在线访问地址: [http://cncounter.duapp.com](http://cncounter.duapp.com)
 
 
+# 开发日志
+
+开发计划: [plan.md](plan.md)
+
+
 # 其他信息 #
 ZXing类库项目首页[https://github.com/zxing/zxing](https://github.com/zxing/zxing)
 
