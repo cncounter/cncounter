@@ -3,9 +3,7 @@ package com.cncounter.test.java;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 /**
  * 测试AtomicInteger与普通int值在多线程下的递增操作

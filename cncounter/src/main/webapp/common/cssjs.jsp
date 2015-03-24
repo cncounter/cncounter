@@ -6,6 +6,10 @@
 	// 根据参数设置,决定是从本机还是从CDN获取CSS,JS资源
 	boolean debugmode = WebSiteConfig.isDEBUG_MODE();
 %>
+	<link href="<%=basePath %>static/image/favicon.ico" rel="bookmark" type="image/x-icon" /> 
+	<link href="<%=basePath %>static/image/favicon.ico" rel="icon" type="image/x-icon" /> 
+	<link href="<%=basePath %>static/image/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
 <%
