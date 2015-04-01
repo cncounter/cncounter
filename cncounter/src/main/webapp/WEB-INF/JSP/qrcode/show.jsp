@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<form id="input_form" action="<%=basePath %>qrcode/ajax/genqrcode.json" method="post">
 					<span>二维码内容:</span>
 					<br/>
-					<textarea readonly="readonly" tabindex="3" id="content" name="content" rows="8" cols="40">${content}</textarea>
+					<textarea readonly="readonly" tabindex="3" id="content" name="content" rows="8" cols="36">${content}</textarea>
 					<br/>
 					
 					<a id="btn_copy"  tabindex="4" class="btn btn-sm btn-success btn-block"> 点击复制 </a> 
