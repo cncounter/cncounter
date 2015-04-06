@@ -27,11 +27,6 @@
 	<%
 	if(debugmode){
 		// 调试模式,则不加载统计信息
-	%>
-	<div class="cnzz">
-		<script src='http://s19.cnzz.com/z_stat.php?id=1000461034&web_id=1000461034' type='text/javascript'></script>
-	</div>
-	<%
 	} else {
 	%>
 	<div class="cnzz">
