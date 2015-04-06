@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 	<jsp:include page="/common/header.jsp"></jsp:include>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="list-group">
 		   <a href="#" class="list-group-item active">
 		      <h4 class="list-group-item-heading">

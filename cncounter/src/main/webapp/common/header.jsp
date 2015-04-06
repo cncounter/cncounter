@@ -2,7 +2,7 @@
 	String h_path = request.getContextPath();
 	String h_basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()	+ h_path + "/";
 %>  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
+      <div class="container-fluid">
         <div class="navbar-header">
         <%--
         这个按钮是在手机上显示的。

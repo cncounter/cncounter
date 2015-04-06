@@ -11,7 +11,7 @@
 </head>
 <body>
 	<jsp:include page="/common/header.jsp"></jsp:include>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="content_left">
 			<p class="h1">极地区域图（Polar area chart）</p>
 		   	<h1>

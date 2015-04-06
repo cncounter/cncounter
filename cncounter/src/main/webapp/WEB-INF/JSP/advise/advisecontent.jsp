@@ -7,14 +7,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 //
 %>
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
 	<title>${advisetitle} - 中国计数cncounter</title>
 	<jsp:include page="/common/cssjs.jsp"></jsp:include>
 </head>
 <body>
 	<jsp:include page="/common/header.jsp"></jsp:include>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="content_left">
 			<ul class="list-group">
 			   <li class="list-group-item">

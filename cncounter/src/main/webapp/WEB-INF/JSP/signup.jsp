@@ -6,7 +6,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<title>用户登录 - CNCounter</title>
+	<title>用户注册 - CNCounter</title>
 	<jsp:include page="/common/cssjs.jsp"></jsp:include>
 </head>
 <body>
@@ -14,7 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="container-fluid">
   	<%-- 必须AJAX --%>
      <form class="form-signin" role="form" method="post" action="<%=path %>/login.php">
-       <h2 class="form-signin-heading">用户登录</h2>
+       <h2 class="form-signin-heading">用户注册</h2>
        <div>
          <label for="loginemail">
                    登录邮箱: 
@@ -27,14 +27,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          </label>
          <input id="loginpassword" name="loginpassword" type="password"  class="form-control" placeholder="请输入密码"  required>
        </div>
-       <div class="checkbox">
-         <label>
-           <input name="rememberme" type="checkbox" value="0">记住我
+       <div>
+         <label for="repassword">
+                   确认密码:
          </label>
-         <span style="float:right;"><a href="<%=path %>/password_reset.php">忘记密码</a></span>
+         <input id="repassword" name="repassword" type="password"  class="form-control" placeholder="请再次输入密码"  required>
        </div>
-       <button class="btn btn-lg btn-primary btn-block" type="submit">登录 CNCounter</button>
-       <a class="btn btn-lg btn-warning btn-block"  href="<%=path %>/signup.php">没有账号?点击注册</a>
+       <button class="btn btn-lg btn-primary btn-block" type="submit">确认注册CNCounter</button>
+       <a class="btn btn-lg btn-warning btn-block"  href="<%=path %>/login.php">已有账号?点击登录</a>
      </form>
   </div> <!-- /container -->
 </body>

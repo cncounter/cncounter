@@ -5,14 +5,14 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
 	<title>意见与建议 - 中国计数cncounter</title>
 	<jsp:include page="/common/cssjs.jsp"></jsp:include>
 </head>
 <body>
 	<jsp:include page="/common/header.jsp"></jsp:include>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="content_left">
 			<div>
 			       <h2 class="form-advise-heading">意见与建议</h2>

@@ -26,6 +26,7 @@ public abstract class ControllerBase {
 	 * 会话中存储user信息的KEY
 	 */
 	public static final String SESSION_USER_KEY = "session_user_key";
+	public static final String UTF_8 = "UTF-8";
 
 	@Autowired
 	private RedisBaseDAO redisBaseDAO;

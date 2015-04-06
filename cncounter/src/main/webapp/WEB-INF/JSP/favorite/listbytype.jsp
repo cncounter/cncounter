@@ -29,14 +29,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 %>
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
 	<title>收藏夹_<%=type %> - 中国计数cncounter</title>
 	<jsp:include page="/common/cssjs.jsp"></jsp:include>
 </head>
 <body>
 	<jsp:include page="/common/header.jsp"></jsp:include>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="content_left">
 			<p class="h1">收藏夹_<%=type %></p>
 			

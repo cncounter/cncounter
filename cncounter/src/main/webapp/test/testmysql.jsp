@@ -10,7 +10,7 @@
 </head>
 <body>
 	<jsp:include page="/common/header.jsp"></jsp:include>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="content_left">
 			<p class="h1">测试MySQL  - 天朝计数</p>
 		   	<h1>

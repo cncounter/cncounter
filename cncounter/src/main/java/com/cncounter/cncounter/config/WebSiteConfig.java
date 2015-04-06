@@ -26,6 +26,9 @@ public class WebSiteConfig {
 	public static void ennableDebugMode(){
 		DEBUG_MODE = true;
 	}
+	public static void disableDebugMode(){
+		DEBUG_MODE = false;
+	}
 	public static boolean isDEBUG_MODE() {
 		return DEBUG_MODE;
 	}

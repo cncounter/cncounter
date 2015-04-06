@@ -2,6 +2,8 @@ package com.cncounter.cncounter.mvc.controller.qrcode;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,20 +33,13 @@ public class QRCodeController extends ControllerBase {
 	@ResponseBody
 	public Object generateQRcode(HttpServletRequest request, HttpServletResponse response) {
 
-		// 需要转换的内容
-		String content = getParameterString(request, "content", "");
 		int width = getParameterInt(request, "width", 300);
 		int height = getParameterInt(request, "height", 300);
+		// 需要转换的内容
+		String content = getParameterString(request, "content", "");
 		
 		// 使用Length+Hash
-		int len = content.length();
-		int hash = content.hashCode();
-		// 
-		String key = Integer.toHexString(len) + Integer.toHexString(hash);
-		//
-		String uuid;// = StringNumberUtil.getUUID(); //
-		//
-		uuid = key;
+		String uuid = parseContentKey(content);
 		//
 		String src = basePath(request)+"rest/qrcode/"+uuid+".jpeg" + "?w="+width + "&h="+height;
 		String href = basePath(request)+"rest/qrcode/"+uuid+".php" + "?w="+width + "&h="+height;
@@ -62,6 +57,28 @@ public class QRCodeController extends ControllerBase {
 		
 		//
 		return message;
+	}
+	
+
+	/**
+	 * 根据内容获取二维码, 动态生成图像
+	 * 获取 content 参数，需要使用 UTF-8 进行URL编码
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/qrcode/generatebycontent.jpeg")
+	@ResponseBody
+	public void getQrCodeByContent(HttpServletRequest request, HttpServletResponse response) {
+		// 需要转换的内容
+		String content = getParameterString(request, "content", "");
+		try {
+			content = URLDecoder.decode(content, UTF_8); // 解码
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		String uuid = parseContentKey(content);
+		// 调用另一个方法实现
+		getQrCode(uuid, request, response);
 	}
 
 	/**
@@ -118,5 +135,18 @@ public class QRCodeController extends ControllerBase {
 		mav.addObject("h", h);
 
 		return mav;
+	}
+	
+	private static String parseContentKey(String content){
+		if(null == content){
+			content = "";
+		}
+		// 使用Length+Hash
+		int len = content.length();
+		int hash = content.hashCode();
+		// 
+		String key = Integer.toHexString(len) + Integer.toHexString(hash);
+		//
+		return key;
 	}
 }

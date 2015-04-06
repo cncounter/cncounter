@@ -11,6 +11,7 @@
 	<div class="container-fluid">
 		<div class="content_left">
 			<p class="h1">测试  - 天朝计数</p>
+			
 			<h2>
 				<a target="_blank" href="http://developer.baidu.com/console#bae!appid=2825717">管理控制台</a>
 			</h2>
@@ -18,34 +19,16 @@
 				<a target="_blank" href="http://developer.baidu.com/apm/index">应用性能监测中心</a>
 			</h2>
 			<h2>
-				<a target="_blank" href="./apitest/config/websiteconfig.jsp">开启调试模式</a>
-			</h2>
-			<h2>
-				<a target="_blank" href="../druid/weburi.html">Druid监控页面</a>
-			</h2>
-			<h2>
-				<a target="_blank" href="./apitest/index.jsp">API测试页面目录</a>
-			</h2>
-			<h2>
-				<a target="_blank" href="../tools/jsconsole.php">JS控制台调试页面</a>
-			</h2>
-			<h2>
-				<a target="_blank" href="http://www.renfufei.com/">就是那只守护的铁锚</a>
-			</h2>
-			<h2>
-				<a target="_blank" href="http://www.jiaojiaochisu.com/">娇娇吃素 敬请期待</a>
-			</h2>
-			<h2>
-				<a target="_blank" href="http://www.zhimengmeng.com/">织梦梦</a>
+				<a target="_blank" href="https://docs.oracle.com/javase/jp/8/technotes/tools/unix/toc.html">JavaSE Tools Reference</a>
 			</h2>
 			<h2>
 				<a target="_blank" href="http://duoshuo.com/">多说 - 社会化评论系统</a>
 			</h2>
 			<h2>
-				<a target="_blank" href="https://docs.oracle.com/javase/jp/8/technotes/tools/unix/toc.html">JavaSE Tools Reference</a>
+				<a target="_blank" href="http://nec.netease.com/">Nice Easy CSS</a>
 			</h2>
 			<h2>
-				<a target="_blank" href="http://nec.netease.com/">Nice Easy CSS</a>
+				<a target="_blank" href="http://www.jiaojiaochisu.com/">娇娇吃素 敬请期待</a>
 			</h2>
 			<h2>
 				<a target="_blank" href="http://b3log.org/">B3log Solo 开源博客程序</a>
@@ -66,6 +49,9 @@
 				<a target="_blank" href="http://www.lepus.cc/">天兔数据库监控系统</a>
 			</h2>
 			<hr/>
+			<h2>
+				<a target="_blank" href="../druid/weburi.html">Druid监控页面</a>
+			</h2>
 		   	<h1>
 		   		<a target="_blank" href="./testmysql.jsp">
 		   		测试MySQL

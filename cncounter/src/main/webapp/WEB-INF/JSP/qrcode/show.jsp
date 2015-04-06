@@ -5,7 +5,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
 	<title>二维码显示 - 中国计数cncounter</title>
 	<jsp:include page="/common/cssjs.jsp"></jsp:include>
@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 	<jsp:include page="/common/header.jsp"></jsp:include>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="content_left">
 		
 			<p class="h1"> 二维码显示</p>
@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<span>二维码图片:</span>
 				<br/>
 				<a id="qrcode_img_anchor" target="_blank" href="<%=basePath %>rest/qrcode/${uuid}.jpeg">
-					<img id="qrcode_img" alt="" src="<%=basePath %>rest/qrcode/${uuid}.jpeg" class="qrcode-img">
+					<img id="qrcode_img" alt="" src="<%=basePath %>rest/qrcode/${uuid}.jpeg" class="qrcode-img img-responsive center-block">
 				</a>
 			</div>
 			<a href="<%=basePath %>qrcode/input.php" class="btn btn-lg btn-warning btn-block">  &lt;&lt;返回 </a> 
