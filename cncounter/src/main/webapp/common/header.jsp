@@ -17,7 +17,7 @@
         </div>
         
         <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav navbar-right">
             <li><a href="<%=h_path %>/login.php">登录</a></li>
             <%--
             	如果是已登录用户,则应该切换为显示用户昵称,以及退出按钮
