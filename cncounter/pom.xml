@@ -10,6 +10,7 @@
 
 	<properties>
 		<junit.version>4.11</junit.version>
+		<httpclient.version>4.4.1</httpclient.version>
 
 		<log4j.version>1.2.16</log4j.version>
 		<servlet.api.version>2.5</servlet.api.version>
@@ -194,6 +195,13 @@
 			<groupId>com.google.zxing</groupId>
 			<artifactId>javase</artifactId>
 			<version>3.1.0</version>
+		</dependency>
+		
+		<!-- Http Client -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${httpclient.version}</version>
 		</dependency>
 		
 		<!-- junit,测试使用 -->

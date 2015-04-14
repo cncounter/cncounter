@@ -173,7 +173,7 @@ public abstract class ControllerBase {
 	 * @param request
 	 * @param user
 	 */
-	protected void addOnlineUser(HttpServletRequest request, User user) {
+	protected static void addOnlineUser(HttpServletRequest request, User user) {
 		if(null == request || null == user){
 			return;
 		}
@@ -189,7 +189,7 @@ public abstract class ControllerBase {
 	 * 删除在线用户
 	 * @param request
 	 */
-	protected void removeOnlineUser(HttpServletRequest request) {
+	protected static void removeOnlineUser(HttpServletRequest request) {
 		if(null == request){
 			return;
 		}
@@ -207,7 +207,7 @@ public abstract class ControllerBase {
 	 * @param request
 	 * @return
 	 */
-	protected String path(HttpServletRequest request){
+	protected static String path(HttpServletRequest request){
 		String path = request.getContextPath();
 		return path;
 	}
@@ -216,7 +216,7 @@ public abstract class ControllerBase {
 	 * @param request
 	 * @return
 	 */
-	protected String basePath(HttpServletRequest request){
+	protected static String basePath(HttpServletRequest request){
 		String basePath = basePathLessSlash(request) + "/";
 		return basePath;
 	}
@@ -225,7 +225,7 @@ public abstract class ControllerBase {
 	 * @param request
 	 * @return
 	 */
-	protected String basePathLessSlash(HttpServletRequest request){
+	protected static String basePathLessSlash(HttpServletRequest request){
 		String path = path(request);
 		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
 		return basePath;
@@ -237,7 +237,7 @@ public abstract class ControllerBase {
 	 * @param name
 	 * @return
 	 */
-	protected String getParameter(HttpServletRequest request, String name){
+	protected static String getParameter(HttpServletRequest request, String name){
 		String value = request.getParameter(name);
 		//
 		return value;
@@ -250,7 +250,7 @@ public abstract class ControllerBase {
 	 * @param defValue 指定默认值
 	 * @return 如果为空或不存在,则返回默认值
 	 */
-	protected String getParameterString(HttpServletRequest request, String name, String defValue){
+	protected static String getParameterString(HttpServletRequest request, String name, String defValue){
 		String value = request.getParameter(name);
 		if(null == value){
 			return defValue;
@@ -272,7 +272,7 @@ public abstract class ControllerBase {
 	 * @param defValue
 	 * @return
 	 */
-	protected int getParameterInt(HttpServletRequest request, String name, int defValue){
+	protected static int getParameterInt(HttpServletRequest request, String name, int defValue){
 		String value = request.getParameter(name);
 		//
 		return StringNumberUtil.parseInt(value, defValue);
@@ -284,7 +284,7 @@ public abstract class ControllerBase {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected Map<String, Object> parseParamMap(HttpServletRequest request){
+	protected static Map<String, Object> parseParamMap(HttpServletRequest request){
 		//
 		Map<String, Object> map = new HashMap<String, Object>();
 		//
@@ -310,7 +310,7 @@ public abstract class ControllerBase {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected Map<String, String> parseParamMapString(HttpServletRequest request){
+	protected static Map<String, String> parseParamMapString(HttpServletRequest request){
 		//
 		Map<String, String> map = new HashMap<String, String>();
 		//
