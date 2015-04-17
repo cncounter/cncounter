@@ -20,6 +20,7 @@
 		<jedis.version>2.5.2</jedis.version>
 
 		<mybatis.version>3.2.7</mybatis.version>
+		<pagehelper.version>3.6.4</pagehelper.version>
 		<mybatis-spring.version>1.2.2</mybatis-spring.version>
 		<mysql.jdbc.version>5.1.30</mysql.jdbc.version>
 		<druid.version>1.0.7</druid.version>
@@ -143,6 +144,13 @@
 			<artifactId>mybatis</artifactId>
 			<version>${mybatis.version}</version>
 		</dependency>
+		<!-- mybatis分页插件 -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>${pagehelper.version}</version>
+		</dependency>
+				
 		<!-- mybatis 与 spring的桥接,好像Spring3.0需要,4.0推荐使用注解方式来集成, -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
