@@ -147,12 +147,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        	   }
 				    };
 				//
-				var errotCallback = function (jqXHR, textStatus, errorThrown) {
+				var errorCallback = function (jqXHR, textStatus, errorThrown) {
 				    	// 把错误吃了
 				        alert("网络请求失败");
 				    };
 				//
-				requestAjax(action, data, successCallback,errotCallback);
+				postAjax(action, data, successCallback,errorCallback,1);
 				//
 			});
 		});
