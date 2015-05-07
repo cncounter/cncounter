@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <label for="loginpassword">
                    登录密码:
          </label>
-         <input id="loginpassword" name="loginpassword" type="password"  class="form-control" placeholder="请输入密码"  required>
+         <input id="loginpassword" name="loginpassword" type="password" autocomplete="off"  class="form-control" placeholder="请输入密码"  required>
        </div>
        <div class="checkbox">
          <label>
