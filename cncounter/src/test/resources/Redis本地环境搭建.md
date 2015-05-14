@@ -71,9 +71,13 @@ Windows下Redis项目: [https://github.com/MSOpenTech/redis](https://github.com/
 	# requirepass foobared
 	requirepass 6EhSiGpsmSMRyZieglUImkTr-eoNRNBgRk397mVyu66MHYuZDsepCeZ8A-MHdLBQwQQVQiHBufZbPa
 
-	# 设置最大堆内存限制
+	# 设置最大堆内存限制,两者设置一个即可
 	# maxheap <bytes>
 	maxheap 512000000
+	
+	# 设置最大内存限制, 两者设置一个即可
+	# maxmemory <bytes>
+	# maxmemory 512000000
 
 此时,如果用客户端来访问,使用如下cmd命令,可以保存为 `client.bat` 文件:
 
