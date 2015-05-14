@@ -5,6 +5,7 @@ USE `cncounter`;
 -- DROP USER 'cncounter';
 CREATE USER 'cncounter'@'%' IDENTIFIED BY 'cncounter';
 grant all privileges on cncounter.* to 'cncounter'@'%' identified by 'cncounter';
+grant all privileges on cncounter.* to cncounter@localhost identified by 'cncounter';
 flush privileges;
 
 */
