@@ -8,6 +8,12 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring/applicationContext.xml</param-value>  
 	</context-param> 
+
+    <!-- 防止发生java.beans.Introspector内存泄露,应将它配置在ContextLoaderListener的前面 -->
+    <!-- 详细描述见http://blog.csdn.net/jadyer/article/details/11991457 -->
+    <listener>
+        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+    </listener>	
 	<listener> 
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> 
 	</listener> 
