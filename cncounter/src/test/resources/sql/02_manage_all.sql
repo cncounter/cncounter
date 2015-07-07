@@ -66,19 +66,18 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
 
 
+--
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+CREATE TABLE `dict` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+	`type` VARCHAR(64) NOT NULL DEFAULT 'SYS' COMMENT '字典类型',
+	`code` VARCHAR(128) NOT NULL COMMENT '编码',
+	`value` VARCHAR(512) NULL DEFAULT NULL COMMENT '值',
+	`remark` VARCHAR(512) NULL DEFAULT NULL COMMENT '说明',
+	PRIMARY KEY (`id`)
+)
+COMMENT='字典表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
 
