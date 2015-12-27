@@ -50,6 +50,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			//
 			var $btn_copy = $("#btn_copy");
 			var $content = $("#content");
+			// 由JS自己控制
+			var content = $content.val() || "";
+			// 不能用 window.copy 判断,杯具
+			try{
+				content && copy(content);
+			} catch(ex){}
 			
 			//
 			setTimeout(function() {
@@ -59,8 +65,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var clip = new ZeroClipboard.Client();
 				//event
 				clip.addEventListener('mousedown',function() {
-					// 由JS自己控制
-					var content = $content.val() || "";
 					//
 					if(!content){
 						alert("复制的内容为空!");
