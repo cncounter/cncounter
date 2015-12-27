@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<span>二维码图片:</span>
 				<br/>
 				<a id="qrcode_img_anchor" target="_blank" href="<%=basePath %>rest/qrcode/${uuid}.jpeg">
-					<img id="qrcode_img" alt="" src="${content}" class="qrcode-img img-responsive center-block">
+					<img id="qrcode_img" alt="${content}" src="<%=basePath %>rest/qrcode/${uuid}.jpeg" class="qrcode-img img-responsive center-block">
 				</a>
 			</div>
 			<a href="<%=basePath %>qrcode/input.php" class="btn btn-lg btn-warning btn-block">  &lt;&lt;返回 </a> 
@@ -50,12 +50,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			//
 			var $btn_copy = $("#btn_copy");
 			var $content = $("#content");
-			// 由JS自己控制
-			var content = $content.val() || "";
-			// 不能用 window.copy 判断,杯具
-			try{
-				content && copy(content);
-			} catch(ex){}
 			
 			//
 			setTimeout(function() {
@@ -65,21 +59,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var clip = new ZeroClipboard.Client();
 				//event
 				clip.addEventListener('mousedown',function() {
+					// 由JS自己控制
+					var content = $content.val() || "";
 					//
 					if(!content){
-						alert("复制的内容为空!");
+						//alert("复制的内容为空!");
 						return;
-					} else {
+					}
+					try{
 						// 由JS自己控制
 						clip.setText(content);
+					} catch(ex){
+						// 不能用 window.copy 判断,杯具
+						try{
+							content && copy(content);
+						} catch(ex){
+						}
 					}
+					
 				});
 				clip.addEventListener('complete',function(client,text) {
 					alert("复制成功!"); // 这里应该修改为使用 msg
 				});
 				//glue it to the button
 				clip.glue('btn_copy');
-			}, 2000);
+			}, 200);
 			
 		});
 	</script>
