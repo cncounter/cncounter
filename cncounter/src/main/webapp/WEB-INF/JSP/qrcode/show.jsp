@@ -63,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						var content0=$content[0]; 
 						content0.select(); // 选择对象 
 						document.execCommand("Copy"); // 执行浏览器复制命令 
-					} catch(ex){
+					} catch(ex2){
 						alert("复制失败");
 					}
 				}
