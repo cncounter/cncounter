@@ -52,6 +52,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var $content = $("#content");
 			
 			//
+			$btn_copy.click(function(){
+				//
+				var content = $content.val() || "";
+				try{
+					content && copy(content);
+				} catch(ex){
+					//
+					try{
+						var content0=$content[0]; 
+						content0.select(); // 选择对象 
+						document.execCommand("Copy"); // 执行浏览器复制命令 
+					} catch(ex){
+						alert("复制失败");
+					}
+				}
+			});
+			//
+			/**
 			setTimeout(function() {
 				//set path
 				ZeroClipboard.setMoviePath('http://davidwalsh.name/dw-content/ZeroClipboard.swf');
@@ -84,7 +102,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				//glue it to the button
 				clip.glue('btn_copy');
 			}, 200);
-			
+			*/
 		});
 	</script>
 </body>

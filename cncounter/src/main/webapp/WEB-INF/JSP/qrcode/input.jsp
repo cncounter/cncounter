@@ -56,6 +56,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			//
 			var href = window.location.href;
 			$content.val(href);
+			// 选中
+			$content[0] && $content[0].select && $content[0].select();
 			//
 			$btn_generate_qrcode.bind("click", function(e){
 				//
