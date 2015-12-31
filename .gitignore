@@ -4,17 +4,18 @@
 
 foo.txt
 
-# 忽略所有生成的 html文件,
+# 忽略所有的 MyEclipse 文件
 
-*.html2
+.settings
+.classpath
+.mymetadata
+.project
 
-# foo.html是手工维护的，所以例外.
+# 忽略所有的 idea 文件
 
-!foo.html
+.idea
+*.iml
 
-# 忽略所有.o和 .a文件.
-
-*.[oa]
 
 # 忽略所有.class文件.
 
@@ -23,9 +24,4 @@ foo.txt
 BAE_CONF/
 cncounter/src/main/webapp/WEB-INF/classes/*
 generator_log*
-.idea
-/cncounter/*.iml
-/cncounter/.settings
-/cncounter/.classpath
-/cncounter/.mymetadata
-/cncounter/.project
+
