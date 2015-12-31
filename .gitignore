@@ -25,3 +25,7 @@ cncounter/src/main/webapp/WEB-INF/classes/*
 generator_log*
 .idea
 /cncounter/*.iml
+/cncounter/.settings
+/cncounter/.classpath
+/cncounter/.mymetadata
+/cncounter/.project
