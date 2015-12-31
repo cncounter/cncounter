@@ -25,3 +25,4 @@ BAE_CONF/
 cncounter/src/main/webapp/WEB-INF/classes/*
 generator_log*
 
+/cncounter/target/*
