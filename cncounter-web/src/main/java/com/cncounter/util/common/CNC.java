@@ -2,6 +2,7 @@ package com.cncounter.util.common;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Map;
 
 /**
  * CNC 工具类 2016/1/5.
@@ -85,9 +86,15 @@ public class CNC {
         } else if(destFieldType.isPrimitive()){
             // 如果是基本类型
             fieldValue = fieldValue;
+        } else if(destFieldType.isArray()){
+            // 如果是数组类型
+            fieldValue = fieldValue;
         } else if(fieldValue instanceof String){
             // String
             fieldValue = String.valueOf(fieldValue);
+        }  else if(fieldValue instanceof Map){
+            // map, list 等
+            fieldValue = (fieldValue);
         } else {
             // 执行深拷贝
             fieldValue = cloneObj(fieldValue, deep);
