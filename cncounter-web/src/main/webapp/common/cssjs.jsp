@@ -1,7 +1,8 @@
 <%@page import="com.cncounter.cncounter.config.WebSiteConfig"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%><%
 	String path = request.getContextPath();
-	String basePath = "//" + request.getServerName() + ":" + request.getServerPort()	+ path + "/";
+	String basePath = "//" + request.getServerName() //+ ":" + request.getServerPort()
+	+ path + "/";
 	
 %>
 	<link href="<%=basePath %>static/image/favicon.ico" rel="bookmark" type="image/x-icon" /> 
