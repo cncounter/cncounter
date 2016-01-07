@@ -1,7 +1,7 @@
 <%@page import="com.cncounter.cncounter.config.WebSiteConfig"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%><%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()	+ path + "/";
+	String basePath = "//" + request.getServerName() + ":" + request.getServerPort()	+ path + "/";
 	
 %>
 	<link href="<%=basePath %>static/image/favicon.ico" rel="bookmark" type="image/x-icon" /> 
@@ -14,7 +14,7 @@
 	String jqv = "1.9.1"; // jQuery版本
 	String bsv = "3.3.4"; // BootStrap版本
 	// 根据参数设置,决定是从本机还是从CDN获取CSS,JS资源
-	boolean debugmode = WebSiteConfig.isDEBUG_MODE();
+	boolean debugmode = true;//WebSiteConfig.isDEBUG_MODE();
 	if(debugmode){
 %>
 	<script src="<%=basePath %>static/jquery/<%=jqv%>/jquery.min.js"></script>
