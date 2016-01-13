@@ -1,16 +1,6 @@
-<%@page import="com.cncounter.cncounter.config.WebSiteConfig"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%><%
-
-	String port = "" + request.getServerPort();
-	String path = request.getContextPath();
-	String basePath = "//" + request.getServerName();
-	if(port.equals("80") || port.equals("443") ){
-	} else {
-		basePath += ":" + request.getServerPort();
-	}
-	basePath += "/";
-	
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.cncounter.cncounter.config.WebSiteConfig" %>
+<%@include file="basePath.jsp"%>
 	<link href="<%=basePath %>static/image/favicon.ico" rel="bookmark" type="image/x-icon" /> 
 	<link href="<%=basePath %>static/image/favicon.ico" rel="icon" type="image/x-icon" /> 
 	<link href="<%=basePath %>static/image/favicon.ico" rel="shortcut icon" type="image/x-icon" />
@@ -21,7 +11,8 @@
 	String jqv = "1.9.1"; // jQuery版本
 	String bsv = "3.3.4"; // BootStrap版本
 	// 根据参数设置,决定是从本机还是从CDN获取CSS,JS资源
-	boolean debugmode = true;//WebSiteConfig.isDEBUG_MODE();
+    // 根据参数设置,决定是从本机还是从CDN获取CSS,JS资源
+    boolean debugmode = WebSiteConfig.isDEBUG_MODE();
 	if(debugmode){
 %>
 	<script src="<%=basePath %>static/jquery/<%=jqv%>/jquery.min.js"></script>

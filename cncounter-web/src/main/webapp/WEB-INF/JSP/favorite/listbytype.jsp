@@ -1,13 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="java.util.List"%>
 <%@page import="com.cncounter.cncounter.model.other.Favorite"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.*"%>
 <%@page import="com.cncounter.util.string.StringNumberUtil"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
+
+<%@include file="../basePath.jsp"%>
 <%
 	Object _favorites = request.getAttribute("favorites");
 	Object _type = request.getAttribute("type");
