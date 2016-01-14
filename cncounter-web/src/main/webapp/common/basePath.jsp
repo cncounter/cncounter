@@ -10,3 +10,6 @@
 	}
 	basePath += "/";
 %>
+<%--
+使用方式: <%@include file="basePath.jsp"%>
+--%>
