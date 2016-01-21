@@ -1,0 +1,4 @@
+
+# shell 命令 -- 导出某个库的DDL与DATA
+
+mysqldump -ucncounter -p** -d cncounter > /usr/local/backup/cnc.ddl.data.20160121.sql
