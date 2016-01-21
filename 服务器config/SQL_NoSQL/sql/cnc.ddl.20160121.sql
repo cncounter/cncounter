@@ -156,3 +156,23 @@ CREATE TABLE IF NOT EXISTS `vote_topic` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='投票主题';
 
 
+-- 导出  表 cncounter.dict_common 结构
+CREATE TABLE IF NOT EXISTS `dict_common` (
+  `id` bigint(20) NOT NULL COMMENT '自增ID',
+  `dict_code` varchar(64) NOT NULL COMMENT '编码',
+  `dict_desc` varchar(64) NOT NULL COMMENT '名称',
+  `category_code` varchar(64) NOT NULL COMMENT '分类编码',
+  `category_desc` varchar(64) DEFAULT NULL COMMENT '分类说明',
+  `sort_no` int(8) NOT NULL DEFAULT '999' COMMENT '排序编号',
+  `data_type` varchar(64) NOT NULL DEFAULT 'STRING' COMMENT '数据类型',
+  `remark` varchar(128) DEFAULT NULL COMMENT '附加说明',
+  `loc_code` varchar(64) DEFAULT NULL COMMENT '检索标识',
+  `create_user_id` bigint(20) DEFAULT '0' COMMENT '创建人ID',
+  `update_user_id` bigint(20) DEFAULT '0' COMMENT '修改人ID',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `version` int(8) NOT NULL DEFAULT '0' COMMENT '乐观锁版本号',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `dict_code_category_code` (`dict_code`,`category_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='通用数据字典';
+
