@@ -1,8 +1,8 @@
 package com.cncounter.cncounter.service.api.other;
 
-import java.util.List;
-
 import com.cncounter.cncounter.model.other.Favorite;
+
+import java.util.List;
 
 public interface FavoriteService {
 
@@ -15,7 +15,7 @@ public interface FavoriteService {
 	public Favorite getById(Integer id);
     /**
      * 根据类别取出数据
-     * @param id
+     * @param type
      * @return
      */
 	public List<Favorite> listByType(Integer type);

@@ -28,6 +28,8 @@
         <jackson.databind.version>2.2.2</jackson.databind.version>
         <org.aspectj.version>1.8.4</org.aspectj.version>
 
+        <log4j-version>2.5</log4j-version>
+
 
         <gpg.skip>true</gpg.skip>
         <javadoc.skip>true</javadoc.skip>
@@ -219,6 +221,12 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore</artifactId>
             <version>${httpclient.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j-version}</version>
         </dependency>
 
         <!-- junit,测试使用 -->

@@ -1,0 +1,4 @@
+2016-02-17 00:24:54,721 [main] INFO  com.cncounter.test.youdao.YouDaoFanYiTest - text1=需要测试的内容1; value1:
+Need to test the content of 1
+2016-02-17 00:24:54,725 [main] INFO  com.cncounter.test.youdao.YouDaoFanYiTest - text2=my name is xiaoming.; value2:
+我的名字叫小明。
