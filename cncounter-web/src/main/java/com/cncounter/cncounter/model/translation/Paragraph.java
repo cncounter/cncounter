@@ -53,7 +53,8 @@ public class Paragraph extends TranslationElement {
         // TODO 可能还有点问题
         // 拆分
         String text = content.substring(0, LEN_LIMIT);
-        int lastIndex = text.lastIndexOf("\n");
+        //int lastIndex = text.lastIndexOf("\n");
+        int lastIndex = getLastParaSepratorIndex(text);
         if(lastIndex > -1){
             // 找到,则构造元素
             // 继续递归
@@ -80,13 +81,13 @@ public class Paragraph extends TranslationElement {
 
     private static int getLastParaSepratorIndex(String text){
         // 取最大值
-        int theLastIndex = 0;
+        int theLastIndex = -1;
 
         String[] seps = {".", "?", ":"};
 
         //
         for(String sep : seps){
-            int lastIndex = text.lastIndexOf("\n");
+            int lastIndex = text.lastIndexOf(sep);
             if(lastIndex > theLastIndex){
                 theLastIndex = lastIndex;
             }
