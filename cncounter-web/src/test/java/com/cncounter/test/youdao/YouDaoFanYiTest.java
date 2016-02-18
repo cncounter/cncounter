@@ -23,7 +23,7 @@ import java.net.URLEncoder;
  */
 public class YouDaoFanYiTest {
     //
-    public static String apiURLPrefix = "http://fanyi.youdao.com/openapi.do?keyfrom=CNCounter&key=282371857&type=data&doctype=json&version=1.1&q=";
+    public static String apiURLPrefix = "http://fanyi.youdao.com/openapi.do?keyfrom=CNCounter&key=282371857&type=data&only=translate&doctype=json&version=1.1&q=";
 
     private static Log logger = LogFactory.getLog(YouDaoFanYiTest.class);
     //

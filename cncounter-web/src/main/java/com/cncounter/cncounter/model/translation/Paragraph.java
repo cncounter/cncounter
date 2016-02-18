@@ -38,7 +38,6 @@ public class Paragraph extends TranslationElement {
             SentenceSep sep = new SentenceSep();
             sep.setOriginalContent(content);
             elementList.add(sep);
-            //
             return elementList;
         }
         // 看长度
@@ -57,22 +56,33 @@ public class Paragraph extends TranslationElement {
         int lastIndex = getLastParaSepratorIndex(text);
         if(lastIndex > -1){
             // 找到,则构造元素
-            // 继续递归
             String left_str = content.substring(0, lastIndex);
-            List<TranslationElement> senList = splitPara2Sentence(left_str);
-            elementList.addAll(senList);
-            //
-            if(lastIndex < len - 1){
-                // 摘出符号
+            if(null != left_str && false== left_str.trim().isEmpty()){
+                //
+                Sentence sentence = new Sentence();
+                sentence.setOriginalContent(left_str);
+                elementList.add(sentence);
+            } else {
+                // 当做分隔符号
                 SentenceSep sep = new SentenceSep();
-                sep.setOriginalContent("\n");
+                sep.setOriginalContent(content);
                 elementList.add(sep);
             }
-            // 接着继续往下
-            String rest = content.substring(lastIndex);
-            List<TranslationElement> restList = splitPara2Sentence(rest);
             //
-            elementList.addAll(restList);
+            if(lastIndex < len - 2){
+                // 摘出符号
+                String symbol = content.substring(lastIndex, lastIndex+1);
+                SentenceSep sep2 = new SentenceSep();
+                sep2.setOriginalContent(symbol); //
+                elementList.add(sep2);
+                //
+                // 接着继续往下 + 1
+                String rest = content.substring(lastIndex+1);
+                // 递归
+                List<TranslationElement> restList = splitPara2Sentence(rest);
+                //
+                elementList.addAll(restList);
+            }
         }
 
         //
@@ -83,11 +93,19 @@ public class Paragraph extends TranslationElement {
         // 取最大值
         int theLastIndex = -1;
 
-        String[] seps = {".", "?", ":"};
+        String[] seps = {".", "?", ":", ","};
 
         //
         for(String sep : seps){
             int lastIndex = text.lastIndexOf(sep);
+            if(lastIndex > theLastIndex){
+                theLastIndex = lastIndex;
+            }
+        }
+
+        if(theLastIndex < 0){
+            // 使用空格
+            int lastIndex = text.lastIndexOf(" ");
             if(lastIndex > theLastIndex){
                 theLastIndex = lastIndex;
             }

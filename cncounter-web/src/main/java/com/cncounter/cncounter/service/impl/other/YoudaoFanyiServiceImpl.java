@@ -23,7 +23,12 @@ import java.net.URLEncoder;
 public class YoudaoFanyiServiceImpl implements YoudaoFanyiService {
 
     //
-    public static String apiURLPrefix = "http://fanyi.youdao.com/openapi.do?keyfrom=CNCounter&key=282371857&type=data&doctype=json&version=1.1&q=";
+    public static String apiURLPrefix = "" +
+            "http://fanyi.youdao.com/openapi.do" +
+            "?" +
+            "keyfrom=CNCounter&key=282371857" +
+            "&type=data&doctype=json&version=1.1&only=translate" +
+            "&q=";
 
     @Override
     public String translation(String originalText) {
