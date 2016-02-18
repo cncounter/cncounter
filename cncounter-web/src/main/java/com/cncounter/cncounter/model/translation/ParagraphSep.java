@@ -10,7 +10,7 @@ public class ParagraphSep extends TranslationElement {
     public ParagraphSep(){
         super(TYPE_PARAGRAPH_SEP);
         //
-        this.originalContent = "\n\n";
+        this.originalContent = "\n\n\n";
     }
     /**
      * 翻译(分隔符不执行翻译)

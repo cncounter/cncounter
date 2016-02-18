@@ -1,6 +1,8 @@
 package com.cncounter.cncounter.model.translation;
 
 import com.cncounter.cncounter.model.translation.api.TranslationApi;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,6 +14,8 @@ import java.util.List;
 public class Article extends TranslationElement {
 
     public static String PARA_DEP_REGEX = "\\n\\n+";
+
+    private  Log logger = LogFactory.getLog(this.getClass());
 
     // 文章元素
     private List<TranslationElement> articleElementList = new ArrayList<TranslationElement>();
@@ -53,6 +57,7 @@ public class Article extends TranslationElement {
         // 依次遍历子元素，然后执行翻译， 接着写入译文内容
         //
         StringBuilder builder = new StringBuilder();
+        int success_num = 0;
         //
         Iterator<TranslationElement> iteratorT = articleElementList.iterator();
         while(iteratorT.hasNext()){
@@ -70,6 +75,9 @@ public class Article extends TranslationElement {
             if(TYPE_PARAGRAPH == elementType){ // 是段落
                 builder.append("\n\n");
                 builder.append(dest);
+                //
+                success_num ++;
+                logger.debug("翻译成功: " + success_num + "条; 最新 orig.length="+orig.length() );
             }
         }
         //
