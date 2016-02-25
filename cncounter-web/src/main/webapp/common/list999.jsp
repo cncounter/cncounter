@@ -37,7 +37,13 @@
 %>
 
 <%
-	List<Favorite> favorites = getFavrite999();
+
+    List<Favorite> favorites = new ArrayList<Favorite>();
+	try{
+        favorites = getFavrite999();
+    } catch (Throwable ex){
+        ex.printStackTrace();
+    }
 					for(Favorite favorite : favorites){
 						//
 						String url = favorite.getUrl();
