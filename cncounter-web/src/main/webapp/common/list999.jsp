@@ -4,11 +4,27 @@
 <%@page import="java.util.*"%>
 <%@ page import="com.cncounter.cncounter.service.api.other.FavoriteService" %>
 <%@ page import="com.cncounter.util.spring.SpringContextHolder" %>
-<%@include file="../basePath.jsp"%>
+<%@ page import="org.springframework.context.ApplicationContext" %>
+<%@include file="basePath.jsp"%>
 <%!
     public List<Favorite> getFavrite999(){
+        //
         List<Favorite> favorites = new ArrayList<Favorite>();
-        FavoriteService favoriteService = SpringContextHolder.getBean(FavoriteService.class);
+        //
+        ApplicationContext applicationContext = SpringContextHolder.getApplicationContext();
+
+        Map<String, FavoriteService> beanMap = applicationContext.getBeansOfType(FavoriteService.class);
+        if(null == beanMap && beanMap.isEmpty() ){
+            return favorites;
+        }
+        //
+        Collection<FavoriteService> valueSet = beanMap.values();
+        if(null == valueSet || valueSet.isEmpty()){
+            return favorites;
+        }
+        List<FavoriteService> valueList = new ArrayList<FavoriteService>(valueSet);
+        //
+        FavoriteService favoriteService =  valueList.get(0) ;
         if(null == favoriteService){
             return favorites;
         }

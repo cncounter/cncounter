@@ -26,7 +26,7 @@
 			<h2>
 				<a target="_blank" href="https://github.com/cncounter/translation">CNCounter翻译文章</a>
 			</h2>
-			<jsp:include page="/WEB-INF/JSP/favorite/list999.jsp"></jsp:include>
+			<jsp:include page="/common/list999.jsp"></jsp:include>
 		</div>
 		<jsp:include page="/common/sidebar.jsp"></jsp:include>
 	</div>
