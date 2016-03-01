@@ -3,14 +3,14 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<title>天朝计数器 - CNCounter</title>
+	<title>CN计数器 - CNCounter</title>
 	<jsp:include page="/common/cssjs.jsp"></jsp:include>
 </head>
 <body>
 	<jsp:include page="/common/header.jsp"></jsp:include>
 	<div class="container-fluid">
 		<div class="content_left">
-			<p class="h1">天朝计数器</p>
+			<p class="h1">CN计数器</p>
 			<h2>
 				<a target="_blank" href="http://blog.cncounter.com/cncounter/">GitHub项目首页</a>
 			</h2>

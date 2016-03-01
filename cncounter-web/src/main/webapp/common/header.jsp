@@ -12,7 +12,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="<%=path %>/">天朝计数器</a>
+          <a class="navbar-brand" href="<%=path %>/">CN计数器</a>
         </div>
         
         <div id="navbar" class="collapse navbar-collapse">

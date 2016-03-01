@@ -15,7 +15,7 @@
 	<jsp:include page="/common/header.jsp"></jsp:include>
 	<div class="container-fluid">
 		<div class="content_left">
-			<p class="h1">测试Chart.js  - 天朝计数</p>
+			<p class="h1">测试Chart.js  - CN计数</p>
 		   	<h1>
 		   		<a target="_blank" href="../index.jsp">
 		   		测试目录页

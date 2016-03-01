@@ -19,7 +19,7 @@ System.out.println(holdername);
 	<jsp:include page="/common/header.jsp"></jsp:include>
 	<div class="container-fluid">
 		<div class="content_left">
-			<p class="h1">天朝计数</p>
+			<p class="h1">CN计数</p>
 			<h1>
 			<%=holdername %>
 			</h1>

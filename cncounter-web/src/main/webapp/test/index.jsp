@@ -10,7 +10,7 @@
 	<jsp:include page="/common/header.jsp"></jsp:include>
 	<div class="container-fluid">
 		<div class="content_left">
-			<p class="h1">测试  - 天朝计数</p>
+			<p class="h1">测试  - CN计数</p>
 			<h2>
 				<a target="_blank" href="http://console.bce.baidu.com/bae/#/bae/app/list">管理控制台</a>
 			</h2>

@@ -7,7 +7,7 @@
 %>  <div class="footer">
 	<hr/>
 	<div class="">
-		天朝计数 | cncounter | 
+		CN计数 | cncounter |
 		<a target="_blank" href="<%=path %>/test/index.jsp">&copy;</a>
 		2014 - <%=f_year %>
 		| 

@@ -13,7 +13,7 @@
 	<jsp:include page="/common/header.jsp"></jsp:include>
 	<div class="container-fluid">
 		<div class="content_left">
-			<p class="h1">测试redis  - 天朝计数</p>
+			<p class="h1">测试redis  - CN计数</p>
 		   	<h1>
 		   		<a target="_blank" href="./testmysql.jsp">
 		   		测试MySQL
