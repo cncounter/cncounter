@@ -58,6 +58,7 @@ public class Article extends TranslationElement {
         //
         StringBuilder builder = new StringBuilder();
         int success_num = 0;
+        long time_start = System.currentTimeMillis();
         //
         Iterator<TranslationElement> iteratorT = articleElementList.iterator();
         while(iteratorT.hasNext()){
@@ -80,6 +81,10 @@ public class Article extends TranslationElement {
                 logger.debug("翻译成功: " + success_num + "条; 最新 orig.length="+orig.length() );
             }
         }
+        long time_end = System.currentTimeMillis();
+        logger.debug("翻译结束,共: " + success_num + "条;" +
+                "耗时: "+ (time_end - time_start)+ " ms;"+
+                " length()="+builder.length() );
         //
         this.setTranslationContent(builder.toString());
     }
