@@ -78,10 +78,17 @@ public class YoudaoFanyiServiceImpl implements YoudaoFanyiService {
                 return value;
             }
             //
-            Object translation0 = translation.get(0);
-            //
-            if (translation0 instanceof String){
-                value = String.valueOf(translation0);
+            int len = translation.size();
+            for(int i=0; i < len; i++){
+                if(i > 0){
+                    value += "\n";
+                }
+                //
+                Object translation0 = translation.get(i);
+                //
+                if (translation0 instanceof String){
+                    value += String.valueOf(translation0);
+                }
             }
         }
 
