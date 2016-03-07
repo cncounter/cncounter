@@ -43,9 +43,13 @@ public class Paragraph extends TranslationElement {
         // 看长度
         int len = content.length();
         if(len <= LEN_LIMIT){ // 小于限值，不再拆分
-            Sentence sentence = new Sentence();
-            sentence.setOriginalContent(content);
-            elementList.add(sentence);
+            // 特殊情况,以 n 个#号开头
+            //
+            List<TranslationElement> sentenceList = content2SingleSentence(content);
+
+            if(null != sentenceList){
+                elementList.addAll(sentenceList);
+            }
             //
             return elementList;
         }
@@ -89,6 +93,38 @@ public class Paragraph extends TranslationElement {
         return elementList;
     }
 
+    private static List<TranslationElement> content2SingleSentence(String content) {
+        List<TranslationElement> sentenceList = new ArrayList<TranslationElement>();
+
+        if(null == content){
+            return null;
+        }
+        // 匹配标题
+        if(content.matches("^(\\#+)\\B+.*")){
+            //
+            String sharpStr = "";
+            while(content.startsWith("#")){
+                sharpStr += "#";
+                content = content.substring(1);
+            }
+            while(content.startsWith(" ")){
+                sharpStr += " ";
+                content = content.substring(1);
+            }
+            //
+            SentenceSep seps = new SentenceSep();
+            seps.setOriginalContent(sharpStr); //
+            sentenceList.add(seps);
+        }
+
+
+        Sentence sentence = new Sentence();
+        sentence.setOriginalContent(content);
+        sentenceList.add(sentence);
+        //
+        return sentenceList;
+    }
+
     private static int getLastParaSepratorIndex(String text){
         // 取最大值
         int theLastIndex = -1;
@@ -130,6 +166,11 @@ public class Paragraph extends TranslationElement {
     public void translation(TranslationApi translationApi) {
         //? 根据原内容,拆分到段落元素中
         // 依次遍历子元素，然后执行翻译， 接着写入译文内容
+        // 如果符合不翻译规则, 则不翻译:
+        if(matchSourceCodeType()){
+            this.setTranslationContent("");
+            return;
+        }
         //
         StringBuilder builder = new StringBuilder();
         //
@@ -145,5 +186,38 @@ public class Paragraph extends TranslationElement {
         }
         //
         this.setTranslationContent(builder.toString());
+    }
+
+    private boolean matchSourceCodeType() {
+        //
+        boolean match = false;
+        int wholeMatchingNum = 0;
+        //
+        String origContent = this.originalContent;
+        if(null == origContent){
+            origContent = "";
+        }
+        origContent = origContent.replace("\r\n", "\n");
+        //
+        String[] linesArray = origContent.split("\n");
+        int lineNum = linesArray.length;
+        //
+        for(String line : linesArray){
+            //
+            if(line.startsWith("\t")){
+                wholeMatchingNum += 1;
+            } else if(line.startsWith("    ")){
+                wholeMatchingNum += 1;
+            } else if(line.trim().isEmpty()){
+                wholeMatchingNum += 1;
+            }
+        }
+        // 匹配不需要翻译的code类型
+        if(wholeMatchingNum == lineNum){
+            match = true;
+        }
+
+        // 取反
+        return  match;
     }
 }
