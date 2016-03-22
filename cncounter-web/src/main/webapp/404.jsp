@@ -9,7 +9,7 @@
 	<jsp:include page="/common/header.jsp"></jsp:include>
 	<div class="container-fluid">
 		<div class="content_left">
-			<p class="h1">404 - 天朝计数器</p>
+			<p class="h1">404 - CN计数器</p>
 			<h2>
 				<a target="_self" href="/">404!</a>
 			</h2>
