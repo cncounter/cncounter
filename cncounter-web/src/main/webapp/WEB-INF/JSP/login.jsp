@@ -15,13 +15,13 @@
        <h2 class="form-signin-heading">用户登录</h2>
        <div>
          <label for="loginemail">
-                   登录邮箱: 
+                   登录邮箱<span class="required">:</span>
          </label>
          <input id="loginemail" name="loginemail"   type="text" class="form-control" placeholder="输入登录邮箱" required autofocus>
        </div>
        <div>
          <label for="loginpassword">
-                   登录密码:
+                   登录密码<span class="required">:</span>
          </label>
          <input id="loginpassword" name="loginpassword" type="password" autocomplete="off"  class="form-control" placeholder="请输入密码"  required>
        </div>

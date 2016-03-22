@@ -107,9 +107,14 @@
 	
 	<session-config>  
         <session-timeout>30</session-timeout>  
-    </session-config>  
-    <!-- 默认欢迎页面 -->  
+    </session-config>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404.jsp</location>
+	</error-page>
+	<!-- 默认欢迎页面 -->
     <welcome-file-list>  
         <welcome-file>index.php</welcome-file>  
-    </welcome-file-list>  
+    </welcome-file-list>
 </web-app>

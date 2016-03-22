@@ -282,6 +282,20 @@ img {
 	float: right;
 }
 
+label .required{
+  color: red;
+}
+
+.red{
+  color: red;
+}
+.green{
+  color: green;
+}
+.blue{
+  color: blue;
+}
+
 /* 单个使用的CSS*/
 
 /* 顶部元素 */

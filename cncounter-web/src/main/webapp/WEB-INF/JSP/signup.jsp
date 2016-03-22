@@ -15,19 +15,19 @@
        <h2 class="form-signin-heading">用户注册</h2>
        <div>
          <label for="loginemail">
-                   登录邮箱: 
+                   登录邮箱<span class="required">:</span>
          </label>
          <input id="loginemail" name="loginemail"   type="text" class="form-control" placeholder="输入登录邮箱" required autofocus>
        </div>
        <div>
          <label for="loginpassword">
-                   登录密码:
+                   登录密码<span class="required">:</span>
          </label>
          <input id="loginpassword" name="loginpassword" type="password"  class="form-control" placeholder="请输入密码"  required>
        </div>
        <div>
          <label for="repassword">
-                   确认密码:
+                   确认密码<span class="required">:</span>
          </label>
          <input id="repassword" name="repassword" type="password"  class="form-control" placeholder="请再次输入密码"  required>
        </div>
