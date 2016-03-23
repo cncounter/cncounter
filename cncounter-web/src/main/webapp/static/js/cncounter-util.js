@@ -1,8 +1,46 @@
+//
+var CNC = CNC || function(){};
+CNC.prototype = {
+
+};
+CNC.currentScript = document.currentScript;
 
 // 刷新本页面
 function refreshPage(){
 	location.reload();
 };
+
+// 加载同目录下的 md5-utils;
+function loadMd5Utils(){
+	//
+	var scs = document["scri" + "pts"];
+	//
+	var cncuntilsName = "cncounter-util.js";
+	var md5utilsName = "md5-util.js";
+	//
+	var cncJsUrl = "";
+	var md5JsUrl = "";
+	if(CNC.currentScript){
+		cncJsUrl = CNC.currentScript.src;
+	} else {
+		//
+		for(var sc in scs){
+			var src = sc.src;
+			if(!src){
+				continue;
+			}
+			if(src.indexOf(cncuntilsName) > -1){
+				cncJsUrl = src;
+				break;
+			}
+		}
+	}
+	md5JsUrl = cncJsUrl.replace(cncuntilsName, md5utilsName);
+	// 加载md5工具.js
+	md5JsUrl && $.getScript(md5JsUrl);
+};
+
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////

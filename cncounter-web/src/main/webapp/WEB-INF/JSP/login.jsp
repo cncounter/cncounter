@@ -31,9 +31,10 @@
          </label>
          <span style="float:right;"><a href="<%=path %>/password_reset.php">忘记密码</a></span>
        </div>
-       <button class="btn btn-lg btn-primary btn-block" type="submit">登录 CNCounter</button>
+       <button id="btn_login" class="btn btn-lg btn-primary btn-block" type="button">登录 CNCounter</button>
        <a class="btn btn-lg btn-warning btn-block"  href="<%=path %>/signup.php">没有账号?点击注册</a>
      </form>
   </div> <!-- /container -->
+  <script src="/static/jsp_js/login.jsp.js"></script>
 </body>
 </html>

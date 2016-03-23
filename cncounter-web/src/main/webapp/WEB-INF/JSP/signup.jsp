@@ -31,9 +31,10 @@
          </label>
          <input id="repassword" name="repassword" type="password"  class="form-control" placeholder="请再次输入密码"  required>
        </div>
-       <button class="btn btn-lg btn-primary btn-block" type="submit">确认注册CNCounter</button>
+       <button id="btn_signup" class="btn btn-lg btn-primary btn-block" type="button">确认注册CNCounter</button>
        <a class="btn btn-lg btn-warning btn-block"  href="<%=path %>/login.php">已有账号?点击登录</a>
      </form>
   </div> <!-- /container -->
+  <script src="/static/jsp_js/signup.jsp.js"></script>
 </body>
 </html>

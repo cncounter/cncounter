@@ -1,20 +1,16 @@
 package com.cncounter.cncounter.mvc.controller.base;
 
 
-import java.io.Serializable;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.WeakHashMap;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.cncounter.cncounter.dao.redis.api.RedisBaseDAO;
 import com.cncounter.cncounter.model.user.User;
 import com.cncounter.util.string.StringNumberUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.io.Serializable;
+import java.util.*;
 
 
 /**
@@ -56,6 +52,14 @@ public abstract class ControllerBase {
 		String nKey = "uuid:"+uuid;
 		//
 		return nKey;
+	}
+	/**
+	 * 获取UUID
+	 * @return
+	 */
+	public static String getUUID(){
+		String uuid = UUID.randomUUID().toString();
+		return uuid;
 	}
 	
 	/**
@@ -232,6 +236,61 @@ public abstract class ControllerBase {
 	}
 
 	/**
+	 * 获取参数或者Cookie
+	 * @param request
+	 * @param name
+	 * @return
+	 */
+	protected String getStringValue(HttpServletRequest request, String name){
+		// 1. 获取直接参数
+		String value = getParameter(request, name);
+		if(StringNumberUtil.notEmpty(value)){
+			return value;
+		}
+		// 2. 获取 cookie
+		value = getCookie(request, name);
+		if(StringNumberUtil.notEmpty(value)){
+			return value;
+		}
+		// 3. 获取session
+//		Object v = getSessionValue(request, name);
+//		if(StringNumberUtil.notEmpty(v)){
+//			return String.valueOf(v);
+//		}
+		// 4. 获取缓存
+//		v = getFromCache(name);
+//		if(StringNumberUtil.notEmpty(v)){
+//			return String.valueOf(v);
+//		}
+		//
+		return value;
+	}
+
+	public static String getCookie(HttpServletRequest request, String name){
+		Map<String, String> cookieMap = getCookies(request);
+		//
+		String value = cookieMap.get(name);
+		return value;
+	}
+
+	public static Map<String, String> getCookies(HttpServletRequest request){
+		//
+		Map<String, String> cookieMap = new HashMap<String, String>();
+				//
+		Cookie[] cookies = request.getCookies();
+		for(Cookie cookie : cookies){
+			//
+			String name = cookie.getName();
+			String value = cookie.getValue();
+			//
+			name = name.trim();
+			value = value.trim();
+			cookieMap.put(name, value);
+		}
+		//
+		return cookieMap;
+	}
+	/**
 	 * 获取参数
 	 * @param request
 	 * @param name
@@ -261,6 +320,16 @@ public abstract class ControllerBase {
 			}
 		}
 		//
+		return value;
+	}
+
+	public static Object getSessionValue(HttpServletRequest request, String name){
+		//
+		HttpSession session = request.getSession();
+		if(null == session){
+			return null;
+		}
+		Object value = session.getAttribute(name);
 		return value;
 	}
 	
