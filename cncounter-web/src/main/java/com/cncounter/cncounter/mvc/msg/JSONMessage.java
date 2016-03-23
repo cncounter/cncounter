@@ -19,14 +19,6 @@ public class JSONMessage {
 	 * 失败状态, 代表有错误发生, 值为0
 	 */
 	public static final int STATUS_FAILURE = 0;
-	
-	/**
-	 * 新创建一个空消息对象
-	 * @return
-	 */
-	public static JSONMessage newMessage(){
-		return new JSONMessage();
-	}
 
 	/**
 	 * 为了兼容表格的记录总数, 需要用户手动设置
@@ -41,7 +33,7 @@ public class JSONMessage {
 	 * 如,分页数据、总条数等等.
 	 */
 	private Map<String, Object> meta = new HashMap<String, Object>();
-	
+
 	/**
 	 * 是否成功,默认0为不成功,1为成功
 	 */
@@ -61,9 +53,27 @@ public class JSONMessage {
 	 */
 	private String clientaction = CLIENT_ACTION.EMPTY;
 	/**
-	 * 与 clientaction 配套, 如果需要简单的 clientaction 操作,则客户端可使用此值进行操作. 
+	 * 与 clientaction 配套, 如果需要简单的 clientaction 操作,则客户端可使用此值进行操作.
 	 */
 	private String actionvalue = "";
+	
+	/**
+	 * 新创建一个空消息对象
+	 * @return
+	 */
+	public static JSONMessage newMessage(){
+		return new JSONMessage();
+	}
+	public static JSONMessage successMessage(){
+		JSONMessage jsonMessage = new JSONMessage();
+		jsonMessage.setSuccess();
+		return jsonMessage;
+	}
+	public static JSONMessage failureMessage(){
+		JSONMessage jsonMessage = new JSONMessage();
+		jsonMessage.setFailure();
+		return jsonMessage;
+	}
 	
 	public static final class CLIENT_ACTION {
 		/**
@@ -113,8 +123,7 @@ public class JSONMessage {
 		this.meta = meta;
 	}
 	/**
-	 * 添加 meta信息, 
-	 * @param meta
+	 * 添加 meta信息,
 	 */
 	public void addMeta( String key, Object value) {
 		if(null == meta){
@@ -134,6 +143,9 @@ public class JSONMessage {
 	 */
 	public void setSuccess(){
 		this.setStatus(STATUS_SUCCESS);
+	}
+	public void setFailure(){
+		this.setStatus(STATUS_FAILURE);
 	}
 	public void setStatus(int status) {
 		this.status = status;

@@ -50,7 +50,6 @@ public abstract class ControllerBase {
 	 */
 	public static String getUUIDKey(String uuid){
 		String nKey = "uuid:"+uuid;
-		//
 		return nKey;
 	}
 	/**
@@ -323,6 +322,8 @@ public abstract class ControllerBase {
 		return value;
 	}
 
+
+
 	public static Object getSessionValue(HttpServletRequest request, String name){
 		//
 		HttpSession session = request.getSession();
@@ -347,60 +348,56 @@ public abstract class ControllerBase {
 		return StringNumberUtil.parseInt(value, defValue);
 	}
 
+
+	/**
+	 * 解析request中的参数Map
+	 * @param request
+	 * @return
+	 */
+	public static Map<String, Object> parseParamMapObject(HttpServletRequest request){
+		//
+		Map<String, String> map = parseParamMap(request);
+		Map<String, Object> map2 = new HashMap<String, Object>(map);
+		//
+		return map2;
+	}
+
+	public static Map<String, String> parseParamMap(HttpServletRequest request, boolean empty2null){
+		//
+		Map<String, String> map = new HashMap<String, String>();
+		//
+		if(null != request){
+			Enumeration<String> enumeration = request.getParameterNames();
+			// 遍历参数,其实有request的request.getParameterMap();但没泛型
+			while (enumeration.hasMoreElements()) {
+				String paraName = (String) enumeration.nextElement();
+				//
+				String paraValue = request.getParameter(paraName);
+				//
+				if(null != paraValue){
+					paraValue = paraValue.trim();
+				}
+				if("".equals(paraValue) || "null".equals(paraValue) || "undefined".equals(paraValue)){
+					paraValue = "";
+				}
+				if(empty2null && StringNumberUtil.isEmpty(paraValue)){
+					// 不设置值
+				} else {
+					map.put(paraName, paraValue);
+				}
+			}
+		}
+		//
+		return map;
+	}
 	/**
 	 * 解析request中的参数Map
 	 * @param request
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected static Map<String, Object> parseParamMap(HttpServletRequest request){
-		//
-		Map<String, Object> map = new HashMap<String, Object>();
-		//
-		if(null != request){
-			Enumeration<String> enumeration = request.getParameterNames();
-			// 遍历参数,其实有request的request.getParameterMap();但没泛型	
-			while (enumeration.hasMoreElements()) {
-				String paraName = (String) enumeration.nextElement();
-				//
-				String paraValue = request.getParameter(paraName);
-				//
-				if(null != paraValue){
-					paraValue = paraValue.trim();
-				}
-				if("".equals(paraValue) || "null".equals(paraValue) || "undefined".equals(paraValue)){
-					paraValue = "";
-				}
-				map.put(paraName, paraValue);
-			}
-		}
-		//
-		return map;
-	}
-
-	@SuppressWarnings("unchecked")
-	protected static Map<String, String> parseParamMapString(HttpServletRequest request){
-		//
-		Map<String, String> map = new HashMap<String, String>();
-		//
-		if(null != request){
-			Enumeration<String> enumeration = request.getParameterNames();
-			// 遍历参数,其实有request的request.getParameterMap();但没泛型	
-			while (enumeration.hasMoreElements()) {
-				String paraName = (String) enumeration.nextElement();
-				//
-				String paraValue = request.getParameter(paraName);
-				//
-				if(null != paraValue){
-					paraValue = paraValue.trim();
-				}
-				if("".equals(paraValue) || "null".equals(paraValue) || "undefined".equals(paraValue)){
-					paraValue = "";
-				}
-				map.put(paraName, paraValue);
-			}
-		}
-		//
+	protected static Map<String, String> parseParamMap(HttpServletRequest request){
+		Map<String, String> map = parseParamMap(request, false);
 		return map;
 	}
 }
