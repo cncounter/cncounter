@@ -124,7 +124,7 @@ public class CrossOrigionProxyController extends ControllerBase {
 
     		// 1. 接收所有参数，除却 _tourl; 然后发送 http 请求
     		//
-    		Map<String, String> paramMap = parseParamMapString(request);
+    		Map<String, String> paramMap = parseParamMap(request);
     		// 移除此地址
     		paramMap.remove("_tourl");
     		//
