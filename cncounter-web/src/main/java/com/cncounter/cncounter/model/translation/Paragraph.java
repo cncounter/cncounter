@@ -5,6 +5,8 @@ import com.cncounter.cncounter.model.translation.api.TranslationApi;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 段落
@@ -53,6 +55,26 @@ public class Paragraph extends TranslationElement {
             //
             return elementList;
         }
+        // 处理 HTML 标签
+        if(allAreHTML(content)){
+            List<TranslationElement> sentenceList = content2SingleSentence(content);
+
+            if(null != sentenceList){
+                elementList.addAll(sentenceList);
+            }
+            //
+            return elementList;
+        }
+        // 处理 ol, ul
+        if(isOL_UL(content)){
+            List<TranslationElement> sentenceList = parseOL_UL(content);
+
+            if(null != sentenceList){
+                elementList.addAll(sentenceList);
+            }
+            //
+            return elementList;
+        }
         // TODO 可能还有点问题
         // 拆分
         String text = content.substring(0, LEN_LIMIT);
@@ -92,6 +114,127 @@ public class Paragraph extends TranslationElement {
         //
         return elementList;
     }
+
+
+    private static List<TranslationElement> parseOL_UL(String origContent){
+        List<TranslationElement> elementList = new ArrayList<TranslationElement>();
+
+        origContent = origContent.replace("\r\n", "\n");
+        //
+        String[] linesArray = origContent.split("\n");
+        int lineNum = linesArray.length;
+        //
+        String regUL = "^(\\s*\\-\\s).*";
+        String regOL = "^(\\s*\\d+\\.\\s).*";
+        String regGT = "^(\\s*>\\s+).*";
+        //
+        Pattern patternUL = Pattern.compile(regUL);
+        Pattern patternOL = Pattern.compile(regOL);
+        Pattern patternGT = Pattern.compile(regGT);
+        //
+        for(String line : linesArray){
+            //
+            Matcher matcherUL = patternUL.matcher(line);
+            Matcher matcherOL = patternOL.matcher(line);
+            Matcher matcherGT = patternGT.matcher(line);
+
+            //
+            String prefix = "";
+            // 只找第一个
+            if (matcherUL.find()){
+                prefix = matcherUL.group(1);
+            } else if (matcherOL.find()){
+                prefix = matcherOL.group(1);
+            } else if (matcherGT.find()){
+                prefix = matcherGT.group(1);
+            }
+            // 分隔符号
+            SentenceSep sep = new SentenceSep();
+            sep.setOriginalContent(prefix);
+            elementList.add(sep);
+            //
+            int len = prefix.length();
+            String content = line.substring(len);
+            //
+            Sentence sentence = new Sentence();
+            sentence.setOriginalContent(content);
+            elementList.add(sentence);
+            //
+            // 换行符号
+            SentenceSep sep2 = new SentenceSep();
+            sep2.setOriginalContent("\n"); //
+            elementList.add(sep2);
+        }
+        return elementList;
+    }
+
+    // 处理 UL,OL, GT
+    private static boolean isOL_UL(String content) {
+        //
+        boolean match = false;
+        int wholeMatchingNum = 0;
+        //
+        String origContent = content;
+        if(null == origContent){
+            origContent = "";
+        }
+        origContent = origContent.replace("\r\n", "\n");
+        //
+        String[] linesArray = origContent.split("\n");
+        int lineNum = linesArray.length;
+        //
+        for(String line : linesArray){
+            //
+            if(line.matches("^\\s*\\-\\s+.*")){
+                wholeMatchingNum += 1;
+            } else if(line.matches("^\\s*\\d+\\.\\s.*")){
+                wholeMatchingNum += 1;
+            }  else if(line.matches("^\\s*>\\s+.*")){
+                wholeMatchingNum += 1;
+            } else if(line.trim().isEmpty()){
+                wholeMatchingNum += 1;
+            }
+        }
+        // 匹配不需要翻译的code类型
+        if(wholeMatchingNum == lineNum){
+            match = true;
+        }
+
+        //
+        return  match;
+    }
+
+    private static boolean allAreHTML(String content) {
+        //
+        boolean match = false;
+        int wholeMatchingNum = 0;
+        //
+        String origContent = content;
+        if(null == origContent){
+            origContent = "";
+        }
+        origContent = origContent.replace("\r\n", "\n");
+        //
+        String[] linesArray = origContent.split("\n");
+        int lineNum = linesArray.length;
+        //
+        for(String line : linesArray){
+            //
+            if(line.matches("^\\s*<.*")){
+                wholeMatchingNum += 1;
+            }else if(line.trim().isEmpty()){
+                wholeMatchingNum += 1;
+            }
+        }
+        // 匹配不需要翻译的code类型
+        if(wholeMatchingNum == lineNum){
+            match = true;
+        }
+
+        //
+        return  match;
+    }
+
 
     private static List<TranslationElement> content2SingleSentence(String content) {
         List<TranslationElement> sentenceList = new ArrayList<TranslationElement>();
@@ -168,6 +311,10 @@ public class Paragraph extends TranslationElement {
         // 依次遍历子元素，然后执行翻译， 接着写入译文内容
         // 如果符合不翻译规则, 则不翻译:
         if(matchSourceCodeType()){
+            this.setTranslationContent("");
+            return;
+        }
+        if(allAreHTML(this.originalContent)){
             this.setTranslationContent("");
             return;
         }

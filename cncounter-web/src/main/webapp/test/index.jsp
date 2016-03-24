@@ -12,7 +12,7 @@
 		<div class="content_left">
 			<p class="h1">测试  - CN计数</p>
 			<h2>
-				<a target="_blank" href="http://console.bce.baidu.com/bae/#/bae/app/list">管理控制台</a>
+				<a target="_self" href="/tools/translation.php">Markdown文章翻译</a>
 			</h2>
 			<h2>
 				<a target="_blank" href="http://developer.baidu.com/apm/index">应用性能监测中心</a>
