@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 需求描述: <br/>
@@ -23,12 +24,42 @@ import java.net.URLEncoder;
 public class YoudaoFanyiServiceImpl implements YoudaoFanyiService {
 
     //
-    public static String apiURLPrefix = "" +
+    private static String apiURLPrefix_RFF = "" +
             "http://fanyi.youdao.com/openapi.do" +
             "?" +
-            "keyfrom=CNCounter&key=282371857" +
+            "keyfrom=renfufei&key=492533600" +
             "&type=data&doctype=json&version=1.1&only=translate" +
             "&q=";
+    private static String apiURLPrefix_LXPZ = "" +
+            "http://fanyi.youdao.com/openapi.do" +
+            "?" +
+            "keyfrom=liangzinpinzhi&key=258980488" +
+            "&type=data&doctype=json&version=1.1&only=translate" +
+            "&q=";
+    private static String apiURLPrefix_TM = "" +
+            "http://fanyi.youdao.com/openapi.do" +
+            "?" +
+            "keyfrom=tiemao&key=873899317" +
+            "&type=data&doctype=json&version=1.1&only=translate" +
+            "&q=";
+
+    public static String[] apis = {
+            apiURLPrefix_RFF,
+            apiURLPrefix_LXPZ,
+            apiURLPrefix_TM
+    };
+
+    public static String apiURLPrefix = apiURLPrefix_RFF;
+    private static AtomicInteger atomicInteger = new AtomicInteger();
+
+    public static String getApiURLPrefix() {
+        //
+        int current = atomicInteger.addAndGet(1);
+        int index = current % apis.length;
+        apiURLPrefix = apis[index];
+        //
+        return apiURLPrefix;
+    }
 
     @Override
     public String translation(String originalText) {
@@ -64,7 +95,7 @@ public class YoudaoFanyiServiceImpl implements YoudaoFanyiService {
             return value;
         }
         //
-        String url = apiURLPrefix + textStr;
+        String url = getApiURLPrefix() + textStr;
         String reply = URLUtils.get(url);
         // 解析 reply 为 JSON
         Object replyObject = JSON.parse(reply);

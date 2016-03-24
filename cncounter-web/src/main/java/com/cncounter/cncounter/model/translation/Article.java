@@ -64,7 +64,20 @@ public class Article extends TranslationElement {
         while(iteratorT.hasNext()){
             TranslationElement element = iteratorT.next();
             //
-            element.translation(translationApi);
+            try{
+                element.translation(translationApi);
+            } catch (Exception e){
+                try{
+                    // 再来一次
+                    element.translation(translationApi);
+                } catch (Exception e2){
+                    if(TYPE_PARAGRAPH == elementType) { // 是段落
+                        success_num--;
+                    }
+                    element.setTranslationContent("!! 翻译失败");
+                    logger.error("!! 翻译失败; 原文内容为: \n" + element.getOriginalContent() + "\n\n", e2);
+                }
+            }
             //
             String orig = element.getOriginalContent();
             //

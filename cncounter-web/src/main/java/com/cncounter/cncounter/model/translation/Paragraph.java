@@ -42,19 +42,6 @@ public class Paragraph extends TranslationElement {
             elementList.add(sep);
             return elementList;
         }
-        // 看长度
-        int len = content.length();
-        if(len <= LEN_LIMIT){ // 小于限值，不再拆分
-            // 特殊情况,以 n 个#号开头
-            //
-            List<TranslationElement> sentenceList = content2SingleSentence(content);
-
-            if(null != sentenceList){
-                elementList.addAll(sentenceList);
-            }
-            //
-            return elementList;
-        }
         // 处理 HTML 标签
         if(allAreHTML(content)){
             List<TranslationElement> sentenceList = content2SingleSentence(content);
@@ -74,9 +61,50 @@ public class Paragraph extends TranslationElement {
             }
             //
             return elementList;
+        } else if(isGT(content)){
+            List<TranslationElement> sentenceList = parseOL_UL(content);
+
+            if(null != sentenceList){
+                elementList.addAll(sentenceList);
+            }
+            //
+            return elementList;
+        } else if(isGTStart(content)){
+            // 不翻译,直接包装为符号
+            // 当做分隔符号
+            SentenceSep sep = new SentenceSep();
+            sep.setOriginalContent(content);
+            elementList.add(sep);
+            return elementList;
         }
         // TODO 可能还有点问题
-        // 拆分
+        // 拆分长内容
+        List<TranslationElement> restList = parseLongContent(content);
+        //
+        elementList.addAll(restList);
+
+        //
+        return elementList;
+    }
+
+
+    private static List<TranslationElement> parseLongContent(String content){
+
+        List<TranslationElement> elementList = new ArrayList<TranslationElement>();
+        // 长度
+        int len = content.length();
+        if(len <= LEN_LIMIT){ // 小于限值，不再拆分
+            // 特殊情况,以 n 个#号开头
+            //
+            List<TranslationElement> sentenceList = content2SingleSentence(content);
+
+            if(null != sentenceList){
+                elementList.addAll(sentenceList);
+            }
+            //
+            return elementList;
+        }
+
         String text = content.substring(0, LEN_LIMIT);
         //int lastIndex = text.lastIndexOf("\n");
         int lastIndex = getLastParaSepratorIndex(text);
@@ -105,7 +133,7 @@ public class Paragraph extends TranslationElement {
                 // 接着继续往下 + 1
                 String rest = content.substring(lastIndex+1);
                 // 递归
-                List<TranslationElement> restList = splitPara2Sentence(rest);
+                List<TranslationElement> restList = parseLongContent(rest);
                 //
                 elementList.addAll(restList);
             }
@@ -137,7 +165,6 @@ public class Paragraph extends TranslationElement {
             Matcher matcherUL = patternUL.matcher(line);
             Matcher matcherOL = patternOL.matcher(line);
             Matcher matcherGT = patternGT.matcher(line);
-
             //
             String prefix = "";
             // 只找第一个
@@ -156,9 +183,10 @@ public class Paragraph extends TranslationElement {
             int len = prefix.length();
             String content = line.substring(len);
             //
-            Sentence sentence = new Sentence();
-            sentence.setOriginalContent(content);
-            elementList.add(sentence);
+
+            List<TranslationElement> restList = parseLongContent(content);
+            //
+            elementList.addAll(restList);
             //
             // 换行符号
             SentenceSep sep2 = new SentenceSep();
@@ -168,7 +196,7 @@ public class Paragraph extends TranslationElement {
         return elementList;
     }
 
-    // 处理 UL,OL, GT
+    // 处理 UL,OL
     private static boolean isOL_UL(String content) {
         //
         boolean match = false;
@@ -189,7 +217,36 @@ public class Paragraph extends TranslationElement {
                 wholeMatchingNum += 1;
             } else if(line.matches("^\\s*\\d+\\.\\s.*")){
                 wholeMatchingNum += 1;
-            }  else if(line.matches("^\\s*>\\s+.*")){
+            }else if(line.trim().isEmpty()){
+                wholeMatchingNum += 1;
+            }
+        }
+        // 匹配不需要翻译的code类型
+        if(wholeMatchingNum == lineNum){
+            match = true;
+        }
+
+        //
+        return  match;
+    }
+    // 处理大于号GT
+    private static boolean isGT(String content) {
+        //
+        boolean match = false;
+        int wholeMatchingNum = 0;
+        //
+        String origContent = content;
+        if(null == origContent){
+            origContent = "";
+        }
+        origContent = origContent.replace("\r\n", "\n");
+        //
+        String[] linesArray = origContent.split("\n");
+        int lineNum = linesArray.length;
+        //
+        for(String line : linesArray){
+            //
+            if(line.matches("^\\s*>\\s+.*")){
                 wholeMatchingNum += 1;
             } else if(line.trim().isEmpty()){
                 wholeMatchingNum += 1;
@@ -202,6 +259,45 @@ public class Paragraph extends TranslationElement {
 
         //
         return  match;
+    }
+
+
+    // 处理大于号GT,段落,不翻译
+    private static boolean isGTStart(String content) {
+        //
+        boolean match = false;
+        boolean isGTStart = false;
+        int wholeMatchingNum = 0;
+        //
+        String origContent = content;
+        if(null == origContent){
+            origContent = "";
+        }
+        origContent = origContent.replace("\r\n", "\n");
+        //
+        origContent = origContent.trim();
+        if(origContent.matches("^\\s*>\\s+.*")){
+            isGTStart = true;
+        }
+        //
+        String[] linesArray = origContent.split("\n");
+        int lineNum = linesArray.length;
+        //
+        for(String line : linesArray){
+            //
+            if(line.matches("^\\s*>\\s+.*")){
+                wholeMatchingNum += 1;
+            } else if(line.trim().isEmpty()){
+                wholeMatchingNum += 1;
+            }
+        }
+        // 匹配不需要翻译的code类型
+        if(wholeMatchingNum == lineNum){
+            match = true;
+        }
+
+        // 以GT开头,却不匹配的情况
+        return isGTStart  && !match;
     }
 
     private static boolean allAreHTML(String content) {

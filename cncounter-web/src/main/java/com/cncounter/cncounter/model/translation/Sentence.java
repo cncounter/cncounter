@@ -32,8 +32,12 @@ public class Sentence extends TranslationElement {
             this.setTranslationContent("");
             return;
         }
+        if(originalContent.length() > Paragraph.LEN_LIMIT){
+            this.setTranslationContent("长度超标,拒绝翻译!");
+            return;
+        }
         //
-        String dest = translationApi.translation(this.getOriginalContent());
+        String dest = translationApi.translation(originalContent);
         //
         this.setTranslationContent(dest);
     }
