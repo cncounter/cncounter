@@ -1,4 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	String uri = request.getRequestURI();
+	if(null != uri){
+		// 这里获取到的是 404.jsp,坑
+		if(uri.contains("?")){
+			int index = uri.indexOf("?");
+			uri = uri.substring(0, index);
+		}
+		if(uri.endsWith(".json")){
+			// 返回JSON
+%>
+{"actionvalue":"","clientaction":"","data":[],"errorcode":"0404","info":"404","meta":{},"status":0,"total":0}
+<%
+			// 不在继续往下执行
+			return;
+		}
+	}
+%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
