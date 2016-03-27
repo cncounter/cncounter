@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-	String uri = request.getRequestURI();
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+%><%@ page import="com.cncounter.cncounter.config.WebSiteConfig"
+%><%
+	String uri = (String) request.getAttribute(WebSiteConfig.KEY_ORIG_REQUEST_URI);
 	if(null != uri){
 		// 这里获取到的是 404.jsp,坑
 		if(uri.contains("?")){
@@ -9,8 +10,9 @@
 		}
 		if(uri.endsWith(".json")){
 			// 返回JSON
-%>
-{"actionvalue":"","clientaction":"","data":[],"errorcode":"0404","info":"404","meta":{},"status":0,"total":0}
+			request.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html; charset=UTF-8");
+%>{"actionvalue":"","clientaction":"","data":[],"errorcode":"0404","info":"404","meta":{},"status":0,"total":0}
 <%
 			// 不在继续往下执行
 			return;

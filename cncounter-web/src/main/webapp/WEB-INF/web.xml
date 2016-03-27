@@ -16,7 +16,15 @@
     </listener>	
 	<listener> 
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> 
-	</listener> 
+	</listener>
+	<filter>
+		<filter-name>PreProcessFilter</filter-name>
+		<filter-class>com.cncounter.cncounter.mvc.filter.PreProcessFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>PreProcessFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<!-- Druid,监控数据库,以及WEB访问连接信息 -->
 	<filter>
 		<filter-name>DruidWebStatFilter</filter-name>

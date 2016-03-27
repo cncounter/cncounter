@@ -7,7 +7,12 @@ import com.cncounter.util.string.StringNumberUtil;
 public class WebSiteConfig {
 
 	public static boolean DEBUG_MODE = false;
-	
+
+	/**
+	 * 原始请求URI
+	 */
+	public static String KEY_ORIG_REQUEST_URI = "_ORIG_REQUEST_URI";
+	public static String KEY_ORIG_REQUEST_URL = "_ORIG_REQUEST_URL";
 	//
 	public static void init(Map<String, String> initOptions){
 		if(null == initOptions || initOptions.isEmpty()){
