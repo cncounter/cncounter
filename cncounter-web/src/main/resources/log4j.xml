@@ -17,9 +17,12 @@
 		</layout>
 	</appender>
 	<!-- Application Loggers -->
-	<logger name="com.cncounter">
-		<level value="DEBUG" />
-	</logger>
+    <logger name="com.cncounter">
+        <level value="DEBUG" />
+    </logger>
+    <logger name="org.springframework">
+        <level value="WARN" />
+    </logger>
 	<!-- Root Logger -->
 	<root>
 		<level value="info"></level>
