@@ -1,7 +1,9 @@
 package com.cncounter.cncounter.dao.api.vote;
 
 import com.cncounter.cncounter.model.vote.VoteRecord;
+import org.springframework.stereotype.Repository;
 
+@Repository("oldVoteRecordMapper")
 public interface VoteRecordMapper {
     int deleteByPrimaryKey(Integer id);
 

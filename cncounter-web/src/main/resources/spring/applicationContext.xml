@@ -7,7 +7,7 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/aop 
-		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 		http://www.springframework.org/schema/security 
 		http://www.springframework.org/schema/security/spring-security-3.2.xsd
 		http://www.springframework.org/schema/beans 
@@ -88,14 +88,13 @@
 		<property name="configLocation" value="classpath:spring/MybatisMapConfig.xml"></property>
 		<!-- 表示在包或所有子目录中，以 *Mapper.xml结尾所有文件 -->
 		<property name="mapperLocations">
-			<value>
-                classpath:com/cncounter/**/*Mapper.xml
+			<value>classpath*:com/cncounter/**/*Mapper.xml
             </value>
 		</property>
 	</bean>
 	<!-- 自动扫描下面的组件, 接口上需要注解 @Component("bean的id") -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.cncounter.cncounter.dao.api" />
+		<property name="basePackage" value="com.cncounter.cncounter.dao.api,com.cncounter.manager.dao.mysql" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 

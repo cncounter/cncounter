@@ -1,7 +1,9 @@
 package com.cncounter.cncounter.dao.api.user;
 
 import com.cncounter.cncounter.model.user.User;
+import org.springframework.stereotype.Repository;
 
+@Repository("oldUserMapper")
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 

@@ -1,7 +1,9 @@
 package com.cncounter.cncounter.dao.api.hotword;
 
 import com.cncounter.cncounter.model.hotword.HotWord;
+import org.springframework.stereotype.Repository;
 
+@Repository("oldHotWordMapper")
 public interface HotWordMapper {
     int deleteByPrimaryKey(Integer id);
 

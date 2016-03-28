@@ -3,7 +3,9 @@ package com.cncounter.cncounter.dao.api.other;
 import java.util.List;
 
 import com.cncounter.cncounter.model.other.Favorite;
+import org.springframework.stereotype.Repository;
 
+@Repository("oldFavoriteMapper")
 public interface FavoriteMapper {
 
     int insert(Favorite record);
