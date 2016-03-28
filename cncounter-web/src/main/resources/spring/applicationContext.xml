@@ -22,7 +22,9 @@
 	<!-- Activates annotation-based bean configuration -->
 	<context:annotation-config />
 	<!-- Scans for application @Components to deploy -->
-	<context:component-scan base-package="com.cncounter.cncounter" />
+	<context:component-scan base-package="com.cncounter">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
 	<!-- 引入属性文件 -->
 	<context:property-placeholder
@@ -86,8 +88,9 @@
 		<property name="configLocation" value="classpath:spring/MybatisMapConfig.xml"></property>
 		<!-- 表示在包或所有子目录中，以 *Mapper.xml结尾所有文件 -->
 		<property name="mapperLocations">
-			<value>classpath:com/cncounter/cncounter/dao/mysql/**/*Mapper.xml
-			</value>
+			<value>
+                classpath:com/cncounter/**/*Mapper.xml
+            </value>
 		</property>
 	</bean>
 	<!-- 自动扫描下面的组件, 接口上需要注解 @Component("bean的id") -->

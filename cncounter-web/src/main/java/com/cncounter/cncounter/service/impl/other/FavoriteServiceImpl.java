@@ -1,16 +1,15 @@
 package com.cncounter.cncounter.service.impl.other;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.cncounter.cncounter.dao.api.other.FavoriteMapper;
 import com.cncounter.cncounter.model.other.Favorite;
 import com.cncounter.cncounter.service.api.other.FavoriteService;
 import com.cncounter.cncounter.service.impl.base.ServiceImplBase;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-@Service
+import java.util.List;
+
+@Service("oldFavoriteServiceImpl")
 public class FavoriteServiceImpl extends ServiceImplBase implements FavoriteService {
 
 	@Autowired

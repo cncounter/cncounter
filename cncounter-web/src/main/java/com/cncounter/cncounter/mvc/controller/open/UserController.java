@@ -5,15 +5,13 @@ import com.cncounter.cncounter.mvc.controller.base.ControllerBase;
 import com.cncounter.cncounter.mvc.msg.JSONMessage;
 import com.cncounter.util.string.StringNumberUtil;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Controller
+@Controller("oldUserController")
 public class UserController extends ControllerBase {
 
 	@RequestMapping(value = "/openapi/signup.json")

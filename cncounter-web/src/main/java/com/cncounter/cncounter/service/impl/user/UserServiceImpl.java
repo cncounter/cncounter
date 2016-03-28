@@ -1,18 +1,17 @@
 package com.cncounter.cncounter.service.impl.user;
 
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.cncounter.cncounter.dao.api.user.UserMapper;
 import com.cncounter.cncounter.model.user.User;
 import com.cncounter.cncounter.service.api.user.UserService;
 import com.cncounter.cncounter.service.impl.base.ServiceImplBase;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
 
 
-@Service
+@Service("oldUserServiceImpl")
 public class UserServiceImpl extends ServiceImplBase implements UserService {
 
 	@Autowired
