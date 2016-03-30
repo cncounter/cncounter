@@ -368,29 +368,26 @@ public class Paragraph extends TranslationElement {
         // 取最大值
         int theLastIndex = -1;
 
-        String[] seps = {".", "?", ":", ","};
-
+        // \n 优先级高
+        // 按优先级
+        String[] seps = {"\n", ".", "?", ":", ",", " "};
         //
-        for(String sep : seps){
+        for(int i = 0; i < seps.length; i++){
+            String sep = seps[i];
             int lastIndex = text.lastIndexOf(sep);
             if(lastIndex > theLastIndex){
                 theLastIndex = lastIndex;
+                return theLastIndex; // 直接返回
             }
         }
 
-        if(theLastIndex < 0){
-            // 使用空格
-            int lastIndex = text.lastIndexOf(" ");
-            if(lastIndex > theLastIndex){
-                theLastIndex = lastIndex;
-            }
-        }
-
-        // \n 优先级高
-        int lastIndex_n = text.lastIndexOf("\n");
-        if(lastIndex_n > 1){
-            theLastIndex = lastIndex_n;
-        }
+//        if(theLastIndex < 0){
+//            // 使用空格
+//            int lastIndex = text.lastIndexOf(" ");
+//            if(lastIndex > theLastIndex){
+//                theLastIndex = lastIndex;
+//            }
+//        }
 
         return theLastIndex;
 
