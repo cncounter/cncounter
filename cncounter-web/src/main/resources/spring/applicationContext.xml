@@ -60,7 +60,7 @@
 		<property name="logAbandoned" value="true" />
 		<property name="filters" value="config,mergeStat" />
 		<!-- 提示Druid数据源需要对数据库密码进行解密 -->
-		<property name="connectionProperties" value="config.decrypt=true" />
+		<property name="connectionProperties" value="config.decrypt=${config.decrypt}" />
 		<!-- 打开PSCache，并且指定每个连接上PSCache的大小 
 			Oracle，则把poolPreparedStatements配置为true;
 			mysql可以配置为false,分库分表较多的数据库，建议配置为false
