@@ -69,10 +69,17 @@ function debug(obj) {
 // 解析JSON字符串为对象
 function parseJSON2Object(text){
 	var object = null;
-	if(window["JSON"]){
-		object = JSON.parse(text) || {};
-	} else { // IE6, IE7
-   		object = eval("("+ text + ")") || {};
+	if(!text){
+		return object;
+	}
+	if(text.toString && text === text.toString()){
+		if(window["JSON"]){
+			object = JSON.parse(text) || {};
+		} else { // IE6, IE7
+			object = eval("("+ text + ")") || {};
+		}
+	} else {
+		object = text;
 	}
 	return object;
 };
