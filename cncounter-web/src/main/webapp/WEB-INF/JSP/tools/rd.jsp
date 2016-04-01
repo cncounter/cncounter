@@ -5,20 +5,16 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<title>二维码生成 - CN计数-cncounter</title>
+	<title>短链接生成 - CN计数cncounter</title>
 	<jsp:include page="/common/cssjs.jsp"></jsp:include>
 </head>
 <body>
 	<jsp:include page="/common/header.jsp"></jsp:include>
 	<div class="container-fluid">
 		<div class="content_left">
-			<p class="h1">二维码在线生成</p>
+			<p class="h1">CN计数-短链接在线生成</p>
 			<div>
 				<form id="input_form" action="<%=basePath %>qrcode/ajax/genqrcode.json" method="post">
-					宽: <input tabindex="1" name="width" name="width" value="300" > px
-					<br/>
-					高: <input tabindex="2" name="height" name="height" value="300" > px
-					<br/>
 					<span>请输入需要转换的内容:</span>
 					<br/>
 					<textarea tabindex="3" id="content" name="content" rows="8" cols="36"></textarea>

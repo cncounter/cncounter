@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<title>${advisetitle} - 中国计数cncounter</title>
+	<title>${advisetitle} - CN计数-cncounter</title>
 	<jsp:include page="/common/cssjs.jsp"></jsp:include>
 </head>
 <body>

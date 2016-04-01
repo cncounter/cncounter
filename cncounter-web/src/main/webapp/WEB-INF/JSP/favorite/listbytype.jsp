@@ -28,7 +28,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<title>收藏夹_<%=type %> - 中国计数cncounter</title>
+	<title>收藏夹_<%=type %> - CN计数-cncounter</title>
 	<jsp:include page="/common/cssjs.jsp"></jsp:include>
 </head>
 <body>
