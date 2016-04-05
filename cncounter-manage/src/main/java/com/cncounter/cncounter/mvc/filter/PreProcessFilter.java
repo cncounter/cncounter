@@ -31,7 +31,7 @@ public class PreProcessFilter implements Filter {
         try {
             preProcess(request, response, chain);
         } catch (Throwable e){
-            //
+            // throw new RuntimeException(e);
         }
         chain.doFilter(request,response);
     }

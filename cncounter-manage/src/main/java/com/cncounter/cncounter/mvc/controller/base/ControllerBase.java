@@ -2,15 +2,17 @@ package com.cncounter.cncounter.mvc.controller.base;
 
 
 import com.cncounter.cncounter.dao.redis.api.RedisBaseDAO;
-import com.cncounter.cncounter.model.user.User;
-import com.cncounter.util.string.StringNumberUtil;
+import com.cncounter.util.common.StringNumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
-import java.util.*;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 
 /**
@@ -138,73 +140,6 @@ public abstract class ControllerBase {
 		// 基于Redis的实现
 		return redisBaseDAO.getObject(name);
 	}
-	/**
-	 * 获取当前登录的用户
-	 * @param request
-	 * @return
-	 */
-	public  User getLoginUser(HttpServletRequest request) {
-		User user = null;
-		Object obj = getSessionAttribute(request, SESSION_USER_KEY);
-		if(obj instanceof User){
-			user = (User)obj;
-		}
-		return user;
-	}
-	
-	/**
-	 * 在线用户; 弱引用,不影响Session的回收; 
-	 */
-	private static WeakHashMap<HttpSession, User> onlineUsers = new WeakHashMap<HttpSession, User>(100);
-	/**
-	 * 获取在线用户数量
-	 * @return
-	 */
-	public static int getOnlineUserCount(){
-		if(null != onlineUsers){
-			int count = onlineUsers.entrySet().size();
-			if(count < 1){
-				count = 1;
-			}
-			return count;
-		} else {
-			return 1;
-		}
-	}
-	/**
-	 * 添加在线用户,主要由 LoginController使用.
-	 * @param request
-	 * @param user
-	 */
-	protected static void addOnlineUser(HttpServletRequest request, User user) {
-		if(null == request || null == user){
-			return;
-		}
-		//
-		if(null != onlineUsers){
-			//
-			HttpSession session = request.getSession(true);
-			// 添加
-			onlineUsers.put(session, user);
-		}
-	}
-	/**
-	 * 删除在线用户
-	 * @param request
-	 */
-	protected static void removeOnlineUser(HttpServletRequest request) {
-		if(null == request){
-			return;
-		}
-		//
-		if(null != onlineUsers){
-			//
-			HttpSession session = request.getSession(true);
-			// 添加
-			onlineUsers.remove(session);
-		}
-	}
-	
 	/**
 	 * 获取 上下文 path, 返回如 "/cncounter"
 	 * @param request

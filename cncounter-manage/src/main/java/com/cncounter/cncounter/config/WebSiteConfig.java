@@ -2,8 +2,6 @@ package com.cncounter.cncounter.config;
 
 import java.util.Map;
 
-import com.cncounter.util.string.StringNumberUtil;
-
 public class WebSiteConfig {
 
 	public static boolean DEBUG_MODE = false;
@@ -20,7 +18,7 @@ public class WebSiteConfig {
 		}
 		// 调试模式
 		String debugmodeStr = initOptions.get("debugmode");
-		if(StringNumberUtil.notEmpty(debugmodeStr)){
+		if(null != (debugmodeStr) ){
 			boolean debugmode =  Boolean.parseBoolean(debugmodeStr);
 			DEBUG_MODE = debugmode;
 		}
