@@ -1,30 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="common/basePath.jsp"%>
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-	<title>CN计数器 - CNCounter</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>CNC-后台管理系统</title>
+    <link href="static/ext/resources/css/ext-all-neptune.css" rel="stylesheet">
+    <link href="static/ext/ux/portal/portal.css" rel="stylesheet">
+    <link href="static/ext/ux/grid/css/GridFilters.css" rel="stylesheet">
+    <link href="static/ext/ux/css/TabScrollerMenu.css" rel="stylesheet">
+    <link href="static/ext/ux/form/BoxSelect.css" rel="stylesheet">
+    <link href="static/skin/css/fssy.css" rel="stylesheet">
+    <link href="static/ext/ux/css/selfDefineStyle.css" rel="stylesheet">
+    <link href="static/skin/default/css/icon.css" rel="stylesheet">
+
+
+    <script src="static/ext/ext-all.js" type="text/javascript"></script>
+    <script src="static/ext/locale/ext-lang-zh_CN.js" type="text/javascript"></script>
+    <script src="static/app.js" type="text/javascript"></script>
+    <script src="static/essm.js" type="text/javascript"></script>
+
+    <style>
+        #dragload
+        {
+            width: 296px;
+            height: 198px;
+
+            padding: 3px;
+            text-align: center;
+            margin: 0 0 2px 0;
+        }
+    </style>
 </head>
 <body>
-	<div class="container-fluid">
-		<div class="content_left">
-			<p class="h1">CN计数器</p>
-			<h2>
-				<a target="_blank" href="http://blog.cncounter.com/cncounter/">GitHub项目首页</a>
-			</h2>
-			<h2>
-				<a target="_self" href="./qrcode/input.php">实用小程序二维码生成</a>
-			</h2>
-			<h2>
-				<a target="_self" href="favorite/list/0.php">公共收藏夹</a>
-			</h2>
-			<h2>
-				<a target="_self" href="./advise/list.php">意见反馈</a>
-			</h2>
-			<h2>
-				<a target="_blank" href="https://github.com/cncounter/translation">CNCounter翻译文章</a>
-			</h2>
-		</div>
-	</div>
+<!--	background:#FFFFFF;  -->
 </body>
 </html>

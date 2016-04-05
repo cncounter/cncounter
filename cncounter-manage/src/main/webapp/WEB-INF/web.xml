@@ -105,12 +105,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
-		<url-pattern>*.php</url-pattern>
-		<url-pattern>*.page</url-pattern>
-		<url-pattern>*.json</url-pattern>
-		<url-pattern>*.jpeg</url-pattern>
-		<url-pattern>*.photo</url-pattern>
-		<url-pattern>*.action</url-pattern>
+		<url-pattern>/rest</url-pattern>
 	</servlet-mapping>
 	
 	<session-config>  
@@ -122,7 +117,7 @@
 		<location>/404.jsp</location>
 	</error-page>
 	<!-- 默认欢迎页面 -->
-    <welcome-file-list>  
-        <welcome-file>index.php</welcome-file>  
+    <welcome-file-list>
+        <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
