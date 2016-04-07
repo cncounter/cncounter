@@ -16,14 +16,44 @@
 		<property name="prefix"><value>/WEB-INF/JSP/</value></property>
 		<property name="suffix"><value>.jsp</value></property>
 	</bean>
-	
+
+    <!--  文件上传处理器,申明的id必须为multipartResolver  -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--
+            允许上传的最大文件大小，100M字节。当设为-1时表示无限制，默认是-1,
+        -->
+        <property name="maxUploadSize" value="102400000" />
+        <!-- 在文件上传时允许写到内存中的最大值，以字节为单位计算，默认是10240		-->
+        <property name="maxInMemorySize" value="4096" />
+        <!-- 上传文件时的临时目录，默认是Servlet容器的临时目录 -->
+    </bean>
 	<!-- Jackson转换器 -->
 	<bean id="mappingJacksonHttpMessageConverter"
-		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" >
+        <property name="objectMapper">
+            <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                <property name="dateFormat">
+                    <bean class="java.text.SimpleDateFormat">
+                        <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss"/>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+    </bean>
 	<!-- enum枚举值的引用方法 -->
 	<bean id="DisableCircularReferenceDetect" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" >
 		<property name="staticField" value="com.alibaba.fastjson.serializer.SerializerFeature.DisableCircularReferenceDetect"></property>
 	</bean>
+    <bean id="WriteNullStringAsEmpty" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" >
+        <property name="staticField" value="com.alibaba.fastjson.serializer.SerializerFeature.WriteNullStringAsEmpty"></property>
+    </bean>
+    <bean id="WriteNullNumberAsZero" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" >
+        <property name="staticField" value="com.alibaba.fastjson.serializer.SerializerFeature.WriteNullNumberAsZero"></property>
+    </bean>
+    <bean id="WriteMapNullValue" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" >
+        <property name="staticField" value="com.alibaba.fastjson.serializer.SerializerFeature.WriteMapNullValue"></property>
+    </bean>
 	<!-- fastjson转换器 -->
 	<bean id="fastJsonHttpMessageConverter"
 		class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter" >
@@ -35,9 +65,13 @@
             <array>
 				<!-- 避免默认的循环引用替换 -->
             	<ref bean="DisableCircularReferenceDetect" />
+                <ref bean="WriteNullStringAsEmpty" />
+                <ref bean="WriteNullNumberAsZero" />
+                <ref bean="WriteMapNullValue" />
             </array>
         </property>
 	</bean>
+    <!--
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">
 			<list>
@@ -45,4 +79,13 @@
 			</list>
 		</property>
 	</bean>
+	-->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="fastJsonHttpMessageConverter" />
+            </list>
+        </property>
+    </bean>
 </beans>
