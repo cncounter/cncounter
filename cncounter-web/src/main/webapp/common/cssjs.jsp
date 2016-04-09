@@ -36,6 +36,7 @@
 	}
 %>
 
+	<script src="<%=basePath %>static/layer/layer.js?v=1"></script>
 	<!-- 本站的JS工具类 -->
 	<script src="<%=basePath %>static/js/cncounter-util.js?v=1"></script>
 	<!-- 本站CSS样式 -->
