@@ -104,7 +104,7 @@
                     btn.up('form').getForm().reset();
                     //window.location.href="./index.html";
                     //单点登录
-                    window.location.href="./admin.html";
+                    window.location.href="./index.jsp";
                 }
             }],
             listeners :{
@@ -147,14 +147,14 @@
             function formLogin(){
                 //
                 form.form.submit({
-                    url :'rest/login/adoLogin.json',
+                    url :'test/rest/main/doLogin.json',
                     method :'POST',
                     timeout: 10*1000,
                     success: function(form, action) {
 
                         //window.location.href="./index.html";
                         //单点登录
-                        window.location.href="./admin.html";
+                        window.location.href="./";
                     },
                     //失败
                     failure: function(form, action) {
