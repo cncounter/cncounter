@@ -147,7 +147,7 @@
             function formLogin(){
                 //
                 form.form.submit({
-                    url :'test/rest/main/doLogin.json',
+                    url :'static/test/rest/main/doLogin.json',
                     method :'POST',
                     timeout: 10*1000,
                     success: function(form, action) {

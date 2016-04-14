@@ -217,13 +217,7 @@ Ext.define("ESSM.view.MainView", {
 				handler : function() {
 					Ext.MessageBox.confirm('提示','是否确定退出？', function(btn){
 						if(btn=='yes'){
-                            if("admin"==ESSM.user.name){
-                                window.location.href= 'rest/login/logout.do';
-                            }else{
-                                //打包一定要改这个ip
-                                //window.location.href= '${cas.url}logout';
-                            }
-                            window.location.href= 'rest/login/logout.do';
+                            window.location.href= './login.jsp';
 						}
 					});
 				}

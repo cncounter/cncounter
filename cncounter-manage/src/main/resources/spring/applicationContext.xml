@@ -28,9 +28,9 @@
 
 	<!-- 引入属性文件 -->
 	<context:property-placeholder
-		ignore-unresolvable="true" location="classpath:duapp/druid.properties" />
+		ignore-unresolvable="true" location="classpath:config/mysql.properties" />
 	<context:property-placeholder
-		ignore-unresolvable="true" location="classpath:duapp/redis.properties" />
+		ignore-unresolvable="true" location="classpath:config/redis.properties" />
 	<!-- 配置Druid数据源 -->
 	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">

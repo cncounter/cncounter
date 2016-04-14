@@ -37,23 +37,25 @@
     <!-- 这里filter-name必须对应security.xml中定义的<bean id="shiroFilter"/> -->
     <!-- 使用[/*]匹配所有请求,保证所有的可控请求都经过Shiro的过滤 -->
     <!-- 通常会将此filter-mapping放置到最前面(即其他filter-mapping前面),以保证它是过滤器链中第一个起作用的 -->
-    <filter>
-        <filter-name>shiroFilter</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-        <init-param>
-            <!-- 该值缺省为false,表示生命周期由SpringApplicationContext管理,设置为true则表示由ServletContainer管理 -->
-            <param-name>targetFilterLifecycle</param-name>
-            <param-value>true</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>shiroFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-        <dispatcher>FORWARD</dispatcher>
-        <dispatcher>INCLUDE</dispatcher>
-        <dispatcher>ERROR</dispatcher>
-    </filter-mapping>
+
+    <!--<filter>-->
+        <!--<filter-name>shiroFilter</filter-name>-->
+        <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
+        <!--<init-param>-->
+            <!--&lt;!&ndash; 该值缺省为false,表示生命周期由SpringApplicationContext管理,设置为true则表示由ServletContainer管理 &ndash;&gt;-->
+            <!--<param-name>targetFilterLifecycle</param-name>-->
+            <!--<param-value>true</param-value>-->
+        <!--</init-param>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>shiroFilter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+        <!--<dispatcher>REQUEST</dispatcher>-->
+        <!--<dispatcher>FORWARD</dispatcher>-->
+        <!--<dispatcher>INCLUDE</dispatcher>-->
+        <!--<dispatcher>ERROR</dispatcher>-->
+    <!--</filter-mapping>-->
+
 
 	<!-- Druid,监控数据库,以及WEB访问连接信息 -->
 	<filter>
