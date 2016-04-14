@@ -94,7 +94,7 @@
 	</bean>
 	<!-- 自动扫描下面的组件, 接口上需要注解 @Component("bean的id") -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.cncounter.cncounter.dao.api,com.cncounter.manager.dao.mysql" />
+		<property name="basePackage" value="com.cncounter.manage.dao.api,com.cncounter.manager.dao.mysql" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 
@@ -125,7 +125,7 @@
 		scope="prototype">
 		<property name="patterns">
 			<list>
-				<value>com.cncounter.cncounter.service.impl.*</value>
+				<value>com.cncounter.manage.service.impl.*</value>
 			</list>
 		</property>
 	</bean>

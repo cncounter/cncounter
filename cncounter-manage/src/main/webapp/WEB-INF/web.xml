@@ -26,7 +26,7 @@
 
 	<filter>
 		<filter-name>PreProcessFilter</filter-name>
-		<filter-class>com.cncounter.cncounter.mvc.filter.PreProcessFilter</filter-class>
+		<filter-class>com.cncounter.manage.mvc.filter.PreProcessFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>PreProcessFilter</filter-name>

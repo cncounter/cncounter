@@ -1,4 +1,4 @@
-package com.cncounter.cncounter.config;
+package com.cncounter.manage.config;
 
 import java.util.Map;
 

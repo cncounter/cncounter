@@ -1,7 +1,7 @@
-package com.cncounter.cncounter.mvc.controller.base;
+package com.cncounter.manage.mvc.controller.base;
 
 
-import com.cncounter.cncounter.dao.redis.api.RedisBaseDAO;
+import com.cncounter.manage.dao.redis.api.RedisBaseDAO;
 import com.cncounter.util.common.StringNumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 

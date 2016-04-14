@@ -1,4 +1,4 @@
-package com.cncounter.cncounter.dao.redis.api;
+package com.cncounter.manage.dao.redis.api;
 
 import java.io.Serializable;
 

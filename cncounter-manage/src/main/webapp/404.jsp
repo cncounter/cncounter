@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-%><%@ page import="com.cncounter.cncounter.config.WebSiteConfig"
+%><%@ page import="com.cncounter.manage.config.WebSiteConfig"
 %><%
 	String uri = (String) request.getAttribute(WebSiteConfig.KEY_ORIG_REQUEST_URI);
 	if(null != uri){

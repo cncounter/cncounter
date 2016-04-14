@@ -1,6 +1,6 @@
-package com.cncounter.cncounter.mvc.controller.base;
+package com.cncounter.manage.mvc.controller.base;
 
-import com.cncounter.cncounter.mvc.msg.JSONMessage;
+import com.cncounter.manage.mvc.msg.JSONMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;

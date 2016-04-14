@@ -1,6 +1,6 @@
-package com.cncounter.cncounter.mvc.filter;
+package com.cncounter.manage.mvc.filter;
 
-import com.cncounter.cncounter.config.WebSiteConfig;
+import com.cncounter.manage.config.WebSiteConfig;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

@@ -1,4 +1,4 @@
-package com.cncounter.cncounter.mvc.msg;
+package com.cncounter.manage.mvc.msg;
 
 
 import java.util.ArrayList;
