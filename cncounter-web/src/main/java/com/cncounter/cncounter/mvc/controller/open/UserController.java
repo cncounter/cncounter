@@ -1,6 +1,5 @@
 package com.cncounter.cncounter.mvc.controller.open;
 
-import com.cncounter.cncounter.model.user.User;
 import com.cncounter.cncounter.mvc.controller.base.ControllerBase;
 import com.cncounter.cncounter.mvc.msg.JSONMessage;
 import com.cncounter.util.string.StringNumberUtil;
@@ -57,11 +56,11 @@ public class UserController extends ControllerBase {
 		}
 		// 登录服务
 		// 获取用户
-		User user = new User();
+		//User user = new User();
 		//
 		String token = getUUID();
 		//
-		saveToCache("user:token:"+token, user);
+		//saveToCache("user:token:"+token, user);
 
 		//
 		//message.setTotal(total);
