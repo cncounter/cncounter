@@ -67,11 +67,6 @@
 			</h2>
 			<hr/>
 		   	<h1>
-		   		<a target="_blank" href="./testmysql.jsp">
-		   		测试MySQL
-		   		</a>
-		   	</h1>
-		   	<h1>
 		   		<a target="_blank" href="./testredis.jsp">
 		   		测试redis
 		   		</a>
