@@ -30,5 +30,5 @@ generator_log*
 /cncounter/target/*
 /cncounter-web/target/*
 /cncounter-manage/target/*
-/cncounter-manage/src/main/resources/rebel.xml
-/cncounter-web/src/main/resources/rebel.xml
+rebel.xml
+mvn_log_*
