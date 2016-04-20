@@ -7,93 +7,115 @@ public class Favorite implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
-
-    private String userid;
-
+    // 自增ID
+    private Long id;
+    // 用户ID
+    private String userId;
+    // 类别,0为首页通用
     private Integer type;
-
+    // 标题
     private String title;
-
+    // 内容
     private String content;
-
+    // 链接
     private String url;
+    // 创建者ID
+    private Long createId;
+    // 更新者ID
+    private Long updateId;
+    // 创建时间
+    private Date createTime;
+    // 更新时间
+    private Date updateTime;
+    // 乐观锁版本号
+    private Integer version;
 
-    private String createuserid;
-
-    private Date createtime;
-
-    private Integer gen;
-
-    public Integer getId() {
-        return id;
+    public void setId(Long value) {
+        this.id = value;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Long getId() {
+        return this.id;
     }
 
-    public String getUserid() {
-        return userid;
+    public void setUserId(String value) {
+        this.userId = value;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid == null ? null : userid.trim();
+    public String getUserId() {
+        return this.userId;
+    }
+
+    public void setType(Integer value) {
+        this.type = value;
     }
 
     public Integer getType() {
-        return type;
+        return this.type;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setTitle(String value) {
+        this.title = value;
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
+    public void setContent(String value) {
+        this.content = value;
     }
 
     public String getContent() {
-        return content;
+        return this.content;
     }
 
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
+    public void setUrl(String value) {
+        this.url = value;
     }
 
     public String getUrl() {
-        return url;
+        return this.url;
     }
 
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
+    public void setCreateId(Long value) {
+        this.createId = value;
     }
 
-    public String getCreateuserid() {
-        return createuserid;
+    public Long getCreateId() {
+        return this.createId;
     }
 
-    public void setCreateuserid(String createuserid) {
-        this.createuserid = createuserid == null ? null : createuserid.trim();
+    public void setUpdateId(Long value) {
+        this.updateId = value;
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Long getUpdateId() {
+        return this.updateId;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(Date value) {
+        this.createTime = value;
     }
 
-    public Integer getGen() {
-        return gen;
+    public Date getCreateTime() {
+        return this.createTime;
     }
 
-    public void setGen(Integer gen) {
-        this.gen = gen;
+    public void setUpdateTime(Date value) {
+        this.updateTime = value;
     }
+
+    public Date getUpdateTime() {
+        return this.updateTime;
+    }
+
+    public void setVersion(Integer value) {
+        this.version = value;
+    }
+
+    public Integer getVersion() {
+        return this.version;
+    }
+
 }
