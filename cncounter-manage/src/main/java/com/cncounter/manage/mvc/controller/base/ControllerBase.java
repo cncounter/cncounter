@@ -2,17 +2,16 @@ package com.cncounter.manage.mvc.controller.base;
 
 
 import com.cncounter.manage.dao.redis.api.RedisBaseDAO;
-import com.cncounter.util.common.StringNumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.beans.PropertyDescriptor;
 import java.io.Serializable;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.*;
 
 
 /**
@@ -178,27 +177,29 @@ public abstract class ControllerBase {
 	protected String getStringValue(HttpServletRequest request, String name){
 		// 1. 获取直接参数
 		String value = getParameter(request, name);
-		if(StringNumberUtil.notEmpty(value)){
+		if(notEmpty(value)){
 			return value;
 		}
 		// 2. 获取 cookie
 		value = getCookie(request, name);
-		if(StringNumberUtil.notEmpty(value)){
+		if(notEmpty(value)){
 			return value;
 		}
-		// 3. 获取session
-//		Object v = getSessionValue(request, name);
-//		if(StringNumberUtil.notEmpty(v)){
-//			return String.valueOf(v);
-//		}
-		// 4. 获取缓存
-//		v = getFromCache(name);
-//		if(StringNumberUtil.notEmpty(v)){
-//			return String.valueOf(v);
-//		}
 		//
 		return value;
 	}
+    /**
+     * 不为empty(空)
+     * @param str
+     * @return
+     */
+    public static boolean notEmpty(Object str){
+        boolean result = false;
+        if(null != str && !str.toString().trim().isEmpty()){
+            result = true;
+        }
+        return result;
+    }
 
 	public static String getCookie(HttpServletRequest request, String name){
 		Map<String, String> cookieMap = getCookies(request);
@@ -280,9 +281,153 @@ public abstract class ControllerBase {
 	protected static int getParameterInt(HttpServletRequest request, String name, int defValue){
 		String value = request.getParameter(name);
 		//
-		return StringNumberUtil.parseInt(value, defValue);
+		return parseInt(value, defValue);
 	}
 
+
+    public static void processPageParams(Map<String, Object> params){
+        // 此段代码可以迁移到工具类之中
+        if(null == params){
+            return;
+        }
+        Integer pageSize = 20;
+        Integer page = 0;
+        Object _pageSize = params.get("pageSize");
+        Object _page = params.get("page");
+        if(_pageSize instanceof Integer){
+            pageSize = (Integer)_pageSize;
+        } else if(_pageSize instanceof String){
+            pageSize = parseInt(_pageSize.toString(), pageSize);
+        }
+        if(_page instanceof Integer){
+            page = (Integer)_page;
+        } else if(_page instanceof String){
+            page = parseInt(_page.toString(), page);
+        }
+        //
+        Integer start = page * pageSize;
+        //
+        params.put("_start", start);
+        params.put("_pageSize", pageSize);
+    }
+
+    public static int parseInt(String str, int defValue){
+        int result = defValue;
+        if(null != str && str.matches("^[\\+\\-]?\\d+$")){
+            str = str.replaceAll("^\\+", "");
+            result = Integer.parseInt(str);
+        }
+        return result;
+    }
+
+
+    /**
+     * 将 Map 的值设置给Bean
+     * @param map
+     * @param clazz
+     * @return
+     */
+    public static Object map2Bean(Map<String, ? extends Object> map, Class<?> clazz){
+        if(null == clazz || clazz.isArray()){
+            return null;
+        }
+        Object bean = null;
+        try {
+            bean = clazz.newInstance();
+            map2Bean(map, bean);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return bean;
+    }
+    /**
+     * 将Map封装为bean
+     * @param paramMap
+     * @param target
+     * @return
+     */
+    public static void map2Bean(Map<String, ? extends Object> paramMap, Object target){
+        if(null == paramMap || null == target || paramMap.isEmpty()){
+            return;
+        }
+        if(target instanceof Map<?,?> || target instanceof List<?>){
+            return; // 不处理 Map,List 以及。。。
+        }
+        Class<?> targetClazz = target.getClass();
+        // 依赖 Spring 的 BeanUtils
+        PropertyDescriptor[] targetPds = org.springframework.beans.BeanUtils.getPropertyDescriptors(targetClazz);
+        //
+        for (PropertyDescriptor targetPd : targetPds) {
+            Method writeMethod = targetPd.getWriteMethod();
+            if (null == writeMethod) { continue; }
+            //
+            Class<?>[] pClazz = writeMethod.getParameterTypes();
+            if(null == pClazz || pClazz.length != 1){
+                // 如果不是只有1个参数
+                continue;
+            }
+            // 获取KEY和Value
+            String keyName = targetPd.getName();
+            Object value = paramMap.get(keyName);
+            // 对比类型,如果类型不同,则进行解析转换, 主要是String转换
+            value = tran2TargetType(value, pClazz[0]);
+            if(null == value){ continue;}
+
+            try {
+                if (!Modifier.isPublic(writeMethod.getDeclaringClass().getModifiers())) {
+                    writeMethod.setAccessible(true);
+                }
+                // 执行 set 方法
+                writeMethod.invoke(target, value);
+            } catch (Throwable e) {
+                throw  new RuntimeException(e);
+            }
+
+        }
+    }
+    public static Object tran2TargetType(Object value, Class<?> pClazz) {
+        Object result = null;
+        // 为 null
+        if(null == value || null == pClazz){
+            return  result;
+        }
+        // 同一类型,不需要转换
+        if(pClazz.isInstance(value)){
+            result = value;
+            return result;
+        }
+        // 如果值不是为 String
+        if(String.class != value.getClass()){
+            // 暂时没有转换器, 留 null
+            return  result;
+        }
+        //
+        String str = value.toString();
+        if (pClazz == int.class || pClazz == Integer.class) {
+            result = Integer.parseInt(str);
+        } else if (pClazz == Double.class || pClazz == double.class) {
+            result = Double.parseDouble(str);
+        } else if (pClazz == Float.class  || pClazz == float.class) {
+            result = Float.parseFloat(str);
+        } else if (pClazz == Long.class || pClazz == long.class) {
+            result = Long.parseLong(str);
+        } else if (pClazz == Boolean.class  || pClazz == boolean.class) {
+            result = Boolean.parseBoolean(str);
+        } else if (pClazz == Short.class || pClazz == short.class) {
+            result = Short.parseShort(str);
+        } else if (pClazz == Date.class) {
+            result = parseStrToDate(str);
+        } else if (pClazz == String.class) {
+            result = str;
+        }
+        //
+        return  result;
+    }
+
+    private static Date parseStrToDate(String str) {
+        // 需要解析各种格式,或者统一规范
+        return null;
+    }
 
 	/**
 	 * 解析request中的参数Map
@@ -315,7 +460,7 @@ public abstract class ControllerBase {
 				if("".equals(paraValue) || "null".equals(paraValue) || "undefined".equals(paraValue)){
 					paraValue = "";
 				}
-				if(empty2null && StringNumberUtil.isEmpty(paraValue)){
+				if(empty2null && !notEmpty(paraValue)){
 					// 不设置值
 				} else {
 					map.put(paraName, paraValue);
