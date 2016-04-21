@@ -32,3 +32,4 @@ generator_log*
 /cncounter-manage/target/*
 rebel.xml
 mvn_log_*
+/cncounter-manage/*.cmd
