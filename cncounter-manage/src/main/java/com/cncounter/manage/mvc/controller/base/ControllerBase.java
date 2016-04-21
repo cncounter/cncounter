@@ -302,7 +302,7 @@ public abstract class ControllerBase {
 		Map<String, String> map = new HashMap<String, String>();
 		//
 		if(null != request){
-			Enumeration<String> enumeration = request.getParameterNames();
+			Enumeration enumeration = request.getParameterNames();
 			// 遍历参数,其实有request的request.getParameterMap();但没泛型
 			while (enumeration.hasMoreElements()) {
 				String paraName = (String) enumeration.nextElement();
