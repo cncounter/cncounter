@@ -165,7 +165,7 @@ public class JSONMessage {
         return message;
     }
 	public String getInfo() {
-		return info;
+		return getMessage();
 	}
 
     public JSONMessage setMessage(String message) {
