@@ -11,7 +11,7 @@ Ext.define("ESSM.view.MainView", {
 	items : [{
 		xtype : 'panel',
 		id : 'mainTop',
-		height : 120,
+		height : 50,
 		border:0,
 		bodyStyle: {
 			background: '#ffc',
@@ -54,7 +54,7 @@ Ext.define("ESSM.view.MainView", {
 				pack: 'end',
 				align: 'middle'
 			},
-			items:[/*{
+			items:[{
 				xtype: 'button',
                 action: 'resetpwd',
 				iconCls : 'key',
@@ -206,7 +206,7 @@ Ext.define("ESSM.view.MainView", {
                     };
 
                 }
-			},*/
+			},
 
 
 
@@ -354,7 +354,7 @@ Ext.define('ESSM.view.ClickView',{
 		]
 	}),
 	tpl: Ext.create('Ext.XTemplate',
-		'<div><h1 style="text-align: center">欢迎使用紫丁香业务管理系统V1.0-CRM</h1></div>',
+		'<div><h1 style="text-align: center">欢迎使用CNC后台管理系统</h1></div>',
 		'<div style="float: left">',
 		'<tpl for=".">',
 		'<div id="{iconCls}" class="{iconCls} icons-item icons-hide">',
