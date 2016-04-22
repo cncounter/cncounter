@@ -44,6 +44,21 @@
       "children": null,
       "leaf": false,
       "expanded": false
+    },{
+      "id": 50000101,
+      "parentId": 50000,
+      "iconCls": "sysrole",
+      "sort": 1,
+      "code": "manage:QbDifficulty",
+      "name": "难度管理",
+      "text": "难度管理",
+      "checked": false,
+      "type": 1,
+      "status": 1,
+      "parentCode": "manage",
+      "children": null,
+      "leaf": false,
+      "expanded": false
     },
     {
       "id": 50000,
