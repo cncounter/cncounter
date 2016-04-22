@@ -30,6 +30,38 @@
   },
   "data": [
     {
+      "id": 50000100,
+      "parentId": 50000,
+      "iconCls": "sysrole",
+      "sort": 1,
+      "code": "manage:favorite",
+      "name": "收藏管理",
+      "text": "收藏管理",
+      "checked": false,
+      "type": 1,
+      "status": 1,
+      "parentCode": "manage",
+      "children": null,
+      "leaf": false,
+      "expanded": false
+    },
+    {
+      "id": 50000,
+      "parentId": 0,
+      "iconCls": "feed",
+      "sort": 1,
+      "code": "manage",
+      "name": "后台数据管理",
+      "text": "后台数据管理",
+      "checked": false,
+      "type": 1,
+      "status": 1,
+      "parentCode": null,
+      "children": null,
+      "leaf": false,
+      "expanded": false
+    },
+    {
       "id": 239,
       "parentId": 181,
       "iconCls": "add",
