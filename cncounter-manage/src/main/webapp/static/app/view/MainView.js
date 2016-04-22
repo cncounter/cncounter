@@ -344,13 +344,13 @@ Ext.define('ESSM.view.ClickView',{
 	store: Ext.create('Ext.data.Store',{
 		fields : ['iconCls','iconName'],
 		data : [
-			{'iconCls':'aim_asset','iconName':'我要购买'},
-			{'iconCls':'cim_open','iconName':'我要开户'},
-			{'iconCls':'aim_review','iconName':'产品审核'},
-			{'iconCls':'aim_publish','iconName':'产品发布'},
-			{'iconCls':'stm_performance','iconName':'我的业绩'},
-			{'iconCls':'stm_manager','iconName':'我的团队'},
-			{'iconCls':'order_tradeorder','iconName':'我的订单'}
+			{'iconCls':'sys_resource','iconName':'权限设置'},
+			{'iconCls':'sys_role','iconName':'角色设置'},
+			{'iconCls':'sys_user','iconName':'用户设置'},
+            {'iconCls':'sys_permission','iconName':'权限分配'},
+			{'iconCls':'sys_dict','iconName':'字典表维护'},
+            {'iconCls':'gb_article','iconName':'文章管理'},
+			{'iconCls':'gb_banner','iconName':'轮播管理'}
 		]
 	}),
 	tpl: Ext.create('Ext.XTemplate',
@@ -369,13 +369,13 @@ Ext.define('ESSM.view.ClickView',{
 	listeners:{
 		viewready:function(){
 			var menus  = [];
-			menus.push("aim_asset");
-			menus.push("cim_open");
-			menus.push("aim_review");
-			menus.push("aim_publish");
-			menus.push("stm_performance");
-			menus.push("stm_manager");
-			menus.push("order_tradeorder");
+			menus.push("sys_resource");
+			menus.push("sys_role");
+			menus.push("sys_user");
+			menus.push("gb_article");
+			menus.push("sys_permission");
+			menus.push("sys_dict");
+			menus.push("gb_banner");
 			Ext.Array.each(ESSM.resoures, function (item, index) {
 				for(var i=0;i<menus.length;i++){
 					var menurpc = menus[i].replace("_",":");

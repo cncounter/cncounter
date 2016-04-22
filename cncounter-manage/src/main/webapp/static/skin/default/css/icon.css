@@ -23,13 +23,13 @@
 .logger {background-image:url(../icons/myicons/logger.png)!important;}
 .banner {background-image:url(../icons/myicons/banner.png)!important;}
 .article {background-image:url(../icons/myicons/article.png)!important;}
-.aim_publish {background-image:url(../icons/myicons/aim_publish.png)!important;}
-.aim_review {background-image:url(../icons/myicons/aim_review.png)!important;}
-.order_tradeorder {background-image:url(../icons/myicons/order_tradeorder.png)!important;}
-.stm_manager {background-image:url(../icons/myicons/stm_manager.png)!important;}
-.stm_performance {background-image:url(../icons/myicons/stm_performance.png)!important;}
-.aim_asset {background-image:url(../icons/myicons/aim_asset.png)!important;}
-.cim_open {background-image:url(../icons/myicons/cim_open.png)!important;}
+.gb_article {background-image:url(../icons/myicons/aim_publish.png)!important;}
+.sys_dict {background-image:url(../icons/myicons/aim_review.png)!important;}
+.gb_banner {background-image:url(../icons/myicons/order_tradeorder.png)!important;}
+.sys_user {background-image:url(../icons/myicons/stm_manager.png)!important;}
+.sys_permission {background-image:url(../icons/myicons/stm_performance.png)!important;}
+.sys_resource {background-image:url(../icons/myicons/aim_asset.png)!important;}
+.sys_role {background-image:url(../icons/myicons/cim_open.png)!important;}
 
 .icons-item{float:left;width:200px;height: 190px; margin:0 20px;background:no-repeat center;}
 .icons-hide{ display:none;}
