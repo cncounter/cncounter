@@ -35,7 +35,7 @@ Ext.define("ESSM.view.manage.FavoriteGrid", {
 			xtype : 'authcbutton',
 			action :'delete',
 			iconCls : 'delete',
-			disabled : false,
+			disabled : true,
 			text : '删除'
 		}
 	],
