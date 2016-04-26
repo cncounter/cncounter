@@ -35,7 +35,7 @@ Ext.define("ESSM.view.manage.FavoriteGrid", {
 			xtype : 'authcbutton',
 			action :'delete',
 			iconCls : 'delete',
-			disabled : true,
+			disabled : false,
 			text : '删除'
 		}
 	],
@@ -45,7 +45,7 @@ Ext.define("ESSM.view.manage.FavoriteGrid", {
 					header: '自增ID', 
 					dataIndex: 'id', 
 					width: 120,
-					align:'center',
+					align:'left',
 					// hidden: true,
 					renderer : function(value, row, record) {
 						if(value) {
@@ -58,7 +58,7 @@ Ext.define("ESSM.view.manage.FavoriteGrid", {
 					header: '用户ID', 
 					dataIndex: 'userId', 
 					width: 120,
-					align:'center',
+					align:'left',
 					// hidden: true,
 					renderer : function(value, row, record) {
 						if(value) {
@@ -71,7 +71,7 @@ Ext.define("ESSM.view.manage.FavoriteGrid", {
 					header: '类别,0为首页通用', 
 					dataIndex: 'type', 
 					width: 120,
-					align:'center',
+					align:'left',
 					// hidden: true,
 					renderer : function(value, row, record) {
 						if(value) {
@@ -84,7 +84,7 @@ Ext.define("ESSM.view.manage.FavoriteGrid", {
 					header: '标题', 
 					dataIndex: 'title', 
 					width: 120,
-					align:'center',
+					align:'left',
 					// hidden: true,
 					renderer : function(value, row, record) {
 						if(value) {
@@ -97,7 +97,7 @@ Ext.define("ESSM.view.manage.FavoriteGrid", {
 					header: '内容', 
 					dataIndex: 'content', 
 					width: 120,
-					align:'center',
+					align:'left',
 					// hidden: true,
 					renderer : function(value, row, record) {
 						if(value) {
@@ -110,7 +110,7 @@ Ext.define("ESSM.view.manage.FavoriteGrid", {
 					header: '链接', 
 					dataIndex: 'url', 
 					width: 120,
-					align:'center',
+					align:'left',
 					// hidden: true,
 					renderer : function(value, row, record) {
 						if(value) {
@@ -123,7 +123,7 @@ Ext.define("ESSM.view.manage.FavoriteGrid", {
 					header: '创建者ID', 
 					dataIndex: 'createId', 
 					width: 120,
-					align:'center',
+					align:'left',
 					// hidden: true,
 					renderer : function(value, row, record) {
 						if(value) {
@@ -136,7 +136,7 @@ Ext.define("ESSM.view.manage.FavoriteGrid", {
 					header: '更新者ID', 
 					dataIndex: 'updateId', 
 					width: 120,
-					align:'center',
+					align:'left',
 					// hidden: true,
 					renderer : function(value, row, record) {
 						if(value) {
@@ -149,7 +149,7 @@ Ext.define("ESSM.view.manage.FavoriteGrid", {
 					header: '创建时间', 
 					dataIndex: 'createTime', 
 					width: 120,
-					align:'center',
+					align:'left',
 					// hidden: true,
 					renderer : function(value, row, record) {
 						if(value) {
@@ -162,7 +162,7 @@ Ext.define("ESSM.view.manage.FavoriteGrid", {
 					header: '更新时间', 
 					dataIndex: 'updateTime', 
 					width: 120,
-					align:'center',
+					align:'left',
 					// hidden: true,
 					renderer : function(value, row, record) {
 						if(value) {
@@ -175,7 +175,7 @@ Ext.define("ESSM.view.manage.FavoriteGrid", {
 					header: '乐观锁版本号', 
 					dataIndex: 'version', 
 					width: 120,
-					align:'center',
+					align:'left',
 					// hidden: true,
 					renderer : function(value, row, record) {
 						if(value) {

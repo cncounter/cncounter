@@ -1,7 +1,7 @@
 /*
  * 文 件 名:  FavoriteServiceImpl.java
  * 创 建 人:  
- * 创建时间:  2016-04-25
+ * 创建时间:  
  */
 package com.cncounter.manage.service.impl;
 

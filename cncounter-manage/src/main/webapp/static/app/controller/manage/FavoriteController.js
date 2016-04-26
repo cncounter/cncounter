@@ -12,12 +12,12 @@ Ext.define('ESSM.controller.manage.FavoriteController', {
 	stores : ['manage.FavoriteStore'],
 	models : ['manage.Favorite'],
 	refs : [{
-        ref : 'form',
-        selector : 'favoriteForm'
-    },{
-        ref : 'view',
-        selector : 'favoriteView'
-    },{
+		ref : 'form',
+		selector : 'favoriteForm'
+	},{
+		ref : 'view',
+		selector : 'favoriteView'
+	},{
 		ref : 'grid',
 		selector : 'favoriteGrid'
 	}],
@@ -27,8 +27,8 @@ Ext.define('ESSM.controller.manage.FavoriteController', {
 	
 	init : function() {
 		this.control({
-
-			'grid': {
+			'grid': 
+			{
 				'itemdblclick':function (grid,row){
 					this.onUpdateFavorite();
 				},
@@ -57,11 +57,9 @@ Ext.define('ESSM.controller.manage.FavoriteController', {
             },
             'grid button[action=delete]' : {
                 click : this.onDeleteFavorite
-            },
-            'configView configMasterView configMasterGrid' : {
             }
 		});
-        //
+        // 如果有某些需要延迟执行的操作
         var me = this;
         window.setTimeout(function(){
             //me.onQuery();
@@ -83,7 +81,7 @@ Ext.define('ESSM.controller.manage.FavoriteController', {
 	 */
 	onUpdateFavorite : function() {
         var me = this;
-        var title = '修改指标配置';
+        var title = '修改收藏';
         //
         var record = this.getGrid().getSelectionModel().getLastSelected();
         if(!record || !record.data) {
@@ -94,7 +92,6 @@ Ext.define('ESSM.controller.manage.FavoriteController', {
         var win = me.getEditWin(title, record, me.saveFn, me);
         win && win.show();
 	},
-
 	
 	/**
 	 * 删除收藏
@@ -108,17 +105,17 @@ Ext.define('ESSM.controller.manage.FavoriteController', {
             return;
 		}
 		Ext.MessageBox.confirm('提示','您确实要删除选定的记录吗？', function(btn){
-		if(btn=='yes'){
-			Ext.Ajax.request({
-				url : url,
-				params : {id : records[0].get('id')},
-				success: function(){
-					Ext.MessageBox.alert("成功","删除成功！");
-					me.onQuery();
-				}
-			});
-		}
-	});
+			if(btn=='yes'){
+				Ext.Ajax.request({
+					url : url,
+					params : {id : records[0].get('id')},
+					success: function(){
+						Ext.MessageBox.alert("成功","删除成功！");
+						me.onQuery();
+					}
+				});
+			}
+		});
 	},
 	
 	/**
@@ -140,7 +137,7 @@ Ext.define('ESSM.controller.manage.FavoriteController', {
 	},
     /**
      * 获取查询参数
-     * @returns {{startTime: string, endTime: string, status: string, sid: string}}
+     * @returns {{id: string}}
      */
     getQueryParams : function(){
         var me = this;
@@ -149,10 +146,9 @@ Ext.define('ESSM.controller.manage.FavoriteController', {
         if(id_input){
             id = id_input.getValue();
         }
-        //var values = form.getForm().getValues();
         //
         var params = {
-            'id' : id
+            //'id' : id
         };
         return params;
     },
