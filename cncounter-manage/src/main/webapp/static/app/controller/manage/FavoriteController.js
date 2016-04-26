@@ -102,7 +102,7 @@ Ext.define('ESSM.controller.manage.FavoriteController', {
 	onDeleteFavorite : function(){
         var me = this;
 		var records = this.getGrid().getSelectionModel().getSelection();
-        var url = this.getGrid().getStore().getProxy().api['remove'];
+        var url = this.getGrid().getStore().getProxy().api['destroy'];
 		if(records.length==0) {
             Ext.MessageBox.alert('提示','请选择一条记录！');
             return;
@@ -126,9 +126,8 @@ Ext.define('ESSM.controller.manage.FavoriteController', {
 	 */
 	onQuery : function(btn) {
 		//
-        //
         var me = this;
-        var store = me.getStore('manage.FavoriteStore');
+        var store = me.getGrid().getStore();
         var params = me.getQueryParams();
         //
         if(!this.validateQueryParam(params)){
@@ -220,7 +219,7 @@ Ext.define('ESSM.controller.manage.FavoriteController', {
         if(params["id"]){
             var url = this.getGrid().getStore().proxy.api.update;
         } else {
-            var url = this.getGrid().getStore().proxy.api.add;
+            var url = this.getGrid().getStore().proxy.api.create;
         }
         //
         Ext.Ajax.request({
