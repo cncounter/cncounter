@@ -108,6 +108,7 @@ Ext.define('ESSM.controller.manage.FavoriteController', {
 			if(btn=='yes'){
 				Ext.Ajax.request({
 					url : url,
+                    method : 'POST',
 					params : {id : records[0].get('id')},
 					success: function(){
 						Ext.MessageBox.alert("成功","删除成功！");

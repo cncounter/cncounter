@@ -17,7 +17,7 @@ Ext.define('ESSM.store.manage.FavoriteStore',{
 		api : {
 			read:'rest/manage/favorite/list.json',
 			create:'rest/manage/favorite/add.json',
-			update:'rest/manage/favorite/update.json',
+			update:'rest/manage/favorite/edit.json',
 			destroy:'rest/manage/favorite/delete.json',
 		},
         actionMethods: {
