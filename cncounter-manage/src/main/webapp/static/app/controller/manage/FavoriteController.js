@@ -112,7 +112,8 @@ Ext.define('ESSM.controller.manage.FavoriteController', {
 					params : {id : records[0].get('id')},
 					success: function(){
 						Ext.MessageBox.alert("成功","删除成功！");
-						me.onQuery();
+						//me.onQuery();
+                        me.getGrid().getStore().load();
 					}
 				});
 			}
