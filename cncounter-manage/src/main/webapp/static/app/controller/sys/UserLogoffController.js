@@ -92,7 +92,7 @@ Ext.define('ESSM.controller.sys.UserLogoffController', {
                         if(result) {
                             //
                             var message = result.message;
-                            var success = result.success;
+                            var success = result.status;
                             //
                             if(success){
                                 //

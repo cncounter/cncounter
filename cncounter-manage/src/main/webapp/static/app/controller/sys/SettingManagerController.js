@@ -174,7 +174,7 @@ Ext.define('ESSM.controller.sys.SettingManagerController', {
 				params : {departCode:this.departCode},
 				success:function(response){
 					var result = Ext.JSON.decode(response.responseText,true);
-//                if(result.success ==  true){
+//                if(result.status ==  true){
 					var managers= result;
 					if(managers.length ==  0){
 						return;

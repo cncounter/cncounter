@@ -113,7 +113,7 @@ Ext.define("ESSM.view.sys.QueryResultForm",{
             // 解析
             function parseResultData(response, successFn){
                 var result = Ext.JSON.decode(response.responseText,true);
-                if(result && result.success) {
+                if(result && result.status) {
                     successFn && successFn(result);
                 }else {
                     result = result || "";

@@ -119,7 +119,7 @@ Ext.define("ESSM.view.MainView", {
                                 //
                                 var result = ESSM.processResultData(response) || "";
 
-                                if(result.success) {
+                                if(result.status) {
                                     Ext.MessageBox.alert('提示',
                                         result.message || "操作成功");
                                     formPanel.up("window").close();

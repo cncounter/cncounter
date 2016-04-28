@@ -678,7 +678,7 @@ wr.alertError = function(msg,title) {
  */
 wr.checkClaimResponse = function(response,grid,record){
    var result = Ext.JSON.decode(response.responseText,true);
-   if(result && result.success) {
+   if(result && result.status) {
    		return true;
    }else {
    		wr.alertError(result.message);
@@ -702,7 +702,7 @@ wr.checkClaimResponse = function(response,grid,record){
 
 wr.processResultData = function(response, successFn){
     var result = Ext.JSON.decode(response.responseText,true);
-    if(result && result.success) {
+    if(result && result.status) {
         successFn && successFn(result);
     }else {
         result = result || "";
@@ -806,7 +806,7 @@ Ext.onReady(function(){
 		dataType:"json",
 		success: function(response){
 			var result = Ext.JSON.decode(response.responseText,true);
-			if(result.success == true){
+			if(result.status == true){
 				var res = [],fns = [],user=result.meta.user,roleNames=result.meta.roleNames;
                 if(!user){
                     user = {
