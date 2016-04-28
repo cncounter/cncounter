@@ -11,6 +11,7 @@ Ext.define("ESSM.view.manage.FavoriteForm",{
 	alias:"widget.favoriteForm",
 	width:600,
 	bodyPadding: '10',
+    autoScroll: true,
 	border : 0,
 	fieldDefaults: {
         msgTarget: 'side',
