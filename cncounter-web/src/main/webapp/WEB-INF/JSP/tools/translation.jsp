@@ -9,7 +9,7 @@
 </head>
 <body>
 	<jsp:include page="/common/header.jsp"></jsp:include>
-	<div class="container-fluid">
+	<div class="container-fluid paddinglr0">
 		<div class="left col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<p class="h1">CNC全文翻译(有道API): </p>
 			<p>说明: 全文翻译.请按照markdown语法整理。</p>

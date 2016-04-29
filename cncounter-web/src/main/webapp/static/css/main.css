@@ -16,7 +16,7 @@ body {
   line-height: 1.6;
   color: #333;
   background-color: #f9f9f9;
-  padding: 20px;
+  padding: 10px;
   max-width: 960px;
   margin: 0 auto;
   position: relative;
@@ -294,6 +294,16 @@ label .required{
 }
 .blue{
   color: blue;
+}
+
+.paddinglr0{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.paddinglr0 *{
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 /* 单个使用的CSS*/
