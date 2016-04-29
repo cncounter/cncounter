@@ -30,10 +30,10 @@
 	} else {
 	%>
 	<div class="cnzz">
-		<script src='http://s19.cnzz.com/z_stat.php?id=1000461034&web_id=1000461034' type='text/javascript'></script>
+		<script src='//s19.cnzz.com/z_stat.php?id=1000461034&web_id=1000461034' type='text/javascript'></script>
 	</div>
 	<div class="baidutongji">
-		<script defer src='http://hm.baidu.com/hm.js?31b7f6b4cced37f3566af21dcfd4df13' type='text/javascript'></script>
+		<script defer src='//hm.baidu.com/hm.js?31b7f6b4cced37f3566af21dcfd4df13' type='text/javascript'></script>
 	</div>
 	<%
 	}

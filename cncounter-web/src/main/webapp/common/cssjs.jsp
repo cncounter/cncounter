@@ -13,7 +13,7 @@
 	// 根据参数设置,决定是从本机还是从CDN获取CSS,JS资源
     // 根据参数设置,决定是从本机还是从CDN获取CSS,JS资源
     boolean debugmode = WebSiteConfig.isDEBUG_MODE();
-	if(debugmode){
+	if(debugmode || true){
 %>
 	<script src="<%=basePath %>static/jquery/<%=jqv%>/jquery.min.js"></script>
 	<script src="<%=basePath %>static/bootstrap/<%=bsv%>/js/bootstrap.min.js"></script>
