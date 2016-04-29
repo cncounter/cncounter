@@ -88,11 +88,12 @@
                     var meta = message["meta"];
                     var text_translation = meta["text_translation"];
                     $text_translation.text(text_translation);
+				    window["layer"] && window["layer"].msg("翻译成功");
                 };
                 function errorCallback(jqXHR, textStatus, errorThrown){
                     alert("请求失败!");
                 };
-
+				window["layer"] && window["layer"].msg("后台正在执行翻译,请等待10-30秒!");
                 postAjax(url, data, successCallback, errorCallback, 1);
             };
             //
@@ -101,12 +102,14 @@
                 var content = $text_translation.val() || "";
                 try{
                     content && copy(content);
+					window["layer"] && window["layer"].msg("复制成功");
                 } catch(ex){
                     //
                     try{
                         var content0=$text_translation[0];
                         content0.select(); // 选择对象
                         document.execCommand("Copy"); // 执行浏览器复制命令
+						window["layer"] && window["layer"].msg("复制成功");
                     } catch(ex2){
                         alert("复制失败,请使用 Chrome浏览器");
                     }
