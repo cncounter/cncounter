@@ -2,9 +2,9 @@ package com.cncounter.manage.config;
 
 import java.util.Map;
 
-public class WebSiteConfig {
+public abstract class WebSiteConfig {
 
-	public static boolean DEBUG_MODE = false;
+	private static boolean DEBUG_MODE = false;
 
 	/**
 	 * 原始请求URI

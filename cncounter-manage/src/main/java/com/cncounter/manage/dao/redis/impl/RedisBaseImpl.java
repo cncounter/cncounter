@@ -1,14 +1,13 @@
 package com.cncounter.manage.dao.redis.impl;
 
-import java.io.Serializable;
-import java.nio.charset.Charset;
-
+import com.cncounter.manage.dao.redis.RedisBaseDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Repository;
 
-import com.cncounter.manage.dao.redis.api.RedisBaseDAO;
+import java.io.Serializable;
+import java.nio.charset.Charset;
 
 @Repository
 public class RedisBaseImpl implements RedisBaseDAO {

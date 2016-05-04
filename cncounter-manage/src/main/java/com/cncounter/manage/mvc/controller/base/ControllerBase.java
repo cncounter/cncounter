@@ -1,7 +1,7 @@
 package com.cncounter.manage.mvc.controller.base;
 
 
-import com.cncounter.manage.dao.redis.api.RedisBaseDAO;
+import com.cncounter.manage.dao.redis.RedisBaseDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.Cookie;
