@@ -12,7 +12,6 @@
         <junit.version>4.11</junit.version>
         <httpclient.version>4.4.1</httpclient.version>
 
-        <log4j.version>1.2.16</log4j.version>
         <servlet.api.version>2.5</servlet.api.version>
 
         <spring.version>4.0.7.RELEASE</spring.version>
@@ -29,7 +28,8 @@
         <jackson.databind.version>2.2.2</jackson.databind.version>
         <org.aspectj.version>1.8.4</org.aspectj.version>
 
-        <log4j-version>2.5</log4j-version>
+        <log4j.version>1.2.17</log4j.version>
+        <log4j2.version>2.5</log4j2.version>
 
 
         <gpg.skip>true</gpg.skip>
@@ -131,12 +131,6 @@
             <version>${shiro.version}</version>
         </dependency>
 
-        <!-- log4j2 -->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
         <!-- MySQL 的客户端驱动  -->
         <dependency>
             <groupId>mysql</groupId>
@@ -190,14 +184,6 @@
             <version>${spring.data.redis.version}</version>
         </dependency>
 
-        <!-- 百度,Ueditor -->
-        <dependency>
-            <groupId>com.baidu.ueditor</groupId>
-            <artifactId>ueditor</artifactId>
-            <version>1.1.1</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/ueditor-1.1.1.jar</systemPath>
-        </dependency>
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
@@ -232,11 +218,19 @@
             <version>${httpclient.version}</version>
         </dependency>
 
+        <!-- log4j2 -->
+
+        <!--<dependency>-->
+            <!--<groupId>org.apache.logging.log4j</groupId>-->
+            <!--<artifactId>log4j-core</artifactId>-->
+            <!--<version>${log4j2.version}</version>-->
+        <!--</dependency>-->
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j-version}</version>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
         </dependency>
+
 
         <!-- junit,测试使用 -->
         <dependency>
