@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS `manage_resource` (
   `parent_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '父资源ID',
   `url` varchar(1024) DEFAULT NULL COMMENT '对应的URL,根据type决定',
   `action` varchar(256) DEFAULT NULL COMMENT '对应的action,由type决定',
+  `view_flag` varchar(256) DEFAULT NULL COMMENT '视图层权限标识符',
   `remark` varchar(256) DEFAULT NULL COMMENT '备注',
   `sort_no` int(8) unsigned NOT NULL DEFAULT '999' COMMENT '排序编号',
   `create_id` bigint(20) unsigned DEFAULT NULL COMMENT '创建者ID',
