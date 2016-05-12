@@ -269,6 +269,15 @@ img {
 	visibility: hidden;
 }
 
+.msg_area{
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.15);
+    color: #33cc99;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
 .text-left{
 	text-align: left;
 }
