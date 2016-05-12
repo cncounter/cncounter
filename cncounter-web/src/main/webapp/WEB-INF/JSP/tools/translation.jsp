@@ -9,11 +9,12 @@
 </head>
 <body>
 	<jsp:include page="/common/header.jsp"></jsp:include>
-	<div class="container-fluid paddinglr0">
+	<div class="container-fluid">
 		<div class="left col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<p class="h1">CNC全文翻译(有道API): </p>
-			<p>说明: 全文翻译.请按照markdown语法整理。</p>
-			<br/>
+            <p class="h1">CNC全文翻译(<a target="_blank" href="http://fanyi.youdao.com/">有道API</a>): </p>
+            <p>说明: 全文翻译.请按照markdown语法整理。</p>
+            <br/>
+            <div class="msg_area"></div>
             <div class="left col-lg-6 col-md-12 col-sm-12 col-xs-12">
                 <div>
                     英文:
@@ -88,12 +89,12 @@
                     var meta = message["meta"];
                     var text_translation = meta["text_translation"];
                     $text_translation.text(text_translation);
-				    window["layer"] && window["layer"].msg("翻译成功");
+                    tip("翻译成功");
                 };
                 function errorCallback(jqXHR, textStatus, errorThrown){
-                    alert("请求失败!");
+                    tip("请求失败!");
                 };
-				window["layer"] && window["layer"].msg("后台正在执行翻译,请等待10-30秒!");
+                tip("后台正在执行翻译,请等待10-30秒!");
                 postAjax(url, data, successCallback, errorCallback, 1);
             };
             //
@@ -102,19 +103,34 @@
                 var content = $text_translation.val() || "";
                 try{
                     content && copy(content);
-					window["layer"] && window["layer"].msg("复制成功");
+                    tip("复制成功");
                 } catch(ex){
                     //
                     try{
                         var content0=$text_translation[0];
                         content0.select(); // 选择对象
                         document.execCommand("Copy"); // 执行浏览器复制命令
-						window["layer"] && window["layer"].msg("复制成功");
+                        tip("复制成功");
                     } catch(ex2){
-                        alert("复制失败,请使用 Chrome浏览器");
+                        tip("复制失败,请使用 Chrome浏览器");
                     }
                 }
             };
+            function tip(msg, selector){
+                selector = selector || ".msg_area";
+                try{
+                    var $msg_area = $(selector);
+                    if($msg_area.length){
+                        $msg_area.text(""+ msg);
+                        $msg_area.removeClass("hide");
+                        $msg_area.show();
+                    } else if(window["layer"]){
+                        window["layer"].msg(msg);
+                    } else {
+                        window.alert(msg);
+                    }
+                } catch(ex){}
+            }
         });
         //
     </script>
