@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cncounter.manage.dao.mysql.QueryLogMapper">
+
+    <select id="listPage" resultType="java.util.Map" parameterType="java.util.Map" >
+        select _sub.* from (
+        ${text}
+        ) _sub
+        <if test="_start != null and _pageSize != null">
+            limit ${_start}, ${_pageSize}
+        </if>
+    </select>
+
+    <select  id="countBy" resultType="java.lang.Integer" parameterType="java.util.Map" >
+        select count(*) from (
+        ${text}
+        ) _sub
+    </select>
+
+    <insert id="insert"  parameterType="java.util.Map">
+        ${text}
+    </insert>
+
+    <update id="update"  parameterType="java.util.Map">
+        ${text}
+    </update>
+
+    <delete id="delete"  parameterType="java.util.Map">
+        ${text}
+    </delete>
+	
+</mapper>

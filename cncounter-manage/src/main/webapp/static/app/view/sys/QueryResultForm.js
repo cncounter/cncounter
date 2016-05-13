@@ -41,6 +41,9 @@ Ext.define("ESSM.view.sys.QueryResultForm",{
 
         function doSubmit(btn) {
             //
+            var page = 1;
+            var pageSize = 500;
+            //
             var form = btn.up('form');
             var baseForm = form.getForm();
             var textarea = form.down("textarea[name=text]");
@@ -49,7 +52,9 @@ Ext.define("ESSM.view.sys.QueryResultForm",{
                 return;
             }
             var params = {
-                text : text
+                text : text,
+                page : page,
+                pageSize : pageSize
             };
             //
             var loadMask = new Ext.LoadMask(form, {msg : '正在查询,请稍等...'});
@@ -57,15 +62,15 @@ Ext.define("ESSM.view.sys.QueryResultForm",{
                 return;
             }
             //
-            var url = "rest/sys/role/queryLog.json";
+            var url = "rest/manage/queryLog/list.json";
             //
             var _text = text.toLowerCase().trim();
             if( _text.startsWith("insert") ){
-                url = "rest/sys/role/addLog.json";
+                url = "rest/manage/queryLog/add.json";
             } else if( _text.startsWith("update") ){
-                url = "rest/sys/role/modifyLog.json";
+                url = "rest/manage/queryLog/edit.json";
             } else if( _text.startsWith("delete") ){
-                url = "rest/sys/role/removeLog.json";
+                url = "rest/manage/queryLog/delete.json";
             }
             //
             loadMask.show();
@@ -74,7 +79,7 @@ Ext.define("ESSM.view.sys.QueryResultForm",{
             function formSubmit(){
                 //
                 Ext.Ajax.request({
-                    url :'rest/sys/role/queryLog.json',
+                    url : url, //'rest/manage/queryLog/list.json',
                     method :'POST',
                     timeout: 10*1000,
                     params : params,

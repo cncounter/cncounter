@@ -28,7 +28,7 @@ Ext.Ajax.on('requestexception', function(conn, response, options) {
     });
     //
     function toLoginFn(){
-        window.location.href = "rest/login/logout.do";
+        window.location.href = "login.jsp";
     };
 });
 

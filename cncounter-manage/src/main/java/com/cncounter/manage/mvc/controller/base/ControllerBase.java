@@ -24,6 +24,8 @@ public abstract class ControllerBase {
 	 */
 	public static final String SESSION_USER_KEY = "session_user_key";
 	public static final String UTF_8 = "UTF-8";
+    public static final String KEY_START = "_start";
+    public static final String KEY_PAGESIZE = "_pageSize";
 
 	@Autowired
 	private RedisBaseDAO redisBaseDAO;
@@ -311,8 +313,8 @@ public abstract class ControllerBase {
         }
         Integer start = page * pageSize;
         //
-        params.put("_start", start);
-        params.put("_pageSize", pageSize);
+        params.put(KEY_START, start);
+        params.put(KEY_PAGESIZE, pageSize);
     }
 
     public static int parseInt(String str, int defValue){
