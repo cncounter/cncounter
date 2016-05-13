@@ -1,7 +1,7 @@
 
 -- 导出  表 cncounter.dict_common 结构
 CREATE TABLE IF NOT EXISTS `dict_common` (
-  `id` bigint(20) unsigned NOT NULL COMMENT '自增ID',
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
   `dict_code` varchar(64) NOT NULL COMMENT '编码',
   `dict_desc` varchar(64) NOT NULL COMMENT '名称',
   `category_code` varchar(64) NOT NULL COMMENT '分类编码',
