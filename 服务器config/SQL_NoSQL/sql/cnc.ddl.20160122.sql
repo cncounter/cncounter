@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `favorite` (
   `title` varchar(512) DEFAULT NULL COMMENT '标题',
   `content` varchar(2048) DEFAULT NULL COMMENT '内容',
   `url` varchar(1024) DEFAULT NULL COMMENT '链接',
+  `sort_number` INT(8) NOT NULL DEFAULT '0' COMMENT '排序号',
   `create_id` bigint(20) unsigned DEFAULT NULL COMMENT '创建者ID',
   `update_id` bigint(20) unsigned DEFAULT NULL COMMENT '更新者ID',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
