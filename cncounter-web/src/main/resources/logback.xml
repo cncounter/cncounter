@@ -3,7 +3,7 @@
 <configuration>
 
     <!--属性区-->
-    <property name="logBase" value="/usr/local/cncounter_webapp/logs/" />
+    <property name="logBase" value="/usr/local/cncounter_webapp/logs/"/>
 
     <!--console输出-->
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
@@ -42,7 +42,7 @@
 
     <!--针对 INFO 级别的日志进行过滤,并输出到 info 文件中-->
     <appender name="async-info" class="ch.qos.logback.classic.AsyncAppender">
-        <appender-ref ref="info" />
+        <appender-ref ref="info"/>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>INFO</level>
             <onMatch>ACCEPT</onMatch>
@@ -71,37 +71,6 @@
     </appender>
 
 
-    <!--针对不同的包设置不同的级别-->
-    <logger name="org.apache" level="INFO" />
-    <logger name="org.springframework" level="INFO" />
-
-
-    <!--&lt;!&ndash;下面这三段的意思是将error,warn级别输出到error文件中,info级别输出到info文件中,同时所有的日志都从控制台上输出&ndash;&gt;-->
-    <!--<logger name="com.lenxeon" level="ERROR" additivity="false">-->
-    <!--<appender-ref ref="stdout"/>-->
-    <!--<appender-ref ref="async-error"/>-->
-    <!--</logger>-->
-
-    <!--<logger name="com.lenxeon" level="WARN" additivity="false">-->
-    <!--<appender-ref ref="stdout"/>-->
-    <!--<appender-ref ref="async-warn"/>-->
-    <!--</logger>-->
-
-    <!--<logger name="com.lenxeon" level="INFO" additivity="false">-->
-    <!--<appender-ref ref="stdout"/>-->
-    <!--<appender-ref ref="async-info"/>-->
-    <!--</logger>-->
-
-
-    <!--总的配置,默认将级别设定在info-->
-    <root level="INFO">
-        <appender-ref ref="stdout" />
-        <appender-ref ref="async-info"/>
-        <appender-ref ref="async-warn"/>
-        <appender-ref ref="async-error"/>
-    </root>
-
-
     <appender name="monitor" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
@@ -118,15 +87,40 @@
         </rollingPolicy>
     </appender>
 
+
+    <!--针对不同的包设置不同的级别-->
     <!-- additivity="false"禁止monitor里的内容向上传递，否则会同时显示在默认的日志中 -->
     <logger name="monitor" additivity="false" level="INFO">
-        <appender-ref ref="monitor" />
+        <appender-ref ref="monitor"/>
     </logger>
 
-    <logger name="org.springframework" level="WARN" />
-    <logger name="org.apache.shiro" level="WARN" />
-    <logger name="org.mybatis" level="WARN" />
-    <logger name="org.springframework.web" level="WARN" />
-    <logger name="com.cncounter" level="DEBUG" />
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.apache.shiro" level="WARN"/>
+    <logger name="org.mybatis" level="WARN"/>
+    <logger name="org.springframework.web" level="WARN"/>
+    <logger name="com.cncounter" level="DEBUG"/>
+    <!--下面这三段的意思是将error,warn级别输出到error文件中,info级别输出到info文件中,同时所有的日志都从控制台上输出-->
+    <logger name="com.cncounter" level="ERROR" additivity="false">
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="async-error"/>
+    </logger>
+
+    <logger name="com.cncounter" level="WARN" additivity="false">
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="async-warn"/>
+    </logger>
+
+    <logger name="com.cncounter" level="INFO" additivity="false">
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="async-info"/>
+    </logger>
+
+    <!--总的配置,默认将级别设定在info-->
+    <root level="INFO">
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="async-info"/>
+        <appender-ref ref="async-warn"/>
+        <appender-ref ref="async-error"/>
+    </root>
 
 </configuration>
