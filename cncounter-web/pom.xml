@@ -36,7 +36,8 @@
         <jackson.databind.version>2.2.2</jackson.databind.version>
         <org.aspectj.version>1.8.4</org.aspectj.version>
 
-        <log4j-version>2.5</log4j-version>
+        <slf4j.version>1.7.21</slf4j.version>
+        <logback.version>1.1.7</logback.version>
 
 
         <gpg.skip>true</gpg.skip>
@@ -213,10 +214,24 @@
             <version>${httpclient.version}</version>
         </dependency>
 
+
+        <!-- slf4j-api -->
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j-version}</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <!-- log4j-over-slf4j: 基于slf4j的log4j类,避免 druid 等报错 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <!-- logback -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
         </dependency>
 
         <!-- junit,测试使用 -->
