@@ -17,7 +17,7 @@
         <script type="text/javascript">
             //
             (function(){
-                return getIp();
+                return window.setTimeout(getIp, 10);
                 function getIp(){
                     var callback = parseIp.name;
                     window[callback] = parseIp;
