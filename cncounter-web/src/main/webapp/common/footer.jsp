@@ -11,7 +11,7 @@
 		<a target="_blank" href="<%=path %>/test/index.jsp">&copy;</a>
 		2014 - <%=f_year %>
 		|
-        <a href="http://ip138.com/api/" title="IP138查询API" class="ip138area" target="_blank">
+        <a href="http://www.ip138.com/ips1388.asp" title="IP138查询API" class="ip138area" target="_blank">
             <span class="clientip">-</span>
         </a>
         <script type="text/javascript">
@@ -39,11 +39,13 @@
                 //
                 function parseIp(ip, err){
                     if(!ip || !ip.data || !ip.data.length){ return showIPMessage("未知"); }
-                    var addr = ip.data.join("-");
-                    showIPMessage(addr);
+                    var title = ip.data.join("-");
+                    var addr = ip.data[2] + "-" + ip.data[3];
+                    showIPMessage(addr, title);
                 };
-                function showIPMessage(msg){
-                    $(".clientip").html(msg || "-");
+                function showIPMessage(msg, title){
+                    if(msg){  $(".clientip").html(msg || "-"); }
+                    if(title){  $(".ip138area").attr("title" ,title); }
                 };
             })();
         </script>
