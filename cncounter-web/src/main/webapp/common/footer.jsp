@@ -19,33 +19,7 @@
             (function(){
                 return window.setTimeout(getIp, 10);
                 function getIp(){
-                    var callback = parseIp.name;
-                    window[callback] = parseIp;
-                    var protocol = location.protocol;
-                    var http = "http";
-                    var https = "https";
-                    if(!protocol || !protocol.startsWith(http)){
-                        protocol = http + ":"; // http,https
-                    }
-                    var api = protocol + "//test.ip138.com/query/?callback="+ callback;
-                    //
-                    if(protocol.startsWith(https)){
-                        return showIPMessage("--保密--");
-                    }
-                    if(window.$){
-                        $.getScript(api);
-                    }
-                };
-                //
-                function parseIp(ip, err){
-                    if(!ip || !ip.data || !ip.data.length){ return showIPMessage("未知"); }
-                    var title = ip.data.join("-");
-                    var addr = ip.data[2] + "-" + ip.data[3];
-                    showIPMessage(addr, title);
-                };
-                function showIPMessage(msg, title){
-                    if(msg){  $(".clientip").html(msg || "-"); }
-                    if(title){  $(".ip138area").attr("title" ,title); }
+                    CNC.getIpPostion(CNC.showIpInfo);
                 };
             })();
         </script>

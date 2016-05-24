@@ -40,5 +40,6 @@
 	<!-- 本站的JS工具类 -->
 	<script src="<%=basePath %>static/js/cncounter-util.js?v=1"></script>
 	<script src="<%=basePath %>static/js/getLanIP.js?v=1"></script>
+	<script src="<%=basePath %>static/js/ip138-util.js?v=1"></script>
 	<!-- 本站CSS样式 -->
 	<link href="<%=path%>/static/css/main.css" rel="stylesheet" type="text/css" />
