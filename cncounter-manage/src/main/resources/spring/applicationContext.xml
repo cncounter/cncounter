@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-	xmlns:security="http://www.springframework.org/schema/security"
-	xmlns:p="http://www.springframework.org/schema/p"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/aop 
 		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
-		http://www.springframework.org/schema/security 
-		http://www.springframework.org/schema/security/spring-security-3.2.xsd
-		http://www.springframework.org/schema/beans 
-		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-		http://www.springframework.org/schema/data/jpa 
-		http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
-		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
 		http://www.springframework.org/schema/context 
 		http://www.springframework.org/schema/context/spring-context-4.0.xsd">
@@ -26,11 +21,8 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-	<!-- 引入属性文件 -->
-	<context:property-placeholder
-		ignore-unresolvable="true" location="classpath:config/mysql.properties" />
-	<context:property-placeholder
-		ignore-unresolvable="true" location="classpath:config/redis.properties" />
+    <!-- 引入属性文件 -->
+	<context:property-placeholder ignore-unresolvable="true" location="classpath:config/*.properties" />
 	<!-- 配置Druid数据源 -->
 	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">
@@ -58,28 +50,12 @@
 		<property name="removeAbandoned" value="true" />
 		<property name="removeAbandonedTimeout" value="1800" />
 		<property name="logAbandoned" value="true" />
-		<property name="filters" value="config,mergeStat" />
 		<!-- 提示Druid数据源需要对数据库密码进行解密 -->
 		<property name="connectionProperties" value="config.decrypt=${config.decrypt}" />
-		<!-- 打开PSCache，并且指定每个连接上PSCache的大小 
-			Oracle，则把poolPreparedStatements配置为true;
-			mysql可以配置为false,分库分表较多的数据库，建议配置为false
-			参考:https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatFilter
-		-->
+		<!-- Oracle，则把poolPreparedStatements配置为true;		-->
 		<property name="poolPreparedStatements" value="false" />
-		<property name="maxPoolPreparedStatementPerConnectionSize"
-			value="20" />
-		<!-- 如果有特殊SQL被拦截,可以将SQL防火墙wall去掉 -->
-		<!-- 
-		<property name="filters" value="wall"/>
-		 -->
-		<property name="proxyFilters">
-			<list>
-				<!-- 挂载监控统计拦截的filters -->
-				<ref bean="stat-filter" />
-				<ref bean="log-filter" />
-			</list>
-		</property>
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+        <property name="filters" value="config,mergeStat" />
 	</bean>
 
 	<!-- myBatis sqlSessionFactory -->
@@ -88,8 +64,7 @@
 		<property name="configLocation" value="classpath:spring/MybatisMapConfig.xml"></property>
 		<!-- 表示在包或所有子目录中，以 *Mapper.xml结尾所有文件 -->
 		<property name="mapperLocations">
-			<value>classpath*:com/cncounter/**/*Mapper.xml
-            </value>
+			<value>classpath*:com/cncounter/**/*Mapper.xml</value>
 		</property>
 	</bean>
 	<!-- 自动扫描下面的组件, 接口上需要注解 @Component("bean的id") -->
@@ -106,33 +81,22 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<!-- 配置druid监控spring jdbc -->
-	<bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
-		<property name="slowSqlMillis" value="3000" />
-		<!-- 统计慢SQL的开关 -->
-		<property name="logSlowSql" value="true" />
-		<!-- 在统计中合并同类SQL的开关 -->
-		<property name="mergeSql" value="true" />
-	</bean>
-	<bean id="log-filter" class="com.alibaba.druid.filter.logging.Log4jFilter">
-		<!-- 日志输出,输出可执行语句 -->
-		<property name="statementExecutableSqlLogEnable" value="false" />
-	</bean>
-	<bean id="druid-stat-interceptor"
-		class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
-	</bean>
-	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"
-		scope="prototype">
-		<property name="patterns">
-			<list>
-				<value>com.cncounter.manage.service.impl.*</value>
-			</list>
-		</property>
-	</bean>
-	<aop:config>
-		<aop:advisor advice-ref="druid-stat-interceptor"
-			pointcut-ref="druid-stat-pointcut" />
-	</aop:config>
+    <!-- 配置_Druid和Spring关联监控 -->
+    <bean id="druid-stat-interceptor"
+          class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
+    </bean>
+    <bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"
+          scope="prototype">
+        <property name="patterns">
+            <list>
+                <value>com.cncounter.manage.service.impl.*</value>
+            </list>
+        </property>
+    </bean>
+    <aop:config>
+        <aop:advisor advice-ref="druid-stat-interceptor"
+                     pointcut-ref="druid-stat-pointcut" />
+    </aop:config>
 
 	<!-- redis 配置 -->
 	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
