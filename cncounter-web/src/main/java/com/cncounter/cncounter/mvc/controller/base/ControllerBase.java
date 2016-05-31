@@ -376,7 +376,12 @@ public abstract class ControllerBase {
             String keyName = targetPd.getName();
             Object value = paramMap.get(keyName);
             // 对比类型,如果类型不同,则进行解析转换, 主要是String转换
-            value = tran2TargetType(value, pClazz[0]);
+            try{
+                value = tran2TargetType(value, pClazz[0]);
+            } catch (Exception ex){
+                // 吃掉异常
+                value = null;
+            }
             if(null == value){ continue;}
 
             try {
