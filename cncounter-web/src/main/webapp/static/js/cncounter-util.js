@@ -147,7 +147,7 @@ function getCookie(cookieName){
 		var arr=arrCookie[i].split("=");
 		//找到cookie,并返回它的值
 		if(cookieName==arr[0]){
-			cookieValue=unescape(arr[1]);
+			cookieValue=arr[1];
 			break;
 		}
 	}
