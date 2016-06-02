@@ -47,13 +47,13 @@
         <jdk.version>1.6</jdk.version>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>local-file</id>
-            <url>file://${basedir}/lib/</url>
-            <layout>default</layout>
-        </repository>
-    </repositories>
+    <!--<repositories>-->
+        <!--<repository>-->
+            <!--<id>local-file</id>-->
+            <!--<url>file://${basedir}/lib/</url>-->
+            <!--<layout>default</layout>-->
+        <!--</repository>-->
+    <!--</repositories>-->
 
     <build>
         <finalName>cncounter-web</finalName>
