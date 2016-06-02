@@ -21,7 +21,7 @@
             }
             var api = protocol + "//test.ip138.com/query/?callback="+ callbackName;
             //
-            if(0 !=protocol.indexOf(https)){
+            if(0 == protocol.indexOf(https)){
                 return callbackWrapper(null, "--保密--");
             }
             if(window.$){
