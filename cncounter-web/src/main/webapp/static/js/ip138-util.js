@@ -16,12 +16,12 @@
             var protocol = location.protocol;
             var http = "http";
             var https = "https";
-            if(!protocol || !protocol.startsWith(http)){
+            if(!protocol || 0!=protocol.indexOf(http)){
                 protocol = http + ":"; // http,https
             }
             var api = protocol + "//test.ip138.com/query/?callback="+ callbackName;
             //
-            if(protocol.startsWith(https)){
+            if(0 !=protocol.indexOf(https)){
                 return callbackWrapper(null, "--保密--");
             }
             if(window.$){
