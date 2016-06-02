@@ -3,6 +3,8 @@ package com.cncounter.cncounter.mvc.controller.base;
 
 import com.cncounter.cncounter.dao.redis.api.RedisBaseDAO;
 import com.cncounter.util.string.StringNumberUtil;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,6 +28,11 @@ public abstract class ControllerBase {
 	 */
 	public static final String SESSION_USER_KEY = "session_user_key";
 	public static final String UTF_8 = "UTF-8";
+
+    /**
+     * 日志logger
+     */
+    protected Log logger = LogFactory.getLog(this.getClass());
 
 	@Autowired
 	private RedisBaseDAO redisBaseDAO;

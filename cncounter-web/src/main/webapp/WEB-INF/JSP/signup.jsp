@@ -11,7 +11,7 @@
 <jsp:include page="/common/header.jsp"></jsp:include>
   <div class="container-fluid">
   	<%-- 必须AJAX --%>
-     <form class="form-signin" role="form" method="post" action="<%=path %>/login.php">
+     <form class="form-signin" role="form" method="post" action="<%=path %>/openapi/signup.json">
        <h2 class="form-signin-heading">用户注册</h2>
        <div>
          <label for="loginemail">

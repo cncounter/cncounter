@@ -21,9 +21,6 @@
 				<a target="_self" href="favorite/list/0.php">公共收藏夹</a>
 			</h2>
 			<h2>
-				<a target="_self" href="./advise/list.php">意见反馈</a>
-			</h2>
-			<h2>
 				<a target="_blank" href="https://github.com/cncounter/translation">CNCounter翻译文章</a>
 			</h2>
 			<jsp:include page="/common/list999.jsp"></jsp:include>
