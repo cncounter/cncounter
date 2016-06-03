@@ -21,12 +21,13 @@
 					<br/>
 					<span>请输入需要转换的内容:</span>
 					<br/>
-					<textarea tabindex="3" id="content" name="content" rows="8" cols="36"></textarea>
+					<textarea tabindex="3" id="content" name="content" rows="4" cols="36"></textarea>
 					<br/>
 				</form>
 					<button tabindex="4" id="btn_generate_qrcode"
-						 type="button" class="btn btn-primary">生成</button>
-			</div>
+						 type="button" class="btn btn-primary"> 生　 成 </button>
+                <a id="btn_redirect"  tabindex="5" style="margin-left: 10px;" class="btn btn-warning"> 点击跳转>> </a>
+            </div>
 			<div>
 			<br/>
 			</div>
@@ -45,6 +46,7 @@
 		$(function(){
 			//
 			var $btn_generate_qrcode = $("#btn_generate_qrcode");
+			var $btn_redirect = $("#btn_redirect");
 			var $qrcode_img = $("#qrcode_img");
 			var $qrcode_img_anchor = $("#qrcode_img_anchor");
 			var $input_form = $("#input_form");
@@ -96,6 +98,17 @@
 				postAjax(url, data, successCallback,errorCallback,1);
 				//
 			});
+            //
+            $btn_redirect.bind("click", function(e){
+                //
+                var http = "http";
+                var content = $content.val();
+                if(!content){ return; }
+                //
+                if(0 === content.indexOf(http)){
+                    window.open(content);
+                }
+            });
 		});
 	</script>
 </body>

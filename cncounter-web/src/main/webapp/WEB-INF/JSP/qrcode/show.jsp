@@ -19,10 +19,11 @@
 				<form id="input_form" action="<%=basePath %>qrcode/ajax/genqrcode.json" method="post">
 					<span>二维码内容:</span>
 					<br/>
-					<textarea readonly="readonly" tabindex="3" id="content" name="content" rows="8" cols="36">${content}</textarea>
+					<textarea readonly="readonly" tabindex="3" id="content" name="content" rows="4" cols="36">${content}</textarea>
 					<br/>
 					
-					<a id="btn_copy"  tabindex="4" class="btn btn-sm btn-success btn-block"> 点击复制 </a> 
+					<a id="btn_copy"  tabindex="4" class="btn btn-md btn-success"> 点击复制 </a>
+                    <a id="btn_redirect"  tabindex="5" style="margin-left: 10px;" class="btn  btn-md btn-warning"> 点击跳转>> </a>
 				</form>
 			</div>
 			<div>
@@ -32,10 +33,10 @@
 				<span>二维码图片:</span>
 				<br/>
 				<a id="qrcode_img_anchor" target="_blank" href="<%=basePath %>rest/qrcode/${uuid}.jpeg">
-					<img id="qrcode_img" alt="${content}" src="<%=basePath %>rest/qrcode/${uuid}.jpeg" class="qrcode-img img-responsive center-block">
+					<img id="qrcode_img" title="点击跳转到图片地址" src="<%=basePath %>rest/qrcode/${uuid}.jpeg" class="qrcode-img img-responsive center-block">
 				</a>
 			</div>
-			<a href="<%=basePath %>qrcode/input.php" class="btn btn-lg btn-warning btn-block">  &lt;&lt;返回 </a> 
+			<a href="<%=basePath %>qrcode/input.php" style="margin-top: 5px;" class="btn btn-mid btn-warning btn-block">  &lt;&lt;返　　回 </a>
 		</div>
 		<jsp:include page="/common/sidebar.jsp"></jsp:include>
 	</div>
@@ -47,6 +48,7 @@
 		$(function(){
 			//
 			var $btn_copy = $("#btn_copy");
+            var $btn_redirect = $("#btn_redirect");
 			var $content = $("#content");
 			
 			//
@@ -66,6 +68,17 @@
 					}
 				}
 			});
+            //
+            $btn_redirect.bind("click", function(e){
+                //
+                var http = "http";
+                var content = $content.val();
+                if(!content){ return; }
+                //
+                if(0 === content.indexOf(http)){
+                    window.open(content);
+                }
+            });
 			//
 			/**
 			setTimeout(function() {
