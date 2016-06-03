@@ -159,10 +159,21 @@ public abstract class ControllerBase {
 	 * @return
 	 */
 	public static UserVO getLoginUser(HttpServletRequest request) {
+        try{
+            UserVO userVo = _getLoginUser(request);
+            return userVo;
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+	}
+
+
+    private static UserVO _getLoginUser(HttpServletRequest request) {
         UserVO userVo = currentLoginUser.get();
         if(null != userVo){ return userVo; }
         if(null == request ){ return null; }
-		Object obj = request.getAttribute(SESSION_USER_KEY);// getSessionAttribute(request, SESSION_USER_KEY);
+        Object obj = request.getAttribute(SESSION_USER_KEY);// getSessionAttribute(request, SESSION_USER_KEY);
         //
         if(null == obj){
             // 获取 用户token
@@ -176,12 +187,12 @@ public abstract class ControllerBase {
             if(null == redisDAO){return userVo;}
             obj = redisDAO.getObject(key);
         }
-		if(obj instanceof UserVO){
+        if(obj instanceof UserVO){
             userVo = (UserVO)obj;
             request.setAttribute(SESSION_USER_KEY, userVo);
-		}
-		return userVo;
-	}
+        }
+        return userVo;
+    }
 
     public static void clearThreadLoginUser(){
         currentLoginUser.remove();
@@ -231,6 +242,9 @@ public abstract class ControllerBase {
 		Map<String, String> cookieMap = new HashMap<String, String>();
 				//
 		Cookie[] cookies = request.getCookies();
+        if(null == cookies){
+            return cookieMap;
+        }
 		for(Cookie cookie : cookies){
 			//
 			String name = cookie.getName();
