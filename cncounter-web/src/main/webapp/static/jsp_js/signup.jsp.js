@@ -57,21 +57,36 @@ $(function(){
     //
     function ajaxRequestSignup(data){
         //
-        var url = "/openapi/signup.json";
+        var localhost = "localhost";
+        var https = "https://";
+        //
+        var host = location.host;
+        var hostname = location.hostname;
+        //
+        var signupUri = "/openapi/signup.json";
+        var url = "";
+        //
+        if(localhost === hostname){
+            url = signupUri;
+        } else {
+            url = https + host + signupUri;
+        }
+
         //
         postAjax(url, data, successCallback, null, true);
         //
         function successCallback(data){
-            //
             // 自动登录?
+            var message = data.info || data.message;
             // 跳转
             if(data.status){
                 // 成功
-                window.location.replace("login.php");
+                CNC.delayMsg(message);
+                CNC.redirect("login.php");
             } else {
                 // 显示信息
+                CNC.msg(message);
             }
-
 
         };
 

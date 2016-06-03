@@ -9,6 +9,12 @@ import java.util.Map;
  */
 public class CNC {
 
+    public static String getSaltPassword(String password, String salt){
+        String saltPassword = MD5Util.md5(password + salt);
+        return saltPassword;
+    }
+
+
     /**
      * 拷贝对象,根据同名属性匹配,将 source 的属性拷贝给 dest <br/>
      * 暴力拷贝, 如果需要使用 getter/setter,请使用 :

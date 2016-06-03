@@ -97,41 +97,43 @@ public class JSONMessage {
 	public int getTotal() {
 		return total;
 	}
-	public void setTotal(int total) {
+	public JSONMessage setTotal(int total) {
 		this.total = total;
+        return this;
 	}
 
 	public List<?> getData() {
 		return data;
 	}
 
-	public void setData(List<?> data) {
-		if(null == data){
-			return;
+	public JSONMessage setData(List<?> data) {
+		if(null != data){
+            this.data = data;
 		}
-		this.data = data;
+        return this;
 	}
 
 	public Map<String, Object> getMeta() {
 		return meta;
 	}
 
-	public void setMeta(Map<String, Object> meta) {
-		if(null == meta){
-			return;
+	public JSONMessage setMeta(Map<String, Object> meta) {
+		if(null != meta){
+            this.meta = meta;
 		}
-		this.meta = meta;
+        return this;
 	}
 	/**
 	 * 添加 meta信息,
 	 */
-	public void addMeta( String key, Object value) {
+	public JSONMessage addMeta( String key, Object value) {
 		if(null == meta){
 			// 非线程安全, 不考虑使用多线程操作 
 			this.meta = new HashMap<String, Object>();
 		}
 		//
 		this.meta.put(key, value);
+        return this;
 	}
 
 	public int getStatus() {
@@ -141,46 +143,51 @@ public class JSONMessage {
 	/**
 	 * 设置执行成功
 	 */
-	public void setSuccess(){
-		this.setStatus(STATUS_SUCCESS);
+	public JSONMessage setSuccess(){
+        return this.setStatus(STATUS_SUCCESS);
 	}
-	public void setFailure(){
-		this.setStatus(STATUS_FAILURE);
+	public JSONMessage setFailure(){
+        return this.setStatus(STATUS_FAILURE);
 	}
-	public void setStatus(int status) {
+	public JSONMessage setStatus(int status) {
 		this.status = status;
+        return this;
 	}
 
 	public String getErrorcode() {
 		return errorcode;
 	}
 
-	public void setErrorcode(String errorcode) {
+	public JSONMessage setErrorcode(String errorcode) {
 		this.errorcode = errorcode;
+        return this;
 	}
 
 	public String getInfo() {
 		return info;
 	}
 
-	public void setInfo(String info) {
+	public JSONMessage setInfo(String info) {
 		this.info = info;
+        return this;
 	}
 
 	public String getClientaction() {
 		return clientaction;
 	}
 
-	public void setClientaction(String clientaction) {
+	public JSONMessage setClientaction(String clientaction) {
 		this.clientaction = clientaction;
+        return this;
 	}
 
 	public String getActionvalue() {
 		return actionvalue;
 	}
 
-	public void setActionvalue(String actionvalue) {
+	public JSONMessage setActionvalue(String actionvalue) {
 		this.actionvalue = actionvalue;
+        return this;
 	}
 	
 }

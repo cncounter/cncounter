@@ -1,9 +1,60 @@
-//
 var CNC = CNC || function(){};
-CNC.prototype = {
 
-};
-CNC.currentScript = document.currentScript;
+;(function(){
+    //
+    CNC.currentScript = document.currentScript;
+    CNC = $.extend(CNC, {
+        msg : msg,
+        delayMsg : delayMsg,
+        delay : delay,
+        redirect : redirect,
+        localSession : localSession
+    });
+    // 显示旧有的消息
+    delayMsg();
+
+
+    function msg(info){
+        window.layer && layer.msg(info);
+    };
+    function delayMsg(info){
+        var key = "_delayedMsg";
+        // 保存
+        if(undefined !== info){
+            return localSession(key , info || "");
+        } else {
+            info = localSession(key);
+            localSession(key, null);
+            //
+            if(info){
+                delay(function(){msg(info);});
+            }
+        }
+    };
+    function delay(fn, timeout){
+        timeout = timeout || 10;
+        window.setTimeout(fn, timeout);
+    };
+    function redirect(url, timeout){
+        delay(function(){
+            window.location.replace(url);
+        });
+    };
+
+    //
+    function localSession(key, value){
+        if(!window.sessionStorage){
+            return;
+        }
+        var oldValue = sessionStorage.getItem(key);
+        if(undefined === value){
+            return oldValue;
+        } else if(null === value){
+            return sessionStorage.removeItem(key);
+        };;
+        sessionStorage.setItem(key, value);
+    };
+})();
 
 // 刷新本页面
 function refreshPage(){
@@ -122,7 +173,7 @@ function requestAjax(url, data, type, successCallback, errorCallback, isParseJSO
 	       if(errorCallback){
 	    	   errorCallback.apply(context, arguments);
 	       } else {
-	    	   alert("操作失败!");
+	    	   CNC.msg("操作失败!");
 	       };
 	    }
 	});

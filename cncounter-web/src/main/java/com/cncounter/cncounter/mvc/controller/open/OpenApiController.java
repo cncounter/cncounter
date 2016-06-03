@@ -1,8 +1,11 @@
 package com.cncounter.cncounter.mvc.controller.open;
 
+import com.cncounter.cncounter.config.QueryConditionMap;
+import com.cncounter.cncounter.model.other.User;
 import com.cncounter.cncounter.mvc.controller.base.ControllerBase;
 import com.cncounter.cncounter.mvc.msg.JSONMessage;
 import com.cncounter.cncounter.service.api.other.UserService;
+import com.cncounter.util.common.CNC;
 import com.cncounter.util.string.StringNumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.UUID;
 
 @Controller
 @RequestMapping(value = "/openapi")
@@ -35,13 +39,45 @@ public class OpenApiController extends ControllerBase {
 			message.setInfo("参数错误");
 			return message;
 		}
-		// 注册服务
+        //
+        QueryConditionMap<String, Object> params = new QueryConditionMap<String, Object>();
+        User condition = new User();
+        condition.setEmail(loginemail);
+        params.setCondition(condition);
+        //
+        int existsCount = userService.countBy(params);
+        if(existsCount > 0){
+            message.setFailure();
+            message.setInfo("账号已注册");
+            return message;
+        }
 
-		//
-		//message.setTotal(total);
-		message.addMeta("loginemail",loginemail);
-		message.setInfo("注册成功");
-		message.setSuccess();
+
+        // 业务逻辑。后期抽到Service
+		// 注册服务
+        String saltPassword = loginemail;
+        String password = CNC.getSaltPassword(loginpassword, saltPassword);
+        String uuid = UUID.randomUUID().toString();
+        //
+        User user = new User();
+        user.setEmail(loginemail);
+        user.setUsername(uuid);
+        user.setPassword(password);
+        user.setSaltPassword(saltPassword);
+        //
+        try{
+            int rows = userService.add(user);
+            //
+            //message.setTotal(total);
+            message.addMeta("loginemail", loginemail);
+            if(rows > 0){
+                message.setInfo("注册成功");
+                message.setSuccess();
+            }
+        } catch (Exception e){
+            message.setInfo("注册失败");
+            message.setFailure();
+        }
 		//
 		return message;
 	}
