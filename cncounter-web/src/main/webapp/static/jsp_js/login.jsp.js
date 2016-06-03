@@ -47,7 +47,7 @@ $(function(){
     //
     function ajaxRequestLogin(data){
         //
-        var url = "/openapi/login.json";
+        var url = "/system/login.json";
         //
         postAjax(url, data, successCallback, null, true);
         //

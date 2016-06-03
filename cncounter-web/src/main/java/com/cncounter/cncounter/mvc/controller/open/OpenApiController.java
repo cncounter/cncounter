@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.UUID;
 
 @Controller
 @RequestMapping(value = "/openapi")
@@ -48,7 +47,7 @@ public class OpenApiController extends ControllerBase {
         int existsCount = userService.countBy(params);
         if(existsCount > 0){
             message.setFailure();
-            message.setInfo("账号已注册");
+            message.setInfo("用户已注册");
             return message;
         }
 
@@ -57,7 +56,7 @@ public class OpenApiController extends ControllerBase {
 		// 注册服务
         String saltPassword = loginemail;
         String password = CNC.getSaltPassword(loginpassword, saltPassword);
-        String uuid = UUID.randomUUID().toString();
+        String uuid = getUUID();
         //
         User user = new User();
         user.setEmail(loginemail);

@@ -2,6 +2,8 @@ package com.cncounter.cncounter.mvc.controller.base;
 
 
 import com.cncounter.cncounter.dao.redis.api.RedisBaseDAO;
+import com.cncounter.cncounter.model.view.UserVO;
+import com.cncounter.util.spring.SpringContextHolder;
 import com.cncounter.util.string.StringNumberUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.beans.PropertyDescriptor;
 import java.io.Serializable;
@@ -27,8 +30,10 @@ public abstract class ControllerBase {
 	 * 会话中存储user信息的KEY
 	 */
 	public static final String SESSION_USER_KEY = "session_user_key";
+	public static final String SESSION_USERVO_KEY_PREFIX = "sessions:uservo:token:";
 	public static final String UTF_8 = "UTF-8";
 
+    private static final ThreadLocal<UserVO> currentLoginUser = new ThreadLocal<UserVO>();
     /**
      * 日志logger
      */
@@ -101,7 +106,7 @@ public abstract class ControllerBase {
 	 * @param name 属性名
 	 * @return
 	 */
-	public  Object getSessionAttribute(HttpServletRequest request, String name) {
+	public static  Object getSessionAttribute(HttpServletRequest request, String name) {
 		// 当前是基于单容器的实现
 		HttpSession session = request.getSession(true);
 		return session.getAttribute(name);
@@ -153,14 +158,43 @@ public abstract class ControllerBase {
 	 * @param request
 	 * @return
 	 */
-//	public  User getLoginUser(HttpServletRequest request) {
-//		User user = null;
-//		Object obj = getSessionAttribute(request, SESSION_USER_KEY);
-//		if(obj instanceof User){
-//			user = (User)obj;
-//		}
-//		return user;
-//	}
+	public static UserVO getLoginUser(HttpServletRequest request) {
+        UserVO userVo = currentLoginUser.get();
+        if(null != userVo){ return userVo; }
+        if(null == request ){ return null; }
+		Object obj = request.getAttribute(SESSION_USER_KEY);// getSessionAttribute(request, SESSION_USER_KEY);
+        //
+        if(null == obj){
+            // 获取 用户token
+            String token = getUserToken(request);
+            if(null == token || token.trim().isEmpty()){
+                return userVo;
+            }
+            String key = SESSION_USERVO_KEY_PREFIX + token;
+            //
+            RedisBaseDAO redisDAO = SpringContextHolder.getBean(RedisBaseDAO.class);
+            if(null == redisDAO){return userVo;}
+            obj = redisDAO.getObject(key);
+        }
+		if(obj instanceof UserVO){
+            userVo = (UserVO)obj;
+            request.setAttribute(SESSION_USER_KEY, userVo);
+		}
+		return userVo;
+	}
+
+    public static void clearThreadLoginUser(){
+        currentLoginUser.remove();
+    }
+
+
+    //
+    public void saveSessionUser(UserVO userVo){
+        if(null == userVo){return;}
+        String token = userVo.getToken();
+        String key = SESSION_USERVO_KEY_PREFIX + token;
+        saveToCache(key, userVo);
+    }
 
 	
 	/**
@@ -190,44 +224,6 @@ public abstract class ControllerBase {
 		String path = path(request);
 		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
 		return basePath;
-	}
-
-	/**
-	 * 获取参数或者Cookie
-	 * @param request
-	 * @param name
-	 * @return
-	 */
-	protected String getStringValue(HttpServletRequest request, String name){
-		// 1. 获取直接参数
-		String value = getParameter(request, name);
-		if(StringNumberUtil.notEmpty(value)){
-			return value;
-		}
-		// 2. 获取 cookie
-		value = getCookie(request, name);
-		if(StringNumberUtil.notEmpty(value)){
-			return value;
-		}
-		// 3. 获取session
-//		Object v = getSessionValue(request, name);
-//		if(StringNumberUtil.notEmpty(v)){
-//			return String.valueOf(v);
-//		}
-		// 4. 获取缓存
-//		v = getFromCache(name);
-//		if(StringNumberUtil.notEmpty(v)){
-//			return String.valueOf(v);
-//		}
-		//
-		return value;
-	}
-
-	public static String getCookie(HttpServletRequest request, String name){
-		Map<String, String> cookieMap = getCookies(request);
-		//
-		String value = cookieMap.get(name);
-		return value;
 	}
 
 	public static Map<String, String> getCookies(HttpServletRequest request){
@@ -281,18 +277,37 @@ public abstract class ControllerBase {
 	}
 
 
+    public static String getCookie(HttpServletRequest request, String name){
+        Map<String, String> cookieMap = getCookies(request);
+        //
+        String value = cookieMap.get(name);
+        return value;
+    }
 
-	public static Object getSessionValue(HttpServletRequest request, String name){
-		//
-		HttpSession session = request.getSession();
-		if(null == session){
-			return null;
-		}
-		Object value = session.getAttribute(name);
-		return value;
-	}
-	
+    public static void setCookie(HttpServletResponse response, String name, String value) {
+        //
+        Cookie cookie = new Cookie(name, value);
+        cookie.setMaxAge(30 * 24 * 60 * 60); // 过期时间
+        response.addCookie(cookie);
+    }
 
+    public static void setUserTokenCookie(HttpServletResponse response, String token) {
+        //
+        final String CNCTOKEN= "CNCTOKEN";
+        Cookie cookie = new Cookie(CNCTOKEN, token);
+        cookie.setMaxAge(30 * 24 * 60 * 60); // 过期时间
+        cookie.setPath("/");
+        response.addCookie(cookie);
+    }
+
+    public static String getUserToken(HttpServletRequest request) {
+        //
+        final String CNCTOKEN= "CNCTOKEN";
+        //
+        String value = getCookie(request, CNCTOKEN);
+
+        return value;
+    }
 	/**
 	 * 获取int类型参数
 	 * @param request

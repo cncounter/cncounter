@@ -11,6 +11,7 @@ public class CNC {
 
     public static String getSaltPassword(String password, String salt){
         String saltPassword = MD5Util.md5(password + salt);
+        // 此处，可以循环N次,增加暴力计算的计算难度
         return saltPassword;
     }
 

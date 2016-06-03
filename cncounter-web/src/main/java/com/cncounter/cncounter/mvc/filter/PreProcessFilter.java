@@ -1,6 +1,7 @@
 package com.cncounter.cncounter.mvc.filter;
 
 import com.cncounter.cncounter.config.WebSiteConfig;
+import com.cncounter.cncounter.mvc.controller.base.ControllerBase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -31,13 +32,19 @@ public class PreProcessFilter implements Filter {
         try {
             preProcess(request, response, chain);
         } catch (Throwable e){
-            //
+            logger.warn("preProcess:",e);
         }
         chain.doFilter(request,response);
+        try {
+            afterProcess(request, response);
+        } catch (Throwable e){
+            logger.warn("afterProcess:",e);
+        }
     }
 
     private final void preProcess(ServletRequest request, ServletResponse response, FilterChain chain){
-
+        //
+        ControllerBase.clearThreadLoginUser();
         //
         if(request instanceof HttpServletRequest){
             HttpServletRequest req = (HttpServletRequest)request;
@@ -48,6 +55,13 @@ public class PreProcessFilter implements Filter {
             req.setAttribute(KEY_ORIG_REQUEST_URI, origURI);
             req.setAttribute(KEY_ORIG_REQUEST_URL, origURL);
         }
+    }
+
+
+
+    private final void afterProcess(ServletRequest request, ServletResponse response){
+        //
+        ControllerBase.clearThreadLoginUser();
     }
 
     @Override

@@ -1,3 +1,5 @@
+<%@ page import="com.cncounter.cncounter.model.view.UserVO" %>
+<%@ page import="com.cncounter.cncounter.mvc.controller.base.ControllerBase" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="basePath.jsp"%>
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -17,15 +19,22 @@
         
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="<%=path %>/login.php">登录</a></li>
-            <%--
-            	如果是已登录用户,则应该切换为显示用户昵称,以及退出按钮
-             --%>
-             <%--
-             
-            <li><a href="<%=h_path %>/login.php">tiemaocsdn</a></li>
-            <li><a href="<%=h_path %>/login.php">退出</a></li>
-              --%>
+            <%
+                UserVO userVO = ControllerBase.getLoginUser(request);
+                if(null == userVO){
+            %>
+              <li><a href="<%=path %>/login.php">登录</a></li>
+            <%
+                } else {
+            %>
+              <%--
+                  如果是已登录用户,则应该切换为显示用户昵称,以及退出按钮
+               --%>
+              <li><a href="<%=path %>/userInfo.php"><%=userVO.getEmail()%></a></li>
+              <li><a href="<%=path %>/logout.php">退出</a></li>
+            <%
+                }
+            %>
           </ul>
         </div>
       </div>
