@@ -6,6 +6,7 @@ import com.cncounter.cncounter.model.view.UserVO;
 import com.cncounter.cncounter.mvc.controller.base.ControllerBase;
 import com.cncounter.cncounter.mvc.msg.JSONMessage;
 import com.cncounter.cncounter.service.api.other.UserService;
+import com.cncounter.util.common.CNC;
 import com.cncounter.util.string.StringNumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -67,6 +68,21 @@ public class SystemLoginController extends ControllerBase {
         // 比对
 		// 获取用户
 		User user = existsCount.get(0);
+        // 比对密码
+        String password = user.getPassword();
+        String salt = user.getSaltPassword();
+        //
+        String saltedpass = CNC.getSaltPassword(loginpassword, salt);
+        if(null == password){
+
+        } else if(password.equalsIgnoreCase(saltedpass)){
+            //
+        } else {
+            // 认为登录失败
+            return message.setFailure().setInfo("用户密码错误");
+        }
+
+        //
         UserVO userVO = UserVO.from(user);
 		//
 		String token = getUUID();
