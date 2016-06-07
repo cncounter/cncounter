@@ -17,6 +17,7 @@
         <spring.version>4.0.7.RELEASE</spring.version>
         <spring.data.redis.version>1.4.0.RELEASE</spring.data.redis.version>
         <jedis.version>2.5.2</jedis.version>
+        <spring.session.version>1.2.0.RELEASE</spring.session.version>
         <shiro.version>1.2.4</shiro.version>
 
         <mybatis.version>3.2.7</mybatis.version>
@@ -192,6 +193,11 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-redis</artifactId>
             <version>${spring.data.redis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session</artifactId>
+            <version>${spring.session.version}</version>
         </dependency>
 
         <dependency>

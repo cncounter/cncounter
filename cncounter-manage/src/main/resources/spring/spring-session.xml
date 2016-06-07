@@ -14,21 +14,8 @@
 		http://www.springframework.org/schema/context 
 		http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-	<!-- Activates annotation-based bean configuration -->
-	<context:annotation-config />
-	<!-- Scans for application @Components to deploy -->
-	<context:component-scan base-package="com.cncounter">
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-    </context:component-scan>
+    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>
 
-    <!-- 引入属性文件 -->
-	<context:property-placeholder ignore-unresolvable="true" location="classpath:config/*.properties" />
-
-    <import resource="classpath:spring/spring-datasource.xml"/>
-    <import resource="classpath:spring/spring-redis.xml"/>
-    <import resource="classpath:spring/spring-session.xml"/>
-
-    <!-- 持有Spring上下文环境的类 -->
-    <bean id="springContextHolder" class="com.cncounter.util.spring.SpringContextHolder" />  
+    <!--<bean class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"/>-->
 
 </beans>

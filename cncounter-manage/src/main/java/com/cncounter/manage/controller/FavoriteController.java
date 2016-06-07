@@ -5,22 +5,20 @@
  */
 package com.cncounter.manage.controller;
 
-import java.util.*;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
+import com.cncounter.manage.model.Favorite;
+import com.cncounter.manage.mvc.controller.base.ControllerBase;
+import com.cncounter.manage.mvc.msg.JSONMessage;
+import com.cncounter.manage.service.FavoriteService;
+import com.cncounter.util.common.StringNumberUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.cncounter.manage.mvc.controller.base.ControllerBase;
-import com.cncounter.util.common.StringNumberUtil;
-import com.cncounter.manage.mvc.msg.JSONMessage;
-import com.cncounter.manage.model.Favorite;
-import com.cncounter.manage.service.FavoriteService;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @version 1.0
@@ -46,6 +44,8 @@ public class FavoriteController extends ControllerBase {
 		JSONMessage jsonMessage = JSONMessage.successMessage();
 		jsonMessage.setTotal(count);
 		jsonMessage.setData(favoriteList);
+        //logger.info("Attr:test:" + request.getSession().getAttribute("test"));
+        //request.getSession().setAttribute("test", "testXXX");
 
 		return jsonMessage;
 	}

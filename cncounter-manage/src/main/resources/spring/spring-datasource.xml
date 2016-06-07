@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!-- 配置Druid数据源 -->
+    <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+          init-method="init" destroy-method="close">
+        <!-- 基本属性 url、user、password -->
+        <property name="url" value="${url}" />
+        <!-- 渣渣,这里value直接是 ${username} 会搞成操作系统用户,Spring在搞毛线 -->
+        <property name="username" value="${dbusername}" />
+        <property name="password" value="${password}" />
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="${initialSize}" />
+        <property name="maxActive" value="${maxActive}" />
+        <property name="minIdle" value="${minIdle}" />
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="10000" />
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="30000" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="60000" />
+        <!-- 连接有效性测试 -->
+        <property name="validationQuery" value="${validationQuery}" />
+        <property name="testOnBorrow" value="true" />
+        <property name="testOnReturn" value="false" />
+        <property name="testWhileIdle" value="true" />
+        <!-- 强行关闭长时间不归还的连接,防止泄露,单位秒 -->
+        <property name="removeAbandoned" value="true" />
+        <property name="removeAbandonedTimeout" value="1800" />
+        <property name="logAbandoned" value="true" />
+        <!-- 提示Druid数据源需要对数据库密码进行解密 -->
+        <property name="connectionProperties" value="config.decrypt=${config.decrypt}" />
+        <!-- Oracle，则把poolPreparedStatements配置为true;		-->
+        <property name="poolPreparedStatements" value="false" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+        <property name="filters" value="config,mergeStat" />
+    </bean>
+
+    <!-- myBatis sqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:spring/MybatisMapConfig.xml"></property>
+        <!-- 表示在包或所有子目录中，以 *Mapper.xml结尾所有文件 -->
+        <property name="mapperLocations">
+            <value>classpath*:com/cncounter/**/*Mapper.xml</value>
+        </property>
+    </bean>
+    <!-- 自动扫描下面的组件, 接口上需要注解 @Component("bean的id") -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.cncounter.manage.dao.mysql" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+    </bean>
+
+    <!-- 使用annotation注解方式配置事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    <!-- 配置事务管理器,使用JDBC事务 -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- 配置_Druid和Spring关联监控 -->
+    <bean id="druid-stat-interceptor"
+          class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
+    </bean>
+    <bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"
+          scope="prototype">
+        <property name="patterns">
+            <list>
+                <value>com.cncounter.manage.service.impl.*</value>
+            </list>
+        </property>
+    </bean>
+    <aop:config>
+        <aop:advisor advice-ref="druid-stat-interceptor"
+                     pointcut-ref="druid-stat-pointcut" />
+    </aop:config>
+
+
+</beans>

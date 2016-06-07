@@ -2,6 +2,8 @@ package com.cncounter.manage.mvc.controller.base;
 
 
 import com.cncounter.manage.dao.redis.RedisBaseDAO;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.Cookie;
@@ -26,6 +28,8 @@ public abstract class ControllerBase {
 	public static final String UTF_8 = "UTF-8";
     public static final String KEY_START = "_start";
     public static final String KEY_PAGESIZE = "_pageSize";
+
+    protected Log logger = LogFactory.getLog(this.getClass());
 
 	@Autowired
 	private RedisBaseDAO redisBaseDAO;
