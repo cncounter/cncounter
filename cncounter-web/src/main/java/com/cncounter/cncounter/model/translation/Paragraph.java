@@ -5,6 +5,7 @@ import com.cncounter.cncounter.model.translation.api.TranslationApi;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,6 +13,15 @@ import java.util.regex.Pattern;
  * 段落
  */
 public class Paragraph extends TranslationElement {
+    //
+    public static final ExecutorService threadPool = Executors.newFixedThreadPool(10, new ThreadFactory() {
+        @Override
+        public Thread newThread(Runnable r) {
+            Thread thread = new Thread(r);
+            thread.setDaemon(true);
+            return thread;
+        }
+    });
 
     public static int LEN_LIMIT = 200;
     // 问号，句号
@@ -399,7 +409,7 @@ public class Paragraph extends TranslationElement {
      * @param translationApi
      */
     @Override
-    public void translation(TranslationApi translationApi) {
+    public void translation(final TranslationApi translationApi) {
         //? 根据原内容,拆分到段落元素中
         // 依次遍历子元素，然后执行翻译， 接着写入译文内容
         // 如果符合不翻译规则, 则不翻译:
@@ -411,17 +421,40 @@ public class Paragraph extends TranslationElement {
             this.setTranslationContent("");
             return;
         }
+        if(null == paraElementList || paraElementList.isEmpty()){
+            return;
+        }
         //
         StringBuilder builder = new StringBuilder();
+        // 栅栏
+        final CountDownLatch latch = new CountDownLatch(paraElementList.size());
         //
         Iterator<TranslationElement> iteratorT = paraElementList.iterator();
         while(iteratorT.hasNext()){
-            TranslationElement element = iteratorT.next();
-            //
-            element.translation(translationApi);
-            //
+            final TranslationElement element = iteratorT.next();
+
+            Future future = threadPool.submit(new Runnable() {
+                @Override
+                public void run() {
+                    element.translation(translationApi);
+                    latch.countDown();
+                }
+            });
+            // future.get(); // 等待
+            // futureList.add(future);
+        }
+        // 最长等待3分钟
+        try {
+            latch.await(3, TimeUnit.MINUTES);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // 获取内容
+        Iterator<TranslationElement> iteratorT2 = paraElementList.iterator();
+        while(iteratorT2.hasNext()){
+            final TranslationElement element = iteratorT2.next();
             String dest = element.getTranslationContent();
-            //
             builder.append(dest);
         }
         //
