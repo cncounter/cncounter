@@ -107,6 +107,10 @@
                 //
                 if(0 === content.indexOf(http)){
                     window.open(content);
+                } else if(0 === content.indexOf("//")){
+                    window.open(location.protocol + content);
+                } else {
+                    window.open(location.protocol + "//"+content);
                 }
             });
 		});
