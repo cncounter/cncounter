@@ -24,6 +24,9 @@
 				<a target="_blank" href="../druid/weburi.html">Druid监控页面</a>
 			</h2>
 			<h2>
+				<a target="_blank" href="./snoop.jsp">snoop,WebApp监测页面</a>
+			</h2>
+			<h2>
 				<a target="_blank" href="./apitest/index.jsp">API测试页面目录</a>
 			</h2>
 			<h2>
