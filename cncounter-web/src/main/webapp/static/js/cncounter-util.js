@@ -93,6 +93,20 @@ function loadMd5Utils(){
 
 
 
+// 跳转到HTTPS(参数:需要跳转的域名)
+function toHttps(REDIRECT_HOSTNAME){
+    var HTTP_PROTOCOL = "http:";
+    var HTTPS_PROTOCOL = "https:";
+    //
+    var protocol = location.protocol;
+    var hostname = location.hostname;
+    var href = location.href;
+    if(REDIRECT_HOSTNAME === hostname && HTTP_PROTOCOL === protocol){
+        // 替换为https
+        var url = href.replace(HTTP_PROTOCOL, HTTPS_PROTOCOL);
+        location.replace(url);
+    }
+};
 
 //////////////////////////////////////////////////////////////////////////////////////
 ///////// 工具函数

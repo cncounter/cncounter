@@ -1,3 +1,7 @@
+;(function(){
+    var CNC_HOSTNAME = "www.cncounter.com";
+    toHttps(CNC_HOSTNAME);
+})();
 
 $(function(){
     //
