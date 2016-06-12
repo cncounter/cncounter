@@ -100,7 +100,7 @@
 				默认查找  WEB-INF/{servlet-name}-servlet.xml 配置文件
 			 -->
             <param-name>contextConfigLocation</param-name> 
-			<param-value>classpath:spring/Spring-mvc.xml</param-value>
+			<param-value>classpath:spring/spring-mvc.xml</param-value>
         </init-param>  
 	</servlet>
 	<servlet-mapping>
