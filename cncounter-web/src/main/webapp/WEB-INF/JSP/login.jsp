@@ -34,6 +34,11 @@
        <button id="btn_login" class="btn btn-lg btn-primary btn-block" type="button">登录 CNCounter</button>
        <a class="btn btn-lg btn-warning btn-block"  href="<%=path %>/signup.php">没有账号?点击注册</a>
      </form>
+	 <div class="form-signin">
+		<a href="/user/login?type=qq&amp;rdurl=http://www.cncounter.com/openapi">
+		<img src="/static/image/qq_logo_4.png?v=080d9.png" alt="腾讯QQ">
+		</a>
+	 </div>
   </div> <!-- /container -->
   <script src="/static/jsp_js/login.jsp.js"></script>
 </body>
