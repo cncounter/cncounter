@@ -62,6 +62,16 @@ public class Paragraph extends TranslationElement {
             //
             return elementList;
         }
+
+        if(isPreCode(content)){
+            List<TranslationElement> sentenceList = content2SingleSentence(content);
+
+            if(null != sentenceList){
+                elementList.addAll(sentenceList);
+            }
+            //
+            return elementList;
+        }
         // 处理 ol, ul
         if(isOL_UL(content)){
             List<TranslationElement> sentenceList = parseOL_UL(content);
@@ -238,6 +248,33 @@ public class Paragraph extends TranslationElement {
 
         //
         return  match;
+    }
+
+    // 整个段落是代码
+    private static boolean isPreCode(String content) {
+        //
+        content = content.trim().replace("\r\n","\n");
+        String codeWraper = "```";
+        String singleCodeWraper = "`";
+        String[] lineArray = content.split("\n");
+        int lineSize = lineArray.length;
+        if(1 == lineSize){
+            if(content.startsWith(singleCodeWraper) && content.endsWith(singleCodeWraper)){
+                return true;
+            }
+        } else if(lineSize > 1){
+            //
+            String startLine = lineArray[0];
+            String endLine = lineArray[lineSize - 1];
+            if(startLine.equals(codeWraper)){
+                return true;
+            } else if(endLine.equals(codeWraper)){
+                return true;
+            }
+        }
+        //
+        //
+        return false;
     }
     // 处理大于号GT
     private static boolean isGT(String content) {
