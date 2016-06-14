@@ -4,6 +4,7 @@
 <html lang="zh-CN">
 <head>
 	<title>CN计数器 - CNCounter</title>
+    <meta property="qc:admins" content="515131327763637564526375" />
 	<jsp:include page="/common/cssjs.jsp"></jsp:include>
 </head>
 <body>
