@@ -322,6 +322,22 @@ public abstract class ControllerBase {
 
         return value;
     }
+
+
+    public void expireUserTokenCookie(HttpServletRequest request, HttpServletResponse response) {
+        //
+        String token = getUserToken(request);
+        final String CNCTOKEN= "CNCTOKEN";
+        Cookie cookie = new Cookie(CNCTOKEN, token);
+        cookie.setMaxAge(-1); // 立即过时
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+        //
+        String key = SESSION_USERVO_KEY_PREFIX + token;
+        redisBaseDAO.deleteByKey(key);
+
+    }
 	/**
 	 * 获取int类型参数
 	 * @param request

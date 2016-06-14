@@ -113,8 +113,12 @@ public class PublicPageController extends ControllerBase {
     }
 	@RequestMapping({"/logout.php","/signout.php"})
 	public ModelAndView signoutPage(HttpServletRequest request, HttpServletResponse response) {
-		// 输入页面
-		ModelAndView mav = new ModelAndView("logout");
+        // 退出登录
+        // 删除 token?
+        super.expireUserTokenCookie(request, response);
+        // 删除用户登录信息
+        // 跳转到登录页面
+		ModelAndView mav = new ModelAndView("login");
 
 		return mav;
 	}
