@@ -91,3 +91,41 @@ Windows下Redis项目: [https://github.com/MSOpenTech/redis](https://github.com/
 当然,目录里面也有一些word文档, 有兴趣可以读一读.
 
 更多信息,请参考: [renfufei的专栏-Redis: http://blog.csdn.net/renfufei/article/category/2470713](http://blog.csdn.net/renfufei/article/category/2470713)
+
+
+### 7. Linux下的安装 
+
+* 确保安装了 gcc
+
+	sudo yum install gcc -y
+
+* 参考官方说明: [http://redis.io/download](http://redis.io/download)
+
+* 如果编译报错，则可以使用:
+
+	make MALLOC=libc
+
+* 后台启动: 
+
+	src/redis-server redis.conf &
+
+再输入一次回车则回到命令行界面.
+
+* 关闭:
+
+	src/redis-cli
+	shutdown
+	quit
+
+* 允许公网访问
+
+编辑 redis.conf 文件,注释掉下面的语句:
+
+	# bind 127.0.0.1
+
+并修改保护模式(3.0+):
+
+
+	protected-mode no
+
+
