@@ -39,7 +39,7 @@ public class OpenApiController extends ControllerBase {
 			return message;
 		}
         //
-        QueryConditionMap<String, Object> params = new QueryConditionMap<String, Object>();
+        QueryConditionMap params = QueryConditionMap.newInstance();
         User condition = new User();
         condition.setEmail(loginemail);
         params.setCondition(condition);

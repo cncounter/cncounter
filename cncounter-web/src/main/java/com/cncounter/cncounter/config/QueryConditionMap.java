@@ -5,13 +5,17 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 查询条件Map
  */
-public class QueryConditionMap<K, V> extends ConcurrentHashMap{
-    public static String CONDITION_KEY = "_bean";
+public class QueryConditionMap extends ConcurrentHashMap<String, Object>{
+    public static final String CONDITION_KEY = "_bean";
+
+    public static final QueryConditionMap newInstance(){
+        return new QueryConditionMap();
+    }
 
     public void setCondition(Object bean){
-        super.put(CONDITION_KEY, bean);
+        this.putCondition(bean);
     }
     public void putCondition(Object bean){
-        this.setCondition(bean);
+        super.put(CONDITION_KEY, bean);
     }
 }
