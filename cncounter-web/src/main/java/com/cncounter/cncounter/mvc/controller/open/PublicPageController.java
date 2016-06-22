@@ -1,5 +1,6 @@
 package com.cncounter.cncounter.mvc.controller.open;
 
+import com.cncounter.cncounter.model.view.UserVO;
 import com.cncounter.cncounter.mvc.controller.base.ControllerBase;
 import com.qq.connect.QQConnectException;
 import com.qq.connect.api.OpenID;
@@ -75,14 +76,24 @@ public class PublicPageController extends ControllerBase {
                 OpenID openIDObj =  new OpenID(accessToken);
                 String openID = openIDObj.getUserOpenID();
 
-                request.getSession().setAttribute("demo_openid", openID);
+                //request.getSession().setAttribute("demo_openid", openID);
                 // 利用获取到的accessToken 去获取当前用户的openid --------- end
 
                 UserInfo qzoneUserInfo = new UserInfo(accessToken, openID);
                 UserInfoBean userInfoBean = qzoneUserInfo.getUserInfo();
                 if (userInfoBean.getRet() == 0) {
-                    setCookie(response, "CNC_qq_openID", openID);
-                    saveToCache("qq:openID:" + openID, userInfoBean);
+                    //setCookie(response, "CNC_qq_openID", openID);
+                    //saveToCache("qq:openID:" + openID, userInfoBean);
+                    //
+                    String token = "qq_openid_"+openID;
+                    UserVO userVO = new UserVO();
+                    userVO.setToken(token);
+                    userVO.setRealName(userInfoBean.getNickname());
+                    //
+                    super.currentLoginUser.set(userVO);
+                    super.saveSessionUser(userVO);
+                    super.setUserTokenCookie(response, token);
+                    //
                     String redirectUrl = "http://www.cncounter.com";
                     response.sendRedirect(redirectUrl);
                 } else {

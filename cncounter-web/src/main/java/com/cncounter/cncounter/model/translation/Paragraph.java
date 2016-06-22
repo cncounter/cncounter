@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  */
 public class Paragraph extends TranslationElement {
     //
-    public static final ExecutorService threadPool = Executors.newFixedThreadPool(10, new ThreadFactory() {
+    public static final ExecutorService threadPool = Executors.newFixedThreadPool(2, new ThreadFactory() {
         @Override
         public Thread newThread(Runnable r) {
             Thread thread = new Thread(r);

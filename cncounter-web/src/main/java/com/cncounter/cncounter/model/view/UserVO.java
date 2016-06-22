@@ -69,6 +69,13 @@ public class UserVO implements Serializable {
     public String getRealName() {
         return realName;
     }
+    public String getNickName() {
+        if(null != realName){
+            return realName;
+        } else {
+            return email;
+        }
+    }
 
     public void setRealName(String realName) {
         this.realName = realName;

@@ -33,7 +33,7 @@ public abstract class ControllerBase {
 	public static final String SESSION_USERVO_KEY_PREFIX = "sessions:uservo:token:";
 	public static final String UTF_8 = "UTF-8";
 
-    private static final ThreadLocal<UserVO> currentLoginUser = new ThreadLocal<UserVO>();
+    protected static final ThreadLocal<UserVO> currentLoginUser = new ThreadLocal<UserVO>();
     /**
      * 日志logger
      */
@@ -500,15 +500,15 @@ public abstract class ControllerBase {
 	 */
 	public static Map<String, Object> parseParamMapObject(HttpServletRequest request){
 		//
-		Map<String, String> map = parseParamMap(request);
-		Map<String, Object> map2 = new HashMap<String, Object>(map);
+		Map<String, String> paramMap = parseParamMap(request);
+		Map<String, Object> map2 = new HashMap<String, Object>(paramMap);
 		//
 		return map2;
 	}
 
 	public static Map<String, String> parseParamMap(HttpServletRequest request, boolean empty2null){
 		//
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> paramMap = new HashMap<String, String>();
 		//
 		if(null != request){
 			Enumeration<String> enumeration = request.getParameterNames();
@@ -527,12 +527,12 @@ public abstract class ControllerBase {
 				if(empty2null && StringNumberUtil.isEmpty(paraValue)){
 					// 不设置值
 				} else {
-					map.put(paraName, paraValue);
+                    paramMap.put(paraName, paraValue);
 				}
 			}
 		}
 		//
-		return map;
+		return paramMap;
 	}
 	/**
 	 * 解析request中的参数Map
@@ -541,8 +541,8 @@ public abstract class ControllerBase {
 	 */
 	@SuppressWarnings("unchecked")
 	protected static Map<String, String> parseParamMap(HttpServletRequest request){
-		Map<String, String> map = parseParamMap(request, false);
-		return map;
+		Map<String, String> paramMap = parseParamMap(request, false);
+		return paramMap;
 	}
 }
 

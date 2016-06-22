@@ -14,9 +14,12 @@
 			<h2>
 				<a target="_self" href="/tools/translation.php">Markdown文章翻译</a>
 			</h2>
-			<h2>
-				<a target="_blank" href="./getLocalIP.jsp">获取局域网IP-LAN</a>
-			</h2>
+            <h2>
+                <a target="_blank" href="../tools/download.php">代理下载</a>
+            </h2>
+            <h2>
+                <a target="_blank" href="./getLocalIP.jsp">获取局域网IP-LAN</a>
+            </h2>
 			<h2>
 				<a target="_blank" href="./apitest/config/websiteconfig.jsp">开启调试模式</a>
 			</h2>

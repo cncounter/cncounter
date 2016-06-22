@@ -14,7 +14,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="<%=path %>/">CN计数器</a>
+          <a class="navbar-brand" href="http:<%=basePath %>">CN计数器</a>
         </div>
         
         <div id="navbar" class="collapse navbar-collapse">
@@ -23,14 +23,14 @@
                 UserVO userVO = ControllerBase.getLoginUser(request);
                 if(null == userVO){
             %>
-              <li><a href="<%=path %>/login.php">登录</a></li>
+              <li><a href="https:<%=basePath %>login.php">登录</a></li>
             <%
                 } else {
             %>
               <%--
                   如果是已登录用户,则应该切换为显示用户昵称,以及退出按钮
                --%>
-              <li><a href="<%=path %>/userInfo.php"><%=userVO.getEmail()%></a></li>
+              <li><a href="<%=path %>/userInfo.php"><%=userVO.getNickName()%></a></li>
               <li><a href="<%=path %>/logout.php">退出</a></li>
             <%
                 }
