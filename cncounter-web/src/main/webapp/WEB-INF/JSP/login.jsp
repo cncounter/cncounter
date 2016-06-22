@@ -13,6 +13,11 @@
   	<%-- 必须AJAX --%>
      <form class="form-signin" role="form" method="post" action="<%=path %>/login.php">
        <h2 class="form-signin-heading">用户登录</h2>
+         <div class="form-signin" style="text-align: center;">
+             <a href="/qqlogin.php">
+                 <img src="/static/image/qq_logo_4.png?v=080d9.png" alt="腾讯QQ">
+             </a>
+         </div>
        <div>
          <label for="loginemail">
                    登录邮箱<span class="required">:</span>
@@ -34,11 +39,6 @@
        <button id="btn_login" class="btn btn-lg btn-primary btn-block" type="button">登录 CNCounter</button>
        <a class="btn btn-lg btn-warning btn-block"  href="<%=path %>/signup.php">没有账号?点击注册</a>
      </form>
-	 <div class="form-signin">
-		<a href="/qqlogin.php">
-		    <img src="/static/image/qq_logo_4.png?v=080d9.png" alt="腾讯QQ">
-		</a>
-	 </div>
   </div> <!-- /container -->
   <script src="/static/jsp_js/login.jsp.js"></script>
 </body>

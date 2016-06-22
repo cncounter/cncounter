@@ -302,6 +302,7 @@ public abstract class ControllerBase {
         //
         Cookie cookie = new Cookie(name, value);
         cookie.setMaxAge(30 * 24 * 60 * 60); // 过期时间
+        cookie.setPath("/");
         response.addCookie(cookie);
     }
 

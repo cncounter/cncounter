@@ -1,0 +1,29 @@
+
+cd /dev/shm
+
+rz
+
+rm /usr/local/cncounter_webapp/cncounter-web.war
+
+mv /dev/shm/cncounter-web.war /usr/local/cncounter_webapp/
+
+cd /usr/local/cncounter_webapp
+
+rm __cncounter-web -rf 
+
+mv _cncounter-web __cncounter-web 
+
+/usr/local/tomcat7/bin/shutdown.sh 
+
+
+mv cncounter-web _cncounter-web 
+
+unzip cncounter-web.war -d cncounter-web
+
+
+/usr/local/tomcat7/bin/startup.sh 
+
+
+netstat -ntl | grep 8080 
+
+
