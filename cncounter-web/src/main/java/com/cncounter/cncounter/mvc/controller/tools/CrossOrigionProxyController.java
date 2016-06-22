@@ -89,14 +89,14 @@ public class CrossOrigionProxyController extends ControllerBase {
             if(StringNumberUtil.notEmpty(origfileurl)){
                 URL url = new URL(origfileurl);
                 String path = url.getPath();
-                if(null == path){
+                if(null == path || path.trim().isEmpty()){
                     return JSONMessage.failureMessage().setInfo("只支持 http 协议");
                 }
                 targetfilename = path.substring(path.lastIndexOf("/"));
-                while(targetfilename.startsWith("/")){
-                    targetfilename = targetfilename.substring(1);
-                }
             }
+        }
+        while(null != targetfilename && targetfilename.startsWith("/")){
+            targetfilename = targetfilename.substring(1);
         }
         //
         if(targetfilename.endsWith(".jsp")){
@@ -126,6 +126,7 @@ public class CrossOrigionProxyController extends ControllerBase {
         Map<String, String> paramMap =parseParamMap(request);
         //
         String origfileurl = paramMap.get("origfileurl");
+        logger.debug("origfileurl:\n"+origfileurl);
         if(StringNumberUtil.isEmpty(origfileurl)){
             return JSONMessage.failureMessage().setInfo("origfileurl为空");
         } else if(false == origfileurl.startsWith("http")){
@@ -141,14 +142,18 @@ public class CrossOrigionProxyController extends ControllerBase {
                 return JSONMessage.failureMessage().setInfo("只支持 http 协议");
             }
             targetfilename = path.substring(path.lastIndexOf("/"));
-            while(targetfilename.startsWith("/")){
-                targetfilename = targetfilename.substring(1);
-            }
+        }
+        while(null != targetfilename && targetfilename.startsWith("/")){
+            targetfilename = targetfilename.substring(1);
         }
         //
         if(targetfilename.endsWith(".jsp")){
             // 暂时不管
             //return JSONMessage.failureMessage().setInfo("不支持 jsp 文件下载");
+        }
+        if(targetfilename.trim().isEmpty()){
+            // 暂时不管
+            return JSONMessage.failureMessage().setInfo("不支持目录下载");
         }
         File targetDirectory = new File(targetDirectoryStr);
         if(!targetDirectory.exists()){
