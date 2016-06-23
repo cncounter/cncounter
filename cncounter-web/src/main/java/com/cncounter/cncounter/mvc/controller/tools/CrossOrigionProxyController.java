@@ -182,8 +182,21 @@ public class CrossOrigionProxyController extends ControllerBase {
                 //
                 FileOutputStream outputStream = null;
                 try{
-                    outputStream = new FileOutputStream(targetFile);
+                    // 需要下载到temp,再 rename
+                    //
+                    String targetFullPath = targetFile.getAbsolutePath();
+                    //
+                    String TMP = ".tmp";
+                    String tempFullPath = targetFullPath + TMP;
+                    //
+                    outputStream = new FileOutputStream(tempFullPath);
                     IOUtils.copy(inputStream, outputStream);
+                    //
+                    File tempFile = new File(tempFullPath);
+                    if(tempFile.exists()){
+                        tempFile.renameTo(targetFile);
+                    }
+                    //
                 } catch (Throwable e){
                     logger.error("下载文件失败.", e);
                 }finally {
@@ -193,7 +206,7 @@ public class CrossOrigionProxyController extends ControllerBase {
             }
         });
         //
-        return JSONMessage.successMessage().setInfo("文件下载成功")
+        return JSONMessage.successMessage().setInfo("文件正在下载")
                 .addMeta("downloadurl",downloadPrefix + targetfilename);
     }
 	
