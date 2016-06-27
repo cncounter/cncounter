@@ -44,8 +44,18 @@ public class FavoriteController extends ControllerBase {
 		JSONMessage jsonMessage = JSONMessage.successMessage();
 		jsonMessage.setTotal(count);
 		jsonMessage.setData(favoriteList);
-        //logger.info("Attr:test:" + request.getSession().getAttribute("test"));
-        //request.getSession().setAttribute("test", "testXXX");
+        //
+        Object calltimes = request.getSession().getAttribute("calltimes");
+        if(calltimes instanceof Integer){
+            calltimes = (Integer)calltimes + 1;
+        } else {
+            calltimes = 0;
+        }
+        jsonMessage.addMeta("calltimes", calltimes);
+        //
+        logger.info("Attr:test:" + request.getSession().getAttribute("test"));
+        request.getSession().setAttribute("test", "testXXX");
+        request.getSession().setAttribute("calltimes", calltimes);
 
 		return jsonMessage;
 	}
