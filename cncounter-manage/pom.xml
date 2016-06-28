@@ -164,12 +164,6 @@
             <artifactId>mybatis</artifactId>
             <version>${mybatis.version}</version>
         </dependency>
-        <!-- mybatis分页插件 -->
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper</artifactId>
-            <version>${pagehelper.version}</version>
-        </dependency>
 
         <!-- mybatis 与 spring的桥接,好像Spring3.0需要,4.0推荐使用注解方式来集成, -->
         <dependency>
