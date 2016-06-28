@@ -28,6 +28,7 @@
 
     <import resource="classpath:spring/spring-datasource.xml"/>
     <import resource="classpath:spring/spring-redis.xml"/>
+    <import resource="classpath:spring/spring-session.xml"/>
 
     <!-- 持有Spring上下文环境的类 -->
     <bean id="springContextHolder" class="com.cncounter.util.spring.SpringContextHolder" />  
