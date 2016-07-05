@@ -12,7 +12,7 @@
 	<jsp:include page="/common/header.jsp"></jsp:include>
 	<div class="container-fluid">
 		<div class="content_left">
-			<p class="h1">代理下载</p>
+			<p class="h1">代理VPN下载</p>
 			<div>
 				<form id="input_form" action="<%=basePath %>crossorigion/download/genfileurl.json" method="post">
 					<span>请输入需要下载的URL地址:</span>
@@ -33,7 +33,18 @@
                 <br/>
 			</div>
 			<div class="qrcode-jpeg-area">
-				下载地址: <a id="file_download_anchor" target="_blank">
+                <div>
+                    <h3>使用说明</h3>
+                    <ol>
+                        <li>输入下载URL</li>
+                        <li>如果下载URL默认文件名不对，可以输入自定义文件名</li>
+                        <li>点击后台下载</li>
+                        <li>等待服务器,点击下载地址后面的链接</li>
+                        <li>如果文件较大，或者下载速度慢,需要一段时间后链接才有文件(隔一会再试)</li>
+                    </ol>
+                </div>
+                <span>下载地址:</span>
+				 <a id="file_download_anchor" target="_blank">
 				</a>
 			</div>
 		</div>
