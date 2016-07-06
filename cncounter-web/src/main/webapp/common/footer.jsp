@@ -10,19 +10,19 @@
 		CN计数 | cncounter |
 		<a target="_blank" href="<%=path %>/test/index.jsp">&copy;</a>
 		2014 - <%=f_year %>
-		|
-        <a href="http://www.ip138.com/ips1388.asp" title="IP138查询API" class="ip138area" target="_blank">
-            <span class="clientip">-</span>
-        </a>
-        <script type="text/javascript">
-            //
-            (function(){
-                return window.setTimeout(getIp, 10);
-                function getIp(){
-                    CNC.getIpPostion(CNC.showIpInfo);
-                };
-            })();
-        </script>
+		<%--|--%>
+        <%--<a href="http://www.ip138.com/ips1388.asp" title="IP138查询API" class="ip138area" target="_blank">--%>
+            <%--<span class="clientip">-</span>--%>
+        <%--</a>--%>
+        <%--<script type="text/javascript">--%>
+            <%--//--%>
+            <%--(function(){--%>
+                <%--return window.setTimeout(getIp, 10);--%>
+                <%--function getIp(){--%>
+                    <%--CNC.getIpPostion(CNC.showIpInfo);--%>
+                <%--};--%>
+            <%--})();--%>
+        <%--</script>--%>
 		|
 		<span id='cnzz_stat_icon_1000461034'>
 		<%

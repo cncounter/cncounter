@@ -38,7 +38,10 @@
                 </div>
                 <br/>
                 <div>
-                    <button id="btn_copy"  class="btn btn-default btn-warning right">复制</button>
+                    <button id="btn_copy"  class="btn btn-default btn-warning right"
+                            data-clipboard-action="copy" data-clipboard-target="#text_translation"
+                            alt="Copy to clipboard"
+                            >复制</button>
                 </div>
             </div>
 		</div>
@@ -55,7 +58,26 @@
             var $btn_translate = $("#btn_translate");
             //
             $btn_translate.click(excuteQuery);
-            $btn_copy.click(excuteCopy);
+            if(window.Clipboard){
+                var clipboard = new Clipboard("#btn_copy", {
+                    text: function(trigger) { // 可以自定义返回的text
+                        return $text_translation.val() || "";
+                    }
+                });
+                clipboard.on('success', function(e) {
+                    e.clearSelection();
+                    return tip("复制成功");
+                });
+
+                clipboard.on('error', function(e) {
+                    var content0=$text_translation[0];
+                    content0.select(); // 选择对象
+                    return tip("请使用 Ctrl + C 命令复制");
+                });
+            } else {
+                $btn_copy.click(excuteCopy);
+            }
+
             //
             function excuteQuery(){
                 //
@@ -85,20 +107,52 @@
             function excuteCopy(){
                 //
                 var content = $text_translation.val() || "";
-                try{
-                    content && copy(content);
-                    tip("复制成功");
-                } catch(ex){
-                    //
-                    try{
+                if(!content){
+                    return tip("没有内容");
+                }
+                if(window.clipboardData && window.clipboardData.setData){
+                    try{ // IE
+                        window.clipboardData.setData('Text', content);
+                        return tip("复制成功");
+                    } catch(ex){}
+                }
+                if (window.ffclipboard && window.ffclipboard.setText) {
+                    try{ // FF -add-on
+                        window.ffclipboard.setText(content);
+                        return tip("复制成功");
+                    } catch(ex){}
+                }
+                if(window.Components && window.Components.classes && window.Components.interfaces){
+                    // FF text
+                    var clipboardhelper = window.Components.classes["@mozilla.org/widget/clipboardhelper;1"];
+                    if(clipboardhelper && window.Components.interfaces.nsIClipboardHelper){
+                        //
+                        try{ // FF Clipboard
+                            var gClipboardHelper = clipboardhelper.getService(Components.interfaces.nsIClipboardHelper);
+                            gClipboardHelper.copyString(content);
+                            return tip("复制成功");
+                        } catch(ex){}
+                    }
+                    // 参考 https://developer.mozilla.org/zh-CN/docs/Using_the_Clipboard
+                    // 已过时
+                }
+                if(window.copy){
+                    try{// Chrome console
+                        content && copy(content);
+                        return tip("复制成功");
+                    } catch(ex){}
+                }
+                //
+                if(document.execCommand){
+                    try{ // Chrome- execCommand
                         var content0=$text_translation[0];
                         content0.select(); // 选择对象
                         document.execCommand("Copy"); // 执行浏览器复制命令
-                        tip("复制成功");
-                    } catch(ex2){
-                        tip("复制失败,请使用 Chrome浏览器");
-                    }
+                        return tip("复制成功");
+                    } catch(ex2){}
                 }
+                //
+                tip("请使用 Ctrl + C 命令复制");
             };
             function tip(msg, selector){
                 selector = selector || ".msg_area";
