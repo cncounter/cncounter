@@ -7,6 +7,7 @@ var CNC = CNC || function(){};
         msg : msg,
         delayMsg : delayMsg,
         delay : delay,
+        isIE : isIE,
         redirect : redirect,
         localSession : localSession
     });
@@ -54,6 +55,11 @@ var CNC = CNC || function(){};
         };;
         sessionStorage.setItem(key, value);
     };
+	function isIE(ver){
+		var b = document.createElement('b')
+		b.innerHTML = '<!--[if IE ' + ver + ']><i></i><![endif]-->'
+		return b.getElementsByTagName('i').length === 1
+	};
 })();
 
 // 刷新本页面
