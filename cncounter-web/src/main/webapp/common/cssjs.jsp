@@ -37,8 +37,10 @@
 %>
 
 	<script src="<%=basePath %>static/layer/layer.js?v=1"></script>
-	<!-- 本站的JS工具类 -->
+	<!--[if !IE]><!-->
 	<script src="<%=basePath %>static/js/clipboard.js?v=1"></script>
+	<!--<![endif]-->
+	<!-- 本站的JS工具类 -->
 	<script src="<%=basePath %>static/js/cncounter-util.js?v=1"></script>
 	<script src="<%=basePath %>static/js/getLanIP.js?v=1"></script>
 	<script src="<%=basePath %>static/js/ip138-util.js?v=1"></script>
