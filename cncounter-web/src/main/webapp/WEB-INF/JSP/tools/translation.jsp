@@ -103,7 +103,8 @@
                 tip("后台正在执行翻译,请等待10-30秒!");
                 postAjax(url, data, successCallback, errorCallback, 1);
             };
-            //
+            // http://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
+			//
             function excuteCopy(){
                 //
                 var content = $text_translation.val() || "";
@@ -144,6 +145,8 @@
                 }
                 //
                 if(document.execCommand){
+					// 必须在用户直接事件处理器之中调用
+					// var copySupported = document.queryCommandSupported('copy');
                     try{ // Chrome- execCommand
                         var content0=$text_translation[0];
                         content0.select(); // 选择对象
