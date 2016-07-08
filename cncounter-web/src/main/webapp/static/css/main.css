@@ -207,13 +207,17 @@ pre code, pre tt {
 =============================================================================*/
 hr {
   clear: both;
-  margin: 15px 0;
+  margin: 1px 0;
   height: 0px;
   overflow: hidden;
   border: none;
   background: transparent;
-  border-bottom: 4px solid #ddd;
+  border-bottom: 1px solid #ddd;
   padding: 0;
+}
+
+.footer .col-center-block{
+    margin-top: 13px;
 }
 
 /* IMAGES
