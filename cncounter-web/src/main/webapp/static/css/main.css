@@ -16,21 +16,21 @@ body {
   line-height: 1.6;
   color: #333;
   background-color: #f9f9f9;
-  padding: 10px;
-  max-width: 960px;
   margin: 0 auto;
-  position: relative;
+  /*position: relative;
+  padding: 10px;
+  max-width: 960px;*/
   padding-top: 50px;
   padding-bottom: 40px;
   word-wrap: break-word;
 }
 
 body>*:first-child {
-  margin-top: 0 !important;
+  /*margin-top: 0 !important;*/
 }
 
 body>*:last-child {
-  margin-bottom: 0 !important;
+  /*margin-bottom: 0 !important;*/
 }
 
 /* BLOCKS

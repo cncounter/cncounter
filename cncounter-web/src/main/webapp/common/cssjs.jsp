@@ -46,3 +46,4 @@
 	<script src="<%=basePath %>static/js/ip138-util.js?v=1"></script>
 	<!-- 本站CSS样式 -->
 	<link href="<%=path%>/static/css/main.css" rel="stylesheet" type="text/css" />
+	<link href="<%=path%>/static/css/sticky-footer.css" rel="stylesheet" type="text/css" />
