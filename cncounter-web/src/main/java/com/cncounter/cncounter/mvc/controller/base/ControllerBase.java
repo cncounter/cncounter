@@ -40,7 +40,7 @@ public abstract class ControllerBase {
     protected Log logger = LogFactory.getLog(this.getClass());
 
 	@Autowired
-	private RedisBaseDAO redisBaseDAO;
+	protected RedisBaseDAO redisBaseDAO;
 
 	/**
 	 * 获取基于sessionid的key
