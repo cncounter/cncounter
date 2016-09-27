@@ -23,6 +23,11 @@
                 UserVO userVO = ControllerBase.getLoginUser(request);
                 if(null == userVO){
             %>
+              <li>
+                  <a href="<%=basePath %>qqlogin.php">
+                      <img style="height: 28px;" src="/static/image/qq_logo_4.png?v=080d9.png" alt="QQ账户登录本站">
+                  </a>
+              </li>
               <li><a href="https:<%=basePath %>login.php">登录</a></li>
             <%
                 } else {
