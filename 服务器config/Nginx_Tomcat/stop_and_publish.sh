@@ -62,6 +62,7 @@ unzip $appname.war -d $appname
 rm $tomcatbase/work/* -rf
 rm $tomcatbase/temp/* -rf
 
+ping localhost -c 10
 
 cd $deploybase/
 $tomcatbase/bin/startup.sh
