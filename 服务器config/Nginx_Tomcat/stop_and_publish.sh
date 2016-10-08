@@ -64,6 +64,18 @@ rm $tomcatbase/temp/* -rf
 
 ping localhost -c 10
 
+
+TOMCAT_ID=`ps aux |grep "java"|grep "[D]catalina.base=$tomcatbase"|awk '{ print $2}'`
+
+
+if [ -n "$TOMCAT_ID" ] ; then
+    kill -9 "$TOMCAT_ID"
+else
+    echo "Tomcat has stoped"
+fi
+
+
+
 cd $deploybase/
 $tomcatbase/bin/startup.sh
 
