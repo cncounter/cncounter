@@ -5,6 +5,13 @@
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
-    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>
+    <!--spring session . 禁用 To disable the automatic configuration  -->
+    <util:constant
+            static-field="org.springframework.session.data.redis.config.ConfigureRedisAction.NO_OP"/>
+        <!--spring session 的redis配置-->
+    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">
+	        <!--Redis-Key的有效期,不是 Web-Session的有效期 -->
+        <property name="maxInactiveIntervalInSeconds" value="48000"/>
+    </bean>
 
 </beans>

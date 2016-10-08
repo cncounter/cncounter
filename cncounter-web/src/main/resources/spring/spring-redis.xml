@@ -23,19 +23,36 @@
 		ignore-unresolvable="true" location="classpath:duapp/redis.properties" />
 
 	<!-- redis 配置 -->
-	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
-		<property name="maxIdle" value="${redis.maxIdle}" />
-		<property name="maxTotal" value="${redis.maxTotal}" />
-		<property name="maxWaitMillis" value="${redis.maxWaitMillis}" />
-		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
-	</bean>
-	<bean id="jedisConnFactory"
-		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
-		<property name="hostName" value="${redis.host}"></property>	
-		<property name="port" value="${redis.port}"></property>	
-		<property name="password" value="${redis.pass}"></property>	
-		<property name="poolConfig" ref="poolConfig"></property>
-	</bean>
+    <!--jedis的连接池配置-->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!-- 最大空闲连接数量 -->
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <!-- 最小空闲连接数量, 处理间隔时间为 timeBetweenEvictionRunsMillis -->
+        <property name="minIdle" value="${redis.minIdle}"/>
+        <!-- 池中持有的最大连接数量 -->
+        <property name="maxTotal" value="${redis.maxTotal}"/>
+        <!-- borrowObject 方法的最大等待时间 -->
+        <property name="maxWaitMillis" value="${redis.maxWaitMillis}"/>
+        <!-- 池中可用资源耗尽时, borrow 方法是否阻塞等待 maxWaitMillis 毫秒 -->
+        <property name="blockWhenExhausted" value="true"/>
+        <!-- borrowObject 时是否执行检测 -->
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+        <!-- 是否检测空闲连接链接的有效性, 间隔时间为 timeBetweenEvictionRunsMillis -->
+        <property name="testWhileIdle" value="true"/>
+        <!-- 空闲对象被清除需要达到的最小空闲时间 -->
+        <property name="minEvictableIdleTimeMillis" value="${redis.minEvictableIdleTimeMillis}"/>
+        <!-- 空闲检测线程,sleep 间隔多长时间,去处理与idle相关的事情 -->
+        <property name="timeBetweenEvictionRunsMillis" value="${redis.timeBetweenEvictionRunsMillis}"/>
+    </bean>
+    <!-- jedis的连接工厂 -->
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="${redis.host}"/>
+        <property name="port" value="${redis.port}"/>
+        <property name="database" value="${redis.database}"/>
+        <property name="password" value="${redis.pass}"/>
+        <property name="timeout" value="2000"/>
+        <property name="poolConfig" ref="poolConfig"/>
+    </bean>
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
 		<property name="connectionFactory" ref="jedisConnFactory" />
     </bean>
