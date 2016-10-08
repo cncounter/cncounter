@@ -44,8 +44,12 @@ mkdir -p $deploybase/bak
 
 rm -rf $deploybase/bak/$appname
 
-
 mv $deploybase/$appname $deploybase/bak/$appname
+
+
+rm -f $deploybase/bak/$appname.war
+
+mv $deploybase/$appname.war $deploybase/bak/$appname.war
 
 cp $deploybase/git_source/$withsubmodelname/target/$appname.war $deploybase/
 
@@ -53,10 +57,6 @@ cp $deploybase/git_source/$withsubmodelname/target/$appname.war $deploybase/
 cd $deploybase/
 
 unzip $appname.war -d $appname
-
-rm -f $appname.war.BAK
-
-mv $appname.war $appname.war.BAK
 
 
 rm $tomcatbase/work/* -rf
