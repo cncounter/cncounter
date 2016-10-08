@@ -52,6 +52,7 @@
 	mvnpathscript='export PATH=/usr/local/apache-maven-3.3.9/bin:$PATH'
 	sudo echo $mvnpathtip >> /etc/rc.d/rc.local
 	sudo echo $mvnpathscript >> /etc/rc.d/rc.local
+	sudo source /etc/rc.d/rc.local
 
 
 8、查看 MAVEN 安装状态
