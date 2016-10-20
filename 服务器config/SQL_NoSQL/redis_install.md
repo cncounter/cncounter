@@ -70,7 +70,7 @@ SHUTDOWN [SAVE|NOSAVE]
 
 	redistip='# start redis'
 	redisscript='/home/data/redis-2.8.24/src/redis-server &'
-	sudo echo $redispathtip >> /etc/rc.d/rc.local
+	sudo echo $redistip >> /etc/rc.d/rc.local
 	sudo echo $redisscript  >> /etc/rc.d/rc.local
 	sudo source /etc/rc.d/rc.local
 
