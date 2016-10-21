@@ -66,6 +66,7 @@ SHUTDOWN [SAVE|NOSAVE]
 或者 `CTRL + C`
 
 
+
 ## 6. 加入自动启动脚本:
 
 	redistip='# start redis'
@@ -96,7 +97,67 @@ SHUTDOWN [SAVE|NOSAVE]
 	Sentinel mode:
 	       ./redis-server /etc/sentinel.conf --sentinel
 
-## 其他信息
+
+## 8. 配置文件与访问密码
+
+可以看到, 在解压后的目录中有配置文件:
+
+	ll /home/data/redis-2.8.24
+
+	redis.conf
+	src
+	sentinel.conf
+
+所以可以拷贝 redis.conf, 或者直接修改其中的内容:
+
+	cd /home/data/redis-2.8.24
+	cp redis.conf redis.conf.orig
+
+编辑配置文件:
+
+	vim redis.conf
+
+在此文件中,找到相应的配置行,则可以修改端口号:
+
+	port 6379
+
+也可以找到相应的配置密码的选项:
+
+	# requirepass foobared
+
+执行 Esc,yy,p 复制一行,去除注释,修改为需要的密码即可:
+
+	requirepass mypassword
+
+
+如果需要用户名+密码的方式,则密码可以配置为 `username-password`；
+
+然后由客户端程序进行拼接(百度云redis一类的认证方式)。
+
+
+### 8.1 重启
+
+打开客户端,连接上服务器之后,关闭即可:
+
+	/home/data/redis-2.8.24/src/redis-cli SHUTDOWN
+
+使用配置文件启动:
+
+	/home/data/redis-2.8.24/src/redis-server /home/data/redis-2.8.24/redis.conf &
+
+然后可以使用 `-a` 选项指定密码进行登录
+
+	/home/data/redis-2.8.24/src/redis-cli -a mypassword
+
+当然,如果有自动启动脚本,也需要进行相应的修改。
+
+要查看帮助信息, 则使用 `--help` 命令行参数即可,和 Linux 其他命令一样。
+
+
+
+
+
+## 9. 其他信息
 
 参考地址:  [http://redis.io/download](http://redis.io/download)
 
