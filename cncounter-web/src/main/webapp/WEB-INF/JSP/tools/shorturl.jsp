@@ -23,6 +23,8 @@
             <div style=" margin-top: 10px; ">
                 <button tabindex="4" id="btn_generate_link"
                         type="button" class="btn btn-primary"> 生成短链接 </button>
+                <button tabindex="4" id="btn_testdemo"
+                        type="button" class="btn btn-primary"> 示例 </button>
             </div>
         </div>
         <div>
@@ -58,12 +60,12 @@
     $(function(){
         //
         var $btn_generate_link = $("#btn_generate_link");
+        var $btn_testdemo = $("#btn_testdemo");
         var $short_url_anchor = $("#short_url_anchor");
         var $short_url_input = $("#short_url_input");
         var $input_form = $("#input_form");
         var $origurl = $("#origurl");
         //
-        init();
         //
         function init(){
             //
@@ -77,6 +79,11 @@
             //
             $origurl.val(href);
         };
+        $btn_testdemo.bind("click", function(e){
+            //
+            init();
+            $btn_generate_link.trigger("click");
+        });
         //
         $btn_generate_link.bind("click", function(e){
             //
