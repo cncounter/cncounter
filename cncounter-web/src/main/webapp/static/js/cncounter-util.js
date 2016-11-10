@@ -67,6 +67,46 @@ function refreshPage(){
 	location.reload();
 };
 
+// 下载文件
+function downloadFile(url, data){
+    if(!url || !data){ return; }
+    // 把参数组装成 form的  input
+    var inputs = '';
+    //data = typeof data == 'string' ? data : jQuery.param(data);
+    //jQuery.each(data.split('&'), function () {
+    //    var pair = this.split('=');
+    //    inputs += '<input type="hidden" name="' + pair[0] + '" value="' + pair[1] + '" />';
+    //});
+    foreachProperty(data, function(name, value){
+        if(!name){ return; }
+        if(0 !== value && !value){ return; }
+        inputs += '<input type="hidden" name="' + name + '" value="' + value + '" />';
+    });
+    //
+    var frameId = "_download";
+    createIframe(frameId);
+    // request发送请求
+    jQuery('<form action="' + url + '" method="post" target="'+ frameId +'" >' + inputs + '</form>')
+        .appendTo('body').submit().remove();
+
+
+    function createIframe(id, src){
+        var iframe  = document.getElementById(id);
+        if(iframe){
+            return iframe;
+        }
+        iframe  = document.createElement("iframe");
+        iframe.id = id;
+        iframe.name = id;
+        iframe.style.display="none";
+        document.body.appendChild(iframe);
+        //
+        return iframe;
+    };
+
+};
+
+
 // 加载同目录下的 md5-utils;
 function loadMd5Utils(){
 	//
@@ -125,6 +165,55 @@ function hashCode(str){
         hash |= 0; // Convert to 32bit integer
     }
     return hash;
+};
+
+// 遍历对象属性
+function foreachProperty(obj, fn){
+    if(!obj || !fn){return;}
+    for (var name in obj) {
+        if(!name){continue;}
+        var isSelfProperty = Object.prototype.hasOwnProperty.call(obj, name);
+        if (isSelfProperty) { // 自有属性,回调
+            var value = obj[name];
+            var result = fn(name, value, obj);
+            if(false === result){break;}
+        }
+    }
+};
+
+// 解析地址栏中的查询参数
+function parseQueryParam(){
+    var params = {};
+    var search = location.search;
+    if(!search){return params;}
+    search = search.replace("?","");
+    if(!search){return params;}
+    var searchArray = search.split("&");
+    for(var i=0; i<searchArray.length; i++){
+        var p = searchArray[i];
+        if(!p){continue;}
+        var pArray = p.split("=");
+        if(!pArray || pArray.length != 2){
+            continue;
+        }
+        var name = pArray[0];
+        var value = pArray[1];
+        params[name] = value;
+    }
+    //
+    return params;
+};
+// 包装 GET参数,待完善
+function wrapGetUrl(path, params){
+    foreachProperty(params, function(name,value){
+        if(!path.indexOf("?")<0){
+            path = path + "?";
+        } else {
+            path = path + "&";
+        }
+        path = path + "" + name + "=" + value;
+    });
+    return path;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

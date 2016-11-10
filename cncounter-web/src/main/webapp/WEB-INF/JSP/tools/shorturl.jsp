@@ -63,6 +63,21 @@
         var $input_form = $("#input_form");
         var $origurl = $("#origurl");
         //
+        init();
+        //
+        function init(){
+            //
+            var href = location.href;
+            if(href.indexOf("?")>-1){
+                href = href.substr(0, href.indexOf("?"));
+            }
+            //
+            href = href + "?";
+            href = href + "_t=_randomvalue_";
+            //
+            $origurl.val(href);
+        };
+        //
         $btn_generate_link.bind("click", function(e){
             //
             var origurl = $origurl.val();
