@@ -233,7 +233,10 @@ public abstract class ControllerBase {
 	 */
 	protected static String basePathLessSlash(HttpServletRequest request){
 		String path = path(request);
-		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
+        int serverPort = request.getServerPort();
+        String portStr = ":" + serverPort;
+        if(80 == serverPort){portStr = "";}
+		String basePath = request.getScheme() + "://" + request.getServerName() + portStr + path;
 		return basePath;
 	}
 

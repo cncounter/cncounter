@@ -33,6 +33,9 @@
                 <h3>使用说明</h3>
                 <ol>
                     <li>输入需要转换的URL</li>
+                    <li>支持随机数(将某个参数值设置为:
+                        <code>_randomvalue_</code>
+                        ),如: xxx.html?v=0&t=_randomvalue_</li>
                     <li>点击“生成短链接”按钮</li>
                     <li>等待服务器响应,点击短网址后面的链接</li>
                 </ol>
@@ -40,6 +43,10 @@
             <span>短网址:</span>
             <a id="short_url_anchor" target="_blank">
             </a>
+        </div>
+        <div>
+            <input id="short_url_input" name="short_url" value="" style="width: 400px;">
+            <br/>
         </div>
     </div>
     <jsp:include page="/common/sidebar.jsp"></jsp:include>
@@ -52,6 +59,7 @@
         //
         var $btn_generate_link = $("#btn_generate_link");
         var $short_url_anchor = $("#short_url_anchor");
+        var $short_url_input = $("#short_url_input");
         var $input_form = $("#input_form");
         var $origurl = $("#origurl");
         //
@@ -76,6 +84,7 @@
                 var shorturl = meta["shorturl"];
                 $short_url_anchor.attr("href", shorturl);
                 $short_url_anchor.text(shorturl);
+                $short_url_input.val(shorturl);
             };
             //
             var errorCallback = function (jqXHR, textStatus, errorThrown) {

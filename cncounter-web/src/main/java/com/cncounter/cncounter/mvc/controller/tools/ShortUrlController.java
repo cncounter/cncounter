@@ -38,8 +38,11 @@ public class ShortUrlController extends ControllerBase {
 		if(StringNumberUtil.isEmpty(origurl) || !origurl.startsWith("http")){
 			return JSONMessage.failureMessage().setInfo("参数错误");
 		}
+        //
+        String targetUrl = parseRandomValue(origurl, "_randomvalue_");
+        //
 		try {
-			response.sendRedirect(origurl);
+			response.sendRedirect(targetUrl);
 			return null;
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -48,7 +51,18 @@ public class ShortUrlController extends ControllerBase {
 
 	}
 
-	@RequestMapping({"/tools/shorturl/generate.json"})
+    private String parseRandomValue(String origurl, String randomvalueKey) {
+        if(!origurl.contains(randomvalueKey)){
+            return origurl;
+        }
+        String randomUUIDStr = ""+getUUID().hashCode();
+        // TBD 应该只判断参数部分
+        String targetUrl = origurl.replace(randomvalueKey, randomUUIDStr);
+        //
+        return targetUrl;
+    }
+
+    @RequestMapping({"/tools/shorturl/generate.json"})
 	@ResponseBody
 	public Object generateShortUrl(HttpServletRequest request, HttpServletResponse response) {
 		// 需要转换的内容
