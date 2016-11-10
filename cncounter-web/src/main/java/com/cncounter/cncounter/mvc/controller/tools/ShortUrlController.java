@@ -55,7 +55,11 @@ public class ShortUrlController extends ControllerBase {
         if(!origurl.contains(randomvalueKey)){
             return origurl;
         }
-        String randomUUIDStr = ""+getUUID().hashCode();
+        int hashCode = getUUID().hashCode();
+        if(hashCode<0){
+            hashCode=Math.abs(hashCode);
+        }
+        String randomUUIDStr = ""+hashCode;
         // TBD 应该只判断参数部分
         String targetUrl = origurl.replace(randomvalueKey, randomUUIDStr);
         //
