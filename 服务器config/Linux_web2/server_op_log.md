@@ -93,8 +93,6 @@
 
 	netstat -ntlp
 
-netstat -ntlp
-
 
 
 ##
