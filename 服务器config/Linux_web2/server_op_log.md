@@ -95,4 +95,51 @@
 
 
 
-##
+## 安装Docker
+
+参考官方文档: [https://docs.docker.com/engine/installation/linux/centos/](https://docs.docker.com/engine/installation/linux/centos/)
+
+查看系统版本号,要求3.10+:
+
+	uname -r
+
+更新 yum 库：
+
+	sudo yum update -y
+
+下载脚本并执行 docker 安装:
+
+	curl -fsSL https://get.docker.com/ | sh
+
+安装完成后允许 docker 服务启动:
+
+	sudo systemctl enable docker.service
+
+启动 Docker daemon; 守护进程:
+
+	sudo systemctl start docker
+
+简单测试:
+
+	sudo docker run --rm hello-world
+
+设置Docker守护进程自动启动:
+
+	sudo systemctl enable docker
+
+### 卸载:
+
+查看安装的docker
+
+	yum list installed | grep docker
+
+卸载docker安装包
+
+	sudo yum -y remove docker-engine.x86_64
+	sudo yum -y remove docker-engine-selinux.noarch
+
+删除 docker 的所有文件:
+
+	rm -rf /var/lib/docker
+
+
