@@ -15,6 +15,8 @@ sudo rpm -Uvh tingyun-agent-system-1.1.1.x86_64.rpm
 
 # 3. 设置授权序号
 
+此授权序号,请注册听云后获取:
+
 sudo /usr/local/bin/nbsys-config nbs.license_key=f69dab90e1e75cf3ad1537d771a5ec86
 
 # 4. 启动守护进程
@@ -42,7 +44,10 @@ sudo service nbsysd start
 
 查看是否有进程:
 
-	ps -ef | grep nbsysd
+	ps -ef | grep tingyun
+
+
+注: 24小时之内没有数据，则可以删除服务器列表中的item
 
 
 重新安装: ...
