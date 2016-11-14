@@ -143,7 +143,71 @@
 	rm -rf /var/lib/docker
 
 
+## 修改主机名
+
+查看IP映射:
+
+	hostname -i
+
+内容为: 
+
+> 10.172.104.25
+
+查看hosts映射:
+
+cat /etc/hosts
+
+内容为:
+
+	127.0.0.1 localhost
+	::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+	10.172.104.25 iZrj91tefvghtch6ehzx7qZXXX
+
+修改对应ip地址的名称:
+
+
+	vim /etc/hosts
+
+内容为:
+
+	10.172.104.25 cnc-web2
+
+然后保存: 按`Esc`键 然后 `:wq`
+
+
+
+接着查看 hostname:
+
+	hostname
+
+内容例如:
+
+> iZrj91tefvghtch6ehzx7qZXXX
+
+sudo hostname
+
+临时修改主机名:
+
+sudo hostname cnc-web2
+
+再次查看IP映射:
+
+	hostname -i
+
+永久修改hostname:
+
+	vim /etc/sysconfig/network
+
+修改以下内容(如果没有,则不管):
+
+	#HOSTNAME=iZu1t995fl8ZXXX
+	HOSTNAME=cnc-web2
+
+
+
 ## 听云sys监控服务器配置
 
 参见: [tingyun-sys_config.md](tingyun-sys_config.md)
+
+##
 
