@@ -1,6 +1,9 @@
+#!/bin/sh
 # stop_and_publish.sh
 # chmod 755 stop_and_publish.sh
 
+# Exit the script if an error happens
+# set -e
 
 # ENV
 
