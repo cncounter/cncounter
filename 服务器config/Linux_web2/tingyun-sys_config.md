@@ -21,6 +21,33 @@ sudo /usr/local/bin/nbsys-config nbs.license_key=f69dab90e1e75cf3ad1537d771a5ec8
 
 sudo service nbsysd start
 
+# 5. 卸载、重装
+
+停止服务:
+
+	sudo service nbsysd stop
+
+卸载服务:
+
+	chkconfig --del nbsysd
+
+查看:
+
+	rpm -qa | grep tingyun
+
+卸载:
+
+	rpm -e tingyun-agent-system-1.1.1-1.x86_64
+
+
+查看是否有进程:
+
+	ps -ef | grep nbsysd
+
+
+重新安装: ...
+
+
 # 参考地址:
 
 # https://report.tingyun.com/sys/server/48108/overview
