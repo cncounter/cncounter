@@ -3,6 +3,7 @@
 <%!
     private static final String[] HEADERS_TO_TRY = {
             "X-Forwarded-For",
+            "X-REAL-IP",
             "Proxy-Client-IP",
             "WL-Proxy-Client-IP",
             "HTTP_X_FORWARDED_FOR",
