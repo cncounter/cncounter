@@ -209,6 +209,75 @@ sudo hostname cnc-web2
 
 参见: [tingyun-sys_config.md](tingyun-sys_config.md)
 
+## 配置Linux-SSH 互信
+
+首先, 配置主机名称:
+
+	vim /etc/hosts
+
+加入以下内容:
+
+	10.172.115.120 cnc-web1
+	10.172.104.25 cnc-web2
+
+
+
+
+1、 生成rsa公钥与私钥;
+
+输入以下命令:
+
+	cd ~
+	ssh-keygen -t rsa
+
+然后一路输入回车,不需要修改保存路径,也不设置密码。
+
+2、 在目标服务器上创建 `~/.ssh/` 目录:
+
+	ssh root@cnc-web1 mkdir -p .ssh
+
+3、 将自身的公钥添加到目标服务器的授信KEY中:
+
+执行此命令,或者手动在目标服务器添加均可。
+
+	cat .ssh/id_rsa.pub | ssh root@cnc-web1 'cat >> .ssh/authorized_keys'
+
+4、 修改目标机器上相关目录和文件的权限
+
+	ssh root@cnc-web1 "chmod 700 .ssh; chmod 640 .ssh/authorized_keys"
+
+5、 直接登录
+
+
+
+因为端口号修改为 10022,所以需要修改 ssh 客户端的默认配置:
+
+	vim /etc/ssh/ssh_config
+
+
+在 `#Port 22` 下面增加 `Port 10022`, 
+
+然后再执行命令:
+
+	ssh cnc-web1
+
+如果提示：
+
+> Are you sure you want to continue connecting (yes/no)? <u>yes</u>
+
+则输入 yes , 变成  known_hosts 即可。
+
+OK。
+
+参考: [5步配置Linux免登陆](http://www.tecmint.com/ssh-passwordless-login-using-ssh-keygen-in-5-easy-steps/)
+
+
+
+## 安装 lrzsz
+
+	yum install -y lrzsz
+
+
 ##  添加swap分区
 
 
