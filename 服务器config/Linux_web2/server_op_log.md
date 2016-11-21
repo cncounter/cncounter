@@ -209,5 +209,78 @@ sudo hostname cnc-web2
 
 参见: [tingyun-sys_config.md](tingyun-sys_config.md)
 
-##
+##  添加swap分区
+
+
+1.查看系统是否已经启用swap分区
+
+
+	cat /proc/swaps
+
+或者使用:
+
+	top
+
+2. 创建一个专门的文件用于swap分区
+
+	mkdir -p /data
+
+	dd if=/dev/zero of=/data/swap bs=512 count=4194304
+
+	chmod 600 /data/swap
+
+
+稍等一会儿(size = bs * count),阿里云的IO现在大约是45MB/s;
+
+(初始化;写N个`0x00`到文件`/data/swap`)
+
+其中, `/dev/zero` 是一个特殊的文件,通过文件系统可以无限读取...NULL 
+
+当然,对应的 `/dev/null` 则是一个写入黑洞, 可以无限写。
+
+3. 将文件格式化为swap分区:
+
+	mkswap /data/swap
+
+4. 查看内核参数vm.swappiness
+
+	cat /proc/sys/vm/swappiness
+
+或者使用:
+	
+	sysctl -a | grep swappiness  
+
+如果为0则根据实际情况调整成10或者5; 内存1G设置为10,2G设置为5...
+
+	sysctl -w vm.swappiness=10
+
+若想永久修改，则编辑/etc/sysctl.conf文件
+
+	vim /etc/sysctl.conf
+
+修改其中: 
+
+	vm.swappiness=10
+
+5. 启用交换分区的交换功能
+
+	swapon /data/swap
+
+写入fstab
+
+	echo "/data/swap swap swap defaults    0  0" >> /etc/fstab
+
+
+
+6. 如何关闭swap分区？
+
+	swapoff /data/swap
+
+	swapoff -a >/dev/null
+
+
+参考: [阿里云云主机添加swap分区与swap性能优化](http://dgd2010.blog.51cto.com/1539422/1762907)
+
+
+##  
 
