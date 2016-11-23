@@ -351,5 +351,43 @@ OK。
 参考: [阿里云云主机添加swap分区与swap性能优化](http://dgd2010.blog.51cto.com/1539422/1762907)
 
 
+##  安装 JDK,设置 JAVA_HOME
+
+安装:
+	sudo yum list -y java*
+	sudo yum install -y java-1.8.0-openjdk*
+
+设置 JAVA_HOME:
+
+	export JAVA_HOME=/etc/alternatives/java_sdk_1.8.0
+
+设置自动配置环境变量:
+
+	jhometip='# add JAVA_HOME'
+	jhomescript='export JAVA_HOME=/etc/alternatives/java_sdk_1.8.0'
+	sudo echo $jhometip >> /etc/rc.d/rc.local
+	sudo echo $jhomescript >> /etc/rc.d/rc.local
+
+查看:
+
+	cat /etc/rc.d/rc.local 
+	echo $JAVA_HOME
+
+查看 javac 的版本号:
+
+	$JAVA_HOME/bin/javac -version
+
+OK,设置完成.
+
+如果没有重启,则如果使用其他用户登录 Linux, 可能也需要 export 一下。
+
 ##  
+
+
+
+
+
+
+
+参考: [http://blog.csdn.net/renfufei/article/details/52621034](http://blog.csdn.net/renfufei/article/details/52621034)
 
