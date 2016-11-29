@@ -393,13 +393,133 @@ OK,设置完成.
 
 如果没有重启,则如果使用其他用户登录 Linux, 可能也需要 export 一下。
 
-##  
-
-
-
-
-
 
 
 参考: [http://blog.csdn.net/renfufei/article/details/52621034](http://blog.csdn.net/renfufei/article/details/52621034)
+
+
+##  安装 Tomcat8
+
+准备目录:
+
+	mkdir -p /usr/local/download
+	mkdir -p /usr/local/tools
+	
+
+下载:
+
+	cd /usr/local/download
+	wget http://apache.fayea.com/tomcat/tomcat-8/v8.5.8/bin/apache-tomcat-8.5.8.tar.gz
+
+解压:
+
+	cd /usr/local/download
+	tar zxf apache-tomcat-8.5.8.tar.gz
+
+拷贝:
+
+	mkdir -p /usr/local/tools
+	cd /usr/local/download
+	mv apache-tomcat-8.5.8 /usr/local/tools/tomcat8
+
+此时,Tomcat8的HOME应该为: `/usr/local/tools/tomcat8`;
+
+
+修改配置文件:
+
+	cd /usr/local/tools/tomcat8/conf
+	cp server.xml server.xml.ORIG
+
+编辑:
+
+	vim server.xml
+
+修改端口号等信息:
+
+	<Server port="18005" shutdown="SHUTDOWN">
+
+	<Connector port="18080" protocol="HTTP/1.1"
+
+	<Connector port="18009" protocol="AJP/1.3" 
+
+
+修改完成之后保存;
+
+此时,就可以进行启动了。
+
+	/usr/local/tools/tomcat8/bin/startup.sh  
+
+
+设置Tomcat自动启动
+
+
+	tomcattip='# start Tomcat'
+	tomcatscript='/usr/local/tools/tomcat8/bin/startup.sh'
+	sudo echo $tomcattip >> /etc/rc.d/rc.local
+	sudo echo $tomcatscript >> /etc/rc.d/rc.local
+
+
+## 统一归类处理服务器启动脚本:
+
+	mkdir -p /etc/cncounter
+	touch /etc/cncounter/setenv.sh
+	touch /etc/cncounter/startservers.sh
+
+	chmod 755 /etc/cncounter
+	chmod 777 /etc/cncounter/setenv.sh
+	chmod 777 /etc/cncounter/startservers.sh
+
+
+然后将 `/etc/rc.d/rc.local` 之中, 环境变量相关的脚本迁移到 setenv.sh 之中.
+
+	cat /etc/rc.d/rc.local
+
+编辑:
+
+	vim /etc/cncounter/setenv.sh
+
+内容例如(原则上可以执行多次,每个用户都可以自己执行):
+
+	# add JAVA_HOME
+	export JAVA_HOME=/etc/alternatives/java_sdk_1.8.0
+
+编辑:
+
+	vim /etc/cncounter/startservers.sh
+
+内容例如(原则上只在服务器启动时执行):
+
+	# start shadowsocks
+	/usr/bin/ssserver -c /etc/shadowsocks/config.json -d start
+	
+	# start Tomcat
+	/usr/local/tools/tomcat8/bin/startup.sh
+
+
+修改 `rc.local` 文件:
+
+	vim /etc/rc.d/rc.local
+
+内容类似于:
+
+	# set env
+	sh /etc/cncounter/setenv.sh
+	# init server
+	sh /etc/cncounter/startservers.sh
+
+对应的 `.bash_profile` 文件也需要修改, 直接调用 `setenv.sh` 即可:
+
+
+	vim ~/.bash_profile
+
+内容:
+
+	# set env
+	sh /etc/cncounter/setenv.sh
+
+
+
+
+
+
 
