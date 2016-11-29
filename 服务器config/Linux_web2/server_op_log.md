@@ -127,6 +127,11 @@
 
 	sudo systemctl enable docker
 
+### chinese_docker 相关文档
+
+另请参见: [https://github.com/widuu/chinese_docker/blob/master/installation/centos.md](https://github.com/widuu/chinese_docker/blob/master/installation/centos.md)
+
+
 ### 卸载:
 
 查看安装的docker
