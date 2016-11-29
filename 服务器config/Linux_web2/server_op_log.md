@@ -368,6 +368,13 @@ OK。
 	sudo echo $jhometip >> /etc/rc.d/rc.local
 	sudo echo $jhomescript >> /etc/rc.d/rc.local
 
+如果只是单个用户,则可以配置为:
+
+	jhometip='# add JAVA_HOME'
+	jhomescript='export JAVA_HOME=/etc/alternatives/java_sdk_1.8.0'
+	echo $jhometip >> ~/.bash_profile
+	echo $jhomescript >> ~/.bash_profile
+
 查看:
 
 	cat /etc/rc.d/rc.local 
