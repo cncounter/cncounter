@@ -503,9 +503,9 @@ OK,设置完成.
 内容类似于:
 
 	# set env
-	sh /etc/cncounter/setenv.sh
+	source /etc/cncounter/setenv.sh
 	# init server
-	sh /etc/cncounter/startservers.sh
+	/etc/cncounter/startservers.sh
 
 对应的 `.bash_profile` 文件也需要修改, 直接调用 `setenv.sh` 即可:
 
@@ -515,7 +515,7 @@ OK,设置完成.
 内容:
 
 	# set env
-	sh /etc/cncounter/setenv.sh
+	source /etc/cncounter/setenv.sh
 
 
 
