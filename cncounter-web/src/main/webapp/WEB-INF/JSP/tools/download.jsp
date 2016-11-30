@@ -17,7 +17,7 @@
 				<form id="input_form" action="<%=basePath %>crossorigion/download/genfileurl.json" method="post">
 					<span>请输入需要下载的URL地址:</span>
 					<br/>
-					<textarea tabindex="3" id="origfileurl" name="origfileurl" rows="4" cols="36"></textarea>
+					<textarea class="break-all" tabindex="3" id="origfileurl" name="origfileurl" rows="4" cols="36"></textarea>
 					<br/>
                     自定义文件名:
                     <br/>

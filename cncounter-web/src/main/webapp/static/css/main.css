@@ -273,6 +273,11 @@ img {
 	visibility: hidden;
 }
 
+.break-all{
+	word-wrap: break-word;
+    word-break: break-all;
+}
+
 .msg_area{
     text-align: center;
     background-color: rgba(0, 0, 0, 0.15);
