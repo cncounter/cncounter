@@ -518,6 +518,51 @@ OK,设置完成.
 	source /etc/cncounter/setenv.sh
 
 
+## 安装 Nginx
+
+参考: [CentOS下yum安装 Nginx: http://blog.csdn.net/renfufei/article/details/48381157](http://blog.csdn.net/renfufei/article/details/48381157)
+
+
+查看 nginx 和 apache 的安装状态
+
+
+	yum info nginx
+
+	yum info httpd
+
+
+如果有Apache,则移除 httpd
+
+	yum remove httpd -y
+
+
+安装 nginx 的命令
+
+
+	yum install nginx -y
+
+
+设置 nginx 自启动
+
+	chkconfig nginx on
+
+可以看到, 在 centos7 下提示,等价于:
+
+	systemctl enable nginx.service
+
+
+查看服务自启动情况
+
+	chkconfig
+
+启动nginx服务
+
+	service nginx start
+
+
+查看端口监听状态
+
+	netstat -ntlp
 
 
 
