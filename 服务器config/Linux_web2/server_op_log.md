@@ -482,6 +482,8 @@ OK,设置完成.
 
 	# add JAVA_HOME
 	export JAVA_HOME=/etc/alternatives/java_sdk_1.8.0
+	# add TOMCAT_HOME
+	export TOMCAT_HOME=/usr/local/tools/tomcat8
 
 编辑:
 
@@ -568,6 +570,89 @@ OK,设置完成.
 ## 听云-Tomcat-监控配置
 
 参考: [tingyun-sys_config.md](tingyun-sys_config.md)
+
+
+
+## yum 安装 GIT 客户端的命令
+
+	sudo yum -y install git
+
+
+## 配置GIT
+
+设置
+
+	git config --global user.name "renfufei"
+	git config --global user.email "renfufei@qq.com"
+
+查看GIT配置
+
+	git config --list
+
+## 下载、安装 MAVEN
+
+
+	mkdir -p /usr/local/download
+	cd /usr/local/download
+	wget http://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+
+
+	cd /usr/local/download
+	tar xzvf apache-maven-3.3.9-bin.tar.gz
+	mv apache-maven-3.3.9 /usr/local/tools/apache-maven-3.3.9
+
+
+
+
+设置 PATH
+
+设置 `MAVEN_HOME`:
+
+	vim /etc/cncounter/setenv.sh
+
+增加:
+
+
+	# add MAVEN_HOME
+	export MAVEN_HOME=/usr/local/tools/apache-maven-3.3.9
+	# add 2 PATH
+	export PATH=$PATH:$MAVEN_HOME/bin
+
+
+
+
+## 配置 Tomcat
+
+备份并修改
+
+	cd /usr/local/tools/tomcat8/conf
+
+	# cp server.xml server.xml.ORIG
+
+	vim /usr/local/tools/tomcat8/conf/server.xml
+
+修改其中的内容:
+
+	<Engine name="Catalina" defaultHost="www.cncounter.com">
+
+	<Host name="www.cncounter.com"  appBase="webapps"
+		  unpackWARs="true" autoDeploy="true"
+
+	<Alias>cncounter.com</Alias>
+	<Alias>localhost</Alias>
+	<Context docBase="/usr/local/cncounter_webapp/cncounter-web"  path="" />
+
+
+配置完成后的文件请参考: [server.xml](server.xml)
+
+
+## 配置部署脚本
+
+参考 [stop_and_publish.sh](stop_and_publish.sh)
+
+
+
+
 
 
 
