@@ -18,7 +18,7 @@ var toMarkdown = function(string) {
       }
     },
     {
-      patterns: ['p'],
+      patterns: ['p', 'section'],
       replacement: function(str, attrs, innerHTML) {
       	innerHTML = trim(innerHTML);
         return innerHTML ? '\n\n' + innerHTML + '\n\n' : '';
