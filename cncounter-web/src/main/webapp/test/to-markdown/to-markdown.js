@@ -11,7 +11,7 @@ var toMarkdown = function(string) {
   var ELEMENTS = [
     {
       patterns: ['div'],
-      type: 'nested',
+      type: 'div',
       replacement: function(str, attrs, innerHTML) {
       	innerHTML = trim(innerHTML);
         return innerHTML ? '\n\n' + innerHTML + '\n\n' : '';
@@ -101,18 +101,34 @@ var toMarkdown = function(string) {
   
   for(var i = 0, len = ELEMENTS.length; i < len; i++) {
     if(typeof ELEMENTS[i].patterns === 'string') {
-      string = replaceEls(string, { tag: ELEMENTS[i].patterns, replacement: ELEMENTS[i].replacement, type:  ELEMENTS[i].type });
+      string = replaceEls(string, { 
+	      	tag: ELEMENTS[i].patterns, 
+	      	replacement: ELEMENTS[i].replacement, 
+	      	type:  ELEMENTS[i].type 
+      	});
     }
     else {
       for(var j = 0, pLen = ELEMENTS[i].patterns.length; j < pLen; j++) {
-        string = replaceEls(string, { tag: ELEMENTS[i].patterns[j], replacement: ELEMENTS[i].replacement, type:  ELEMENTS[i].type });
+        string = replaceEls(string, {
+	        	 tag: ELEMENTS[i].patterns[j], 
+	        	 replacement: ELEMENTS[i].replacement, 
+	        	 type:  ELEMENTS[i].type 
+        	 });
       }
     }
   }
   
   function replaceEls(html, elProperties) {
-    var pattern = elProperties.type === 'void' ? '<' + elProperties.tag + '\\b([^>]*)\\/?>' : '<' + elProperties.tag + '\\b([^>]*)>([\\s\\S]*?)<\\/' + elProperties.tag + '>';
-        ;
+    var pattern = "";
+    if(elProperties.type === 'void'){
+    	pattern = '<' + elProperties.tag + '\\b([^>]*)\\/?>' ;
+    } else if(elProperties.type === 'div'){
+    	// return
+    	return replaceDiv(html, elProperties); 
+    } else {
+    	pattern = '<' + elProperties.tag + '\\b([^>]*)>([\\s\\S]*?)<\\/' + elProperties.tag + '>';
+    }
+        
     var regex = new RegExp(pattern, 'gi');
     var markdown = '';
     if(typeof elProperties.replacement === 'string') {
@@ -124,6 +140,33 @@ var toMarkdown = function(string) {
       });
     }
     return markdown;
+  };
+  
+  function replaceDiv(html, elProperties) {
+  	if(!html){return html;}
+  	// tanlan moshi
+    var pattern = '<' + elProperties.tag + '\\b([^>]*)>([\\s\\S]*?)<\\/' + elProperties.tag + '>';
+    // nested element replace
+    var regex = new RegExp(pattern, 'gi');
+    var markdown = '';
+    // not equals, continue replace
+    while(true){
+	    if(typeof elProperties.replacement === 'string') {
+	      markdown = html.replace(regex, elProperties.replacement);
+	    }
+	    else {
+	      markdown = html.replace(regex, function(str, p1, p2, p3) {
+	        return elProperties.replacement.call(this, str, p1, p2, p3);
+	      });
+	    }
+	    //
+	    if(markdown !== html){
+	    	html = markdown;
+	    } else {
+	    	break; // important!! must break;
+	    }
+    }
+    return markdown;
   }
   
   function attrRegExp(attr) {
@@ -131,12 +174,19 @@ var toMarkdown = function(string) {
   }
   
   // Pre code blocks
-  
-  string = string.replace(/<pre\b[^>]*>`([\s\S]*)`<\/pre>/gi, function(str, innerHTML) {
+  // no tanlan
+  string = string.replace(/<pre\b[^>]*>`([\s\S]*?)`<\/pre>/gi, function(str, innerHTML) {
     innerHTML = innerHTML.replace(/^\t+/g, '  '); // convert tabs to spaces (you know it makes sense)
-    innerHTML = innerHTML.replace(/\n/g, '\n    ');
-    return '\n\n    ' + innerHTML + '\n';
+    innerHTML = innerHTML.replace(/\n/g, '\n    '); // every line
+    innerHTML = replaceGtLt(innerHTML);
+    return '\n\n\n    ' + innerHTML + '\n\n\n';
   });
+  //
+  function replaceGtLt(string){
+  	string = string.replace(/&gt;/g, ">");
+  	string = string.replace(/&lt;/g, "<");
+  	return string;
+  };
   
   // Lists
   
