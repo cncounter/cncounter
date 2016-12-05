@@ -12,17 +12,19 @@ var toMarkdown = function(string) {
     {
       patterns: 'p',
       replacement: function(str, attrs, innerHTML) {
-        return innerHTML ? '\n\n' + innerHTML + '\n' : '';
+      	innerHTML = trim(innerHTML);
+        return innerHTML ? '\n\n' + innerHTML + '\n\n' : '';
       }
     },
     {
       patterns: 'br',
       type: 'void',
-      replacement: '\n'
+      replacement: '\n\n'
     },
     {
       patterns: 'h([1-6])',
       replacement: function(str, hLevel, attrs, innerHTML) {
+      	innerHTML = trim(innerHTML);
         var hPrefix = '';
         for(var i = 0; i < hLevel; i++) {
           hPrefix += '#';
@@ -38,6 +40,7 @@ var toMarkdown = function(string) {
     {
       patterns: 'a',
       replacement: function(str, attrs, innerHTML) {
+      	innerHTML = trim(innerHTML);
         var href = attrs.match(attrRegExp('href')),
             title = attrs.match(attrRegExp('title'));
         return href ? '[' + innerHTML + ']' + '(' + href[1] + (title && title[1] ? ' "' + title[1] + '"' : '') + ')' : str;
@@ -46,13 +49,28 @@ var toMarkdown = function(string) {
     {
       patterns: ['b', 'strong'],
       replacement: function(str, attrs, innerHTML) {
+      	innerHTML = trim(innerHTML);
         return innerHTML ? '**' + innerHTML + '**' : '';
       }
     },
     {
       patterns: ['i', 'em'],
       replacement: function(str, attrs, innerHTML) {
+      	innerHTML = trim(innerHTML);
         return innerHTML ? '_' + innerHTML + '_' : '';
+      }
+    },
+    {
+      patterns: ['span'],
+      replacement: function(str, attrs, innerHTML) {
+      	innerHTML = trim(innerHTML);
+        return innerHTML ? ' ' + innerHTML + ' ' : '';
+      }
+    },
+    {
+      patterns: ['script','noscript'],
+      replacement: function(str, attrs, innerHTML) {
+        return '\n\n';
       }
     },
     {
@@ -173,6 +191,11 @@ var toMarkdown = function(string) {
     string = string.replace(/\n{3,}/g, '\n\n'); // limit consecutive linebreaks to 2
     return string;
   }
+  function trim(string){
+  	string = string || "";
+    string = string.replace(/^[\t\r\n\s]+|[\t\r\n\s]+$/g, '');
+    return string;
+  };
   
   return cleanUp(string);
 };
