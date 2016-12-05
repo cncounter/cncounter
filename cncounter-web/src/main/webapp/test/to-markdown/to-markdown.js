@@ -10,7 +10,15 @@ var toMarkdown = function(string) {
   
   var ELEMENTS = [
     {
-      patterns: 'p',
+      patterns: ['div'],
+      type: 'nested',
+      replacement: function(str, attrs, innerHTML) {
+      	innerHTML = trim(innerHTML);
+        return innerHTML ? '\n\n' + innerHTML + '\n\n' : '';
+      }
+    },
+    {
+      patterns: ['p'],
       replacement: function(str, attrs, innerHTML) {
       	innerHTML = trim(innerHTML);
         return innerHTML ? '\n\n' + innerHTML + '\n\n' : '';
@@ -64,7 +72,7 @@ var toMarkdown = function(string) {
       patterns: ['span'],
       replacement: function(str, attrs, innerHTML) {
       	innerHTML = trim(innerHTML);
-        return innerHTML ? ' ' + innerHTML + ' ' : '';
+        return innerHTML ? '' + innerHTML + '' : '';
       }
     },
     {
@@ -103,9 +111,10 @@ var toMarkdown = function(string) {
   }
   
   function replaceEls(html, elProperties) {
-    var pattern = elProperties.type === 'void' ? '<' + elProperties.tag + '\\b([^>]*)\\/?>' : '<' + elProperties.tag + '\\b([^>]*)>([\\s\\S]*?)<\\/' + elProperties.tag + '>',
-        regex = new RegExp(pattern, 'gi'),
-        markdown = '';
+    var pattern = elProperties.type === 'void' ? '<' + elProperties.tag + '\\b([^>]*)\\/?>' : '<' + elProperties.tag + '\\b([^>]*)>([\\s\\S]*?)<\\/' + elProperties.tag + '>';
+        ;
+    var regex = new RegExp(pattern, 'gi');
+    var markdown = '';
     if(typeof elProperties.replacement === 'string') {
       markdown = html.replace(regex, elProperties.replacement);
     }
@@ -132,7 +141,7 @@ var toMarkdown = function(string) {
   // Lists
   
   // Escape numbers that could trigger an ol
-  string = string.replace(/(\d+). /g, '$1\\. ');
+  string = string.replace(/(\d+)\\. /g, '$1\\. ');
   
   // Converts lists that have no child lists (of same type) first, then works it's way up
   var noChildrenRegex = /<(ul|ol)\b[^>]*>(?:(?!<ul|<ol)[\s\S])*?<\/\1>/gi;
