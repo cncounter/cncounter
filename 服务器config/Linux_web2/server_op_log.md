@@ -725,6 +725,8 @@ OK,设置完成.
 
 如果端口号已经监听, 则可以用上面的 jstatd 连接之中, 添加JMX连接.
 
+JMX连接地址类似于: `47.88.26.176:19999`, 其他默认保持即可。
+
 稍等一会,则连接成功 (JVisualVM的列表中,Tomcat图标上有JMX水印)!
 
 
@@ -732,9 +734,15 @@ OK,设置完成.
 >
 > 原来没有启用 jstatd 时，无论如何都连接不上 JMX.
 >
-> 连接上 JMX 之后,jstatd 的链接也用不了了。
+> 连接上 JMX 之后,有时候 jstatd 的链接用不了,也许是网络超时。
 
 
+另外应该可以使用 rmiregistry 注册机制：
+
+参见: [官方文档: rmiregistry](http://docs.oracle.com/javase/7/docs/technotes/tools/solaris/rmiregistry.html)
+
+
+## 
 
 
 
