@@ -681,3 +681,60 @@ OK,设置完成.
 必须指定公网IP，否则不能通过公网连接。
 
 
+官网介绍:[http://docs.oracle.com/javase/7/docs/technotes/tools/share/jstatd.html](http://docs.oracle.com/javase/7/docs/technotes/tools/share/jstatd.html)
+
+
+## 配置 JMX 远程服务
+
+修改 tomcat 启动文件:
+
+	cd /usr/local/tools/tomcat8
+
+	cp catalina.sh catalina.sh_BAK
+
+	vim catalina.sh
+
+在文件开头的某一行增加以下内容:
+
+	JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote 
+		-Dcom.sun.management.jmxremote.port=19999
+		-Dcom.sun.management.jmxremote.authenticate=false
+		-Dcom.sun.management.jmxremote.ssl=false
+		-Djava.rmi.server.hostname=47.88.26.176"
+
+
+配制时没有换行,不确定加上换行是否有效.
+
+其中 `hostname=47.88.26.176` 是公网IP，`port=19999` 是端口号。
+
+然后重启服务器:
+
+	netstat -ntlp
+
+	cd /usr/local/cncounter_webapp/
+
+	/usr/local/tools/tomcat8/bin/shutdown.sh 
+
+	/usr/local/tools/tomcat8/bin/startup.sh 
+
+
+稍等一会、继续查看端口号情况:
+
+	netstat -ntlp
+
+
+如果端口号已经监听, 则可以用上面的 jstatd 连接之中, 添加JMX连接.
+
+稍等一会,则连接成功 (JVisualVM的列表中,Tomcat图标上有JMX水印)!
+
+
+> **说明** : 不确定 JMX 与 jstatd 有没有关系。
+>
+> 原来没有启用 jstatd 时，无论如何都连接不上 JMX.
+>
+> 连接上 JMX 之后,jstatd 的链接也用不了了。
+
+
+
+
+
