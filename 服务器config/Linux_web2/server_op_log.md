@@ -651,8 +651,33 @@ OK,设置完成.
 参考 [stop_and_publish.sh](stop_and_publish.sh)
 
 
+## 安装 jstatd
+
+参考: [采用 jstatd 监控服务器: http://blog.csdn.net/renfufei/article/details/53187123](http://blog.csdn.net/renfufei/article/details/53187123)
 
 
+配置 jstatd.all.policy
 
+	mkdir -p /etc/java/
+	cd /etc/java/
+	vim jstatd.all.policy
+
+文件内容如下:
+
+	grant codebase "file:${java.home}/../lib/tools.jar" { 
+	   permission java.security.AllPermission; 
+	};
+
+
+配置启动脚本:
+
+	cd /etc/java/
+	vim startjstatd.sh
+
+内容如下:
+
+	jstatd -p 11099 -J-Djava.security.policy=/etc/java/jstatd.all.policy -J-Djava.rmi.server.hostname=47.88.26.176 &
+
+必须指定公网IP，否则不能通过公网连接。
 
 
