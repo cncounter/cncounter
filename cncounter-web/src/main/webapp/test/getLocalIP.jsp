@@ -1,3 +1,4 @@
+<%@ page import="com.cncounter.util.net.IPUtils" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%!
@@ -42,6 +43,9 @@
                 <a target="_blank" href="http://stackoverflow.com/questions/16558869/getting-ip-address-of-client">
                     <span class="remoteip"><%=getClientIpAddress(request) %></span>
                 </a>
+                (
+                <%=IPUtils.parseIp2Location(IPUtils.getClientIp(request)) %>
+                )
             </h1>
 		   	<h1>
                 您的LAN-IP地址为:
@@ -61,6 +65,15 @@
                     })();
                 </script>
 		   	</h1>
+            <h1>
+                查询IP地址: <a target="_blank" href="http://www.ip138.com/">http://www.ip138.com/</a><br/>
+                <br/>
+                本站查询接口: <a target="_blank" href="../tools/api/jsonp/ip.json?callback=getip">查询IP</a><br/>
+                <br/>
+                感谢: <a target="_blank" href="https://www.ipip.net/">https://www.ipip.net/</a><br/>
+                <br/>
+
+            </h1>
 		</div>
 		<jsp:include page="/common/sidebar.jsp"></jsp:include>
 	</div>

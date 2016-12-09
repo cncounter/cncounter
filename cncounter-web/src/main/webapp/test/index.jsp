@@ -35,6 +35,9 @@
 			<h2>
 				<a target="_blank" href="./notMultiClick/notMultiClick.html">防止抖动；防止短时间内重复点击</a>
 			</h2>
+            <h2>
+                <a target="_blank" href="../tools/api/ip.json">测试获取IP</a>
+            </h2>
 			<h2>
 				<a target="_blank" href="./apitest/index.jsp">API测试页面目录</a>
 			</h2>
