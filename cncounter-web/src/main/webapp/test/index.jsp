@@ -33,6 +33,9 @@
 				<a target="_blank" href="./to-markdown/index.html">to-markdown页面</a>
 			</h2>
 			<h2>
+				<a target="_blank" href="./notMultiClick/notMultiClick.html">防止抖动；防止短时间内重复点击</a>
+			</h2>
+			<h2>
 				<a target="_blank" href="./apitest/index.jsp">API测试页面目录</a>
 			</h2>
 			<h2>
