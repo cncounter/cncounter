@@ -38,13 +38,16 @@
 	<div class="container-fluid">
 		<div class="content_left">
 			<p class="h1">获取局域网IP-LAN  - CN计数</p>
+            <%
+                String clientIp = IPUtils.getClientIp(request);
+            %>
             <h1>
                 您的公网-IP地址为:
                 <a target="_blank" href="http://stackoverflow.com/questions/16558869/getting-ip-address-of-client">
-                    <span class="remoteip"><%=getClientIpAddress(request) %></span>
+                    <span class="remoteip"><%=clientIp %></span>
                 </a>
                 (
-                <%=IPUtils.parseIp2Location(IPUtils.getClientIp(request)) %>
+                <%=IPUtils.parseIp2Location(clientIp) %>
                 )
             </h1>
 		   	<h1>
@@ -68,7 +71,7 @@
             <h1>
                 查询IP地址: <a target="_blank" href="http://www.ip138.com/">http://www.ip138.com/</a><br/>
                 <br/>
-                本站查询接口: <a target="_blank" href="../tools/api/jsonp/ip.json?callback=getip">查询IP</a><br/>
+                本站查询接口: <a target="_blank" href="../tools/api/jsonp/ip.json?callback=getip&ip=<%=clientIp%>">Jsonp-查询IP</a><br/>
                 <br/>
                 感谢: <a target="_blank" href="https://www.ipip.net/">https://www.ipip.net/</a><br/>
                 <br/>
