@@ -742,7 +742,54 @@ JMX连接地址类似于: `47.88.26.176:19999`, 其他默认保持即可。
 参见: [官方文档: rmiregistry](http://docs.oracle.com/javase/7/docs/technotes/tools/solaris/rmiregistry.html)
 
 
-## 
+## tomcat 优雅支持 nginx 代理的 https
 
+参考: [https://www.oschina.net/question/12_213459](https://www.oschina.net/question/12_213459)
+
+编辑配置文件
+
+	cd $TOMCAT_HOME/conf/
+
+	vim server.xml
+
+在 Host 下 增加 Valve, 部分代码如下:
+
+            <Valve className="org.apache.catalina.valves.RemoteIpValve"
+               remoteIpHeader="x-forwarded-for"
+               remoteIpProxiesHeader="x-forwarded-by"
+               protocolHeader="x-forwarded-proto"/>
+
+
+
+可以看到,通过 Valve, 解析 protocolHeader 部分, http 协议的 header-name 一般不区分大小写。
+
+重启 Tomcat:
+
+	cd /usr/local/cncounter_webapp/
+
+	$TOMCAT_HOME/bin/shutdown.sh
+
+	$TOMCAT_HOME/bin/startup.sh
+
+
+
+当然, Nginx 的也需要有对应的配置;
+
+	cd /etc/nginx/
+
+	vim cncounter.com.conf
+
+在其中对应的位置增加一行:
+
+	proxy_set_header X-Forwarded-Proto $scheme;
+
+
+重新加载 nginx 的配置:
+
+	nginx -s reload
+
+其中, `-s` 是给 nginx 主进程发送信号; 可以使用 `nginx -h` 来查看帮助;
+
+支持的信号包括:  stop, quit, reopen, reload
 
 
