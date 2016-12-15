@@ -5,13 +5,16 @@ import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.UnknownHostException;
+import java.nio.ByteBuffer;
 import java.util.Enumeration;
 import java.util.Properties;
 
 /**
- * Created by Administrator on 2016/12/9.
+ * IP工具
  */
 public class IPUtils {
+
+    public static final String SEMICOLON = ";";
 
     // 代理的客户IP-header
     public static final String[] HEADERS_TO_TRY = {
@@ -84,7 +87,7 @@ public class IPUtils {
                     //  是IPV4地址
                     if (addr != null && addr instanceof Inet4Address) {
                         ip += addr.getHostAddress();
-                        ip += ";";
+                        ip += SEMICOLON;
                     }
                 }
             }
@@ -92,14 +95,14 @@ public class IPUtils {
             e.printStackTrace();
         }
         //
-        if(ip.indexOf(";") < ip.lastIndexOf(";")){
+        if(ip.indexOf(SEMICOLON) < ip.lastIndexOf(SEMICOLON)){
             ip = ip.replace("127.0.0.1","");
-            ip = ip.replace(";;","");
+            ip = ip.replace(SEMICOLON+SEMICOLON,"");
         }
-        if(ip.startsWith(";")){
+        if(ip.startsWith(SEMICOLON)){
             ip = ip.substring(1);
         }
-        if(ip.endsWith(";")){
+        if(ip.endsWith(SEMICOLON)){
             ip = ip.substring(0, ip.length() - 1);
         }
         //
@@ -149,7 +152,7 @@ public class IPUtils {
         //
         String areaAddress = "";
         // 判断IP;
-        final String semicoma = ";";
+        final String semicoma = SEMICOLON;
         final String linkSymbol = "-";
         //
         if(null == ip || ip.trim().isEmpty()){ return areaAddress;}
@@ -185,5 +188,63 @@ public class IPUtils {
             }
         }
         return areaAddress;
+    }
+
+
+    public static long ip2Long(String localIp){
+        String strIp = firstIp(localIp);
+        if(null == strIp){return 0;}
+        strIp = strIp.trim();
+        if(!isIpv4(strIp)){return 0;}
+        try {
+            InetAddress inet = InetAddress.getByName(strIp);
+            long value = ByteBuffer.wrap(inet.getAddress()).getLong();
+            return value;
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        return 0;
+        //
+//        long[] ip = new long[4];
+//        //先找到IP地址字符串中.的位置
+//        int position1 = strIp.indexOf(".");
+//        int position2 = strIp.indexOf(".", position1 + 1);
+//        int position3 = strIp.indexOf(".", position2 + 1);
+//        //将每个.之间的字符串转换成整型
+//        ip[0] = Long.parseLong(strIp.substring(0, position1));
+//        ip[1] = Long.parseLong(strIp.substring(position1+1, position2));
+//        ip[2] = Long.parseLong(strIp.substring(position2+1, position3));
+//        ip[3] = Long.parseLong(strIp.substring(position3+1));
+//        return (ip[0] << 24) + (ip[1] << 16) + (ip[2] << 8) + ip[3];
+    }
+
+    public static String long2Ip(Long ipValue){
+        try {
+            InetAddress inet = InetAddress.getByName(""+ ipValue);
+            String address = inet.getHostAddress();
+            return address;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public static boolean isIpv4(String ipStr){
+        if(null == ipStr){
+            return false;
+        } else if(ipStr.matches("^\\d+\\.\\d+\\.\\d+\\.\\d+$")){
+            return true;
+        }
+        return false;
+    }
+
+    private static String firstIp(String ip){
+        if(null == ip){return ip;}
+        if(!ip.contains(SEMICOLON)){
+            return ip;
+        } else {
+            return ip.substring(0, ip.indexOf(SEMICOLON));
+        }
+
     }
 }
