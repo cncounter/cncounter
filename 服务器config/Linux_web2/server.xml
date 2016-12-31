@@ -21,6 +21,7 @@
   <Service name="Catalina">
 
     <Connector port="18080" protocol="HTTP/1.1"
+               URIEncoding="UTF-8"
                connectionTimeout="20000"
                redirectPort="8443" />
 
