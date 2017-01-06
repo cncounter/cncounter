@@ -12,7 +12,11 @@
 	<div class="container-fluid">
 		<div class="left col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <p class="h1">CNC全文翻译(<a target="_blank" href="http://fanyi.youdao.com/">有道API</a>): </p>
-            <p>说明: 全文翻译.请按照markdown语法整理。</p>
+            <p>
+			<span>说明: 全文翻译.请按照markdown语法整理。</span>
+			<span>
+			( 参考 <a target="_blank" href="../test/to-markdown/index.html">to-markdown工具</a> )</span>
+			</p>
             <br/>
             <div class="msg_area"></div>
             <div class="left col-lg-6 col-md-12 col-sm-12 col-xs-12">
