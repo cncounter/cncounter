@@ -105,6 +105,7 @@
                     tip("请求失败!");
                 };
                 tip("后台正在执行翻译,请等待10-30秒!");
+				$text_translation.text("");
                 postAjax(url, data, successCallback, errorCallback, 1);
             };
             // http://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
