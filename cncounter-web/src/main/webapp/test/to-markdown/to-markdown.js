@@ -69,14 +69,14 @@ var toMarkdown = function(string) {
       }
     },
     {
-      patterns: ['span'],
+      patterns: ['span','figure'],
       replacement: function(str, attrs, innerHTML) {
       	innerHTML = trim(innerHTML);
         return innerHTML ? '' + innerHTML + '' : '';
       }
     },
     {
-      patterns: ['script','noscript', 'iframe'],
+      patterns: ['script','noscript', 'iframe', 'canvas'],
       replacement: function(str, attrs, innerHTML) {
         return '\n\n';
       }
@@ -248,6 +248,9 @@ var toMarkdown = function(string) {
     string = string.replace(/^[\t\r\n]+|[\t\r\n]+$/g, ''); // trim leading/trailing whitespace
     string = string.replace(/\n\s+\n/g, '\n\n');
     string = string.replace(/\n{3,}/g, '\n\n'); // limit consecutive linebreaks to 2
+	while(string.indexOf("&nbsp;")> -1){ 
+		string = string.replace("&nbsp;", ' ');
+	}
     return string;
   }
   function trim(string){
