@@ -684,6 +684,18 @@ OK,设置完成.
 官网介绍:[http://docs.oracle.com/javase/7/docs/technotes/tools/share/jstatd.html](http://docs.oracle.com/javase/7/docs/technotes/tools/share/jstatd.html)
 
 
+如何通过 ssh tunnel 连接到远程的内网主机:
+
+1. 首先启动内网服务器的 jstatd; 指定IP为局域网IP；
+2. 查看 监听的2个端口号;(`netstat -ntlp`; 都是 jstatd 的进程号)
+3. 配置 Local(Outcomming) 代理; 2个端口号,把客户机的2个端口号做对应的映射.
+4. 增加客户机的IP,和内网机器一模一样。
+5. 使用 jvisualvm 连接； 内网机器IP:标准端口号。
+
+经测试成功。 但 proxy 的方式不成功。
+
+
+
 ## 配置 JMX 远程服务
 
 修改 tomcat 启动文件:
