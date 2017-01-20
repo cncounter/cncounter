@@ -228,6 +228,13 @@
             <version>${httpclient.version}</version>
         </dependency>
 
+        <!-- QiNiu-yuncunchu -->
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <version>7.0.9</version>
+        </dependency>
+
 
         <!-- slf4j-api -->
         <dependency>
@@ -260,13 +267,6 @@
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.jsqlparser</groupId>
-            <artifactId>jsqlparser</artifactId>
-            <version>0.9.1</version>
-            <optional>true</optional>
         </dependency>
         <!-- javaweb工程的API -->
         <dependency>
