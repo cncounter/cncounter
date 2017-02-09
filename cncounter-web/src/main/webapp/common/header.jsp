@@ -19,6 +19,7 @@
         
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
+              <jsp:include page="bshare.jsp"/>
             <%
                 UserVO userVO = ControllerBase.getLoginUser(request);
                 if(null == userVO){
@@ -45,3 +46,6 @@
       </div>
   </nav>
   <%-- 这里垫一个DIV会不会比较好 --%>
+<div>
+
+</div>
