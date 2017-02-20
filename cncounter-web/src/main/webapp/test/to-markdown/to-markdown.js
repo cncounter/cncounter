@@ -10,7 +10,7 @@ var toMarkdown = function(string) {
   
   var ELEMENTS = [
     {
-      patterns: ['div', 'article'],
+      patterns: ['div', 'article', 'header'],
       type: 'div',
       replacement: function(str, attrs, innerHTML) {
       	innerHTML = trim(innerHTML);
@@ -69,14 +69,14 @@ var toMarkdown = function(string) {
       }
     },
     {
-      patterns: ['span','figure'],
+      patterns: ['span','figure', 'aside'],
       replacement: function(str, attrs, innerHTML) {
       	innerHTML = trim(innerHTML);
         return innerHTML ? '' + innerHTML + '' : '';
       }
     },
     {
-      patterns: ['script','noscript', 'iframe', 'canvas', 'ins'],
+      patterns: ['script','noscript', 'iframe', 'canvas', 'ins', 'style'],
       replacement: function(str, attrs, innerHTML) {
         return '\n\n';
       }
