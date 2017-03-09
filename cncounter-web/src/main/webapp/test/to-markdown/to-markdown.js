@@ -76,7 +76,7 @@ var toMarkdown = function(string) {
       }
     },
     {
-      patterns: ['script','noscript', 'iframe', 'canvas', 'ins', 'style'],
+      patterns: ['script','noscript', 'iframe', 'canvas', 'ins', 'style', 'meta'],
       replacement: function(str, attrs, innerHTML) {
         return '\n\n';
       }
