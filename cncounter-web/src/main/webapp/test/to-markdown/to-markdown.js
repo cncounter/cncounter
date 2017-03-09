@@ -69,7 +69,7 @@ var toMarkdown = function(string) {
       }
     },
     {
-      patterns: ['span','figure', 'aside'],
+      patterns: ['span','figure', 'aside', 'center'],
       replacement: function(str, attrs, innerHTML) {
       	innerHTML = trim(innerHTML);
         return innerHTML ? '' + innerHTML + '' : '';
@@ -175,7 +175,7 @@ var toMarkdown = function(string) {
   
   // Pre code blocks
   // no tanlan
-  string = string.replace(/<pre\b[^>]*>`([\s\S]*?)`<\/pre>/gi, function(str, innerHTML) {
+  string = string.replace(/<pre\b[^>]*>([\s\S]*?)<\/pre>/gi, function(str, innerHTML) {
     innerHTML = innerHTML.replace(/^\t+/g, '  '); // convert tabs to spaces (you know it makes sense)
     innerHTML = innerHTML.replace(/\n/g, '\n    '); // every line
     innerHTML = replaceGtLt(innerHTML);
