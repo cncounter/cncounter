@@ -82,7 +82,7 @@ var toMarkdown = function(string) {
       }
     },
     {
-      patterns: 'code',
+      patterns: ['code', 'tt'],
       replacement: function(str, attrs, innerHTML) {
         return innerHTML ? '`' + innerHTML + '`' : '';
       }
