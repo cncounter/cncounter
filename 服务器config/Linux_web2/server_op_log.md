@@ -805,3 +805,53 @@ JMX连接地址类似于: `47.88.26.176:19999`, 其他默认保持即可。
 支持的信号包括:  stop, quit, reopen, reload
 
 
+## 配置 Teminal 提示符的颜色
+
+vim /etc/profile
+
+
+export PS1="\[\e[31;1m\][\u@\H \W ]\$ \[\e[0m\]"
+
+终端连接时会自动执行 `source /etc/profile` ?
+
+
+
+
+## 安装 Gradle
+
+
+
+准备目录:
+
+	mkdir -p /usr/local/download
+	mkdir -p /home/data
+	
+下载:
+
+	cd /usr/local/download
+	wget https://downloads.gradle.org/distributions/gradle-3.4-all.zip
+
+解压:
+
+	cd /usr/local/download
+	unzip gradle-3.4-all.zip -d /home/data/gradle
+
+配置 PATH 
+
+
+	vim /etc/profile.d/gradle.sh
+
+输入以下内容:
+
+	export GRADLE_HOME=/home/data/gradle/gradle-3.4
+	export PATH=$PATH:$GRADLE_HOME/bin
+
+
+
+需要执行以下命令, 或者在 ~/.bashrc 文件之中增加, 或者重新登录:
+
+source /etc/profile
+
+
+
+
