@@ -593,6 +593,7 @@ OK,设置完成.
 
 
 	mkdir -p /usr/local/download
+	mkdir -p /usr/local/tools
 	cd /usr/local/download
 	wget http://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
 
@@ -851,6 +852,130 @@ export PS1="\[\e[31;1m\][\u@\H \W ]\$ \[\e[0m\]"
 需要执行以下命令, 或者在 ~/.bashrc 文件之中增加, 或者重新登录:
 
 source /etc/profile
+
+
+## 安装 Redis
+
+参考: <https://redis.io/download>
+
+
+### 1. 初始化环境以及下载安装:
+
+	mkdir -p /usr/local/download
+
+	yum install -y gcc
+
+
+	cd /usr/local/download
+
+	wget http://download.redis.io/releases/redis-3.2.8.tar.gz
+
+	tar xzf redis-3.2.8.tar.gz
+
+	mv redis-3.2.8 /usr/local/redis-3.2.8
+
+
+	cd /usr/local/redis-3.2.8
+
+	make
+
+### 2. 配置文件
+
+
+cd /usr/local/redis-3.2.8
+vim  /usr/local/redis-3.2.8/redis.conf
+
+
+
+#### 允许远程访问
+
+去除IP绑定,允许远程访问; 将下面这行注释:
+
+
+	#bind 127.0.0.1
+
+
+> vim 搜索技巧:
+>
+> 按 ESC 键,进入命令模式, 输入“左斜线+关键字”,回车, 例如: `/bind`。 
+>
+> 查找下一个, 按小写的 <kbd>n</kbd>; 上一个, 按大写的 <kbd>N</kbd>;
+
+
+#### 启用密码
+
+查找 requirepass 关键字,或者增加以下这行:
+
+
+	requirepass cnc_any_password
+
+
+其中的密码,请设置为你自己的访问密码。
+
+
+其他配置、请参考: <https://redis.io/topics/config>
+
+
+### 3. 启动脚本
+
+
+	vim /usr/local/redis-3.2.8/start_redis.sh
+
+输入以下内容并保存:
+
+	/usr/local/redis-3.2.8/src/redis-server /usr/local/redis-3.2.8/redis.conf &
+
+
+修改执行权限:
+
+
+	chmod 766 /usr/local/redis-3.2.8/start_redis.sh
+
+
+此时,就可以执行此脚本启动服务器了
+
+	/usr/local/redis-3.2.8/start_redis.sh
+
+
+执行之后会有启动成功的提示信息。 按回车键即可。
+
+
+
+### 4. 关闭脚本
+
+
+此处仅作示例, 请根据具体情况决定:
+
+	vim /usr/local/redis-3.2.8/shutdown_redis.sh
+
+
+输入以下内容并保存:
+
+	/usr/local/redis-3.2.8/src/redis-cli -a cnc_any_password  shutdown
+
+这里的 `-a` 后面是密码, 即 redis.conf 之中配置的密码。
+
+
+修改执行权限:
+
+
+	chmod 766 /usr/local/redis-3.2.8/shutdown_redis.sh
+
+执行即可关闭对应的实例。
+
+
+
+### 5. 服务器启动时自启动
+
+文件 `/etc/rc.local` 中的内容会在系统启动之后执行, 所以修改此文件:
+
+	vim /etc/rc.local
+
+在末尾增加启动脚本:
+
+	/usr/local/redis-3.2.8/start_redis.sh
+
+保存即可。 下次重启服务器后会自动执行。
 
 
 
