@@ -95,11 +95,17 @@
                     text_original : text_original
                 };
                 //
+                var startTime = new Date();
+                //
                 function successCallback(message){
                     var meta = message["meta"];
                     var text_translation = meta["text_translation"];
                     $text_translation.text(text_translation);
-                    tip("翻译成功");
+                    var endTime = new Date();
+                    //
+                    var timemillis = endTime.getTime() - startTime.getTime();
+                    var seconds = timemillis / 1000.0;
+                    tip("翻译成功! 耗时: " + seconds + " s.");
                 };
                 function errorCallback(jqXHR, textStatus, errorThrown){
                     tip("请求失败!");
