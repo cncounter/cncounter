@@ -26,6 +26,15 @@ public class QRCodeController extends ControllerBase {
 
 		return mav;
 	}
+
+
+    @RequestMapping({"/qrcode/upload.php"})
+    public ModelAndView uploadPage(HttpServletRequest request, HttpServletResponse response) {
+        // 输入页面
+        ModelAndView mav = new ModelAndView("qrcode/upload");
+
+        return mav;
+    }
 	
 	@RequestMapping(value = "/qrcode/ajax/genqrcode.json")
 	@ResponseBody
