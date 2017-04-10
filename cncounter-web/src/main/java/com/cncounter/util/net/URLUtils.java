@@ -48,4 +48,31 @@ public class URLUtils {
             return content;
         }
     }
+
+    /**
+     * 组合两个URI；主要是处理2个斜线或者没有斜线 "/" 问题
+     * @param basePath
+     * @param subUri
+     * @return
+     */
+    public static String concatUri(String basePath, String subUri){
+        final  String SLASH = "/";
+        //
+        if(null == basePath){
+            basePath = "";
+        }
+        if(null == subUri){
+            subUri = "";
+        }
+        String resultUri = basePath;
+        if(resultUri.endsWith(SLASH) && subUri.startsWith(SLASH)){
+            resultUri = resultUri.substring(0, resultUri.length()-1);
+        } else if(!resultUri.endsWith(SLASH) && !subUri.startsWith(SLASH)){
+            resultUri += SLASH;
+        }
+        //
+        resultUri += subUri;
+        //
+        return resultUri;
+    }
 }

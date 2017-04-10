@@ -50,7 +50,12 @@
 						if(url.startsWith("http:") || url.startsWith("https:")){
 							
 						} else {
-							url = basePath + url;
+                            final  String SLASH = "/";
+                            String resultUri = basePath;
+                            if(resultUri.endsWith(SLASH) && url.startsWith(SLASH)){
+                                resultUri = resultUri.substring(0, resultUri.length()-1);
+                            }
+                            url = resultUri + url;
 						}
 						url = url.trim();
 						
