@@ -33,11 +33,22 @@ public class Article extends TranslationElement {
         String[] paraStringArray = originalContent.split(PARA_DEP_REGEX);
         //
         ParagraphSep sep = new ParagraphSep();
+        //
+        boolean isCode = false;
         // 遍历,并且组成新元素
         for(String paraContent : paraStringArray){
             //
+            boolean currentisCode = isCode;
+            if(null == paraContent){
+                continue;
+            } else if(paraContent.trim().equals("```")){
+                currentisCode = true;
+                isCode = !isCode;
+            }
+            //
             Paragraph paragraph = new Paragraph();
             paragraph.setOriginalContent(paraContent);
+            paragraph.isCode = currentisCode;
             //
             this.articleElementList.add(paragraph);
             // 加分隔符

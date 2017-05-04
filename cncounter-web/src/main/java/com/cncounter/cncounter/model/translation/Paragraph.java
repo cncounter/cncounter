@@ -22,6 +22,8 @@ public class Paragraph extends TranslationElement {
             return thread;
         }
     });
+    //
+    public boolean isCode = false;
 
     public static int LEN_LIMIT = 200;
     // 问号，句号
@@ -107,10 +109,66 @@ public class Paragraph extends TranslationElement {
         return elementList;
     }
 
+    private static List<TranslationElement> parseHasCodeContent(String content){
+
+        List<TranslationElement> elementList = new ArrayList<TranslationElement>();
+        // 包含源码符号...
+
+        boolean prevNotIsCode = false;
+        //
+        String rest = content;
+        while(rest.contains("`")){
+            //
+            int index = rest.indexOf("`");
+            String preContent =rest.substring(0, index);
+            rest = rest.substring(index + 1);
+
+            // 增加分隔符
+            SentenceSep sep = new SentenceSep();
+            sep.setOriginalContent("`");
+            elementList.add(sep);
+            //
+            prevNotIsCode = !prevNotIsCode;
+            //
+            if(null == preContent || preContent.isEmpty()){
+                continue;
+            }
+            //
+            if(prevNotIsCode){ // 之前的部分不是 code,
+                // 递归
+                List<TranslationElement> restList = parseLongContent(preContent);
+                //
+                elementList.addAll(restList);
+            } else {
+                // 是代码
+                SentenceSep sentence = new SentenceSep();
+                sentence.setOriginalContent(preContent);
+                elementList.add(sentence);
+            }
+        }
+        // 最后的部分
+        if(null != rest && !rest.isEmpty()){
+            // 递归
+            List<TranslationElement> restList = parseLongContent(rest);
+            //
+            elementList.addAll(restList);
+        }
+        //
+        return elementList;
+
+    }
+
 
     private static List<TranslationElement> parseLongContent(String content){
 
         List<TranslationElement> elementList = new ArrayList<TranslationElement>();
+        // 包含源码符号...
+        if(content.contains("`")){
+            elementList = parseHasCodeContent(content);
+            //
+            return elementList;
+        }
+
         // 长度
         int len = content.length();
         if(len <= LEN_LIMIT){ // 小于限值，不再拆分
@@ -253,7 +311,7 @@ public class Paragraph extends TranslationElement {
     // 整个段落是代码
     private static boolean isPreCode(String content) {
         //
-        content = content.trim().replace("\r\n","\n");
+        content = content.trim().replace("\r\n", "\n");
         String codeWraper = "```";
         String singleCodeWraper = "`";
         String[] lineArray = content.split("\n");
@@ -448,6 +506,10 @@ public class Paragraph extends TranslationElement {
     @Override
     public void translation(final TranslationApi translationApi) {
         //? 根据原内容,拆分到段落元素中
+        if(this.isCode){
+            this.setTranslationContent("");
+            return;
+        }
         // 依次遍历子元素，然后执行翻译， 接着写入译文内容
         // 如果符合不翻译规则, 则不翻译:
         if(matchSourceCodeType()){
