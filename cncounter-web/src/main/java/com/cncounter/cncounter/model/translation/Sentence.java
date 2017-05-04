@@ -19,6 +19,14 @@ public class Sentence extends TranslationElement {
     public void translation(TranslationApi translationApi) {
         //直接根据原内容,执行翻译，接着写入译文内容
         String originalContent = this.getOriginalContent();
+        if(null == originalContent){
+            this.setTranslationContent("");
+            return;
+        }
+        if(originalContent.trim().isEmpty()){
+            this.setTranslationContent(originalContent);
+            return;
+        }
         //
         if(originalContent.trim().startsWith("![](")){
             this.setTranslationContent("");

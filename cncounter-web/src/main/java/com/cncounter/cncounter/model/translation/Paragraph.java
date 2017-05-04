@@ -126,11 +126,11 @@ public class Paragraph extends TranslationElement {
             // 增加分隔符
             SentenceSep sep = new SentenceSep();
             sep.setOriginalContent("`");
-            elementList.add(sep);
             //
             prevNotIsCode = !prevNotIsCode;
             //
             if(null == preContent || preContent.isEmpty()){
+                elementList.add(sep);
                 continue;
             }
             //
@@ -145,6 +145,7 @@ public class Paragraph extends TranslationElement {
                 sentence.setOriginalContent(preContent);
                 elementList.add(sentence);
             }
+            elementList.add(sep);
         }
         // 最后的部分
         if(null != rest && !rest.isEmpty()){

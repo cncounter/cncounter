@@ -44,6 +44,11 @@ public class Article extends TranslationElement {
             } else if(paraContent.trim().equals("```")){
                 currentisCode = true;
                 isCode = !isCode;
+
+                ParagraphSep sep2 = new ParagraphSep();
+                sep2.setOriginalContent(paraContent);
+                this.articleElementList.add(sep2);
+                continue;
             }
             //
             Paragraph paragraph = new Paragraph();
