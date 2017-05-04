@@ -7,9 +7,8 @@
 
     <!--console输出-->
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{26}[%L] - %msg%n
-            </pattern>
+        <encoder charset="UTF-8">
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss} %5p %c:%L %X{msgId}] %m%n</pattern>
         </encoder>
     </appender>
 
@@ -70,38 +69,6 @@
         </filter>
     </appender>
 
-
-    <!--针对不同的包设置不同的级别-->
-    <logger name="org.apache" level="INFO" />
-    <logger name="org.springframework" level="INFO" />
-
-
-    <!--&lt;!&ndash;下面这三段的意思是将error,warn级别输出到error文件中,info级别输出到info文件中,同时所有的日志都从控制台上输出&ndash;&gt;-->
-    <!--<logger name="com.lenxeon" level="ERROR" additivity="false">-->
-    <!--<appender-ref ref="stdout"/>-->
-    <!--<appender-ref ref="async-error"/>-->
-    <!--</logger>-->
-
-    <!--<logger name="com.lenxeon" level="WARN" additivity="false">-->
-    <!--<appender-ref ref="stdout"/>-->
-    <!--<appender-ref ref="async-warn"/>-->
-    <!--</logger>-->
-
-    <!--<logger name="com.lenxeon" level="INFO" additivity="false">-->
-    <!--<appender-ref ref="stdout"/>-->
-    <!--<appender-ref ref="async-info"/>-->
-    <!--</logger>-->
-
-
-    <!--总的配置,默认将级别设定在info-->
-    <root level="INFO">
-        <appender-ref ref="stdout" />
-        <appender-ref ref="async-info"/>
-        <appender-ref ref="async-warn"/>
-        <appender-ref ref="async-error"/>
-    </root>
-
-
     <appender name="monitor" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
@@ -128,5 +95,20 @@
     <logger name="org.mybatis" level="WARN" />
     <logger name="org.springframework.web" level="WARN" />
     <logger name="com.cncounter" level="DEBUG" />
+
+
+    <!--针对不同的包设置不同的级别-->
+    <logger name="org.apache" level="INFO" />
+    <logger name="org.springframework" level="INFO" />
+
+
+    <!--总的配置,默认将级别设定在info-->
+    <root level="INFO">
+        <appender-ref ref="stdout" />
+        <appender-ref ref="async-info"/>
+        <appender-ref ref="async-warn"/>
+        <appender-ref ref="async-error"/>
+    </root>
+
 
 </configuration>
