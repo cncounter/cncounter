@@ -23,6 +23,7 @@ import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 /**
  * 二维码图片包装工具<br/>
@@ -103,13 +104,20 @@ public class ZXingUtil {
 			content = "";
 		}
 		BufferedImage image = null;
-		//
-		MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
 
-		Map<EncodeHintType, String> hints = new HashMap<EncodeHintType, String>();
+		// 配置项...
+		Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
+		// 字符编码
 		hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+		// 高容错率
+		hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
+		// 白边大小
+		Integer quietZoneInt = 0;
+		hints.put(EncodeHintType.MARGIN, quietZoneInt);
 		BitMatrix matrix = null;
 		try {
+			//
+			MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
 			matrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE,
 					width, height, hints);
 			image = MatrixToImageWriter.toBufferedImage(matrix);
