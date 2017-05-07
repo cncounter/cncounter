@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cncounter.cncounter.dao.api.other.UserMapper">
+
+	<resultMap id="BaseResultMap" type="com.cncounter.cncounter.model.other.User">
+			<id property="id" column="id" jdbcType="BIGINT"/>
+			<result property="username" column="username" jdbcType="VARCHAR"/>
+			<result property="password" column="password" jdbcType="VARCHAR"/>
+			<result property="saltPassword" column="salt_password" jdbcType="VARCHAR"/>
+			<result property="userType" column="user_type" jdbcType="INTEGER"/>
+			<result property="email" column="email" jdbcType="VARCHAR"/>
+			<result property="mobile" column="mobile" jdbcType="VARCHAR"/>
+			<result property="realName" column="real_name" jdbcType="VARCHAR"/>
+			<result property="title" column="title" jdbcType="VARCHAR"/>
+			<result property="createId" column="create_id" jdbcType="BIGINT"/>
+			<result property="updateId" column="update_id" jdbcType="BIGINT"/>
+			<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+			<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+			<result property="version" column="version" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+		id,username,password,salt_password,user_type,email,mobile,real_name,title,create_id,update_id,create_time,update_time,version
+	</sql>
+	
+	<select id="getById" parameterType="int" resultMap="BaseResultMap">
+		select
+			<include refid="Base_Column_List" />
+		from
+			user
+		where
+			id = #{id}
+	</select>
+	
+	<select id="countBy" resultType="int">
+		select count(*)
+		from user
+		where 1=1
+		  <if test="_bean != null and _bean.id != null">
+			and id = #{ _bean.id, jdbcType=BIGINT }
+		  </if>
+		  <if test="_bean != null and _bean.username != null">
+			and username = #{ _bean.username, jdbcType=VARCHAR }
+		  </if>
+		  <if test="_bean != null and _bean.password != null">
+			and password = #{ _bean.password, jdbcType=VARCHAR }
+		  </if>
+		  <if test="_bean != null and _bean.saltPassword != null">
+			and salt_password = #{ _bean.saltPassword, jdbcType=VARCHAR }
+		  </if>
+		  <if test="_bean != null and _bean.userType != null">
+			and user_type = #{ _bean.userType, jdbcType=INTEGER }
+		  </if>
+		  <if test="_bean != null and _bean.email != null">
+			and email = #{ _bean.email, jdbcType=VARCHAR }
+		  </if>
+		  <if test="_bean != null and _bean.mobile != null">
+			and mobile = #{ _bean.mobile, jdbcType=VARCHAR }
+		  </if>
+		  <if test="_bean != null and _bean.realName != null">
+			and real_name = #{ _bean.realName, jdbcType=VARCHAR }
+		  </if>
+		  <if test="_bean != null and _bean.title != null">
+			and title = #{ _bean.title, jdbcType=VARCHAR }
+		  </if>
+		  <if test="_bean != null and _bean.createId != null">
+			and create_id = #{ _bean.createId, jdbcType=BIGINT }
+		  </if>
+		  <if test="_bean != null and _bean.updateId != null">
+			and update_id = #{ _bean.updateId, jdbcType=BIGINT }
+		  </if>
+		  <if test="_bean != null and _bean.createTime != null">
+			and create_time = #{ _bean.createTime, jdbcType=TIMESTAMP }
+		  </if>
+		  <if test="_bean != null and _bean.updateTime != null">
+			and update_time = #{ _bean.updateTime, jdbcType=TIMESTAMP }
+		  </if>
+		  <if test="_bean != null and _bean.version != null">
+			and version = #{ _bean.version, jdbcType=INTEGER }
+		  </if>
+	</select>
+	
+	<select id="listPage" resultMap="BaseResultMap">
+		select
+			<include refid="Base_Column_List" />
+		from user
+		where 1=1
+			<if test="_bean != null and _bean.id != null">
+			  and id = #{ _bean.id, jdbcType=BIGINT }
+			</if>
+			<if test="_bean != null and _bean.username != null">
+			  and username = #{ _bean.username, jdbcType=VARCHAR }
+			</if>
+			<if test="_bean != null and _bean.password != null">
+			  and password = #{ _bean.password, jdbcType=VARCHAR }
+			</if>
+			<if test="_bean != null and _bean.saltPassword != null">
+			  and salt_password = #{ _bean.saltPassword, jdbcType=VARCHAR }
+			</if>
+			<if test="_bean != null and _bean.userType != null">
+			  and user_type = #{ _bean.userType, jdbcType=INTEGER }
+			</if>
+			<if test="_bean != null and _bean.email != null">
+			  and email = #{ _bean.email, jdbcType=VARCHAR }
+			</if>
+			<if test="_bean != null and _bean.mobile != null">
+			  and mobile = #{ _bean.mobile, jdbcType=VARCHAR }
+			</if>
+			<if test="_bean != null and _bean.realName != null">
+			  and real_name = #{ _bean.realName, jdbcType=VARCHAR }
+			</if>
+			<if test="_bean != null and _bean.title != null">
+			  and title = #{ _bean.title, jdbcType=VARCHAR }
+			</if>
+			<if test="_bean != null and _bean.createId != null">
+			  and create_id = #{ _bean.createId, jdbcType=BIGINT }
+			</if>
+			<if test="_bean != null and _bean.updateId != null">
+			  and update_id = #{ _bean.updateId, jdbcType=BIGINT }
+			</if>
+			<if test="_bean != null and _bean.createTime != null">
+			  and create_time = #{ _bean.createTime, jdbcType=TIMESTAMP }
+			</if>
+			<if test="_bean != null and _bean.updateTime != null">
+			  and update_time = #{ _bean.updateTime, jdbcType=TIMESTAMP }
+			</if>
+			<if test="_bean != null and _bean.version != null">
+			  and version = #{ _bean.version, jdbcType=INTEGER }
+			</if>
+		<if test="_orderby != null">
+			order by ${_orderby} ${_orderdir}
+		</if>
+		<if test="_start != null and _pageSize != null">
+			limit ${_start}, ${_pageSize}
+		</if>
+	</select>
+	
+	<update id="update" parameterType="com.cncounter.cncounter.model.other.User">
+		update user
+		<set>
+			<if test="username != null">
+			  username = #{ _bean.username, jdbcType=VARCHAR }
+			</if>
+			<if test="password != null">
+			  password = #{ _bean.password, jdbcType=VARCHAR }
+			</if>
+			<if test="saltPassword != null">
+			  salt_password = #{ _bean.saltPassword, jdbcType=VARCHAR }
+			</if>
+			<if test="userType != null">
+			  user_type = #{ _bean.userType, jdbcType=INTEGER }
+			</if>
+			<if test="email != null">
+			  email = #{ _bean.email, jdbcType=VARCHAR }
+			</if>
+			<if test="mobile != null">
+			  mobile = #{ _bean.mobile, jdbcType=VARCHAR }
+			</if>
+			<if test="realName != null">
+			  real_name = #{ _bean.realName, jdbcType=VARCHAR }
+			</if>
+			<if test="title != null">
+			  title = #{ _bean.title, jdbcType=VARCHAR }
+			</if>
+			<if test="createId != null">
+			  create_id = #{ _bean.createId, jdbcType=BIGINT }
+			</if>
+			<if test="updateId != null">
+			  update_id = #{ _bean.updateId, jdbcType=BIGINT }
+			</if>
+			<if test="createTime != null">
+			  create_time = #{ _bean.createTime, jdbcType=TIMESTAMP }
+			</if>
+			<if test="updateTime != null">
+			  update_time = #{ _bean.updateTime, jdbcType=TIMESTAMP }
+			</if>
+			<if test="version != null">
+			  version = #{ _bean.version, jdbcType=INTEGER }
+			</if>
+		</set>
+		where
+			id = #{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="int">
+		delete from user 
+		where
+			id = #{id}
+	</delete>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id"
+		parameterType="com.cncounter.cncounter.model.other.User">
+		insert into user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="username != null">
+				username,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="saltPassword != null">
+				salt_password,
+			</if>
+			<if test="userType != null">
+				user_type,
+			</if>
+			<if test="email != null">
+				email,
+			</if>
+			<if test="mobile != null">
+				mobile,
+			</if>
+			<if test="realName != null">
+				real_name,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="createId != null">
+				create_id,
+			</if>
+			<if test="updateId != null">
+				update_id,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="version != null">
+				version,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id, jdbcType=BIGINT},
+			</if>
+			<if test="username != null">
+				#{username, jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password, jdbcType=VARCHAR},
+			</if>
+			<if test="saltPassword != null">
+				#{saltPassword, jdbcType=VARCHAR},
+			</if>
+			<if test="userType != null">
+				#{userType, jdbcType=INTEGER},
+			</if>
+			<if test="email != null">
+				#{email, jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				#{mobile, jdbcType=VARCHAR},
+			</if>
+			<if test="realName != null">
+				#{realName, jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				#{title, jdbcType=VARCHAR},
+			</if>
+			<if test="createId != null">
+				#{createId, jdbcType=BIGINT},
+			</if>
+			<if test="updateId != null">
+				#{updateId, jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				#{createTime, jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime, jdbcType=TIMESTAMP},
+			</if>
+			<if test="version != null">
+				#{version, jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	
+</mapper>

@@ -15,6 +15,8 @@ foo.txt
 
 .idea
 *.iml
+all.log
+all.log.*
 
 
 # 忽略所有.class文件.
@@ -26,3 +28,8 @@ cncounter/src/main/webapp/WEB-INF/classes/*
 generator_log*
 
 /cncounter/target/*
+/cncounter-web/target/*
+/cncounter-manage/target/*
+rebel.xml
+mvn_log_*
+/cncounter-manage/*.cmd

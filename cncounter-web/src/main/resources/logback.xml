@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+    <!--属性区-->
+    <property name="logBase" value="/usr/local/cncounter_webapp/logs/" />
+
+    <!--console输出-->
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="UTF-8">
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss} %5p %c:%L %X{msgId}] %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--info 文件输出-->
+    <appender name="info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 按日期区分的滚动日志 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logBase}/cnc_web_info.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36}[%L] - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!--error 文件输出-->
+    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 按日期区分的滚动日志 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logBase}/cnc_web_error.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36}[%L] - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+
+    <!--针对 INFO 级别的日志进行过滤,并输出到 info 文件中-->
+    <appender name="async-info" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="info" />
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!--针对 ERROR 级别的日志进行过滤,并输出到 error 文件中-->
+    <appender name="async-error" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="error"/>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!--针对 WARN 级别的日志进行过滤,并输出到 error 文件中-->
+    <appender name="async-warn" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="error"/>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="monitor" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36}[%L] - %msg%n
+            </pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logBase}/cnc_web_monitor.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- additivity="false"禁止monitor里的内容向上传递，否则会同时显示在默认的日志中 -->
+    <logger name="monitor" additivity="false" level="INFO">
+        <appender-ref ref="monitor" />
+    </logger>
+
+    <logger name="org.springframework" level="WARN" />
+    <logger name="org.apache.shiro" level="WARN" />
+    <logger name="org.mybatis" level="WARN" />
+    <logger name="org.springframework.web" level="WARN" />
+    <logger name="com.cncounter" level="DEBUG" />
+
+
+    <!--针对不同的包设置不同的级别-->
+    <logger name="org.apache" level="INFO" />
+    <logger name="org.springframework" level="INFO" />
+
+
+    <!--总的配置,默认将级别设定在info-->
+    <root level="INFO">
+        <appender-ref ref="stdout" />
+        <appender-ref ref="async-info"/>
+        <appender-ref ref="async-warn"/>
+        <appender-ref ref="async-error"/>
+    </root>
+
+
+</configuration>

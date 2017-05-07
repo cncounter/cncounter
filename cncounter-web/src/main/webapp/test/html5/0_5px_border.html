@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>CSS实现0.5px边框</title>
+  <meta charset='utf-8'>
+  <meta name="Author" content="renfufei@qq.com">
+  <meta name="Description" content="inveted by: http://davidwalsh.name/browser-camera">
+<style type="text/css">
+
+.border_0_5_px {
+    position: relative;
+}
+
+.border_0_5_px:before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    border: 1px solid #000;
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scale(0.5, 0.5);
+    -ms-transform: scale(0.5, 0.5);
+    -o-transform: scale(0.5, 0.5);
+    transform: scale(0.5, 0.5);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.border_1_0_px {
+    border: 1px solid #000;
+}
+.inline-block {
+    display: inline-block;
+}
+.bx {
+    display: block;
+}
+
+.border_0_25_px:before{
+    width: 400%;
+    height: 400%;
+    -webkit-transform: scale(0.25, 0.25);
+    -ms-transform: scale(0.25, 0.25);
+    -o-transform: scale(0.25, 0.25);
+    transform: scale(0.25, 0.25);
+}
+
+pre {
+    max-height: 800px;
+    overflow-y: auto;
+    padding: 7px;
+    line-height: 18px;
+    margin-bottom: 1em;
+}
+
+pre, code {
+    font-family: Consolas, Monaco, Lucida Console, monospace;
+    background-color: #f4f4f4;
+    color: #666;
+    font-size: 12px;
+    word-wrap: break-word;
+}
+
+br{
+	padding: 2px;
+    margin-bottom: 5px;
+}
+
+</style>
+ </head>
+
+ <body>
+<h1>CSS实现0.5px边框</h1>
+
+<hr/>
+
+<em>参考地址: http://www.ayqy.net/blog/css3%E5%AE%9E%E7%8E%B0%E5%8D%8A%E5%83%8F%E7%B4%A0%E8%BE%B9%E6%A1%86/</em>
+
+<br/>
+
+<p><em>边框效果用移动浏览器看更明显，变化的是线宽而不是颜色</em></p>
+
+<p><em>注意：</em>虽然理论上边框可以任意细（1/n px），但由于存在精度的问题（精度影响边框的宽高），所以半像素边框是最有实用意义的，虽然也存在问题：如果宽高是奇数则边框位置会偏移0.5px，实际应用中尚可接受</p>
+
+<hr/>
+
+<div class="demo">
+<h3>1像素边框</h3>
+HTML代码:
+<br/>
+<pre><code>&lt;div class="border_1_0_px"&gt;1像素边框，block&lt;/div&gt;
+</code></pre>
+<br/>
+
+CSS代码:
+<br/>
+<pre><code>.border_1_0_px {
+    border: 1px solid #000;
+}
+</code></pre>
+<br/>
+
+实现效果:
+<br/>
+<br/>
+
+<div class="border_1_0_px">1像素边框，block</div>
+
+</div>
+
+
+<br>
+<br>
+<hr/>
+
+<div class="demo">
+<h3>0.5像素边框</h3>
+HTML代码:
+<br/>
+<pre><code>&lt;div class="border_0_5_px"&gt;半像素边框，block&lt;/div&gt;
+</code></pre>
+<br/>
+
+CSS代码:
+<br/>
+<pre><code>.border_0_5_px {
+    position: relative;
+}
+
+.border_0_5_px:before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    border: 1px solid #000;
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scale(0.5, 0.5);
+    -ms-transform: scale(0.5, 0.5);
+    -o-transform: scale(0.5, 0.5);
+    transform: scale(0.5, 0.5);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+</code></pre>
+<br/>
+
+实现效果:
+<br/>
+<br/>
+
+<div class="border_0_5_px">
+    半像素边框，block
+</div>
+
+</div>
+
+</div>
+
+
+<br>
+<br>
+<hr/>
+
+<h3>更多示例,请点击鼠标右键,查看源代码:</h3>
+
+<br>
+<br>
+
+<span class="border_1_0_px">1像素边框，inline</span>
+<br/>
+<br/>
+
+<span class="border_0_5_px inline-block">半像素边框 + inline-block</span>
+<br/>
+<br/>
+
+<span class="border_0_5_px">半像素边框，inline，边框太窄</span>
+<br/>
+<br/>
+
+<div class="border_0_5_px inline-block border_0_25_px">1/4像素边框</div></p>
+
+
+<br>
+<br>
+<hr/>
+<br>
+<br>
+ </body>
+</html>

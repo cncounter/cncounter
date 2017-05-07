@@ -1,0 +1,1 @@
+INSERT INTO  favorite (type, title, url) SELECT type, title,url FROM favorite_old

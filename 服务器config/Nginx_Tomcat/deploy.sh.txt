@@ -1,0 +1,79 @@
+
+
+##### 轻量发布, 不上传 jar 包，而是拷贝
+
+rm /usr/local/cncounter_webapp/cncounter-web.war -f
+
+cd /usr/local/cncounter_webapp
+
+rz
+
+rm __cncounter-web -rf 
+
+mv _cncounter-web __cncounter-web 
+
+/usr/local/tomcat7/bin/shutdown.sh 
+
+
+mv cncounter-web _cncounter-web 
+
+unzip cncounter-web.war -d cncounter-web
+
+cp _cncounter-web/WEB-INF/lib/*.jar cncounter-web/WEB-INF/lib/
+
+
+/usr/local/tomcat7/bin/startup.sh 
+
+
+netstat -ntl | grep 8080 
+
+
+
+
+
+
+
+
+
+
+
+#######################################
+
+cd /dev/shm
+
+
+rm /dev/shm/cncounter-web.war -f
+
+rz
+
+ping localhost -c 1
+
+if [ ! -f "/dev/shm/cncounter-web.war" ]; then
+  echo "/dev/shm/cncounter-web.war is not exists!"
+  exit 0
+fi
+
+rm /usr/local/cncounter_webapp/cncounter-web.war -f
+
+mv /dev/shm/cncounter-web.war /usr/local/cncounter_webapp/
+
+cd /usr/local/cncounter_webapp
+
+rm __cncounter-web -rf 
+
+mv _cncounter-web __cncounter-web 
+
+/usr/local/tomcat7/bin/shutdown.sh 
+
+
+mv cncounter-web _cncounter-web 
+
+unzip cncounter-web.war -d cncounter-web
+
+
+/usr/local/tomcat7/bin/startup.sh 
+
+
+netstat -ntl | grep 8080 
+
+

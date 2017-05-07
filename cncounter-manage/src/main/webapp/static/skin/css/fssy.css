@@ -1,0 +1,104 @@
+.x-tree-view .x-tree-node-text {
+	cursor: pointer;
+}
+
+.x-form-checkboxgroup-body{
+	padding : 0
+}
+
+
+.icon-over {
+	 background-color: #eee;
+}
+
+.icon-item {
+	margin : 6px 10px;
+	float : left;
+	cursor: pointer;
+	width : 16px;
+	height: 16px;
+}
+
+.x-grid-cell-inner .icon-item{
+	margin: 0;
+	float: auto;
+	cursor: default;
+}
+
+.tab-content-title .x-panel-header {
+	background: #DFEAF2;
+}
+.tab-content-title .x-panel-header-default {
+	border: 1px solid #cdcdcd
+}
+
+.tab-content-title .x-panel-header  .x-panel-header-text {
+	color :#666
+}
+
+.x-boxselect-list .x-boxselect-item-close {
+	background: transparent url(../../ext/resources/themes/images/gray/tab/tab-default-close.gif) no-repeat left center;
+	filter		: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+	opacity		: 0.6;
+	top		: 2px;
+	right		: 2px;
+	cursor: pointer;
+	width		: 11px;
+	height		: 11px;
+	top: 0;
+	right: 2px;
+	color: #97B2E7;
+	font-weight: bold;
+	position: absolute;
+}
+
+.x-grid-suspended-row {
+	background: #FFFF00
+}
+
+.x-grid-suspended-row td {
+	background: #FFFF00
+}
+
+.x-grid-cell-action{
+	padding: 0
+}
+.x-grid-cell-action .x-grid-cell-inner{
+	padding: 0 10px;
+}
+
+.x-grid-cell-action .x-grid-cell-inner a {
+	margin-top: 5px;
+	display: block;
+	zoom: 1;
+}
+
+.x-form-readonly input.x-form-text{
+	background : #FAFCFD;
+}
+ 
+.x-back-reason  textarea{
+	background: #FFCCCC
+}
+
+.x-grid-back-red {
+	background: #FF0000;
+}
+
+.x-btn-back-blue{
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  padding: 3px 3px 3px 3px;
+  border-width: 1px;
+  border-style: solid;
+  background-image: none;
+  background-color: #2cacee;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #2cacee), color-stop(50%, #2cacee), color-stop(51%, #2cacee), color-stop(100%, #2cacee));
+  background-image: -webkit-linear-gradient(top, #2cacee, #2cacee 50%, #2cacee 51%, #2cacee);
+  background-image: -moz-linear-gradient(top, #2cacee, #2cacee 50%, #2cacee 51%, #2cacee);
+  background-image: -o-linear-gradient(top, #2cacee, #2cacee 50%, #2cacee 51%, #2cacee);
+  background-image: linear-gradient(top, #2cacee, #2cacee 50%, #2cacee 51%, #2cacee);
+}

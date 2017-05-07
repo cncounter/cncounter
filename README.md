@@ -5,7 +5,7 @@ CNCounter
 
 Java+SpringMVC+Druid+Jedis+MyBatis+REST
 
-在线访问地址: [http://cncounter.duapp.com](http://cncounter.duapp.com)
+在线访问地址: [http://www.cncounter.com](http://www.cncounter.com)
 
 
 # 开发日志

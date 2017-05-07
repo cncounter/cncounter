@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "errorcode": "0000",
+  "message": "",
+  "meta": {
+    "user": {
+      "roles": null,
+      "id": 2,
+      "name": "admin",
+      "realName": "管理员",
+      "password": "********",
+      "type": 0,
+      "phone": "15201678765",
+      "email": "ezugloba@163.com",
+      "picUrl": null,
+      "status": 1,
+      "sex": null,
+      "birthday": null,
+      "officePhone": null,
+      "departCode": null,
+      "departName": null,
+      "superLeaderCode": null,
+      "superLeaderName": null,
+      "employCode": "123456",
+      "createTime": "2015-04-17 09:28:34",
+      "updateTime": "2015-06-26 12:12:27",
+      "posPassword": ""
+    }
+  }
+}
