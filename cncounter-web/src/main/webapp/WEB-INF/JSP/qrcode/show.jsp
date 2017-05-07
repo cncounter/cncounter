@@ -14,7 +14,7 @@
 	<div class="container-fluid">
 		<div class="content_left">
 		
-			<p class="h1"> 二维码显示</p>
+			<p class="h1"> 二维码显示  [<a target="_blank" href="upload.php">在线识别</a>]</p>
 			<div>
 				<form id="input_form" action="<%=basePath %>qrcode/ajax/genqrcode.json" method="post">
 					<span>二维码内容:</span>

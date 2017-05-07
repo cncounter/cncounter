@@ -32,12 +32,13 @@ public class HttpClientUtils {
 
     /**
      * 将URL连接为 InputStream, 主要用于下载文件
-     * @param url
+     * @param str
      * @return
      */
-    public static InputStream getUrlAsStream(String url){
+    public static InputStream getUrlAsStream(String str){
         InputStream inputStream = null;
         try {
+            URL url = new URL(str);
             inputStream = _getUrlAsStream(url);
         } catch (IOException e) {
             logger.error(e);
@@ -64,9 +65,6 @@ public class HttpClientUtils {
      * @return
      * @throws IOException
      */
-    private static InputStream _getUrlAsStream(String url) throws IOException {
-        return _getUrlAsStream(url);
-    }
 
     private static InputStream _getUrlAsStream(URL url) throws IOException {
         InputStream inputStream = null;

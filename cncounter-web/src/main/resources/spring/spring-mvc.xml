@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
-        http://www.springframework.org/schema/beans     
-        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-        http://www.springframework.org/schema/context 
-        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+	   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
 
 	<context:component-scan base-package="com.cncounter">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
@@ -44,5 +45,16 @@
 				<ref bean="fastJsonHttpMessageConverter" />
 			</list>
 		</property>
+	</bean>
+	<!--  文件上传处理器,申明的id必须为multipartResolver  -->
+	<bean id="multipartResolver"
+		  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!--
+            允许上传的最大文件大小，100M字节。当设为-1时表示无限制，默认是-1,
+        -->
+		<property name="maxUploadSize" value="102400000" />
+		<!-- 在文件上传时允许写到内存中的最大值，以字节为单位计算，默认是10240		-->
+		<property name="maxInMemorySize" value="4096" />
+		<!-- 上传文件时的临时目录，默认是Servlet容器的临时目录 -->
 	</bean>
 </beans>
