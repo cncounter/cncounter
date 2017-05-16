@@ -36,7 +36,7 @@ public class TestQRCode {
             //
             BufferedImage imageLogo = ImageIO.read(TestQRCode.class.getClassLoader().getResourceAsStream(logo));
 
-            //
+            // 合并后的新图片
             BufferedImage imageSaved = new BufferedImage(size, size, BufferedImage.TYPE_INT_RGB);
             Graphics2D g2d = imageSaved.createGraphics();
             g2d.drawImage(image1, null, 0, 0);
@@ -54,22 +54,11 @@ public class TestQRCode {
             _imgRGB = imageLogo.getRGB(0, 0, w2, h2, _imgRGB, 0, w2);
             //
             imageSaved.setRGB(posw, posh, w2, h2, _imgRGB, 0, w2);
-//            for (int i = 0; i < w2; i++) {
-//                for (int j = 0; j < h2; j++) {
-//                    //int _rgb1 = image1.getRGB(i + posw, j + posh);
-//                    int _rgb2 = imageLogo.getRGB(i, j);
-//                    //if (_rgb1 != _rgb2) {
-//                    //    _rgb2 = _rgb1 & _rgb2;
-//                    //}
-//                    imageSaved.setRGB(i + posw, j + posh, _rgb2);
-//                }
-//            }
 
             //
             ostream = new FileOutputStream(file);
 
             ImageIO.write(imageSaved, "jpeg", ostream);
-            //ImageIO.write(imageLogo, "jpeg", ostream);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
