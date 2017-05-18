@@ -62,6 +62,7 @@
             var $btn_translate = $("#btn_translate");
             //
             $btn_translate.click(excuteQuery);
+            $text_original.keyup(keyupHandler);
             if(window.Clipboard){
                 var clipboard = new Clipboard("#btn_copy", {
                     text: function(trigger) { // 可以自定义返回的text
@@ -83,7 +84,20 @@
             }
 
             //
+            function keyupHandler(e){
+                //
+                var ctrlKey = e.ctrlKey;
+                var keyCode = e.keyCode;
+                //
+                var keyCode_Enter = 13;
+                if(ctrlKey && (keyCode_Enter===keyCode)){
+                    excuteQuery();
+                }
+            };
+            //
             function excuteQuery(){
+                //
+                $text_translation.text("");
                 //
                 var text_original = $text_original.val();
                 if(!text_original){
@@ -111,7 +125,6 @@
                     tip("请求失败!");
                 };
                 tip("后台正在执行翻译,请等待10-30秒!");
-				$text_translation.text("");
                 postAjax(url, data, successCallback, errorCallback, 1);
             };
             // http://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
