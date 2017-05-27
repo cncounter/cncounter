@@ -15,7 +15,6 @@ $(function(){
         //
         $btn_login.bind("click", reg_click_handler);
         // 加载md5工具.js
-        // $.getScript("/static/js/md5-util.js");
         loadMd5Utils();
     };
     //

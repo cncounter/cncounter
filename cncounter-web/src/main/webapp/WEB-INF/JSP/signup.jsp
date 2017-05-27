@@ -23,18 +23,16 @@
          <label for="loginpassword">
                    登录密码<span class="required">:</span>
          </label>
-         <input id="loginpassword" name="loginpassword" type="password"  class="form-control" placeholder="请输入密码"  required>
+         <input id="loginpassword" name="loginpassword" type="text"  class="form-control" placeholder="输入登录密码"  required>
        </div>
-       <div>
-         <label for="repassword">
-                   确认密码<span class="required">:</span>
-         </label>
-         <input id="repassword" name="repassword" type="password"  class="form-control" placeholder="请再次输入密码"  required>
-       </div>
-       <button id="btn_signup" class="btn btn-lg btn-primary btn-block" type="button">确认注册CNCounter</button>
-       <a class="btn btn-lg btn-warning btn-block"  href="<%=path %>/login.php">已有账号?点击登录</a>
+         <br/>
+         <div>
+             <button id="btn_signup" class="btn btn-lg btn-primary btn-block" type="button">确认注册</button>
+             <br/>
+             <a class="btn btn-lg btn-warning btn-block"  href="<%=path %>/login.php">已有账号?点击登录</a>
+         </div>
      </form>
   </div> <!-- /container -->
-  <script src="/static/jsp_js/signup.jsp.js"></script>
+  <script src="<%=path %>/static/jsp_js/signup.jsp.js"></script>
 </body>
 </html>
