@@ -7,7 +7,7 @@ $(function(){
     //
     var $loginemail = $("#loginemail");
     var $loginpassword = $("#loginpassword");
-    var $repassword = $("#repassword");
+    //var $repassword = $("#repassword");
     var $btn_signup = $("#btn_signup");
     //
     initBindEvents();
@@ -23,30 +23,33 @@ $(function(){
         //
         var loginemail = $loginemail.val();
         var loginpassword = $loginpassword.val();
-        var repassword = $repassword.val();
+        //var repassword = $repassword.val();
         //
         if(!loginemail){
+            layer.tips("请输入email地址", $loginemail);
             $loginemail.focus();
             return;
         } else if( !(/.+@.+/.test(loginemail))){
             // 判断符合email
+            layer.tips("email格式错误", $loginemail);
             $loginemail.focus();
             return;
         }
 
         //
         if(!loginpassword){
+            layer.tips("请输入登录密码", $loginpassword);
             $loginpassword.focus();
             return;
         }
-        if(!repassword){
-            $repassword.focus();
-            return;
-        }
-        if(loginpassword != repassword){
-            $repassword.focus();
-            return;
-        }
+        //if(!repassword){
+        //    $repassword.focus();
+        //    return;
+        //}
+        //if(loginpassword != repassword){
+        //    $repassword.focus();
+        //    return;
+        //}
         // 对密码进行一次md5,避免传输明文
         loginpassword = md5(loginpassword);
         //
@@ -88,7 +91,12 @@ $(function(){
                 CNC.redirect("login.php");
             } else {
                 // 显示信息
-                CNC.msg(message);
+                //CNC.msg(message);
+                message = message || "注册失败!";
+
+                layer.tips(message, $loginemail);
+                $loginemail.focus();
+                $loginemail.select();
             }
 
         };

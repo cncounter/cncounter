@@ -15,9 +15,9 @@
        <h2 class="form-signin-heading">用户注册</h2>
        <div>
          <label for="loginemail">
-                   登录邮箱<span class="required">:</span>
+                   登录Email<span class="required">:</span>
          </label>
-         <input id="loginemail" name="loginemail"   type="text" class="form-control" placeholder="输入登录邮箱" required autofocus>
+         <input id="loginemail" name="loginemail"   type="text" class="form-control" placeholder="输入Email地址" required autofocus>
        </div>
        <div>
          <label for="loginpassword">
