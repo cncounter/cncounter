@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.cncounter.cncounter.config.WebSiteConfig" %>
 <%@include file="basePath.jsp"%>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<link href="<%=basePath %>static/image/favicon.ico" rel="bookmark" type="image/x-icon" /> 
 	<link href="<%=basePath %>static/image/favicon.ico" rel="icon" type="image/x-icon" /> 
 	<link href="<%=basePath %>static/image/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-	
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
 <%
 	String jqv = "1.9.1"; // jQuery版本
 	String bsv = "3.3.4"; // BootStrap版本
@@ -23,15 +25,14 @@
 	} else {
 	//
 %>
-	<!-- 百度CDN公共库参考地址 : http://developer.baidu.com/wiki/index.php?title=docs/cplat/libs -->
 	<!-- 引入 jQuery -->
-	<script src="http://libs.baidu.com/jquery/<%=jqv%>/jquery.min.js"></script>
+	<script src="//cdn.bootcss.com/jquery/<%=jqv%>/jquery.min.js"></script>
 	<!-- BootStrap JS -->
-	<script src="http://cdn.bootcss.com/bootstrap/<%=bsv%>/js/bootstrap.min.js"></script>
+	<script src="//cdn.bootcss.com/bootstrap/<%=bsv%>/js/bootstrap.min.js"></script>
 	<!-- BootStrap -->
-	<link href="http://cdn.bootcss.com/bootstrap/<%=bsv%>/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//cdn.bootcss.com/bootstrap/<%=bsv%>/css/bootstrap.min.css" rel="stylesheet">
 	<!-- BootStrap theme -->
-	<link href="http://cdn.bootcss.com/bootstrap/<%=bsv%>/css/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="//cdn.bootcss.com/bootstrap/<%=bsv%>/css/bootstrap-theme.min.css" rel="stylesheet">
 <%
 	}
 %>
