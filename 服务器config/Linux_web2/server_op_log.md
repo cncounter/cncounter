@@ -979,4 +979,30 @@ vim  /usr/local/redis-3.2.8/redis.conf
 
 
 
+### 6. 连接本机服务器脚本
+
+
+此处仅作示例, 请根据具体情况决定:
+
+	vim /usr/local/redis-3.2.8/to_conn_localhost.sh
+
+
+输入以下内容并保存:
+
+	/usr/local/redis-3.2.8/src/redis-cli -a cnc_any_password
+
+
+这里的 `-a` 后面是密码, 即 redis.conf 之中配置的密码。
+
+
+修改执行权限:
+
+	chmod 766 /usr/local/redis-3.2.8/to_conn_localhost.sh
+
+执行即可连接本机实例。
+
+相关的连接帮助信息可以通过 --help 查看,例如:
+
+/usr/local/redis-3.2.8/src/redis-cli --help
+
 
