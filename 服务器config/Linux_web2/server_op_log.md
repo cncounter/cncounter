@@ -709,16 +709,17 @@ OK,设置完成.
 
 在文件开头的某一行增加以下内容:
 
-	JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote 
+	export JAVA_OPTS="$JAVA_OPTS 
 		-Dcom.sun.management.jmxremote.port=19999
-		-Dcom.sun.management.jmxremote.authenticate=false
 		-Dcom.sun.management.jmxremote.ssl=false
+		-Dcom.sun.management.jmxremote.authenticate=false
 		-Djava.rmi.server.hostname=47.88.26.176"
 
 
-配制时没有换行,不确定加上换行是否有效.
+此处为了排版方便，实际上其中没有换行符. 
 
-其中 `hostname=47.88.26.176` 是公网IP，`port=19999` 是端口号。
+其中, `hostname=47.88.26.176` 是公网IP，`port=19999` 是端口号。如果只有一个IP，那么不指定 hostname 应该也可以。
+
 
 然后重启服务器:
 
@@ -978,5 +979,31 @@ vim  /usr/local/redis-3.2.8/redis.conf
 保存即可。 下次重启服务器后会自动执行。
 
 
+
+### 6. 连接本机服务器脚本
+
+
+此处仅作示例, 请根据具体情况决定:
+
+	vim /usr/local/redis-3.2.8/to_conn_localhost.sh
+
+
+输入以下内容并保存:
+
+	/usr/local/redis-3.2.8/src/redis-cli -a cnc_any_password
+
+
+这里的 `-a` 后面是密码, 即 redis.conf 之中配置的密码。
+
+
+修改执行权限:
+
+	chmod 766 /usr/local/redis-3.2.8/to_conn_localhost.sh
+
+执行即可连接本机实例。
+
+相关的连接帮助信息可以通过 --help 查看,例如:
+
+/usr/local/redis-3.2.8/src/redis-cli --help
 
 
