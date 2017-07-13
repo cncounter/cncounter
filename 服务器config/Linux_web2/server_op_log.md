@@ -48,6 +48,17 @@
 	/usr/bin/ssserver -c /etc/shadowsocks/config.json -d start
 
 
+可以在该文件中看到提示：
+
+	# Please note that you must run 'chmod +x /etc/rc.d/rc.local' to ensure
+	# that this script will be executed during boot.
+
+
+所以需要配置该文件的可执行权限:
+
+	chmod +x /etc/rc.d/rc.local
+
+
 ### 手动启动:
 
 	/usr/bin/ssserver -c /etc/shadowsocks/config.json -d start
