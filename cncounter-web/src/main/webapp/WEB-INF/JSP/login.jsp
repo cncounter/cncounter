@@ -13,18 +13,18 @@
   	<%-- 必须AJAX --%>
      <form class="form-signin" role="form" method="post" action="<%=path %>/login.php">
        <h2 class="form-signin-heading">用户登录</h2>
-         <div class="form-signin" style="text-align: center;">
+         <div class="form-signin hide" style="text-align: center;">
              <a href="<%=path %>/qqlogin.php">
                  <img src="<%=path %>/static/image/qq_logo_4.png?v=080d9.png" alt="腾讯QQ">
              </a>
          </div>
-       <div>
+       <div class="form-group">
          <label for="loginemail">
                    登录邮箱<span class="required">:</span>
          </label>
          <input id="loginemail" name="loginemail"   type="text" class="form-control" placeholder="输入登录邮箱" required autofocus>
        </div>
-       <div>
+       <div class="form-group">
          <label for="loginpassword">
                    登录密码<span class="required">:</span>
          </label>

@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
   `username` varchar(64) NOT NULL COMMENT '用户名',
   `password` varchar(256) NOT NULL COMMENT '密码,加密后的',
-  `salt_password` varchar(16) NOT NULL COMMENT '密码盐,随机数',
+  `salt_password` varchar(64) NOT NULL COMMENT '密码盐,随机数',
   `user_type` int(8) unsigned DEFAULT '0' COMMENT '用户类别,0为普通用户,100为管理员',
   `email` varchar(64) NOT NULL COMMENT '邮箱',
   `mobile` varchar(64) DEFAULT NULL COMMENT '手机号',
