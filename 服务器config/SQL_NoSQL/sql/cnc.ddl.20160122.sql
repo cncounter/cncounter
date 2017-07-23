@@ -1,4 +1,29 @@
 
+-- 导出  表 cncounter.cms_chengyu 结构
+CREATE TABLE `cms_chengyu` (
+	`id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+	`title` VARCHAR(512) NULL DEFAULT NULL COMMENT '标题',
+	`search_content` VARCHAR(2048) NULL DEFAULT NULL COMMENT '搜索内容',
+	`html_content` VARCHAR(2048) NULL DEFAULT NULL COMMENT 'HTML内容',
+	`tags` VARCHAR(512) NULL DEFAULT NULL COMMENT '标签,以逗号分隔',
+	`pinyin` VARCHAR(512) NULL DEFAULT NULL COMMENT '拼音-全拼',
+	`jianpin` VARCHAR(512) NULL DEFAULT NULL COMMENT '简拼-首字母大写',
+	`type` INT(8) UNSIGNED NOT NULL DEFAULT '0' COMMENT '类别,0为首页通用',
+	`status` INT(8) NOT NULL DEFAULT '0' COMMENT '状态:0保存;1发布;2屏蔽;',
+	`sort_no` INT(8) UNSIGNED NOT NULL DEFAULT '999' COMMENT '排序编号',
+	`create_id` BIGINT(20) UNSIGNED NULL DEFAULT NULL COMMENT '创建者ID',
+	`update_id` BIGINT(20) UNSIGNED NULL DEFAULT NULL COMMENT '更新者ID',
+	`create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	`update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+	`version` INT(8) NOT NULL DEFAULT '0' COMMENT '乐观锁版本号',
+	PRIMARY KEY (`id`)
+)
+COMMENT='成语'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+
+
 -- 导出  表 cncounter.dict_common 结构
 CREATE TABLE IF NOT EXISTS `dict_common` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
