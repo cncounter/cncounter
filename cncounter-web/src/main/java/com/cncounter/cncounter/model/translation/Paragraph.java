@@ -37,6 +37,10 @@ public class Paragraph extends TranslationElement {
 
     public void setOriginalContent(String originalContent) {
         this.originalContent = originalContent;
+        if(this.isCode){
+            this.setTranslationContent("");
+            return;
+        }
         // 处理拆分元素
         List<TranslationElement> elementList = splitPara2Sentence(originalContent);
         //
