@@ -73,9 +73,17 @@ public class Article extends TranslationElement {
         String content = builder.toString();
         if(content.trim().isEmpty()){
             ParagraphSep sep = new ParagraphSep();
+            if(content.contains("\n\n")){
+            } else if(content.contains("\n")){
+                content = content+"\n";
+            } else {
+                content = "\n"+content+"\n";
+            }
             sep.setOriginalContent(content);
             return sep;
         }
+        //
+        content = content.trim();
 
         Paragraph paragraph = new Paragraph();
         paragraph.isCode = code1Started; // 决定之前是否是 Code
@@ -283,10 +291,11 @@ public class Article extends TranslationElement {
             //
             int elementType = element.getElementType();
             //
-            builder.append(orig);
+            builder.append(orig.trim());
             if(TYPE_PARAGRAPH == elementType){ // 是段落
                 builder.append("\n\n");
-                builder.append(dest);
+                builder.append(dest.trim());
+                builder.append("\n\n");
                 //
                 success_num ++;
                 logger.debug("翻译成功: " + success_num + "条; 最新 orig.length="+orig.length() );
@@ -309,7 +318,7 @@ public class Article extends TranslationElement {
 //        TranslationApi translationApi = new TranslationApi() {
 //            @Override
 //            public String translation(String originalText) {
-//                return "///中文模拟翻译///"+originalText;
+//                return "///中文模拟翻译///"+originalText.trim();
 //            }
 //        };
 //        article.translation(translationApi);
