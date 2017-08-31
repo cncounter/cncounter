@@ -39,6 +39,11 @@ function checkSidCardNum(code) {
         pass = false;
     } else if(!/^\d{17}[\dx]$/i.test(code)){
         tip = "身份证号格式错误";
+        if(code.length<18){
+            tip += ":不足18个字符";
+        }if(code.length>18){
+            tip += ":超过18个字符";
+        }
         pass = false;
     } else if(!city[code.substr(0,2)]){
         tip = "地址编码错误";
