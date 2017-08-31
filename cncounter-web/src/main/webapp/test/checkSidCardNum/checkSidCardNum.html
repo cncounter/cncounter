@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>身份证号校验位计算 - CN计数-cncounter</title>
+
+    <script src="http://www.cncounter.com/static/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://www.cncounter.com/static/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link  href="http://www.cncounter.com/static/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link  href="http://www.cncounter.com/static/bootstrap/3.3.4/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- 本站CSS样式 -->
+    <link href="http://www.cncounter.com/static/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="http://www.cncounter.com/static/css/sticky-footer.css" rel="stylesheet" type="text/css" />
+
+    <script src="http://www.cncounter.com/static/js/checkSidCardNum.js?v=1"></script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="content_left">
+			<p class="h1">身份证号校验位计算</p>
+
+			<hr class="hr" style="border-top-color :black; width: 100%;"/>
+			<div>
+				<form id="input_form" action="" method="post">
+					身份证号码: <input tabindex="1" id="sid" name="sid" value="" >
+					<br/>
+				</form>
+					<button tabindex="4" id="btn_calc"
+						 type="button" class="btn btn-primary">计算</button>
+			</div>
+            <div>
+                验证状态: <span class="sid_tip"></span> <br/>
+                验证状态: <span class="sid_checkstatus"></span> <br/>
+                校验位: <span class="sid_checksum"></span> <br/>
+            </div>
+		</div>
+	</div>
+
+	
+	<script type="text/javascript">
+		// 此处JS应该归拢收集
+		$(function(){
+			//
+			var $btn_calc = $("#btn_calc");
+			var $sid = $("#sid");
+			var $sid_tip = $(".sid_tip");
+			var $sid_checkstatus = $(".sid_checkstatus");
+			var $sid_checksum = $(".sid_checksum");
+			//
+			//
+			$btn_calc.bind("click", function(e){
+				//
+				var sid = $sid.val() || "";
+                sid = sid.toUpperCase();
+                //
+                var result = checkSidCardNum(sid) || {};
+                //
+                var tip = result.tip;   // 提示信息
+                var pass = result.pass; // 通过状态
+                var last = result.last; // 校验位
+                //
+                $sid_tip.text(tip);
+                $sid_checkstatus.text(pass);
+                $sid_checksum.text(last);
+				//
+			});
+		});
+	</script>
+</body>
+</html>

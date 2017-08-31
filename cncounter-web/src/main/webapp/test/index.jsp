@@ -20,6 +20,9 @@
             <h2>
                 <a target="_blank" href="./getLocalIP.jsp">获取局域网IP-LAN</a>
             </h2>
+            <h2>
+                <a target="_blank" href="./checkSidCardNum/checkSidCardNum.html">计算身份证校验位</a>
+            </h2>
 			<h2>
 				<a target="_blank" href="./apitest/config/websiteconfig.jsp">开启调试模式</a>
 			</h2>
