@@ -124,7 +124,7 @@ public class Article extends TranslationElement {
             }
             // 1. ``` 方式的代码段
             // 代码段开始
-            if(!code1Started && codeLine.trim().equals(line.trim())){
+            if(!code1Started && line.trim().startsWith(codeLine)){
                 // 结束之前的 ParaGraph
                 TranslationElement paragraph = asParagraph(currentPara, code1Started);
                 paraElementList.add(paragraph);
@@ -136,7 +136,7 @@ public class Article extends TranslationElement {
                 continue; // 继续下一行
             }
             // 代码段结束
-            if(code1Started && codeLine.trim().equals(line.trim())){
+            if(code1Started && line.trim().startsWith(codeLine)){
                 // 加入当前 para 之中
                 append2Builder(currentPara, line);
                 TranslationElement paragraph = asParagraph(currentPara, code1Started);
@@ -164,6 +164,12 @@ public class Article extends TranslationElement {
                 // 4个空格或者\t; 属于代码
                 thisMatchCode = true;
             } else if(currentEmptyLine){
+                thisMatchCode = true;
+            } else if(line.trim().matches("^!?\\[[^\\]]*\\]\\([^\\)]*\\)$")){
+                // 匹配 ![]() 或者 []
+                thisMatchCode = true;
+            } else if(line.trim().matches("^<http[^>]+>$")){
+                // 匹配 <http...>
                 thisMatchCode = true;
             }
 
