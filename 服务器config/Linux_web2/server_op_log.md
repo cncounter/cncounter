@@ -692,6 +692,8 @@ OK,设置完成.
 
 必须指定公网IP，否则不能通过公网连接。
 
+如果是通过内网访问,那么, `-Djava.rmi.server.hostname` 应该可以忽略, 请根据实际情况确定
+
 
 官网介绍:[http://docs.oracle.com/javase/7/docs/technotes/tools/share/jstatd.html](http://docs.oracle.com/javase/7/docs/technotes/tools/share/jstatd.html)
 
