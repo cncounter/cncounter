@@ -83,6 +83,7 @@
                     } else {
                         $content.val(data.info);
                     }
+                    $image_url.val("");
                 }
             });
 			//

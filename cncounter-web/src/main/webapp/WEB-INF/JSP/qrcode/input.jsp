@@ -94,6 +94,9 @@
 				    	// 把错误吃了
 				        alert("网络请求失败");
 				    };
+                //
+                $qrcode_img_anchor.attr("href", "").addClass("hide");
+                $qrcode_img.attr("src", "").addClass("hide");
 				//
 				postAjax(url, data, successCallback,errorCallback,1);
 				//
