@@ -1,5 +1,13 @@
 package com.cncounter.util.zxing;
 
+import com.google.zxing.*;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.common.HybridBinarizer;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -8,22 +16,6 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Vector;
-
-import javax.imageio.ImageIO;
-
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.BinaryBitmap;
-import com.google.zxing.DecodeHintType;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatReader;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.Result;
-import com.google.zxing.WriterException;
-import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.common.HybridBinarizer;
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 /**
  * 二维码图片包装工具<br/>
@@ -104,13 +96,24 @@ public class ZXingUtil {
 			content = "";
 		}
 		BufferedImage image = null;
+        //
+        ErrorCorrectionLevel level = null;
+        if(content.length() > 120){
+            level = ErrorCorrectionLevel.L;
+        } else if(content.length() > 100){
+            level = ErrorCorrectionLevel.M;
+        } else if(content.length() > 80){
+            level = ErrorCorrectionLevel.Q;
+        } else {
+            level = ErrorCorrectionLevel.H;
+        }
 
 		// 配置项...
 		Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
 		// 字符编码
 		hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
-		// 高容错率
-		hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
+		// 容错率
+		hints.put(EncodeHintType.ERROR_CORRECTION, level);
 		// 白边大小
 		Integer quietZoneInt = 0;
 		hints.put(EncodeHintType.MARGIN, quietZoneInt);
