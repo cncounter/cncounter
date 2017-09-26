@@ -8,7 +8,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
+    <style>
+	body {
+		word-wrap: break-word;
+		word-break: break-all;
+	}
+    </style>
 </HEAD>
 <BODY>
 
@@ -28,14 +33,14 @@
 </tr>
  
 <tr>
-<td width="200">堆内存使用情况(Heap Memory Usage)</td>
+<td width="200">堆内存(Heap Memory Usage)</td>
 <td>
 <%=ManagementFactory.getMemoryMXBean().getHeapMemoryUsage()%>
 </td>
 </tr>
  
 <tr>
-<td>非堆内存使用情况(Non-Heap Memory Usage)</td>
+<td>堆外内存(Non-Heap Memory Usage)</td>
 <td>
 <%=ManagementFactory.getMemoryMXBean().getNonHeapMemoryUsage()%>
 </td>
@@ -67,22 +72,22 @@ MemoryPoolMXBean item = (MemoryPoolMXBean) iter.next();
 </tr>
  
 <tr>
-<td width="200">类型(Type)</td>
+<td width="200">内存池类型(Type)</td>
 <td><%= item.getType() %></td>
 </tr>
  
 <tr>
-<td>当前使用(Usage)</td>
+<td>使用量(Usage)</td>
 <td><%= item.getUsage() %></td>
 </tr>
  
 <tr>
-<td>峰值使用(Peak Usage)</td>
+<td>峰值(Peak Usage)</td>
 <td><%= item.getPeakUsage() %></td>
 </tr>
  
 <tr>
-<td>集合占用(Collection Usage)</td>
+<td>GC后(Collection Usage)</td>
 <td><%= item.getCollectionUsage() %></td>
 </tr>
  
