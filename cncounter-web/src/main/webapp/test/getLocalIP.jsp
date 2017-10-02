@@ -77,6 +77,33 @@
                 <br/>
 
             </h1>
+            <h1>
+                新浪查询接口: <a target="_blank" href="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js">http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js</a><br/>
+                <br/>
+                新浪返回结果: <span class="sina-ip-result"></span>
+                <script src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
+                <script>
+                    $(function(){
+                        var sinaIpResult = $(".sina-ip-result");
+                        if(window.remote_ip_info){
+                            //
+                            // var remote_ip_info = {"ret":1,"start":-1,"end":-1,"country":"\u4e2d\u56fd","province":"\u5317\u4eac","city":"\u5317\u4eac","district":"","isp":"","type":"","desc":""};
+                            //
+                            var result = window.remote_ip_info;
+                            var country = result.country || "-";
+                            var province = result.province || "-";
+                            var city = result.city || "-";
+                            var district = result.district || "-";
+                            //
+                            var text = "国家="+ country + ";" + "省="+ province + ";" + "市="+ city + ";" + "省="+ district + ";" ;
+                            //
+                            sinaIpResult.text(text);
+                        }
+                    });
+                </script>
+                <br/>
+
+            </h1>
 		</div>
 		<jsp:include page="/common/sidebar.jsp"></jsp:include>
 	</div>
