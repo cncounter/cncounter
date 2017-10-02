@@ -95,7 +95,7 @@
                             var city = result.city || "-";
                             var district = result.district || "-";
                             //
-                            var text = "国家="+ country + ";" + "省="+ province + ";" + "市="+ city + ";" + "省="+ district + ";" ;
+                            var text = "国家="+ country + ";" + "省="+ province + ";" + "市="+ city + ";" + "县="+ district + ";" ;
                             //
                             sinaIpResult.text(text);
                         }
