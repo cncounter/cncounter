@@ -886,18 +886,18 @@ source /etc/profile
 
 	tar xzf redis-3.2.8.tar.gz
 
-	mv redis-3.2.8 /usr/local/redis-3.2.8
+	mv redis-3.2.8 /usr/local/redis
 
 
-	cd /usr/local/redis-3.2.8
+	cd /usr/local/redis
 
 	make
 
 ### 2. 配置文件
 
 
-cd /usr/local/redis-3.2.8
-vim  /usr/local/redis-3.2.8/redis.conf
+cd /usr/local/redis
+vim  /usr/local/redis/redis.conf
 
 
 
@@ -916,6 +916,14 @@ vim  /usr/local/redis-3.2.8/redis.conf
 > 查找下一个, 按小写的 <kbd>n</kbd>; 上一个, 按大写的 <kbd>N</kbd>;
 
 
+#### 修改端口号
+
+找到 port, 修改即可:
+
+```
+port 6379
+```
+
 #### 启用密码
 
 查找 requirepass 关键字,或者增加以下这行:
@@ -927,28 +935,29 @@ vim  /usr/local/redis-3.2.8/redis.conf
 其中的密码,请设置为你自己的访问密码。
 
 
+
 其他配置、请参考: <https://redis.io/topics/config>
 
 
 ### 3. 启动脚本
 
 
-	vim /usr/local/redis-3.2.8/start_redis.sh
+	vim /usr/local/redis/start_redis.sh
 
 输入以下内容并保存:
 
-	/usr/local/redis-3.2.8/src/redis-server /usr/local/redis-3.2.8/redis.conf &
+	/usr/local/redis/src/redis-server /usr/local/redis/redis.conf &
 
 
 修改执行权限:
 
 
-	chmod 766 /usr/local/redis-3.2.8/start_redis.sh
+	chmod 766 /usr/local/redis/start_redis.sh
 
 
 此时,就可以执行此脚本启动服务器了
 
-	/usr/local/redis-3.2.8/start_redis.sh
+	/usr/local/redis/start_redis.sh
 
 
 执行之后会有启动成功的提示信息。 按回车键即可。
@@ -960,12 +969,12 @@ vim  /usr/local/redis-3.2.8/redis.conf
 
 此处仅作示例, 请根据具体情况决定:
 
-	vim /usr/local/redis-3.2.8/shutdown_redis.sh
+	vim /usr/local/redis/shutdown_redis.sh
 
 
 输入以下内容并保存:
 
-	/usr/local/redis-3.2.8/src/redis-cli -a cnc_any_password  shutdown
+	/usr/local/redis/src/redis-cli -a cnc_any_password  shutdown
 
 这里的 `-a` 后面是密码, 即 redis.conf 之中配置的密码。
 
@@ -973,7 +982,7 @@ vim  /usr/local/redis-3.2.8/redis.conf
 修改执行权限:
 
 
-	chmod 766 /usr/local/redis-3.2.8/shutdown_redis.sh
+	chmod 766 /usr/local/redis/shutdown_redis.sh
 
 执行即可关闭对应的实例。
 
@@ -987,7 +996,7 @@ vim  /usr/local/redis-3.2.8/redis.conf
 
 在末尾增加启动脚本:
 
-	/usr/local/redis-3.2.8/start_redis.sh
+	/usr/local/redis/start_redis.sh
 
 保存即可。 下次重启服务器后会自动执行。
 
@@ -998,12 +1007,12 @@ vim  /usr/local/redis-3.2.8/redis.conf
 
 此处仅作示例, 请根据具体情况决定:
 
-	vim /usr/local/redis-3.2.8/to_conn_localhost.sh
+	vim /usr/local/redis/to_conn_localhost.sh
 
 
 输入以下内容并保存:
 
-	/usr/local/redis-3.2.8/src/redis-cli -a cnc_any_password
+	/usr/local/redis/src/redis-cli -p 6379 -a cnc_any_password
 
 
 这里的 `-a` 后面是密码, 即 redis.conf 之中配置的密码。
@@ -1011,12 +1020,18 @@ vim  /usr/local/redis-3.2.8/redis.conf
 
 修改执行权限:
 
-	chmod 766 /usr/local/redis-3.2.8/to_conn_localhost.sh
+	chmod 766 /usr/local/redis/to_conn_localhost.sh
 
 执行即可连接本机实例。
 
 相关的连接帮助信息可以通过 --help 查看,例如:
 
-/usr/local/redis-3.2.8/src/redis-cli --help
+/usr/local/redis/src/redis-cli --help
 
+
+添加软连接:
+
+ln -s /usr/local/redis/start_redis.sh ~/start_redis.sh
+ln -s /usr/local/redis/shutdown_redis.sh ~/shutdown_redis.sh
+ln -s /usr/local/redis/to_conn_localhost.sh ~/to_conn_localhost.sh
 
