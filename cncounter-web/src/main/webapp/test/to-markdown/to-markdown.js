@@ -18,7 +18,7 @@ var toMarkdown = function(string) {
       }
     },
     {
-      patterns: ['p'],
+      patterns: ['p', 'dd'],
       replacement: function(str, attrs, innerHTML) {
       	innerHTML = trim(innerHTML);
         return innerHTML ? '\n\n' + innerHTML + '\n\n' : '';
@@ -51,7 +51,7 @@ var toMarkdown = function(string) {
       	innerHTML = trim(innerHTML);
         var href = attrs.match(attrRegExp('href')),
             title = attrs.match(attrRegExp('title'));
-        return href ? '[' + innerHTML + ']' + '(' + href[1] + (title && title[1] ? ' "' + title[1] + '"' : '') + ')' : str;
+        return href ? '[' + innerHTML + ']' + '(' + href[1] + (title && title[1] ? ' "' + title[1] + '"' : '') + ')' : innerHTML;
       }
     },
     {
@@ -69,7 +69,7 @@ var toMarkdown = function(string) {
       }
     },
     {
-      patterns: ['span','figure', 'aside', 'center'],
+      patterns: ['span','figure', 'aside', 'center', 'dl'],
       replacement: function(str, attrs, innerHTML) {
       	innerHTML = trim(innerHTML);
         return innerHTML ? '' + innerHTML + '' : '';
@@ -82,7 +82,7 @@ var toMarkdown = function(string) {
       }
     },
     {
-      patterns: ['code', 'tt'],
+      patterns: ['code', 'tt', 'dt'],
       replacement: function(str, attrs, innerHTML) {
         return innerHTML ? '`' + innerHTML + '`' : '';
       }
@@ -177,9 +177,9 @@ var toMarkdown = function(string) {
   // no tanlan
   string = string.replace(/<pre\b[^>]*>([\s\S]*?)<\/pre>/gi, function(str, innerHTML) {
     innerHTML = innerHTML.replace(/^\t+/g, '  '); // convert tabs to spaces (you know it makes sense)
-    innerHTML = innerHTML.replace(/\n/g, '\n    '); // every line
+    //innerHTML = innerHTML.replace(/\n/g, '\n    '); // every line
     innerHTML = replaceGtLt(innerHTML);
-    return '\n\n\n    ' + innerHTML + '\n\n\n';
+    return '\n\n```\n' + innerHTML + '\n```\n\n';
   });
   //
   function replaceGtLt(string){
