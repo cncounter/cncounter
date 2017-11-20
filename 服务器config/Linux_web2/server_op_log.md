@@ -1035,3 +1035,135 @@ ln -s /usr/local/redis/start_redis.sh ~/start_redis.sh
 ln -s /usr/local/redis/shutdown_redis.sh ~/shutdown_redis.sh
 ln -s /usr/local/redis/to_conn_localhost.sh ~/to_conn_localhost.sh
 
+
+
+## 安装 MariaDB
+
+MariaDB 是 MySQL 的开源分支,由 MySQL 创始人进行维护。
+
+参考链接: <http://blog.csdn.net/renfufei/article/details/17616549>
+
+添加 yum 仓库地址
+
+```
+cd /etc/yum.repos.d/
+vim /etc/yum.repos.d/MariaDB.repo
+```
+
+输入以下内容
+
+```
+# MariaDB 10.2 CentOS repository list - created 2017-09-30 08:28 UTC
+# http://downloads.mariadb.org/mariadb/repositories/
+[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/10.2/centos7-amd64
+gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1
+```
+
+保存之后, 执行 yum 安装
+
+```
+sudo yum -y install MariaDB-server MariaDB-client
+```
+
+修改配置文件
+
+```
+cd /etc/my.cnf.d/
+cp -a /etc/my.cnf.d/server.cnf /etc/my.cnf.d/server.cnf.orig
+vim /etc/my.cnf.d/server.cnf
+```
+
+修改 [mysqld] 一节的内容。
+
+增加端口号:
+
+```
+[mysqld]
+port=13306
+```
+
+当然, 最好在修改服务器端口号的同时,也修改客户端的默认端口号。
+
+```
+vim /etc/my.cnf.d/mysql-clients.cnf
+```
+
+内容如下:
+
+```
+[mysql]
+port=13306
+```
+
+
+
+启动服务
+
+```
+# 查看mysql状态;
+# service mysql status
+# 关闭数据库
+# service mysql stop
+# 启动数据库
+service mysql start
+
+```
+
+如果启动出错，请查看提示信息。
+
+查看端口号:
+
+```
+netstat -ntlp
+```
+
+设置ROOT密码:
+
+```
+mysqladmin -u root password 'root'
+```
+
+如果root已经设置了密码，则可以使用 `-poldpass` 来连接, 注意`-p`后面没有空格.
+
+```
+mysqladmin -u root -proot password 'root'
+```
+
+
+客户端连接:
+
+```
+mysql -u root -proot -h localhost -P 13306
+```
+
+当然, -h 与 -P 可以不指定, 则使用配置文件中的默认值。
+
+
+创建数据库与用户授权:
+
+
+```
+CREATE DATABASE `cncounter` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `cncounter`;
+-- DROP USER 'cncounter';
+CREATE USER 'cncounter'@'%' IDENTIFIED BY 'cncounter';
+-- grant all privileges on cncounter.* to 'cncounter'@'%' identified by 'cncounter';
+grant all privileges on cncounter.* to cncounter@localhost identified by 'cncounter';
+grant all privileges on cncounter.* to 'cncounter'@'cnc-web1' identified by 'cncounter';
+grant all privileges on cncounter.* to 'cncounter'@'cnc-web2' identified by 'cncounter';
+flush privileges;
+```
+
+注意: 'cncounter'@'%' 可能比较危险, 一般来说MySQL服务器都限制IP。 例如  `cnc-web2`, 然后在 `/etc/hosts` 中进行映射即可。
+
+OK, 可以连接试试。
+
+
+
+
+
+
+
