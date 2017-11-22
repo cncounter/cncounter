@@ -1166,8 +1166,129 @@ flush privileges;
 OK, 可以连接试试。
 
 
+## 安装OSS-FS文件系统
 
 
+下载安装包文件, 参考: <https://github.com/aliyun/ossfs/wiki/install>
 
+
+```
+cd /usr/local/download/
+wget  https://github.com/aliyun/ossfs/releases/download/v1.80.3/ossfs_1.80.3_centos7.0_x86_64.rpm
+
+```
+
+执行本地安装:
+
+```
+cd /usr/local/download/
+sudo yum localinstall ossfs_1.80.3_centos7.0_x86_64.rpm -y
+
+```
+
+按提示, CentOS 6.5 以上不需要 ` --nogpgcheck` 参数
+
+
+准备好RAM子账号的 AccessKeyId 和 AccessKeySecret 。
+
+```
+AccessKeyId:		XXXaccessKeyId
+AccessKeySecret:	XXXaccessKeySecret
+```
+
+以及创建好 bucket, 以及获取相关参数，如:
+
+
+ECS 的 VPC 网络访问（内网）
+
+```
+BucketName:	cnc-hk-pri
+内网EndPoint:	oss-cn-hongkong-internal.aliyuncs.com
+```
+
+配置:
+
+注意修改3个参数为需要的参数:
+
+```
+sudo touch /etc/passwd-ossfs
+echo XXXBucketName:XXXaccessKeyId:XXXaccessKeySecret > /etc/passwd-ossfs
+sudo chmod 640 /etc/passwd-ossfs
+```
+
+
+挂载bucket到某个目录:
+
+```
+mkdir -p /home/ossfs/cnc-hk-pri
+chmod 777 /home/ossfs/cnc-hk-pri
+ossfs cnc-hk-pri /home/ossfs/cnc-hk-pri -ourl=http://oss-cn-hongkong-internal.aliyuncs.com -o allow_other
+
+```
+
+然后查看挂载情况:
+
+```
+$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vda1        40G  5.7G   32G  16% /
+devtmpfs        1.9G     0  1.9G   0% /dev
+tmpfs           1.9G     0  1.9G   0% /dev/shm
+tmpfs           1.9G  480K  1.9G   1% /run
+tmpfs           1.9G     0  1.9G   0% /sys/fs/cgroup
+tmpfs           380M     0  380M   0% /run/user/0
+ossfs           256T     0  256T   0% /home/ossfs/cnc-hk-pri
+```
+
+可以看到已经挂载.
+
+```
+ll /home/ossfs
+ll /home/ossfs/cnc-hk-pri
+```
+
+如果需要卸载某个挂载点:
+
+```
+# umount /home/ossfs/cnc-hk-pri
+```
+
+CentOS7自动挂载。
+
+
+更多问题请参考FAQ: <https://github.com/aliyun/ossfs/wiki/FAQ>
+
+
+```
+touch /etc/init.d/ossfs
+chmod a+x /etc/init.d/ossfs
+
+```
+
+
+> vim /etc/init.d/ossfs
+
+填入挂载的执行脚本:
+
+```
+#! /bin/bash
+#
+# ossfs      Automount Aliyun OSS Bucket in the specified direcotry.
+#
+# chkconfig: 2345 90 10
+# description: Activates/Deactivates ossfs configured to start at boot time.
+
+ossfs cnc-hk-pri /home/ossfs/cnc-hk-pri -ourl=http://oss-cn-hongkong-internal.aliyuncs.com -o allow_other
+```
+
+注意, 必须有 chkconfig 等注释信息;
+
+把ossfs启动脚本作为其他服务，开机自动启动
+
+```
+chkconfig ossfs on
+```
+
+至此、安装配置完成。
 
 
