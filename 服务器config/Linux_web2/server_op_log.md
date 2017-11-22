@@ -1283,6 +1283,8 @@ ossfs cnc-hk-pri /home/ossfs/cnc-hk-pri -ourl=http://oss-cn-hongkong-internal.al
 
 注意, 必须有 chkconfig 等注释信息;
 
+上面的注释的意思是, 服务必须在运行级 2345 下被启动或关闭，启动的优先级是90，关闭的优先级是10
+
 把ossfs启动脚本作为其他服务，开机自动启动
 
 ```
