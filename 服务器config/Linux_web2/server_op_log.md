@@ -1291,6 +1291,17 @@ ossfs cnc-hk-pri /home/ossfs/cnc-hk-pri -ourl=http://oss-cn-hongkong-internal.al
 chkconfig ossfs on
 ```
 
+
+增加 mime.types 支持:
+
+```
+sudo yum install -y mailcap
+```
+
+主要是 `/etc/mime.types` 文件, ossfs 依据该文件确定文件类型。
+
+
+
 至此、安装配置完成。
 
 
