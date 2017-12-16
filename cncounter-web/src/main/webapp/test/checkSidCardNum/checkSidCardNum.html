@@ -8,7 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>身份证号校验位计算 - CN计数-cncounter</title>
-
+    <script>
+        var href = location.href;
+        if(0 === href.indexOf("https://")){
+            href = href.replace("https://", "http://");
+            return location.replace(href);
+        }
+    </script>
     <script src="http://www.cncounter.com/static/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://www.cncounter.com/static/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link  href="http://www.cncounter.com/static/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
