@@ -79,12 +79,13 @@ fi
 
 
 
+# backend nohup start
 cd $deploybase/
-$tomcatbase/bin/startup.sh
+nohup $tomcatbase/bin/startup.sh &
 
 
 ping localhost -c 2
 
-tail -n 500 -f $tomcatbase/logs/catalina.out &
+tail -n 500 -f $tomcatbase/logs/catalina.out
 
 
