@@ -2,7 +2,12 @@
 
 1、yum 安装 GIT 客户端的命令
 
-	sudo yum install git
+	sudo yum install git -y
+
+1.1 查看帮助
+
+	git --help
+
 
 2、设置
 
@@ -28,12 +33,12 @@
 
 	mkdir -p /usr/local/download
 	cd /usr/local/download
-	wget http://mirrors.cnnic.cn/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+	wget http://mirrors.cnnic.cn/apache/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
 
 
 	cd /usr/local/download
-	tar xzvf apache-maven-3.3.9-bin.tar.gz
-	mv apache-maven-3.3.9 /usr/local/apache-maven-3.3.9
+	tar xzvf apache-maven-3.5.2-bin.tar.gz
+	mv apache-maven-3.5.2 /usr/local/apache-maven-3.5.2
 
 
 6、查找并设置 JAVA_HOME
@@ -44,15 +49,15 @@
 
 7、配置 MAVEN 到 PATH
 
-	export PATH=/usr/local/apache-maven-3.3.9/bin:$PATH
+	export PATH=/usr/local/apache-maven-3.5.2/bin:$PATH
 
 7.1 加入启动目录
 
 	mvnpathtip='# add MVN_PATH'
-	mvnpathscript='export PATH=/usr/local/apache-maven-3.3.9/bin:$PATH'
-	sudo echo $mvnpathtip >> /etc/rc.d/rc.local
-	sudo echo $mvnpathscript >> /etc/rc.d/rc.local
-	sudo source /etc/rc.d/rc.local
+	mvnpathscript='export PATH=/usr/local/apache-maven-3.5.2/bin:$PATH'
+	sudo echo $mvnpathtip >> /etc/profile
+	sudo echo $mvnpathscript >> /etc/profile
+	sudo source /etc/profile
 
 
 8、查看 MAVEN 安装状态
@@ -66,7 +71,7 @@
 	cd /usr/local/cncounter_webapp/git_source/cncounter
 	git pull
 	cd /usr/local/cncounter_webapp/git_source/cncounter/cncounter-web
-	mvn clean package -U -DskipTests
+	mvn clean package -P prod -U -DskipTests
 
 
 10、重启
