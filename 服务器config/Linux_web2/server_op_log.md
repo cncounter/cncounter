@@ -120,7 +120,7 @@
 
 下载脚本并执行 docker 安装:
 
-	curl -fsSL https://get.docker.com/ | sh
+	sudo curl -fsSL https://get.docker.com/ | sudo sh
 
 安装完成后允许 docker 服务启动:
 
