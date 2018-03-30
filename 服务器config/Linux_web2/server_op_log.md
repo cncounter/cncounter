@@ -138,6 +138,15 @@
 
 	sudo systemctl enable docker
 
+
+列出本机的所有 image 文件。
+
+	sudo docker image ls
+
+删除 image 文件
+
+	sudo docker image rm [imageName]
+
 ### chinese_docker 相关文档
 
 另请参见: [https://github.com/widuu/chinese_docker/blob/master/installation/centos.md](https://github.com/widuu/chinese_docker/blob/master/installation/centos.md)
