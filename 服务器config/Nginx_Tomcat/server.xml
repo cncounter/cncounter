@@ -55,6 +55,7 @@
             <Alias>cncounter.com</Alias>
             <Alias>localhost</Alias>
             <Context docBase="/usr/local/cncounter_webapp/cncounter-web"  path="" />
+			<Valve className="org.apache.catalina.valves.RemoteIpValve" remoteIpHeader="x-forwarded-for" proxiesHeader="x-forwarded-by" protocolHeader="x-forwarded-proto" />
             <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
                prefix="cncounter_access_log." suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
