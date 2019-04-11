@@ -22,9 +22,13 @@ git clone -b $srcbranch  $srcurl $appname
 # package
 
 cd $deploybase/git_source/$appname
-git checkout $srcbranch
+
+git checkout -b $srcbranch $srcbranch
+# git checkout $srcbranch
 
 git pull
+
+git checkout $srcbranch
 
 git pull
 
